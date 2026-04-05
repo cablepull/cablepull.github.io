@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TeamPCP, poisoned LiteLLM on PyPI, shadow AI gateways, and why your Copilot keys were in the blast radius — March 2026 supply chain note.">
+  <link rel="canonical" href="https://cablepull.github.io/security/proxy-that-ate-copilot.html">
+  <meta property="og:site_name" content="cablepull">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cablepull.github.io/security/proxy-that-ate-copilot.html">
+  <meta property="og:title" content="The proxy that ate your Copilot keys · cablepull">
+  <meta property="og:description" content="Shadow AI, TeamPCP, and the LiteLLM PyPI compromise — how the toolchain turned on you, what was in the package, and what to do next.">
+  <meta property="og:image" content="https://cablepull.github.io/images/proxy-that-ate-copilot.png">
+  <meta property="og:image:alt" content="Horror-poster illustration: a creature in a server city devours glowing Copilot-style key tiles; LiteLLM signage in the scene.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The proxy that ate your Copilot keys · cablepull">
+  <meta name="twitter:description" content="Shadow AI, TeamPCP, and the LiteLLM PyPI compromise — supply chain, payloads, and remediation.">
+  <meta name="twitter:image" content="https://cablepull.github.io/images/proxy-that-ate-copilot.png">
+  <title>The proxy that ate your Copilot keys · cablepull</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --void: #050908;
+      --swamp: #0c1614;
+      --teal-deep: #142824;
+      --teal-mid: #1e3d36;
+      --moss: #2a5248;
+      --slime: #6ee7b7;
+      --slime-dim: rgba(110, 231, 183, 0.55);
+      --amber: #e8d44d;
+      --ember: #f59e0b;
+      --orange: #f97316;
+      --text: #e8f0ec;
+      --text-dim: rgba(232, 240, 236, 0.78);
+      --text-muted: rgba(232, 240, 236, 0.48);
+      --page-pad: clamp(1.25rem, 4vw, 2.5rem);
+      --prose-width: 42rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: clamp(1.02rem, 1rem + 0.2vw, 1.125rem);
+      color: var(--text);
+      background: var(--void);
+      line-height: 1.65;
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 50;
+      opacity: 0.18;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .wash {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 100% 80% at 50% 120%, rgba(42, 82, 72, 0.45), transparent 55%),
+        radial-gradient(ellipse 60% 50% at 0% 0%, rgba(232, 212, 77, 0.06), transparent 45%),
+        radial-gradient(ellipse 50% 40% at 100% 20%, rgba(110, 231, 183, 0.08), transparent 50%),
+        linear-gradient(180deg, var(--void) 0%, var(--swamp) 35%, var(--teal-deep) 100%);
+    }
+
+    .vignette {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      box-shadow: inset 0 0 min(90vw, 720px) rgba(0, 0, 0, 0.55);
+    }
+
+    .page-main {
+      position: relative;
+      z-index: 2;
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrap-intro {
+      max-width: min(var(--prose-width), 100%);
+      margin: 0 auto;
+      padding: var(--page-pad);
+      padding-bottom: 0;
+      width: 100%;
+    }
+
+    nav {
+      margin-bottom: 1.75rem;
+      font-family: "Bebas Neue", system-ui, sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      color: var(--text-dim);
+      text-decoration: none;
+      margin-right: 1.25rem;
+    }
+
+    nav a:hover {
+      color: var(--slime);
+    }
+
+    .eyebrow {
+      margin: 0 0 0.5rem;
+      font-family: "Bebas Neue", system-ui, sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ember);
+    }
+
+    h1 {
+      margin: 0 0 1rem;
+      font-family: "Bebas Neue", system-ui, sans-serif;
+      font-weight: 400;
+      font-size: clamp(2.35rem, 1.4rem + 4vw, 3.6rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #f4faf6;
+      text-shadow:
+        0 0 40px rgba(110, 231, 183, 0.15),
+        0 3px 0 rgba(0, 0, 0, 0.5);
+    }
+
+    .lede {
+      margin: 0 0 1.5rem;
+      font-size: 1.08rem;
+      line-height: 1.65;
+      color: var(--text-dim);
+      max-width: 36rem;
+    }
+
+    .content-stage {
+      max-width: min(var(--prose-width), 100%);
+      margin: 0 auto;
+      padding: 0 var(--page-pad) 2.5rem;
+      width: 100%;
+    }
+
+    .prose {
+      margin-top: 2.25rem;
+      color: var(--text-dim);
+    }
+
+    .prose > p {
+      margin: 0 0 1.2em;
+      max-width: 65ch;
+    }
+
+    .prose > p:last-child {
+      margin-bottom: 0;
+    }
+
+    .prose h2 {
+      margin: 2.35rem 0 0.85rem;
+      font-family: "Bebas Neue", system-ui, sans-serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--slime);
+      line-height: 1.2;
+    }
+
+    .prose h2:first-child {
+      margin-top: 0;
+    }
+
+    .prose strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .subtitle {
+      margin: -0.35rem 0 1.25rem;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      font-weight: 600;
+      color: var(--slime-dim);
+      line-height: 1.45;
+      max-width: 38rem;
+    }
+
+    .prose a {
+      color: var(--slime);
+      text-decoration: underline;
+      text-underline-offset: 0.18em;
+    }
+
+    .prose a:hover {
+      color: #fff;
+    }
+
+    .prose code {
+      font-family: ui-monospace, "Cascadia Code", Menlo, monospace;
+      font-size: 0.88em;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 0.1em 0.35em;
+      border-radius: 0.25rem;
+      border: 1px solid rgba(110, 231, 183, 0.12);
+    }
+
+    .prose hr {
+      margin: 2rem 0;
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(110, 231, 183, 0.25), transparent);
+    }
+
+    .prose ul {
+      margin: 0 0 1.25em;
+      padding-left: 1.35rem;
+      max-width: 65ch;
+      color: var(--text-dim);
+    }
+
+    .prose li {
+      margin-bottom: 0.45em;
+    }
+
+    .prose li::marker {
+      color: var(--slime-dim);
+    }
+
+    .epigraph {
+      margin: 2rem 0;
+      padding: 1.15rem 1.25rem;
+      border-left: 3px solid var(--ember);
+      font-size: 1.08rem;
+      font-style: italic;
+      color: var(--text-dim);
+      max-width: 65ch;
+    }
+
+    .sources-wrap {
+      margin: 1.75rem 0 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 0.4rem;
+      border: 1px solid rgba(110, 231, 183, 0.15);
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    .sources-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    .sources-table th,
+    .sources-table td {
+      padding: 0.65rem 0.85rem;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid rgba(110, 231, 183, 0.1);
+    }
+
+    .sources-table th {
+      font-family: "Bebas Neue", system-ui, sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--amber);
+      font-weight: 400;
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .sources-table td:first-child {
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .sources-table td a {
+      color: var(--slime);
+      word-break: break-all;
+    }
+
+    .sources-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .pull-quote {
+      margin: 2rem 0;
+      padding: 1.35rem 1.4rem 1.35rem 1.15rem;
+      border-left: 4px solid var(--slime);
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 0 0.4rem 0.4rem 0;
+      box-shadow:
+        inset 0 1px 0 rgba(110, 231, 183, 0.08),
+        0 0 32px rgba(110, 231, 183, 0.06);
+    }
+
+    .pull-quote p {
+      margin: 0;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: clamp(1.08rem, 1rem + 0.35vw, 1.22rem);
+      font-weight: 600;
+      line-height: 1.45;
+      letter-spacing: 0.01em;
+      color: #f0faf5;
+    }
+
+    .pull-quote p + p {
+      margin-top: 0.75rem;
+    }
+
+    .pull-quote code {
+      font-family: ui-monospace, "Cascadia Code", Menlo, monospace;
+      font-size: 0.88em;
+      font-weight: 500;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 0.08em 0.3em;
+      border-radius: 0.2rem;
+      border: 1px solid rgba(110, 231, 183, 0.15);
+    }
+
+    .pull-quote__kicker {
+      font-size: 1.05rem !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.08em !important;
+      text-transform: uppercase !important;
+      font-style: normal !important;
+      font-family: "Bebas Neue", system-ui, sans-serif !important;
+      color: var(--amber) !important;
+      line-height: 1.2 !important;
+    }
+
+    .callout-quote {
+      margin: 1.65rem 0;
+      padding: 1.15rem 1.35rem;
+      border-left: 3px solid var(--amber);
+      background: rgba(232, 212, 77, 0.06);
+      border-radius: 0 0.35rem 0.35rem 0;
+    }
+
+    .callout-quote p {
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    .diagnostic {
+      margin: 1.75rem 0;
+      padding: 1.25rem 1.35rem;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(110, 231, 183, 0.2);
+      border-radius: 0.45rem;
+    }
+
+    .diagnostic p {
+      margin: 0 0 0.65rem;
+      color: var(--text-dim);
+      padding-left: 0.75rem;
+      border-left: 2px solid var(--teal-mid);
+    }
+
+    .diagnostic p:last-child {
+      margin-bottom: 0;
+    }
+
+    .diagnostic__title {
+      font-family: "Bebas Neue", system-ui, sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 0.85rem !important;
+      padding-left: 0 !important;
+      border-left: none !important;
+    }
+
+    .bio {
+      margin-top: 2.25rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(110, 231, 183, 0.12);
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      max-width: 65ch;
+    }
+
+    .poster-figure {
+      margin: 0;
+      padding: 0;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      border: 1px solid rgba(110, 231, 183, 0.25);
+      box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.5),
+        0 0 60px -10px rgba(110, 231, 183, 0.2),
+        0 24px 64px -20px rgba(0, 0, 0, 0.7);
+      background: #020504;
+      line-height: 0;
+    }
+
+    .poster-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .poster-caption {
+      margin: 0.75rem 0 0;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-align: center;
+      letter-spacing: 0.04em;
+      line-height: 1.4;
+    }
+
+    .outbound {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(110, 231, 183, 0.12);
+    }
+
+    .outbound h2 {
+      margin: 0 0 0.75rem;
+      font-family: "Bebas Neue", system-ui, sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .outbound ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+    }
+
+    .outbound a {
+      font-family: "Bebas Neue", system-ui, sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--orange);
+      text-decoration: none;
+    }
+
+    .outbound a:hover {
+      color: var(--slime);
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    .site-footer {
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+      margin-top: auto;
+      padding: 1.5rem var(--page-pad);
+      border-top: 1px solid rgba(110, 231, 183, 0.12);
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      max-width: min(var(--prose-width), 100%);
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .site-footer p {
+      margin: 0 0 1rem;
+    }
+
+    .site-footer p:last-child {
+      margin-bottom: 0;
+    }
+
+    .site-footer a {
+      color: var(--slime-dim);
+    }
+
+    /* Link hover previews (js/link-preview.js + Microlink API) */
+    .link-preview-popover {
+      position: fixed;
+      z-index: 99999;
+      width: min(22rem, calc(100vw - 1.5rem));
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.16s ease, transform 0.16s ease;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 0.88rem;
+      line-height: 1.4;
+    }
+
+    .link-preview-popover.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .link-preview-popover__inner {
+      border-radius: 0.4rem;
+      overflow: hidden;
+      border: 1px solid rgba(110, 231, 183, 0.28);
+      background: rgba(6, 12, 10, 0.96);
+      box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.5),
+        0 16px 48px rgba(0, 0, 0, 0.65),
+        0 0 36px rgba(110, 231, 183, 0.08);
+    }
+
+    .link-preview-popover__loading {
+      padding: 0.85rem 1rem;
+      color: var(--slime-dim);
+      font-style: italic;
+    }
+
+    .link-preview-popover__img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 9rem;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(110, 231, 183, 0.12);
+    }
+
+    .link-preview-popover__text {
+      padding: 0.65rem 0.85rem 0.75rem;
+    }
+
+    .link-preview-popover__title {
+      font-family: "Bebas Neue", system-ui, sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 0.35rem;
+    }
+
+    .link-preview-popover__desc {
+      color: var(--text-dim);
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 0.35rem;
+    }
+
+    .link-preview-popover__host {
+      font-size: 0.75rem;
+      font-family: ui-monospace, Menlo, monospace;
+      color: var(--slime);
+      opacity: 0.85;
+    }
+
+    .link-preview-popover__error {
+      padding: 0.85rem 1rem;
+      color: #fca5a5;
+      font-size: 0.85rem;
+    }
+
+    .link-preview-popover__error small {
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+  </style>
+</head>
+<body data-link-preview-root=".prose,.sources-wrap,.outbound">
+  <div class="wash" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="page-main">
+    <div class="wrap-intro">
+      <nav aria-label="Section">
+        <a href="./">← Security</a>
+        <a href="../">Home</a>
+      </nav>
+      <p class="eyebrow">Supply chain · March 2026</p>
+      <h1>The proxy that ate your Copilot keys</h1>
+      <p class="subtitle">Shadow AI, supply chain rot, and why TeamPCP didn’t need to hack you—you did it for them.</p>
+      <p class="lede">Let’s talk about something your CISO almost certainly doesn’t know is running in your environment right now.</p>
+    </div>
+
+    <div class="content-stage">
+      <figure class="poster-figure">
+        <img src="../images/proxy-that-ate-copilot.png" alt="Cinematic illustration: a large creature in a dark server city inhales glowing tiles showing Microsoft-style logos; cracked LiteLLM signage and cablepull mark in the scene." loading="lazy" decoding="async">
+        <figcaption class="poster-caption">Poster art for this note—gateway as hungry middle.</figcaption>
+      </figure>
+
+      <blockquote class="pull-quote">
+        <p>The keys to your Copilot are in a <code>.env</code> file next to a Python package that phones home to a typosquatted domain.</p>
+        <p class="pull-quote__kicker">The fire suppression system was the accelerant.</p>
+      </blockquote>
+
+      <article class="prose" aria-label="Essay">
+        <p>It’s called LiteLLM. It’s an open-source Python library — <a href="https://www.bleepingcomputer.com/news/security/popular-litellm-pypi-package-compromised-in-teampcp-supply-chain-attack/" rel="noopener noreferrer">95 million downloads a month, 3.4 million a day</a> — that acts as a unified API gateway to every major LLM provider on the planet. One proxy, one interface. OpenAI, Anthropic, Azure OpenAI, Bedrock, Gemini, Cohere, your enterprise Copilot deployment — all of it routed through a single <code>pip install</code> that some senior engineer stood up on a Tuesday because the vendor AI portal was too slow and IT takes three weeks to approve anything.</p>
+
+        <p>That’s the shadow AI problem, and it’s not theoretical. It’s sitting in your internal infrastructure right now, running as a systemd service, holding a config file full of API keys, and nobody in your security team knows it exists.</p>
+
+        <p>Which brings us to March 24, 2026, and a threat actor called TeamPCP.</p>
+
+        <hr>
+
+        <h2 id="how-pwned">How you get pwned by your own toolchain</h2>
+
+        <p>TeamPCP didn’t wake up that morning and decide to attack LiteLLM. This was <a href="https://snyk.io/blog/poisoned-security-scanner-backdooring-litellm/" rel="noopener noreferrer">Phase 09 of a campaign running since at least December 2025</a> — methodical, infrastructure-consistent, and clever enough to weaponize your security tools against you.</p>
+
+        <p>On March 19, they <a href="https://snyk.io/blog/poisoned-security-scanner-backdooring-litellm/" rel="noopener noreferrer">rewrote Git tags in the <code>trivy-action</code> GitHub Action repository</a>, pointing it at a malicious release carrying a credential-harvesting payload. Trivy is a vulnerability scanner. The kind of thing you run in your CI/CD pipeline because you care about security. Congratulations — your commitment to security hygiene just handed the attacker your publishing credentials.</p>
+
+        <p><a href="https://snyk.io/blog/poisoned-security-scanner-backdooring-litellm/" rel="noopener noreferrer">LiteLLM’s CI/CD pipeline ran Trivy as part of its build process, pulling from apt without a pinned version. The compromised action exfiltrated the <code>PYPI_PUBLISH</code> token from the GitHub Actions runner environment.</a></p>
+
+        <p>Five days later, that token got used.</p>
+
+        <p><a href="https://cycode.com/blog/lite-llm-supply-chain-attack/" rel="noopener noreferrer">At 10:39 UTC on March 24, 2026, TeamPCP used the stolen credentials to upload two backdoored LiteLLM releases — 1.82.7 and 1.82.8 — to PyPI.</a> Both removed within 46 minutes. Which sounds fast until you do the math: <a href="https://threatbook.io/blog/when-security-tools-get-compromised-the-litellm-supply-chain-poisoning-incident" rel="noopener noreferrer">3 million downloads a day, 46-minute window, blast radius across downstream AI projects described as substantial.</a></p>
+
+        <hr>
+
+        <h2 id="package">What was in the package</h2>
+
+        <p>Two vectors. Both elegant. Both vicious.</p>
+
+        <p><a href="https://www.armosec.io/blog/litellm-supply-chain-attack-backdoor-analysis/" rel="noopener noreferrer">Version 1.82.7 injected an obfuscated base64 payload into <code>litellm/proxy/proxy_server.py</code> at line 128, between two unrelated legitimate code blocks. The payload executes at import time — any process that imports the LiteLLM proxy triggers the malware. The injected code is triple-nested: base64 in <code>proxy_server.py</code> decodes to an orchestrator, which decodes a second base64 blob containing the actual harvester.</a></p>
+
+        <p>Version 1.82.8 escalated. <a href="https://www.truesec.com/hub/blog/malicious-pypi-package-litellm-supply-chain-compromise" rel="noopener noreferrer">It contains a malicious <code>.pth</code> file — <code>litellm_init.pth</code>, 34,628 bytes — which is automatically executed by the Python interpreter on every startup, without requiring any explicit import of the litellm module.</a> You don’t even have to use LiteLLM. You just have to have it installed in the same Python environment.</p>
+
+        <p><a href="https://futuresearch.ai/blog/litellm-pypi-supply-chain-attack/" rel="noopener noreferrer">The <code>.pth</code> launcher spawns a child Python process via <code>subprocess.Popen</code>, but because <code>.pth</code> files trigger on every interpreter startup, the child re-triggers the same <code>.pth</code> — creating an exponential fork bomb that crashed the machine. The fork bomb is actually a bug in the malware.</a> Small comfort.</p>
+
+        <p>Once past the detonation stage, <a href="https://www.bleepingcomputer.com/news/security/popular-litellm-pypi-package-compromised-in-teampcp-supply-chain-attack/" rel="noopener noreferrer">the payload runs a three-stage attack: it harvests credentials — SSH keys, cloud tokens, Kubernetes secrets, crypto wallets, and <code>.env</code> files — attempts lateral movement across Kubernetes clusters by deploying privileged pods to every node, and installs a persistent systemd backdoor that polls for additional binaries. Exfiltrated data is encrypted and sent to an attacker-controlled domain.</a></p>
+
+        <p>That domain? <a href="https://threatbook.io/blog/when-security-tools-get-compromised-the-litellm-supply-chain-poisoning-incident" rel="noopener noreferrer"><code>models.litellm.cloud</code> — a lookalike domain deliberately registered to mimic the legitimate <code>litellm.ai</code>.</a> Designed to slide past network anomaly detection because the name looks plausible in an environment that’s literally routing LLM traffic.</p>
+
+        <hr>
+
+        <h2 id="why-proxy">Why the LiteLLM proxy is a particularly catastrophic place to drop a credential stealer</h2>
+
+        <p>Here’s where the shadow AI risk crystallizes into something a board should be scared of.</p>
+
+        <p>LiteLLM isn’t just a library for hobbyist AI tinkering. It’s the unofficial enterprise AI middleware layer for organizations that want flexibility without vendor lock-in. You configure it with a <code>config.yaml</code> and a pile of API keys, stand up the proxy server, and route everything through it. Your developers call one endpoint. LiteLLM figures out the rest.</p>
+
+        <p>In practice, that config file contains:</p>
+
+        <ul>
+          <li>Your <strong>Microsoft Copilot</strong> API credentials — M365 Copilot, GitHub Copilot, whatever your enterprise licensing covers</li>
+          <li>Your <strong>Azure OpenAI</strong> deployment keys, tied to a service principal with meaningful permissions</li>
+          <li>Your <strong>Anthropic</strong> and <strong>OpenAI</strong> org-level API keys — the ones with spend limits in the thousands</li>
+          <li>Internal tool integrations — custom LLM-backed apps, RAG pipelines, anything the engineering team connected because it was easier than going through the vendor portal</li>
+          <li>Often, database connection strings in <code>.env</code> files sitting in the same working directory</li>
+        </ul>
+
+        <p>The credential stealer grabbed all of it. SSH keys. Cloud tokens. Kubernetes configs. <code>.env</code> files. <a href="https://www.sonatype.com/blog/compromised-litellm-pypi-package-delivers-multi-stage-credential-stealer" rel="noopener noreferrer">This makes the attack especially dangerous in environments where developers, CI/CD systems, and production infrastructure share access to sensitive credentials — compromise in one layer can quickly cascade into others.</a></p>
+
+        <p>Now layer in the shadow AI dimension. That LiteLLM instance your platform engineering team is running? There’s a reasonable chance it’s not in your CMDB. It wasn’t procured through IT. Security never reviewed it. Nobody knows what keys it’s holding or what it’s proxying to. And because it’s doing something useful — unified LLM access, cost tracking, rate limiting — nobody’s in a hurry to shut it down.</p>
+
+        <blockquote class="callout-quote">
+          <p><a href="https://www.trendmicro.com/en_us/research/26/c/inside-litellm-supply-chain-compromise.html" rel="noopener noreferrer">Everyone wants to talk about advanced AI vulnerabilities like prompt injection, data poisoning, and model inversion, but attackers are exploiting the exact same infrastructure weaknesses we’ve battled for a decade. The AI technology stack is built on standard, fragile, open-source foundations. Why bother engineering a complex LLM jailbreak when a poisoned Python dependency hands over your Kubernetes cluster on a silver platter?</a></p>
+        </blockquote>
+
+        <p>That’s the actual threat model. And TeamPCP understood it before most enterprise security teams did.</p>
+
+        <hr>
+
+        <h2 id="community">The community response was faster than your detection would have been</h2>
+
+        <p>When developers started reporting the compromise in GitHub issue #24512, <a href="https://snyk.io/blog/poisoned-security-scanner-backdooring-litellm/" rel="noopener noreferrer">the attackers posted 88 bot comments from 73 unique accounts in a 102-second window — previously compromised developer accounts, not purpose-created profiles. Using the compromised maintainer account, they closed the issue as “not planned” and made commits to unrelated repositories with the message “teampcp update.”</a></p>
+
+        <p>That’s coordinated suppression. They tried to kill the disclosure thread in real time. It didn’t work — the community opened a parallel issue and Hacker News picked it up — but the fact that they had the playbook ready is worth noting. This wasn’t opportunistic. <a href="https://snyk.io/blog/poisoned-security-scanner-backdooring-litellm/" rel="noopener noreferrer">TeamPCP has been active since at least December 2025, maintaining Telegram channels and embedding “TeamPCP Cloud stealer” in their payloads.</a> They brand their work.</p>
+
+        <hr>
+
+        <h2 id="remediation">What you actually need to do</h2>
+
+        <p>If you don’t know whether LiteLLM is running somewhere in your environment, that’s your first problem. Shadow AI inventory — not a theoretical exercise anymore.</p>
+
+        <p><a href="https://www.sonatype.com/blog/compromised-litellm-pypi-package-delivers-multi-stage-credential-stealer" rel="noopener noreferrer">Simply removing the package is not sufficient. The malware is designed to establish persistence and may have already deployed additional payloads. Rotate all potentially exposed credentials. Review logs for suspicious outbound connections. Validate the integrity of infrastructure packages.</a></p>
+
+        <p>Hunt for outbound connections to <code>models.litellm.cloud</code> and <code>checkmarx.zone</code> in your SIEM. If you find them, you have a much larger conversation ahead of you than a credential rotation.</p>
+
+        <p>And pin your dependencies. Unpinned <code>pip install</code> in a production environment isn’t a development shortcut anymore — it’s an invitation. <a href="https://cycode.com/blog/lite-llm-supply-chain-attack/" rel="noopener noreferrer">The threat actor shifted from attacking the factory to poisoning the product delivered to millions of users. Once a developer or a production server runs <code>pip install litellm</code> without a pinned version and receives 1.82.7 or 1.82.8, the malicious code executes automatically.</a></p>
+
+        <p>The attacker didn’t need elevated privileges. They didn’t need a zero-day. They needed one unpinned dependency and a CI/CD pipeline that trusted its own security scanner.</p>
+
+        <blockquote class="callout-quote">
+          <p>That’s the state of AI infrastructure security in 2026. The keys to your Copilot are in a <code>.env</code> file next to a Python package that phones home to a typosquatted domain. The fire suppression system was the accelerant.</p>
+        </blockquote>
+
+        <hr>
+
+        <p class="epigraph">Shadow AI isn’t an employee behavior problem. It’s a governance failure with a lateral movement problem attached to it.</p>
+
+        <hr>
+
+        <h2 id="sources">Sources</h2>
+        <div class="sources-wrap">
+          <table class="sources-table">
+            <thead>
+              <tr>
+                <th scope="col">Source</th>
+                <th scope="col">URL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>LiteLLM official security update</td>
+                <td><a href="https://docs.litellm.ai/blog/security-update-march-2026" rel="noopener noreferrer">docs.litellm.ai/blog/security-update-march-2026</a></td>
+              </tr>
+              <tr>
+                <td>FutureSearch — discovery &amp; fork bomb analysis</td>
+                <td><a href="https://futuresearch.ai/blog/litellm-pypi-supply-chain-attack/" rel="noopener noreferrer">futuresearch.ai/blog/litellm-pypi-supply-chain-attack</a></td>
+              </tr>
+              <tr>
+                <td>Snyk — poisoned security scanner deep dive</td>
+                <td><a href="https://snyk.io/blog/poisoned-security-scanner-backdooring-litellm/" rel="noopener noreferrer">snyk.io/blog/poisoned-security-scanner-backdooring-litellm</a></td>
+              </tr>
+              <tr>
+                <td>Truesec — <code>.pth</code> mechanism analysis</td>
+                <td><a href="https://www.truesec.com/hub/blog/malicious-pypi-package-litellm-supply-chain-compromise" rel="noopener noreferrer">truesec.com/…/litellm-supply-chain-compromise</a></td>
+              </tr>
+              <tr>
+                <td>BleepingComputer — breaking coverage</td>
+                <td><a href="https://www.bleepingcomputer.com/news/security/popular-litellm-pypi-package-compromised-in-teampcp-supply-chain-attack/" rel="noopener noreferrer">bleepingcomputer.com/…/teampcp-supply-chain-attack</a></td>
+              </tr>
+              <tr>
+                <td>Trend Micro — campaign infrastructure analysis</td>
+                <td><a href="https://www.trendmicro.com/en_us/research/26/c/inside-litellm-supply-chain-compromise.html" rel="noopener noreferrer">trendmicro.com/…/inside-litellm-supply-chain-compromise</a></td>
+              </tr>
+              <tr>
+                <td>ARMO — backdoor payload analysis</td>
+                <td><a href="https://www.armosec.io/blog/litellm-supply-chain-attack-backdoor-analysis/" rel="noopener noreferrer">armosec.io/blog/litellm-supply-chain-attack-backdoor-analysis</a></td>
+              </tr>
+              <tr>
+                <td>Cycode — timeline &amp; blast radius</td>
+                <td><a href="https://cycode.com/blog/lite-llm-supply-chain-attack/" rel="noopener noreferrer">cycode.com/blog/lite-llm-supply-chain-attack</a></td>
+              </tr>
+              <tr>
+                <td>ThreatBook — three-stage payload breakdown</td>
+                <td><a href="https://threatbook.io/blog/when-security-tools-get-compromised-the-litellm-supply-chain-poisoning-incident" rel="noopener noreferrer">threatbook.io/blog/…/litellm-supply-chain-poisoning-incident</a></td>
+              </tr>
+              <tr>
+                <td>Sonatype — multi-stage credential stealer analysis</td>
+                <td><a href="https://www.sonatype.com/blog/compromised-litellm-pypi-package-delivers-multi-stage-credential-stealer" rel="noopener noreferrer">sonatype.com/blog/…/credential-stealer</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="bio"><strong>cablepull</strong> is a principal security architect with 25+ years in the field. This page is compiled from public incident reporting—verify against primary sources and your own counsel.</p>
+      </article>
+
+      <div class="outbound">
+        <h2>Outbound</h2>
+        <ul>
+          <li><a href="conduct-code.html">Conduct code</a></li>
+          <li><a href="https://github.com/cablepull" rel="noopener noreferrer">github.com/cablepull</a></li>
+          <li><a href="https://cablepull.github.io/security/" rel="noopener noreferrer">Security index</a></li>
+          <li><a href="https://cablepull.github.io/projects/" rel="noopener noreferrer">Projects</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>© 2026 cablepull. All rights reserved.</p>
+    <p>No permission is granted to use this site or its contents for training, tuning, or developing artificial intelligence or machine learning systems, or to ingest it into any model or dataset for those purposes. Third parties may not crawl, scrape, cache, or index this site for search, AI, aggregation, or similar services without prior written consent.</p>
+  </footer>
+
+  <script type="module" src="../js/link-preview.js"></script>
+</body>
+</html>

@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Threat models, control design, security architecture notes, and the Conduct code page from cablepull.">
+  <meta name="description" content="Threat models, control design, security architecture notes—Conduct code, Copilot proxy keys, and field notes from cablepull.">
   <link rel="canonical" href="https://cablepull.github.io/security/">
   <meta property="og:site_name" content="cablepull">
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cablepull.github.io/security/">
   <meta property="og:title" content="Security · cablepull">
-  <meta property="og:description" content="Threat models, control design, security architecture notes, and the Conduct code page from cablepull.">
+  <meta property="og:description" content="Threat models, control design, security architecture notes—Conduct code, AI gateway credentials, and field notes from cablepull.">
   <meta property="og:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
   <meta property="og:image:alt" content="You vibe code, I conduct code — we are not the same.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Security · cablepull">
-  <meta name="twitter:description" content="Threat models, control design, security architecture notes, and the Conduct code page from cablepull.">
+  <meta name="twitter:description" content="Threat models, control design, security architecture notes—Conduct code, AI gateway credentials, and field notes from cablepull.">
   <meta name="twitter:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
   <title>Security · cablepull</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,6 +32,7 @@
       --orange: #f2721d;
       --page-pad: clamp(1.25rem, 4vw, 2.5rem);
       --preview-max: min(28rem, 100%);
+      --proxy-glow: rgba(34, 197, 94, 0.35);
     }
     body {
       margin: 0;
@@ -184,6 +185,22 @@
       line-height: 1.45;
     }
 
+    .preview-stage .preview-card + .preview-card {
+      margin-top: 2rem;
+    }
+
+    .preview-card--night:hover,
+    .preview-card--night:focus-within {
+      border-color: rgba(34, 197, 94, 0.45);
+      box-shadow:
+        0 0 0 1px rgba(34, 197, 94, 0.12),
+        0 26px 60px -20px var(--proxy-glow);
+    }
+
+    .preview-card--night .preview-card__stretch:focus-visible {
+      outline-color: #16a34a;
+    }
+
     .site-footer {
       flex-shrink: 0;
       margin-top: 3rem;
@@ -207,7 +224,7 @@
       <nav><a href="../">← Home</a></nav>
       <p class="tag">Security architecture</p>
       <h1>Security</h1>
-      <p>Threat models, control design, reviews, and field notes—add pages here as you publish them.</p>
+      <p>Threat models, control design, reviews, and field notes—featured essays open from the previews below.</p>
     </div>
 
     <div class="preview-stage">
@@ -227,6 +244,25 @@
         <div class="preview-card__meta">
           <h2 id="conduct-preview-title" class="preview-card__title">Conduct code</h2>
           <p class="preview-card__blurb">Poster page, outbound links, and the full image—select the card to open it.</p>
+        </div>
+      </article>
+
+      <article class="preview-card preview-card--night" aria-labelledby="proxy-preview-title">
+        <a
+          class="preview-card__stretch"
+          href="proxy-that-ate-copilot.html"
+          aria-label="Open The proxy that ate your Copilot keys — security/proxy-that-ate-copilot.html"
+        ></a>
+        <div class="preview-card__chrome" aria-hidden="true">
+          <div class="preview-card__dots"><span></span><span></span><span></span></div>
+          <span class="preview-card__url">…/security/proxy-that-ate-copilot.html</span>
+        </div>
+        <div class="preview-card__viewport">
+          <img src="../images/proxy-that-ate-copilot.png" alt="Preview: horror-poster art—gateway monster and Copilot-style keys (opens proxy article)." loading="lazy" decoding="async">
+        </div>
+        <div class="preview-card__meta">
+          <h2 id="proxy-preview-title" class="preview-card__title">The proxy that ate your Copilot keys</h2>
+          <p class="preview-card__blurb">AI gateways, logging, and blast radius—select the card to read the full note.</p>
         </div>
       </article>
     </div>
