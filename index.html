@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Security architect, father, reality auditor · articles, fiction, projects, and security field notes.">
+  <link rel="canonical" href="https://cablepull.github.io/">
+  <meta property="og:site_name" content="cablepull">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cablepull.github.io/">
+  <meta property="og:title" content="cablepull">
+  <meta property="og:description" content="Security architect, father, reality auditor · articles, fiction, projects, and security field notes.">
+  <meta property="og:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
+  <meta property="og:image:alt" content="cablepull — You vibe code, I conduct code (illustration).">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="cablepull">
+  <meta name="twitter:description" content="Security architect, father, reality auditor · articles, fiction, projects, and security field notes.">
+  <meta name="twitter:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
+  <title>cablepull</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0c0f14;
+      --paper: #e8e4dc;
+      --muted: #5c5a55;
+      --accent: #c45c26;
+      --accent-soft: #e8945c;
+      --secure: #1a5c66;
+      --glow: rgba(196, 92, 38, 0.35);
+      --glow-secure: rgba(26, 92, 102, 0.22);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: clamp(1rem, 0.95rem + 0.35vw, 1.125rem);
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--paper);
+      overflow-x: hidden;
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.07;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .mesh {
+      position: fixed;
+      inset: -20%;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 50% at 20% 0%, var(--glow), transparent 55%),
+        radial-gradient(ellipse 55% 45% at 85% 20%, var(--glow-secure), transparent 50%),
+        radial-gradient(ellipse 60% 40% at 100% 30%, rgba(12, 15, 20, 0.08), transparent 50%),
+        radial-gradient(ellipse 50% 60% at 0% 100%, rgba(196, 92, 38, 0.12), transparent 45%),
+        var(--paper);
+    }
+
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.045;
+      background-image:
+        linear-gradient(var(--ink) 1px, transparent 1px),
+        linear-gradient(90deg, var(--ink) 1px, transparent 1px);
+      background-size: min(12vw, 72px) min(12vw, 72px);
+      mask-image: radial-gradient(ellipse 85% 70% at 50% 40%, black 20%, transparent 70%);
+    }
+
+    .diagonal {
+      position: fixed;
+      top: -10%;
+      right: -15%;
+      width: min(70vw, 520px);
+      height: 140vh;
+      z-index: -1;
+      background: linear-gradient(
+        165deg,
+        transparent 40%,
+        rgba(12, 15, 20, 0.04) 40%,
+        rgba(12, 15, 20, 0.04) 42%,
+        transparent 42%,
+        transparent 48%,
+        rgba(196, 92, 38, 0.06) 48%,
+        rgba(196, 92, 38, 0.06) 50%,
+        transparent 50%
+      );
+      transform: rotate(-8deg);
+      pointer-events: none;
+    }
+
+    .wrap {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: clamp(1.25rem, 4vw, 2.5rem);
+    }
+
+    .brand-block {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.35rem;
+    }
+
+    .role {
+      margin: 0;
+      max-width: 22rem;
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      line-height: 1.35;
+      color: var(--secure);
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: clamp(2rem, 6vw, 4rem);
+      border-bottom: 1px solid rgba(12, 15, 20, 0.12);
+      animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      opacity: 0;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .brand {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.25rem, 1rem + 1vw, 1.5rem);
+      letter-spacing: -0.03em;
+      text-decoration: none;
+      color: var(--ink);
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0;
+    }
+
+    .brand span {
+      color: var(--accent);
+      margin-inline-start: -0.03em;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 0.75rem;
+    }
+
+    nav a {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--ink);
+      padding: 0.5rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.2s;
+    }
+
+    nav a:hover {
+      border-color: rgba(12, 15, 20, 0.15);
+      background: rgba(255, 255, 255, 0.45);
+      transform: translateY(-1px);
+    }
+
+    nav a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    main {
+      padding-top: clamp(2.5rem, 8vw, 5rem);
+    }
+
+    .hero {
+      max-width: 38rem;
+      animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.08s forwards;
+      opacity: 0;
+    }
+
+    .hero h1 {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.5rem, 1.5rem + 4.5vw, 4.25rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin: 0 0 1.25rem;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.12em;
+    }
+
+    .hero p.lead {
+      font-size: clamp(1.1rem, 1rem + 0.5vw, 1.35rem);
+      color: var(--muted);
+      margin: 0 0 2rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+      gap: 1rem;
+      margin-top: clamp(2.5rem, 6vw, 4rem);
+      animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.18s forwards;
+      opacity: 0;
+    }
+
+    .card {
+      display: block;
+      padding: 1.35rem 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      background: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(12, 15, 20, 0.1);
+      border-radius: 1rem;
+      box-shadow: 0 12px 40px -20px rgba(12, 15, 20, 0.35);
+      transition: transform 0.25s ease, border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(196, 92, 38, 0.35);
+      box-shadow: 0 20px 50px -18px rgba(196, 92, 38, 0.25);
+    }
+
+    .card.card--secure:hover {
+      border-color: rgba(26, 92, 102, 0.4);
+      box-shadow: 0 20px 50px -18px rgba(26, 92, 102, 0.22);
+    }
+
+    .card.card--secure h2::after {
+      color: var(--secure);
+    }
+
+    .card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .card.card--secure:focus-visible {
+      outline-color: var(--secure);
+    }
+
+    .card h2 {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.35rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .card h2::after {
+      content: "→";
+      font-size: 1.1rem;
+      color: var(--accent);
+      transition: transform 0.25s ease;
+    }
+
+    .card:hover h2::after {
+      transform: translateX(4px);
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    footer {
+      margin-top: clamp(4rem, 12vw, 7rem);
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(12, 15, 20, 0.1);
+      font-size: 0.9rem;
+      color: var(--muted);
+      animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.28s forwards;
+      opacity: 0;
+    }
+
+    footer a {
+      color: var(--accent);
+    }
+
+    footer code {
+      font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
+      font-size: 0.88em;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.5);
+      padding: 0.12em 0.35em;
+      border-radius: 0.25rem;
+    }
+
+    footer p {
+      margin: 0 0 1rem;
+    }
+
+    footer p:last-child {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="mesh" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
+  <div class="diagonal" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <header>
+      <div class="brand-block">
+        <a class="brand" href="./">cable<span>pull</span></a>
+        <p class="role">security architect, father, reality auditor</p>
+      </div>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="articles/">Articles</a></li>
+          <li><a href="fiction/">Fiction</a></li>
+          <li><a href="projects/">Projects</a></li>
+          <li><a href="security/">Security</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-heading">
+        <h1 id="hero-heading">Clear thinking at <em>trust boundaries</em>.</h1>
+        <p class="lead">
+          Writing on security architecture—threat models, controls, and tradeoffs—alongside
+          general essays, fiction, and shipped projects. Static site; no accounts, no trackers.
+        </p>
+      </section>
+
+      <section class="cards" aria-label="Sections">
+        <a class="card" href="articles/">
+          <h2>Articles</h2>
+          <p>Notes, essays, and longer-form thinking.</p>
+        </a>
+        <a class="card" href="fiction/">
+          <h2>Fiction</h2>
+          <p>Short pieces, serials, and narrative play.</p>
+        </a>
+        <a class="card" href="projects/">
+          <h2>Projects</h2>
+          <p>Tools, repos, and things shipped into the world.</p>
+        </a>
+        <a class="card card--secure" href="security/">
+          <h2>Security</h2>
+          <p>Architecture, reviews, and field notes from the job.</p>
+        </a>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2026 cablepull. All rights reserved.</p>
+      <p>No permission is granted to use this site or its contents for training, tuning, or developing artificial intelligence or machine learning systems, or to ingest it into any model or dataset for those purposes. Third parties may not crawl, scrape, cache, or index this site for search, AI, aggregation, or similar services without prior written consent.</p>
+      <p>Hosted on <a href="https://pages.github.com/" rel="noopener noreferrer">GitHub Pages</a>.
+        Static assets stay in-repo: use <code>images/filename.png</code> from the site root, or <code>../images/filename.png</code> from section pages.</p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Shipped tools, demos, and GitHub Pages builds from cablepull.">
+  <link rel="canonical" href="https://cablepull.github.io/projects/">
+  <meta property="og:site_name" content="cablepull">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cablepull.github.io/projects/">
+  <meta property="og:title" content="Projects · cablepull">
+  <meta property="og:description" content="Shipped tools, demos, and GitHub Pages builds from cablepull.">
+  <meta property="og:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
+  <meta property="og:image:alt" content="cablepull — You vibe code, I conduct code (illustration).">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Projects · cablepull">
+  <meta name="twitter:description" content="Shipped tools, demos, and GitHub Pages builds from cablepull.">
+  <meta name="twitter:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
+  <title>Projects · cablepull</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0c0f14;
+      --paper: #e8e4dc;
+      --muted: #5c5a55;
+      --accent: #c45c26;
+      --page-pad: clamp(1.25rem, 4vw, 2.5rem);
+      --preview-max: min(96rem, 100%);
+    }
+    body { margin: 0; min-height: 100vh; font-family: "Newsreader", Georgia, serif; color: var(--ink); background: var(--paper); line-height: 1.6; display: flex; flex-direction: column; }
+    a { color: var(--accent); }
+    h1 { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 800; letter-spacing: -0.03em; }
+    nav { margin-bottom: 2rem; font-family: "Bricolage Grotesque", system-ui, sans-serif; font-size: 0.85rem; }
+    nav a { text-decoration: none; color: var(--ink); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+    nav a:hover { color: var(--accent); }
+    .page-main { flex: 1 0 auto; display: flex; flex-direction: column; }
+    .wrap-intro {
+      max-width: min(44rem, 100%);
+      margin: 0 auto;
+      padding: var(--page-pad);
+      padding-bottom: 0;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    .project-stage {
+      max-width: var(--preview-max);
+      margin: 0 auto;
+      padding: 2rem var(--page-pad) 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .site-footer {
+      flex-shrink: 0;
+      margin-top: 3rem;
+      padding: 1.5rem var(--page-pad);
+      border-top: 1px solid rgba(12, 15, 20, 0.1);
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: var(--preview-max);
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      box-sizing: border-box;
+    }
+    .site-footer p { margin: 0 0 1rem; }
+    .site-footer p:last-child { margin-bottom: 0; }
+
+    .project-stage .project-card:first-child {
+      margin-top: 0;
+    }
+
+    .project-card {
+      position: relative;
+      margin-top: 2rem;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(12, 15, 20, 0.12);
+      background: rgba(255, 255, 255, 0.45);
+      box-shadow: 0 16px 48px -28px rgba(12, 15, 20, 0.35);
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .project-card:hover,
+    .project-card:focus-within {
+      border-color: rgba(196, 92, 38, 0.35);
+      box-shadow: 0 22px 56px -24px rgba(196, 92, 38, 0.22);
+    }
+
+    .project-card__stretch {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+
+    .project-card__stretch:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    .project-card__chrome {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.55rem 0.85rem;
+      background: rgba(12, 15, 20, 0.06);
+      border-bottom: 1px solid rgba(12, 15, 20, 0.08);
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .project-card__dots {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .project-card__dots span {
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      background: rgba(12, 15, 20, 0.15);
+    }
+
+    .project-card__dots span:first-child { background: #e07066; }
+    .project-card__dots span:nth-child(2) { background: #ddb84a; }
+    .project-card__dots span:nth-child(3) { background: #6bcc7a; }
+
+    .project-card__url {
+      flex: 1;
+      min-width: 0;
+      font-family: ui-monospace, "Cascadia Code", Menlo, monospace;
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      color: var(--ink);
+      opacity: 0.75;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .project-card__viewport {
+      position: relative;
+      z-index: 0;
+      aspect-ratio: 2 / 1;
+      background: #fff;
+    }
+
+    .project-card__frame {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      pointer-events: none;
+    }
+
+    .project-card__meta {
+      position: relative;
+      z-index: 1;
+      padding: 1rem 1.1rem;
+      background: rgba(255, 255, 255, 0.65);
+      border-top: 1px solid rgba(12, 15, 20, 0.08);
+    }
+
+    .project-card__title {
+      margin: 0 0 0.35rem;
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .project-card__blurb {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-main">
+    <div class="wrap-intro">
+      <nav><a href="../">← Home</a></nav>
+      <h1>Projects</h1>
+      <p>List repos, demos, and write-ups here as you add them.</p>
+    </div>
+    <div class="project-stage">
+    <article class="project-card" aria-labelledby="tines-title">
+      <a
+        class="project-card__stretch"
+        href="https://cablepull.github.io/tines-desktop/"
+        rel="noopener noreferrer"
+        aria-label="Tines Desktop — open cablepull.github.io/tines-desktop"
+      ></a>
+      <div class="project-card__chrome" aria-hidden="true">
+        <div class="project-card__dots"><span></span><span></span><span></span></div>
+        <span class="project-card__url">cablepull.github.io/tines-desktop</span>
+      </div>
+      <div class="project-card__viewport">
+        <iframe
+          class="project-card__frame"
+          src="https://cablepull.github.io/tines-desktop/"
+          title="Live preview of Tines Desktop"
+          loading="lazy"
+          sandbox="allow-scripts allow-same-origin allow-forms"
+        ></iframe>
+      </div>
+      <div class="project-card__meta">
+        <h2 id="tines-title" class="project-card__title">Tines Desktop</h2>
+        <p class="project-card__blurb">Select this card to open the live site (preview above).</p>
+      </div>
+    </article>
+
+    <article class="project-card" aria-labelledby="finsteps-title">
+      <a
+        class="project-card__stretch"
+        href="https://cablepull.github.io/finsteps/"
+        rel="noopener noreferrer"
+        aria-label="Finsteps — open cablepull.github.io/finsteps"
+      ></a>
+      <div class="project-card__chrome" aria-hidden="true">
+        <div class="project-card__dots"><span></span><span></span><span></span></div>
+        <span class="project-card__url">cablepull.github.io/finsteps</span>
+      </div>
+      <div class="project-card__viewport">
+        <iframe
+          class="project-card__frame"
+          src="https://cablepull.github.io/finsteps/"
+          title="Live preview of Finsteps"
+          loading="lazy"
+          sandbox="allow-scripts allow-same-origin allow-forms"
+        ></iframe>
+      </div>
+      <div class="project-card__meta">
+        <h2 id="finsteps-title" class="project-card__title">Finsteps</h2>
+        <p class="project-card__blurb">Select this card to open the live site (preview above).</p>
+      </div>
+    </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>© 2026 cablepull. All rights reserved.</p>
+    <p>No permission is granted to use this site or its contents for training, tuning, or developing artificial intelligence or machine learning systems, or to ingest it into any model or dataset for those purposes. Third parties may not crawl, scrape, cache, or index this site for search, AI, aggregation, or similar services without prior written consent.</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Threat models, control design, security architecture notes, and the Conduct code page from cablepull.">
+  <link rel="canonical" href="https://cablepull.github.io/security/">
+  <meta property="og:site_name" content="cablepull">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cablepull.github.io/security/">
+  <meta property="og:title" content="Security · cablepull">
+  <meta property="og:description" content="Threat models, control design, security architecture notes, and the Conduct code page from cablepull.">
+  <meta property="og:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
+  <meta property="og:image:alt" content="You vibe code, I conduct code — we are not the same.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Security · cablepull">
+  <meta name="twitter:description" content="Threat models, control design, security architecture notes, and the Conduct code page from cablepull.">
+  <meta name="twitter:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
+  <title>Security · cablepull</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0c0f14;
+      --paper: #e8e4dc;
+      --muted: #5c5a55;
+      --accent: #c45c26;
+      --secure: #1a5c66;
+      --poster-blue: #2c4c74;
+      --orange: #f2721d;
+      --page-pad: clamp(1.25rem, 4vw, 2.5rem);
+      --preview-max: min(28rem, 100%);
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: "Newsreader", Georgia, serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+    }
+    .page-main { flex: 1 0 auto; display: flex; flex-direction: column; }
+    .wrap-intro {
+      max-width: min(40rem, 100%);
+      margin: 0 auto;
+      padding: var(--page-pad);
+      padding-bottom: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    a { color: var(--secure); }
+    h1 { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 800; letter-spacing: -0.03em; }
+    nav { margin-bottom: 2rem; font-family: "Bricolage Grotesque", system-ui, sans-serif; font-size: 0.85rem; }
+    nav a { text-decoration: none; color: var(--ink); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+    nav a:hover { color: var(--secure); }
+    .tag { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--secure); margin: 0 0 0.5rem; }
+
+    .preview-stage {
+      max-width: var(--preview-max);
+      margin: 0 auto;
+      padding: 2rem var(--page-pad) 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .preview-card {
+      position: relative;
+      border-radius: 0.65rem;
+      border: 1px solid rgba(12, 15, 20, 0.12);
+      background: rgba(255, 255, 255, 0.5);
+      box-shadow:
+        0 0 0 1px rgba(44, 76, 116, 0.08),
+        0 20px 50px -24px rgba(30, 53, 85, 0.35);
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .preview-card:hover,
+    .preview-card:focus-within {
+      border-color: rgba(242, 114, 29, 0.4);
+      box-shadow:
+        0 0 0 1px rgba(242, 114, 29, 0.12),
+        0 26px 60px -20px rgba(242, 114, 29, 0.18);
+    }
+
+    .preview-card__stretch {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+
+    .preview-card__stretch:focus-visible {
+      outline: 2px solid var(--orange);
+      outline-offset: 3px;
+    }
+
+    .preview-card__chrome {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.55rem 0.85rem;
+      background: linear-gradient(180deg, rgba(44, 76, 116, 0.1), rgba(44, 76, 116, 0.04));
+      border-bottom: 1px solid rgba(12, 15, 20, 0.08);
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--poster-blue);
+    }
+
+    .preview-card__dots {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .preview-card__dots span {
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      background: rgba(12, 15, 20, 0.12);
+    }
+
+    .preview-card__dots span:first-child { background: #e07066; }
+    .preview-card__dots span:nth-child(2) { background: #ddb84a; }
+    .preview-card__dots span:nth-child(3) { background: #6bcc7a; }
+
+    .preview-card__url {
+      flex: 1;
+      min-width: 0;
+      font-family: ui-monospace, "Cascadia Code", Menlo, monospace;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      color: var(--ink);
+      opacity: 0.72;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .preview-card__viewport {
+      position: relative;
+      z-index: 0;
+      background: #1e3555;
+      line-height: 0;
+    }
+
+    .preview-card__viewport img {
+      display: block;
+      width: 100%;
+      height: auto;
+      pointer-events: none;
+    }
+
+    .preview-card__meta {
+      position: relative;
+      z-index: 1;
+      padding: 1rem 1.1rem;
+      background: rgba(255, 255, 255, 0.75);
+      border-top: 1px solid rgba(12, 15, 20, 0.08);
+    }
+
+    .preview-card__title {
+      margin: 0 0 0.35rem;
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .preview-card__blurb {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .site-footer {
+      flex-shrink: 0;
+      margin-top: 3rem;
+      padding: 1.5rem var(--page-pad);
+      border-top: 1px solid rgba(12, 15, 20, 0.1);
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: min(40rem, 100%);
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      box-sizing: border-box;
+    }
+    .site-footer p { margin: 0 0 1rem; }
+    .site-footer p:last-child { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+  <div class="page-main">
+    <div class="wrap-intro">
+      <nav><a href="../">← Home</a></nav>
+      <p class="tag">Security architecture</p>
+      <h1>Security</h1>
+      <p>Threat models, control design, reviews, and field notes—add pages here as you publish them.</p>
+    </div>
+
+    <div class="preview-stage">
+      <article class="preview-card" aria-labelledby="conduct-preview-title">
+        <a
+          class="preview-card__stretch"
+          href="conduct-code.html"
+          aria-label="Open Conduct code — security/conduct-code.html"
+        ></a>
+        <div class="preview-card__chrome" aria-hidden="true">
+          <div class="preview-card__dots"><span></span><span></span><span></span></div>
+          <span class="preview-card__url">…/security/conduct-code.html</span>
+        </div>
+        <div class="preview-card__viewport">
+          <img src="../images/conduct-code.jpeg" alt="Preview: You vibe code, I conduct code — stylized illustration (opens Conduct code page)." loading="lazy" decoding="async">
+        </div>
+        <div class="preview-card__meta">
+          <h2 id="conduct-preview-title" class="preview-card__title">Conduct code</h2>
+          <p class="preview-card__blurb">Poster page, outbound links, and the full image—select the card to open it.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>© 2026 cablepull. All rights reserved.</p>
+    <p>No permission is granted to use this site or its contents for training, tuning, or developing artificial intelligence or machine learning systems, or to ingest it into any model or dataset for those purposes. Third parties may not crawl, scrape, cache, or index this site for search, AI, aggregation, or similar services without prior written consent.</p>
+  </footer>
+</body>
+</html>
