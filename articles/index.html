@@ -3,43 +3,215 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Essays, notes, and longer-form writing from cablepull.">
+  <meta name="description" content="Essays and longer-form writing from cablepull—bounded chaos, systems, and governance.">
   <link rel="canonical" href="https://cablepull.github.io/articles/">
   <meta property="og:site_name" content="cablepull">
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cablepull.github.io/articles/">
   <meta property="og:title" content="Articles · cablepull">
-  <meta property="og:description" content="Essays, notes, and longer-form writing from cablepull.">
-  <meta property="og:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
-  <meta property="og:image:alt" content="cablepull — You vibe code, I conduct code (illustration).">
+  <meta property="og:description" content="Essays and longer-form writing—bounded chaos, religion as control system, and governing genAI.">
+  <meta property="og:image" content="https://cablepull.github.io/images/bounded-chaotic-systems.png">
+  <meta property="og:image:alt" content="Golden meditative figure on a lotus throne amid code and geometry — bounded chaos.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Articles · cablepull">
-  <meta name="twitter:description" content="Essays, notes, and longer-form writing from cablepull.">
-  <meta name="twitter:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
+  <meta name="twitter:description" content="Essays and longer-form writing—bounded chaos, systems, and governance.">
+  <meta name="twitter:image" content="https://cablepull.github.io/images/bounded-chaotic-systems.png">
   <title>Articles · cablepull</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
   <style>
-    :root { --ink: #0c0f14; --paper: #e8e4dc; --muted: #5c5a55; --accent: #c45c26; }
-    body { margin: 0; min-height: 100vh; font-family: "Newsreader", Georgia, serif; color: var(--ink); background: var(--paper); line-height: 1.6; }
-    .wrap { max-width: 40rem; margin: 0 auto; padding: clamp(1.25rem, 4vw, 2.5rem); }
-    a { color: var(--accent); }
+    :root {
+      --ink: #0c0f14;
+      --paper: #e8e4dc;
+      --muted: #5c5a55;
+      --accent: #c45c26;
+      --articles-teal: #1a5c66;
+      --pond: #0b2230;
+      --pond-mid: #143d52;
+      --gold-accent: #c9a227;
+      --lotus-glow: rgba(232, 197, 71, 0.32);
+      --page-pad: clamp(1.25rem, 4vw, 2.5rem);
+      --preview-max: min(28rem, 100%);
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: "Newsreader", Georgia, serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+    }
+    .page-main { flex: 1 0 auto; display: flex; flex-direction: column; }
+    .wrap-intro {
+      max-width: min(40rem, 100%);
+      margin: 0 auto;
+      padding: var(--page-pad);
+      padding-bottom: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    a { color: var(--articles-teal); }
     h1 { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 800; letter-spacing: -0.03em; }
     nav { margin-bottom: 2rem; font-family: "Bricolage Grotesque", system-ui, sans-serif; font-size: 0.85rem; }
     nav a { text-decoration: none; color: var(--ink); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
-    nav a:hover { color: var(--accent); }
-    body { display: flex; flex-direction: column; min-height: 100vh; }
-    .wrap { flex: 1 0 auto; }
+    nav a:hover { color: var(--articles-teal); }
+    .tag {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--articles-teal);
+      margin: 0 0 0.5rem;
+    }
+
+    .preview-stage {
+      max-width: var(--preview-max);
+      margin: 0 auto;
+      padding: 2rem var(--page-pad) 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .preview-card {
+      position: relative;
+      border-radius: 0.65rem;
+      border: 1px solid rgba(12, 15, 20, 0.12);
+      background: rgba(255, 255, 255, 0.5);
+      box-shadow:
+        0 0 0 1px rgba(26, 92, 102, 0.1),
+        0 20px 50px -24px rgba(11, 34, 48, 0.35);
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .preview-card:hover,
+    .preview-card:focus-within {
+      border-color: rgba(201, 162, 39, 0.45);
+      box-shadow:
+        0 0 0 1px rgba(201, 162, 39, 0.15),
+        0 26px 60px -20px var(--lotus-glow);
+    }
+
+    .preview-card__stretch {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+
+    .preview-card__stretch:focus-visible {
+      outline: 2px solid var(--gold-accent);
+      outline-offset: 3px;
+    }
+
+    .preview-card__chrome {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.55rem 0.85rem;
+      background: linear-gradient(180deg, rgba(26, 92, 102, 0.12), rgba(26, 92, 102, 0.04));
+      border-bottom: 1px solid rgba(12, 15, 20, 0.08);
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--pond-mid);
+    }
+
+    .preview-card__dots {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .preview-card__dots span {
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      background: rgba(12, 15, 20, 0.12);
+    }
+
+    .preview-card__dots span:first-child { background: #e07066; }
+    .preview-card__dots span:nth-child(2) { background: #ddb84a; }
+    .preview-card__dots span:nth-child(3) { background: #6bcc7a; }
+
+    .preview-card__url {
+      flex: 1;
+      min-width: 0;
+      font-family: ui-monospace, "Cascadia Code", Menlo, monospace;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      color: var(--ink);
+      opacity: 0.72;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .preview-card__viewport {
+      position: relative;
+      z-index: 0;
+      background: var(--pond);
+      line-height: 0;
+    }
+
+    .preview-card__viewport img {
+      display: block;
+      width: 100%;
+      height: auto;
+      pointer-events: none;
+    }
+
+    .preview-card__meta {
+      position: relative;
+      z-index: 1;
+      padding: 1rem 1.1rem;
+      background: rgba(255, 255, 255, 0.75);
+      border-top: 1px solid rgba(12, 15, 20, 0.08);
+    }
+
+    .preview-card__title {
+      margin: 0 0 0.35rem;
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .preview-card__blurb {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .after-previews {
+      max-width: min(40rem, 100%);
+      margin: 0 auto;
+      padding: 1.75rem var(--page-pad) 0;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
     .site-footer {
       flex-shrink: 0;
       margin-top: 3rem;
-      padding: 1.5rem clamp(1.25rem, 4vw, 2.5rem);
+      padding: 1.5rem var(--page-pad);
       border-top: 1px solid rgba(12, 15, 20, 0.1);
       font-size: 0.9rem;
       color: var(--muted);
-      max-width: 40rem;
+      max-width: min(40rem, 100%);
       width: 100%;
       margin-left: auto;
       margin-right: auto;
@@ -50,10 +222,36 @@
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <nav><a href="../">← Home</a></nav>
-    <h1>Articles</h1>
-    <p>Add posts here as <code>.html</code> files or wire up a static generator later.</p>
+  <div class="page-main">
+    <div class="wrap-intro">
+      <nav><a href="../">← Home</a></nav>
+      <p class="tag">Essays</p>
+      <h1>Articles</h1>
+      <p>Longer notes on systems, control, and how we live with uncertainty—open a preview below to read the full piece.</p>
+    </div>
+
+    <div class="preview-stage">
+      <article class="preview-card" aria-labelledby="bounded-chaos-preview-title">
+        <a
+          class="preview-card__stretch"
+          href="bounded-chaos.html"
+          aria-label="Open Free will through bounded chaos — articles/bounded-chaos.html"
+        ></a>
+        <div class="preview-card__chrome" aria-hidden="true">
+          <div class="preview-card__dots"><span></span><span></span><span></span></div>
+          <span class="preview-card__url">…/articles/bounded-chaos.html</span>
+        </div>
+        <div class="preview-card__viewport">
+          <img src="../images/bounded-chaotic-systems.png" alt="Preview: lotus and geometry art for bounded chaos (opens full essay)." loading="lazy" decoding="async">
+        </div>
+        <div class="preview-card__meta">
+          <h2 id="bounded-chaos-preview-title" class="preview-card__title">Free will through bounded chaos</h2>
+          <p class="preview-card__blurb">Religion as civilizational control, a constitution for non-deterministic actors, and governing genAI without blind trust—select the card to read the essay.</p>
+        </div>
+      </article>
+    </div>
+
+    <p class="after-previews">More posts will land here as <code>.html</code> files (or a static generator) when they are ready.</p>
   </div>
   <footer class="site-footer">
     <p>© 2026 cablepull. All rights reserved.</p>
