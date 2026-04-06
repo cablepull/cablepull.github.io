@@ -3,43 +3,257 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Short fiction, serials, and narrative experiments from cablepull.">
+  <meta name="description" content="Fiction and narrative from cablepull—Edge Cases, a LinkedIn newsletter of speculative tales as AI meets everyday life.">
   <link rel="canonical" href="https://cablepull.github.io/fiction/">
   <meta property="og:site_name" content="cablepull">
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cablepull.github.io/fiction/">
   <meta property="og:title" content="Fiction · cablepull">
-  <meta property="og:description" content="Short fiction, serials, and narrative experiments from cablepull.">
+  <meta property="og:description" content="Stories and serials—featured: Edge Cases (LinkedIn), weekly fiction about AI woven into ordinary life.">
   <meta property="og:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
-  <meta property="og:image:alt" content="cablepull — You vibe code, I conduct code (illustration).">
+  <meta property="og:image:alt" content="cablepull — illustration from the site.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Fiction · cablepull">
-  <meta name="twitter:description" content="Short fiction, serials, and narrative experiments from cablepull.">
+  <meta name="twitter:description" content="Stories and serials—featured: Edge Cases (LinkedIn), weekly fiction about AI in daily life.">
   <meta name="twitter:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
   <title>Fiction · cablepull</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
   <style>
-    :root { --ink: #0c0f14; --paper: #e8e4dc; --muted: #5c5a55; --accent: #c45c26; }
-    body { margin: 0; min-height: 100vh; font-family: "Newsreader", Georgia, serif; color: var(--ink); background: var(--paper); line-height: 1.6; }
-    .wrap { max-width: 40rem; margin: 0 auto; padding: clamp(1.25rem, 4vw, 2.5rem); }
-    a { color: var(--accent); }
+    :root {
+      --ink: #0c0f14;
+      --paper: #e8e4dc;
+      --muted: #5c5a55;
+      --fiction-violet: #4a3f5c;
+      --fiction-deep: #1a1524;
+      --linkedin: #0a66c2;
+      --linkedin-glow: rgba(10, 102, 194, 0.28);
+      --page-pad: clamp(1.25rem, 4vw, 2.5rem);
+      --preview-max: min(28rem, 100%);
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: "Newsreader", Georgia, serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+    }
+    .page-main { flex: 1 0 auto; display: flex; flex-direction: column; }
+    .wrap-intro {
+      max-width: min(40rem, 100%);
+      margin: 0 auto;
+      padding: var(--page-pad);
+      padding-bottom: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    a { color: var(--linkedin); }
     h1 { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 800; letter-spacing: -0.03em; }
     nav { margin-bottom: 2rem; font-family: "Bricolage Grotesque", system-ui, sans-serif; font-size: 0.85rem; }
     nav a { text-decoration: none; color: var(--ink); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
-    nav a:hover { color: var(--accent); }
-    body { display: flex; flex-direction: column; min-height: 100vh; }
-    .wrap { flex: 1 0 auto; }
+    nav a:hover { color: var(--fiction-violet); }
+    .tag {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fiction-violet);
+      margin: 0 0 0.5rem;
+    }
+
+    .preview-stage {
+      max-width: var(--preview-max);
+      margin: 0 auto;
+      padding: 2rem var(--page-pad) 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .preview-card {
+      position: relative;
+      border-radius: 0.65rem;
+      border: 1px solid rgba(12, 15, 20, 0.12);
+      background: rgba(255, 255, 255, 0.5);
+      box-shadow:
+        0 0 0 1px rgba(74, 63, 92, 0.1),
+        0 20px 50px -24px rgba(26, 21, 36, 0.35);
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .preview-card:hover,
+    .preview-card:focus-within {
+      border-color: rgba(10, 102, 194, 0.4);
+      box-shadow:
+        0 0 0 1px rgba(10, 102, 194, 0.12),
+        0 26px 60px -20px var(--linkedin-glow);
+    }
+
+    .preview-card__stretch {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+
+    .preview-card__stretch:focus-visible {
+      outline: 2px solid var(--linkedin);
+      outline-offset: 3px;
+    }
+
+    .preview-card__chrome {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.55rem 0.85rem;
+      background: linear-gradient(180deg, rgba(74, 63, 92, 0.12), rgba(74, 63, 92, 0.04));
+      border-bottom: 1px solid rgba(12, 15, 20, 0.08);
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fiction-violet);
+    }
+
+    .preview-card__dots {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .preview-card__dots span {
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      background: rgba(12, 15, 20, 0.12);
+    }
+
+    .preview-card__dots span:first-child { background: #e07066; }
+    .preview-card__dots span:nth-child(2) { background: #ddb84a; }
+    .preview-card__dots span:nth-child(3) { background: #6bcc7a; }
+
+    .preview-card__url {
+      flex: 1;
+      min-width: 0;
+      font-family: ui-monospace, "Cascadia Code", Menlo, monospace;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      color: var(--ink);
+      opacity: 0.72;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .preview-card__viewport {
+      position: relative;
+      z-index: 0;
+      line-height: 0;
+    }
+
+    .preview-card__viewport--edge {
+      min-height: 11.5rem;
+      aspect-ratio: 16 / 10;
+      background:
+        radial-gradient(ellipse 120% 80% at 20% 20%, rgba(10, 102, 194, 0.22), transparent 55%),
+        radial-gradient(ellipse 90% 70% at 85% 75%, rgba(74, 63, 92, 0.35), transparent 50%),
+        linear-gradient(165deg, var(--fiction-deep) 0%, #0d0b12 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1rem, 4vw, 1.75rem);
+      box-sizing: border-box;
+    }
+
+    .preview-card__edge-inner {
+      position: relative;
+      z-index: 0;
+      text-align: center;
+      max-width: 26ch;
+      pointer-events: none;
+    }
+
+    .preview-card__edge-kicker {
+      margin: 0 0 0.5rem;
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .preview-card__edge-title {
+      margin: 0 0 0.65rem;
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: clamp(1.35rem, 4.5vw, 1.75rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: #f3f1f8;
+      text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .preview-card__edge-lede {
+      margin: 0;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 0.95rem;
+      line-height: 1.45;
+      font-style: italic;
+      color: rgba(235, 232, 245, 0.78);
+    }
+
+    .preview-card__meta {
+      position: relative;
+      z-index: 1;
+      padding: 1rem 1.1rem;
+      background: rgba(255, 255, 255, 0.75);
+      border-top: 1px solid rgba(12, 15, 20, 0.08);
+    }
+
+    .preview-card__title {
+      margin: 0 0 0.35rem;
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .preview-card__blurb {
+      margin: 0;
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .after-previews {
+      max-width: min(40rem, 100%);
+      margin: 0 auto;
+      padding: 1.75rem var(--page-pad) 0;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
     .site-footer {
       flex-shrink: 0;
       margin-top: 3rem;
-      padding: 1.5rem clamp(1.25rem, 4vw, 2.5rem);
+      padding: 1.5rem var(--page-pad);
       border-top: 1px solid rgba(12, 15, 20, 0.1);
       font-size: 0.9rem;
       color: var(--muted);
-      max-width: 40rem;
+      max-width: min(40rem, 100%);
       width: 100%;
       margin-left: auto;
       margin-right: auto;
@@ -50,10 +264,41 @@
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <nav><a href="../">← Home</a></nav>
-    <h1>Fiction</h1>
-    <p>Drop stories here as pages or link out to publications.</p>
+  <div class="page-main">
+    <div class="wrap-intro">
+      <nav><a href="../">← Home</a></nav>
+      <p class="tag">Stories</p>
+      <h1>Fiction</h1>
+      <p>Short fiction, serials, and work hosted elsewhere—open the preview below to read on LinkedIn.</p>
+    </div>
+
+    <div class="preview-stage">
+      <article class="preview-card" aria-labelledby="edge-cases-preview-title">
+        <a
+          class="preview-card__stretch"
+          href="https://www.linkedin.com/newsletters/edge-cases-7355526990403194882/"
+          rel="noopener noreferrer"
+          aria-label="Open Edge Cases newsletter on LinkedIn"
+        ></a>
+        <div class="preview-card__chrome" aria-hidden="true">
+          <div class="preview-card__dots"><span></span><span></span><span></span></div>
+          <span class="preview-card__url">linkedin.com/newsletters/edge-cases-7355526990403194882</span>
+        </div>
+        <div class="preview-card__viewport preview-card__viewport--edge">
+          <div class="preview-card__edge-inner">
+            <p class="preview-card__edge-kicker">LinkedIn · Newsletter · Weekly</p>
+            <p class="preview-card__edge-title">Edge Cases</p>
+            <p class="preview-card__edge-lede">Fictional tales about AI being integrated into our lives as AGI emerges.</p>
+          </div>
+        </div>
+        <div class="preview-card__meta">
+          <h2 id="edge-cases-preview-title" class="preview-card__title">Edge Cases</h2>
+          <p class="preview-card__blurb">By Prof. Mehmet Y. Select the card to open the newsletter on LinkedIn (new tab).</p>
+        </div>
+      </article>
+    </div>
+
+    <p class="after-previews">More fiction pages can be added here over time, or linked from this index.</p>
   </div>
   <footer class="site-footer">
     <p>© 2026 cablepull. All rights reserved.</p>
