@@ -164,6 +164,30 @@
       pointer-events: none;
     }
 
+    .project-card__preview-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center top;
+      background: #0a0e12;
+    }
+
+    .project-card__badge {
+      display: inline-block;
+      margin: 0 0 0.45rem;
+      padding: 0.22rem 0.55rem;
+      border-radius: 999px;
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(22, 108, 46, 0.14);
+      color: #146c2e;
+    }
+
     .project-card__meta {
       position: relative;
       z-index: 1;
@@ -246,6 +270,33 @@
       <div class="project-card__meta">
         <h2 id="finsteps-title" class="project-card__title">Finsteps</h2>
         <p class="project-card__blurb">Select this card to open the live site (preview above).</p>
+      </div>
+    </article>
+
+    <article class="project-card" aria-labelledby="exif-stripper-title">
+      <a
+        class="project-card__stretch"
+        href="https://cablepull.github.io/exif-stripper-wasm/"
+        rel="noopener noreferrer"
+        aria-label="EXIF Stripper — open live demo at cablepull.github.io/exif-stripper-wasm"
+      ></a>
+      <div class="project-card__chrome" aria-hidden="true">
+        <div class="project-card__dots"><span></span><span></span><span></span></div>
+        <span class="project-card__url">cablepull.github.io/exif-stripper-wasm</span>
+      </div>
+      <div class="project-card__viewport">
+        <img
+          class="project-card__preview-img"
+          src="../images/exif-stripper-sn.png"
+          alt="Screenshot: EXIF Stripper UI — drop zone, processed files, download clean images."
+          loading="lazy"
+          decoding="async"
+        >
+      </div>
+      <div class="project-card__meta">
+        <span class="project-card__badge">Live demo</span>
+        <h2 id="exif-stripper-title" class="project-card__title">EXIF Stripper</h2>
+        <p class="project-card__blurb">Strip JPEG and PNG metadata in the browser with WebAssembly—no upload, no server. Select the card to open the app.</p>
       </div>
     </article>
     </div>
