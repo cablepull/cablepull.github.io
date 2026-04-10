@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Open letter: stop AI theater on existential risk—bring the scientific community, NIST, and universities into the loop. With a chronology of prior warnings.">
+  <link rel="canonical" href="https://cablepull.github.io/articles/open-letter.html">
+  <meta property="og:site_name" content="cablepull">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://cablepull.github.io/articles/open-letter.html">
+  <meta property="og:title" content="Open letter: science, not theater · cablepull">
+  <meta property="og:description" content="We are told of existential AI risk while the most powerful firms get first access. Show us work that survives external scrutiny—NIST, universities, the scientific community.">
+  <meta property="og:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
+  <meta property="og:image:alt" content="cablepull — editorial illustration.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Open letter: science, not theater · cablepull">
+  <meta name="twitter:description" content="Existential risk claims deserve scientific scrutiny—not theater handed first to the most powerful corporations.">
+  <meta name="twitter:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
+  <title>Open letter: science, not theater · cablepull</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --desk: #5c564c;
+      --desk-deep: #454039;
+      --paper: #faf7f0;
+      --paper-shadow: rgba(28, 25, 23, 0.22);
+      --paper-vein: rgba(139, 126, 108, 0.08);
+      --ink: #1c1917;
+      --ink-soft: #44403c;
+      --muted: #78716c;
+      --margin-line: #dcb8b8;
+      --seal: #7f1d1d;
+      --seal-soft: rgba(127, 29, 29, 0.12);
+      --link: #1d4ed8;
+      --manila: #ebe3d4;
+      --manila-dark: #d4c4a8;
+      --pad: clamp(1.25rem, 4vw, 2.75rem);
+      --max-letter: 40rem;
+      --max-full: 72rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background: var(--desk-deep);
+      font-family: "EB Garamond", Georgia, "Times New Roman", serif;
+      font-size: clamp(1.12rem, 1.05rem + 0.35vw, 1.28rem);
+      line-height: 1.58;
+    }
+
+    .desk {
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse 120% 80% at 50% -20%, rgba(255, 255, 255, 0.06), transparent 50%),
+        linear-gradient(168deg, var(--desk) 0%, var(--desk-deep) 45%, #2e2a26 100%);
+      padding-bottom: 3rem;
+    }
+
+    .desk-texture {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.35;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+    }
+
+    nav.back {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-full);
+      margin: 0 auto;
+      padding: 1.15rem var(--pad) 0;
+    }
+
+    nav.back a {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(250, 247, 240, 0.65);
+      text-decoration: none;
+    }
+
+    nav.back a:hover { color: #faf7f0; }
+
+    .letter-wrap {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-full);
+      margin: 0 auto;
+      padding: 1.5rem var(--pad) 0;
+      display: grid;
+      gap: 2rem;
+    }
+
+    @media (min-width: 960px) {
+      .letter-wrap {
+        grid-template-columns: minmax(0, var(--max-letter)) minmax(0, 1fr);
+        align-items: start;
+        gap: 2.25rem;
+      }
+    }
+
+    /* Cream sheet + red margin (notebook / formal letter) */
+    .letter-paper {
+      position: relative;
+      background: var(--paper);
+      color: var(--ink);
+      padding: clamp(1.75rem, 5vw, 2.75rem) clamp(1.35rem, 4vw, 2.5rem) clamp(2rem, 5vw, 3rem) clamp(2.1rem, 5vw, 3.25rem);
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.5) inset,
+        0 2px 0 rgba(0, 0, 0, 0.04),
+        0 18px 48px -12px var(--paper-shadow),
+        0 0 0 1px rgba(0, 0, 0, 0.06);
+      border-radius: 1px;
+    }
+
+    .letter-paper::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: clamp(1.5rem, 4vw, 2.25rem);
+      width: 1px;
+      background: linear-gradient(180deg, transparent 0%, var(--margin-line) 8%, var(--margin-line) 92%, transparent 100%);
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .letter-fiber {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      border-radius: 1px;
+      opacity: 0.45;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+    }
+
+    .letterhead-brand {
+      text-align: center;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .letterhead-brand span { color: var(--seal); font-weight: 600; }
+
+    .letterhead-rule {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--ink) 15%, var(--ink) 85%, transparent);
+      opacity: 0.2;
+      margin: 0 0 1.25rem;
+    }
+
+    .letter-paper h1 {
+      font-size: clamp(1.65rem, 3.5vw, 2.35rem);
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.65rem;
+      text-align: center;
+    }
+
+    .letter-paper h1 em {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--seal);
+    }
+
+    .letterhead-dek {
+      text-align: center;
+      font-size: 1.02rem;
+      font-style: italic;
+      color: var(--ink-soft);
+      margin: 0 0 1.75rem;
+      line-height: 1.45;
+      max-width: 32ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .letter-address-block {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: start;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid rgba(28, 25, 23, 0.12);
+      font-size: 0.98rem;
+    }
+
+    @media (max-width: 520px) {
+      .letter-address-block {
+        grid-template-columns: 1fr;
+      }
+      .letter-date-col {
+        text-align: left;
+        padding-top: 0.5rem;
+        border-top: 1px dashed rgba(28, 25, 23, 0.1);
+      }
+    }
+
+    .letter-address-block .label,
+    .re-line .label {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 0.25rem;
+    }
+
+    .letter-address-block p { margin: 0; }
+
+    .letter-date-col {
+      text-align: right;
+      min-width: 8rem;
+    }
+
+    .letter-date-col p:not(.label) {
+      font-variant-numeric: lining-nums;
+    }
+
+    .letter-body {
+      position: relative;
+      z-index: 1;
+    }
+
+    .re-line {
+      margin: 0 0 1.35rem;
+      font-size: 1.02rem;
+    }
+
+    .re-line .label { display: inline; margin-right: 0.35rem; }
+
+    .letter-body p {
+      margin: 0 0 1.2rem;
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    .letter-body .lead {
+      font-size: 1.12rem;
+      line-height: 1.52;
+    }
+
+    .letter-body .lead strong {
+      color: var(--seal);
+      font-weight: 600;
+    }
+
+    /* Emphasis block: same voice as the letter, not a foreign excerpt */
+    .letter-body blockquote.call {
+      margin: 0 0 1.2rem;
+      padding: 0;
+      border: none;
+      background: none;
+      font-style: normal;
+      font-size: inherit;
+      line-height: inherit;
+      font-weight: 500;
+      color: var(--ink);
+      text-align: justify;
+      hyphens: auto;
+      quotes: none;
+    }
+
+    .letter-body blockquote.call::before,
+    .letter-body blockquote.call::after {
+      content: none;
+    }
+
+    .letter-body .recommendations {
+      margin: 0 0 1.35rem;
+      padding: 0 0 0 1.35rem;
+      list-style-type: decimal;
+      font-size: inherit;
+      line-height: 1.58;
+    }
+
+    .letter-body .recommendations > li {
+      margin: 0 0 1.15rem;
+      padding-left: 0.45rem;
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    .letter-body .recommendations > li:last-child {
+      margin-bottom: 0;
+    }
+
+    .letter-body .recommendations strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .letter-body .recommendations .frame {
+      display: block;
+      margin-top: 0.35rem;
+      font-style: italic;
+      color: var(--ink-soft);
+    }
+
+    .letter-body .recommendations li p {
+      margin: 0.45rem 0 0;
+      text-align: justify;
+    }
+
+    .letter-body .recommendations li p:first-of-type {
+      margin-top: 0.5rem;
+    }
+
+    .letter-body .letter-anchor {
+      margin: 0.65rem 0 0;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--seal);
+      text-align: left;
+      hyphens: none;
+    }
+
+    /* Verbatim vendor excerpt — visually distinct from in-voice emphasis (.call) */
+    .letter-body .vendor-excerpt {
+      margin: 0 0 1.2rem;
+      padding: 0;
+    }
+
+    .letter-body .vendor-excerpt blockquote {
+      margin: 0 0 0.55rem;
+      padding: 1rem 1.1rem 1rem 1.15rem;
+      border-left: 3px solid var(--ink-soft);
+      background: rgba(28, 25, 23, 0.04);
+      font-style: italic;
+      color: var(--ink-soft);
+      quotes: none;
+    }
+
+    .letter-body .vendor-excerpt blockquote p {
+      margin: 0;
+      text-align: left;
+      hyphens: none;
+    }
+
+    .letter-body .vendor-excerpt blockquote::before,
+    .letter-body .vendor-excerpt blockquote::after {
+      content: none;
+    }
+
+    .letter-body .vendor-excerpt figcaption {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.06em;
+      line-height: 1.5;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-left: 0.15rem;
+    }
+
+    .letter-body .vendor-excerpt figcaption a {
+      color: var(--link);
+      text-decoration: none;
+      text-transform: none;
+      letter-spacing: 0.02em;
+      font-size: 0.62rem;
+    }
+
+    .letter-body .vendor-excerpt figcaption a:hover {
+      text-decoration: underline;
+    }
+
+    .letter-valediction {
+      margin: 2rem 0 0.35rem;
+      font-style: italic;
+      color: var(--ink-soft);
+    }
+
+    .letter-signature {
+      margin: 0 0 1.5rem;
+      font-weight: 600;
+      font-size: 1.08rem;
+      letter-spacing: 0.02em;
+    }
+
+    .letter-signature .org { color: var(--seal); }
+
+    .letter-ps {
+      margin: 0;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(28, 25, 23, 0.15);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      line-height: 1.65;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .letter-ps a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    .letter-ps a:hover { text-decoration: underline; }
+
+    /* Manila enclosure — chronicle */
+    .enclosure {
+      position: relative;
+    }
+
+    .enclosure-sticky {
+      position: sticky;
+      top: 1rem;
+    }
+
+    .enclosure-tab {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(28, 25, 23, 0.55);
+      margin-bottom: 0.5rem;
+      padding-left: 0.15rem;
+    }
+
+    .enclosure-sheet {
+      background: var(--manila);
+      border: 1px solid var(--manila-dark);
+      border-radius: 2px;
+      padding: 1.35rem 1.2rem 1.5rem;
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.35) inset,
+        0 14px 36px -16px rgba(0, 0, 0, 0.35);
+    }
+
+    .enclosure h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0 0 0.4rem;
+      color: var(--ink);
+    }
+
+    .enclosure-dek {
+      font-size: 0.92rem;
+      font-style: italic;
+      color: var(--ink-soft);
+      margin: 0 0 1.25rem;
+      line-height: 1.45;
+    }
+
+    .cite-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-height: none;
+    }
+
+    @media (min-width: 960px) {
+      .cite-list {
+        max-height: calc(100vh - 9rem);
+        overflow-y: auto;
+        padding-right: 0.35rem;
+      }
+      .cite-list::-webkit-scrollbar { width: 5px; }
+      .cite-list::-webkit-scrollbar-thumb {
+        background: var(--manila-dark);
+        border-radius: 2px;
+      }
+    }
+
+    .cite-card {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(28, 25, 23, 0.1);
+      padding: 0.85rem 1rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .cite-card:hover {
+      border-color: rgba(29, 78, 216, 0.25);
+      box-shadow: 0 4px 14px -6px rgba(0, 0, 0, 0.12);
+    }
+
+    .cite-card .year {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      color: var(--seal);
+      margin-bottom: 0.35rem;
+    }
+
+    .cite-card p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.48;
+      color: var(--ink-soft);
+    }
+
+    .cite-card .cite-source,
+    .cite-card .cite-retrieved {
+      margin-top: 0.55rem;
+      font-size: 0.8rem;
+      line-height: 1.48;
+      color: var(--ink);
+    }
+
+    .cite-card .cite-retrieved {
+      margin-top: 0.4rem;
+    }
+
+    .cite-card .cite-source strong,
+    .cite-card .cite-retrieved strong {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .cite-card .cite-source cite,
+    .cite-card p cite {
+      font-style: italic;
+    }
+
+    .cite-card .cite-retrieved a {
+      color: var(--link);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-size: inherit;
+      font-family: inherit;
+    }
+
+    .cite-card .cite-retrieved a:hover {
+      text-decoration-thickness: 2px;
+    }
+
+    .cite-card > a {
+      display: inline-block;
+      margin-top: 0.45rem;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.52rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    .cite-card > a:hover { text-decoration: underline; }
+
+    /* Bibliography — second sheet */
+    .bib-section {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-full);
+      margin: 0 auto;
+      padding: 2.5rem var(--pad) 0;
+    }
+
+    .bib-section > .enclosure-tab {
+      max-width: none;
+      padding: 0 0.15rem;
+    }
+
+    .bib-paper {
+      background: var(--paper);
+      padding: clamp(1.5rem, 4vw, 2.25rem);
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.45) inset,
+        0 16px 44px -14px var(--paper-shadow);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 1px;
+    }
+
+    .bib-section h2 {
+      font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+      font-weight: 600;
+      margin: 0 0 0.4rem;
+      text-align: center;
+    }
+
+    .bib-section .bib-dek {
+      text-align: center;
+      font-style: italic;
+      color: var(--ink-soft);
+      margin: 0 auto 1.75rem;
+      max-width: 40ch;
+      line-height: 1.45;
+    }
+
+    .bib-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(16.5rem, 1fr));
+      gap: 0.85rem;
+    }
+
+    .bib-item {
+      border: 1px solid rgba(28, 25, 23, 0.1);
+      padding: 0.95rem 1.05rem;
+      background: rgba(250, 247, 240, 0.85);
+    }
+
+    .bib-item h3 {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--seal);
+      margin: 0 0 0.4rem;
+    }
+
+    .bib-item p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.48;
+      color: var(--ink-soft);
+    }
+
+    .bib-item a {
+      color: var(--link);
+      word-break: break-word;
+    }
+
+    .site-footer {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-letter);
+      margin: 2.5rem auto 0;
+      padding: 0 var(--pad) 2rem;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: rgba(250, 247, 240, 0.55);
+    }
+
+    .site-footer p { margin: 0 0 0.85rem; }
+    .site-footer p:last-child { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+  <div class="desk">
+    <div class="desk-texture" aria-hidden="true"></div>
+
+    <nav class="back"><a href="index.html">← Articles</a> · <a href="../">Home</a></nav>
+
+    <div class="letter-wrap">
+      <div class="letter-paper">
+        <div class="letter-fiber" aria-hidden="true"></div>
+
+        <header>
+          <p class="letterhead-brand">cable<span>pull</span></p>
+          <div class="letterhead-rule" aria-hidden="true"></div>
+          <h1 id="open-letter-title">Open Letter: Stop the theater. <em>Go to science.</em></h1>
+          <p class="letterhead-dek">On existential-risk rhetoric, priority access for the largest firms, and what it would mean to submit claims to real external scrutiny.</p>
+        </header>
+
+        <div class="letter-address-block">
+          <div>
+            <p class="label">To</p>
+            <p>Frontier artificial-intelligence laboratories<br>and vendors of large language models</p>
+          </div>
+          <div class="letter-date-col">
+            <p class="label">Date</p>
+            <p>10 April 2026</p>
+          </div>
+        </div>
+
+        <article class="letter-body" aria-labelledby="open-letter-title">
+          <p class="re-line"><span class="label">Re</span> Claims of catastrophic and existential risk from general-purpose AI</p>
+
+          <p>Dear Anthropic and AI/LLM research community colleagues,</p>
+
+          <p class="lead">I and many of my colleagues in the security community are tired of AI theater and everyone involved in it. <strong>“We created another existential threat…”</strong> but we are going to give that existential threat to the most powerful corporations on the planet first. This is a clear and terrifying misalignment.</p>
+
+          <p>You have publicly framed <strong>Claude Mythos Preview</strong> as an extraordinary step—capabilities in the neighborhood of frontier offensive security research and vulnerability discovery—while simultaneously announcing <strong>Project Glasswing</strong>, which routes early access to that model through a closed consortium of a dozen of the world’s largest technology and finance firms. If the risk story is sincere, that ordering is backwards: the scientific community, standards bodies, and universities should help define and verify the threat model <em>before</em> “pay to play” becomes the default path for the most sensitive capability.</p>
+
+          <p>The same materials turn around and invite reassurance in language like this—quoted verbatim from the system preview card for Claude Mythos Preview:</p>
+
+          <figure class="vendor-excerpt">
+            <blockquote cite="https://red.anthropic.com/2026/mythos-preview/" lang="en">
+              <p>Similarly, Claude Mythos Preview shows a dramatic reduction in the frequency of unwanted high-stakes actions that the model takes at its own initiative, with behaviors related to deception falling by more than half relative to Opus 4.6, and continued improvements on recent models’ already good behaviors in areas like self-preservation and power-seeking.</p>
+            </blockquote>
+            <figcaption>Source: Anthropic · Claude Mythos Preview (system preview card). <a href="https://red.anthropic.com/2026/mythos-preview/" rel="noopener noreferrer">red.anthropic.com · Mythos Preview</a></figcaption>
+          </figure>
+
+          <p>That is the point: the public is asked to hold “existential misalignment” and “dramatic reductions in deception, self-preservation, and power-seeking” in the same story, without the replication, protocols, or failure thresholds that would let anyone else tell which narrative the evidence actually supports.</p>
+
+          <p>Separately, your published <strong>Claude’s Constitution</strong>—the rules you say should shape the model’s judgment—includes this passage, quoted verbatim:</p>
+
+          <figure class="vendor-excerpt">
+            <blockquote cite="https://www.anthropic.com/constitution" lang="en">
+              <p>But we want Claude to be cognizant of the risks this kind of power concentration implies, to view contributing to it as a serious harm that requires a very high bar of justification, and to attend closely to the legitimacy of the process and of the actors so empowered.</p>
+            </blockquote>
+            <figcaption>Source: Anthropic · Claude’s Constitution. <a href="https://www.anthropic.com/constitution" rel="noopener noreferrer">anthropic.com · Constitution</a></figcaption>
+          </figure>
+
+          <p><strong>Project Glasswing</strong> is a live instance of concentrated access to an extraordinarily capable system. The “very high bar of justification” and attention to “the legitimacy of the process and of the actors” are not something a closed vendor narrative can self-certify—that is the work of independent replication, adversarial evaluation, and the institutions this letter names.</p>
+
+          <p>I don’t ask the next question to insult or out of frivolity, but rather to show that the message is inconsistent—and we need high assurance when it comes to these matters. Only one of two things can be true: either you are a responsible AI company or you are not. I would not classify a company that runs a pay-to-play program to pilot a potentially devastating, self-jailbreaking technology without working extensively with the scientific community first as having met that bar.</p>
+
+          <p>What do you think the scientific community exists for?</p>
+
+          <blockquote class="call">
+            If you are being sincere, then you must show us something designed to survive external scrutiny. If we have truly crossed a threshold for existential threats, then now is not the time to unleash it to select companies.  Anthropic: get the scientific community involved. Go talk to the National Institute of Standards and Technology (NIST). Get universities involved. You claim you want to be the secure, responsible AI vendor. Act like it.
+          </blockquote>
+
+          <p>Concretely—still regarding <strong>Claude Mythos Preview</strong>, <strong>Project Glasswing</strong>, and the standard you ask the world to accept—we offer the following recommendations. They overlap on purpose: the failure mode they target is a single one, namely high-stakes claims without high-assurance evidence.</p>
+
+          <ol class="recommendations" aria-label="Ten recommendations on evidence, access, and governance">
+            <li><strong>Shift the burden of proof.</strong> Do not ask observers to accept extraordinary capability on presentation while treating controllability as a footnote. Demand—and supply—evidence that safeguards hold under agentic, long-horizon use; that the system resists self-jailbreaking and goal decomposition; and that behavior is stable across model versions and drift, not only on curated snapshots. <span class="frame">Show controllability under the same conditions you showcase capability.</span></li>
+
+            <li><strong>Separate access control from safety.</strong> Restricting who may call an API is governance of distribution, not proof of containment. If behavioral limits are real, they must be enforced by the system and the stack—not inferred from the respectability of the partner list. <span class="frame">Who gets it is not a safety mechanism.</span></li>
+
+            <li><strong>Use your own uncertainty honestly (RSP).</strong> Your Responsible Scaling Policy and related materials acknowledge that evaluation is ambiguous and that the underlying science is still immature. Taken seriously, that admission rules out treating internal judgment alone as sufficient for existential or civilization-scale claims. What follows is obligatory: independent validation layers—NIST-class rigor, academia, and neutral evaluators—not another internal slide deck.</li>
+
+            <li><strong>Distinguish disclosure from legitimacy.</strong> No one is asking you to publish live exploit chains in a blog post. What we are asking for is legitimate scrutiny: independent testing, adversarial evaluation, and predefined protocols everyone can see before the scores are announced. <span class="frame">Withholding operational detail is not the same thing as avoiding scrutiny.</span></li>
+
+            <li><strong>Do not confuse a commercial consortium with public-interest governance.</strong> This is not a claim that large enterprises are “bad.” It is a claim that a closed commercial consortium optimizes for a different set of interests than democratic or scientific legitimacy. If the risk is exceptional, the governance of that risk must be exceptional too—NIST, universities, and credibly neutral third parties in the loop, not only consortium members. <span class="frame">If risk is exceptional, governance must be exceptional.</span></li>
+
+            <li><strong>Make self-jailbreaking decisive.</strong> The decisive question is whether safeguards survive autonomous iteration, task decomposition, and persistence—the very behaviors you promote when you market “agentic” use. If they do not, the story that staged access equals containment collapses: you are describing distribution, not control. <span class="frame">If it can route around its own controls, this is distribution—not containment.</span></li>
+
+            <li><strong>Separate the markets you are mixing.</strong> A capability market aimed at defense and advantage tolerates opacity, speed, and asymmetric information. Enterprise and public deployment require reliability, auditability, and bounded behavior under stress. The letter’s concern is that these models are being blended in rhetoric and product without an honest accounting of which rules apply to which buyer.</li>
+
+            <li><strong>Reframe what is actually being competed on.</strong> The public argument is too often cast as hype versus reality. The sharper description is capability competition versus adoption and governance competition. The worry is that vendors are optimizing the former while selling into environments that require the latter.</li>
+
+            <li><strong>Demand concrete artifacts—not adjectives.</strong> Among the things that should exist in public or semi-public form: adversarial red-team results from <em>external</em> teams; a serious failure-mode taxonomy; explicit control-break thresholds; reproducible evaluation harnesses; and, where you claim traceability, audit logs or other guarantees an outsider can reason about. (This subsumes what we have elsewhere called independent replication, public or semi-public protocols, shared challenge problems, and transparent limitation reporting.)</li>
+
+            <li><strong>State the narrow question.</strong> Grant, for argument, that <strong>Claude Mythos Preview</strong> is as capable as claimed. Narrow the issue: it is not a cartoon choice between “release” and “no release.” Force the actual question: <em>where is the independent evidence that your controls hold under the exact autonomous behaviors you are promoting?</em>
+              <p>That is the lever.</p>
+              <p class="letter-anchor">You’ve demonstrated capability. You have not demonstrated control under that capability.</p>
+            </li>
+          </ol>
+
+          <p>Without movement on these fronts, Mythos-class claims remain indistinguishable from theater—no matter how sober the press release sounds.</p>
+
+          <p><strong>Stop what you are doing, and go to science.</strong> This is my call to action.  This is not just about Anthropic—it is an open letter to every LLM and AI research firm that believes it may be building an existential threat.</p>
+
+          <p>You built a remarkable LLM, but it seems you no longer remember why the scientific community exists.  It is time to take corrective measures.</p>
+
+          <p class="letter-valediction">Respectfully,</p>
+          <p class="letter-signature"><span class="org">cablepull aka Mehmet Yilmaz</span></p>
+
+          <p class="letter-ps">
+            P.S. — Verifiable material for other claims on this site is indexed under
+            <a href="../receipts/">Receipts Available</a>.
+          </p>
+        </article>
+      </div>
+
+      <aside class="enclosure" aria-label="Chronology of existential and catastrophic AI risk discourse">
+        <p class="enclosure-tab">Enclosure A — References</p>
+        <div class="enclosure-sheet enclosure-sticky">
+          <h2>Warnings before the press release</h2>
+          <p class="enclosure-dek">A non-exhaustive thread of public citations—context for the moment “existential” is used as both warning and marketing.</p>
+
+          <div class="cite-list">
+            <article class="cite-card">
+              <div class="year">1951</div>
+              <p>Alan Turing, in a 1951 radio lecture on intelligent machinery, raised the prospect that machines might eventually “outstrip our feeble powers”—and that at some stage “we should have to expect the machines to take control.” Early articulation of loss-of-control concern.</p>
+              <p class="cite-source"><strong>Source:</strong> Turing, A. M. (1951). <cite>Intelligent Machinery: A Heretical Theory</cite> (BBC Third Programme lecture; circulated as typescript). Reprinted in Copeland, B. J. (ed.), <cite>The Essential Turing: Seminal Writings in Computing, Logic, Philosophy, Artificial Intelligence, and Artificial Life, plus the Secrets of Enigma</cite>, Oxford University Press, 2004.</p>
+              <p class="cite-retrieved"><strong>Retrieved from:</strong> <a href="https://global.oup.com/academic/product/the-essential-turing-9780198250807" rel="noopener noreferrer">Oxford University Press · <cite>The Essential Turing</cite> (catalog)</a></p>
+            </article>
+
+            <article class="cite-card">
+              <div class="year">1966</div>
+              <p>I. J. Good’s “speculations concerning the first ultraintelligent machine”: an intelligence explosion could render the human race redundant—foundational for later existential risk framing.</p>
+              <p class="cite-source"><strong>Source:</strong> Good, I. J. (1966). “Speculations concerning the first ultraintelligent machine.” In Alt, F. L. &amp; Rubinoff, M. F. (eds.), <cite>Advances in Computers</cite>, vol. 6, pp. 31–88. Academic Press.</p>
+              <p class="cite-retrieved"><strong>Retrieved from:</strong> <a href="https://doi.org/10.1016/S0065-2458(08)60418-0" rel="noopener noreferrer">DOI 10.1016/S0065-2458(08)60418-0 · ScienceDirect / Elsevier</a></p>
+            </article>
+
+            <article class="cite-card">
+              <div class="year">1960</div>
+              <p>Norbert Wiener’s <cite>God and Golem, Inc.</cite>—ethics of learning machines and the danger of “gadgets” we cannot morally or technically master.</p>
+              <a href="https://mitpress.mit.edu/9780262730071/god-and-golem-inc/" rel="noopener noreferrer">MIT Press</a>
+            </article>
+
+            <article class="cite-card">
+              <div class="year">1993</div>
+              <p>Vernor Vinge’s essay “The Coming Technological Singularity” predicts superhuman intelligence within decades and argues we cannot predict or bound what follows.</p>
+              <a href="https://edoras.sdsu.edu/~vinge/misc/singularity.html" rel="noopener noreferrer">Author-hosted text</a>
+            </article>
+
+            <article class="cite-card">
+              <div class="year">2003–2014</div>
+              <p>Nick Bostrom’s analytical work on superintelligent agency and instrumental convergence—including the path from capable systems to outcomes no human asked for.</p>
+              <a href="https://nickbostrom.com/ethics/ai.html" rel="noopener noreferrer">Bostrom · AI ethics overview</a>
+            </article>
+
+            <article class="cite-card">
+              <div class="year">2015</div>
+              <p>Open letter on research priorities for robust and beneficial AI—signed by thousands of researchers, flagging misuse and long-term questions as mainstream topics.</p>
+              <a href="https://futureoflife.org/open-letter/ai-open-letter/" rel="noopener noreferrer">Future of Life Institute</a>
+            </article>
+
+            <article class="cite-card">
+              <div class="year">2017</div>
+              <p>Asilomar AI Principles—23 principles including capability caution, shared benefit, and priority for “the long-term future of humanity” alongside near-term safety.</p>
+              <a href="https://futureoflife.org/ai-principles/" rel="noopener noreferrer">FLI · Asilomar principles</a>
+            </article>
+
+            <article class="cite-card">
+              <div class="year">2019</div>
+              <p>Stuart Russell’s <cite>Human Compatible</cite> reframes AI around uncertainty about human objectives—arguing misalignment scales with capability.</p>
+              <a href="https://humancompatible.ai/" rel="noopener noreferrer">humancompatible.ai</a>
+            </article>
+
+            <article class="cite-card">
+              <div class="year">2022</div>
+              <p>“Existential risk from power-seeking AI” (Cotra, Open Philanthropy)—influential report tying scaling trends to misalignment and takeover risk.</p>
+              <a href="https://www.openphilanthropy.org/research/existential-risk-from-power-seeking-ai/" rel="noopener noreferrer">Open Philanthropy</a>
+            </article>
+
+            <article class="cite-card">
+              <div class="year">2023</div>
+              <p>Statement on AI Risk (CAIS): “Mitigating the risk of extinction from AI should be a global priority alongside other societal-scale risks such as pandemics and nuclear war.”</p>
+              <a href="https://www.safe.ai/statement-on-ai-risk" rel="noopener noreferrer">Center for AI Safety</a>
+            </article>
+
+            <article class="cite-card">
+              <div class="year">2023</div>
+              <p>Pause Giant AI Experiments—open letter calling for public policy and shared safety protocols before training systems more powerful than GPT-4.</p>
+              <a href="https://futureoflife.org/open-letter/pause-giant-ai-experiments/" rel="noopener noreferrer">FLI · Pause letter</a>
+            </article>
+
+            <article class="cite-card">
+              <div class="year">2023</div>
+              <p>NIST AI Risk Management Framework (AI RMF 1.0)—voluntary U.S. guidance for mapping, measuring, and managing AI risks; institutional home for “show your work” governance.</p>
+              <a href="https://www.nist.gov/itl/ai-risk-management-framework" rel="noopener noreferrer">NIST · AI RMF</a>
+            </article>
+
+            <article class="cite-card">
+              <div class="year">2023</div>
+              <p>Bletchley Declaration—countries agree to collaborate on frontier-AI safety, acknowledging “substantial risks… including… potential for catastrophic harm.”</p>
+              <a href="https://www.gov.uk/government/publications/ai-safety-summit-2023-the-bletchley-declaration/the-bletchley-declaration-by-countries-attending-the-ai-safety-summit-1-2-november-2023" rel="noopener noreferrer">UK Gov</a>
+            </article>
+
+            <article class="cite-card">
+              <div class="year">2024</div>
+              <p>EU Artificial Intelligence Act—legally distinguishes unacceptable risk, high-risk systems, and GPAI with systemic risk; one regulatory answer to “who proves what to whom.”</p>
+              <a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" rel="noopener noreferrer">European Commission</a>
+            </article>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="bib-section" aria-labelledby="bib-heading">
+      <p class="enclosure-tab">Enclosure B — Further reading</p>
+      <div class="bib-paper">
+        <h2 id="bib-heading">Further reading &amp; institutions</h2>
+        <p class="bib-dek">Primary vendor pages for what this letter names (<strong>Claude Mythos Preview</strong>, <strong>Project Glasswing</strong>), plus portals for standards, evaluation, and multi-stakeholder process.</p>
+        <div class="bib-grid">
+          <div class="bib-item">
+            <h3>Claude Mythos Preview</h3>
+            <p>Anthropic’s published overview of Mythos and related capability claims—the baseline text the letter asks to see subjected to independent replication and adversarial evaluation. <a href="https://red.anthropic.com/2026/mythos-preview/" rel="noopener noreferrer">red.anthropic.com · Mythos Preview</a></p>
+          </div>
+          <div class="bib-item">
+            <h3>Project Glasswing</h3>
+            <p>Anthropic’s description of consortium partners, credits, and defensive use of Mythos-class capability. <a href="https://www.anthropic.com/glasswing" rel="noopener noreferrer">anthropic.com · Project Glasswing</a></p>
+          </div>
+          <div class="bib-item">
+            <h3>Claude’s Constitution</h3>
+            <p>Anthropic’s published constitutional principles for the model—including language on power concentration, justification, and legitimacy of process and actors quoted in the letter. <a href="https://www.anthropic.com/constitution" rel="noopener noreferrer">anthropic.com · Constitution</a></p>
+          </div>
+          <div class="bib-item">
+            <h3>NIST</h3>
+            <p><a href="https://www.nist.gov/itl/ai-risk-management-framework" rel="noopener noreferrer">AI Risk Management Framework</a> and related evaluation work—where “responsible vendor” meets documented practice.</p>
+          </div>
+          <div class="bib-item">
+            <h3>Cloud Security Alliance</h3>
+            <p><strong>AI Safety Initiative</strong>—guidance, research artifacts, and controls frameworks (including alignment with NIST AI RMF and ISO/IEC 42001). <a href="https://cloudsecurityalliance.org/artifacts/ai-safety-initiative-overview" rel="noopener noreferrer">Initiative overview (artifact)</a> · <a href="https://e.cloudsecurityalliance.org/ai-safety-initiative" rel="noopener noreferrer">AI Safety Initiative hub</a></p>
+          </div>
+          <div class="bib-item">
+            <h3>Partnership on AI</h3>
+            <p><a href="https://partnershiponai.org/" rel="noopener noreferrer">partnershiponai.org</a> — multi-sector research and policy on AI impacts.</p>
+          </div>
+          <div class="bib-item">
+            <h3>MLCommons · AI Safety</h3>
+            <p><a href="https://mlcommons.org/" rel="noopener noreferrer">mlcommons.org</a> — benchmarks and (via working groups) emerging safety evaluation norms.</p>
+          </div>
+          <div class="bib-item">
+            <h3>Anthropic · RSP</h3>
+            <p><a href="https://www.anthropic.com/news/anthropics-responsible-scaling-policy" rel="noopener noreferrer">Responsible Scaling Policy</a> — example of self-published guardrails; the letter above asks that such claims be stress-tested outside the building.</p>
+          </div>
+          <div class="bib-item">
+            <h3>Future of Life Institute</h3>
+            <p><a href="https://futureoflife.org/" rel="noopener noreferrer">futureoflife.org</a> — open letters, grants, and long-term risk advocacy since the 2010s.</p>
+          </div>
+          <div class="bib-item">
+            <h3>Gov.uk · AI Safety</h3>
+            <p><a href="https://www.gov.uk/government/organisations/ai-safety-institute" rel="noopener noreferrer">AI Safety Institute</a> — national institutional response post–AI Safety Summit.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p>© 2026 cablepull. All rights reserved.</p>
+      <p>No permission is granted to use this site or its contents for training, tuning, or developing artificial intelligence or machine learning systems, or to ingest it into any model or dataset for those purposes. Third parties may not crawl, scrape, cache, or index this site for search, AI, aggregation, or similar services without prior written consent.</p>
+    </footer>
+  </div>
+</body>
+</html>
