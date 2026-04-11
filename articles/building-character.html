@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Building character in the genAI era—individual discernment, children and tools, imitation, institutions, ethics under provocation, and civilizational stress tests.">
+  <link rel="canonical" href="https://cablepull.github.io/articles/building-character.html">
+  <meta property="og:site_name" content="cablepull">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://cablepull.github.io/articles/building-character.html">
+  <meta property="og:title" content="Building character · cablepull">
+  <meta property="og:description" content="Adaptation, children, reflected sentiment, institutional rigor, rejecting violence, and hardship as forge—essays on character and genAI.">
+  <meta property="og:image" content="https://cablepull.github.io/images/character-building/ch-1.png">
+  <meta property="og:image:alt" content="Character building comic illustration.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Building character · cablepull">
+  <meta name="twitter:description" content="Character in the genAI era—individual, developmental, reflected, institutional, ethical, civilizational.">
+  <meta name="twitter:image" content="https://cablepull.github.io/images/character-building/ch-1.png">
+  <title>Building character · cablepull</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Kalam:wght@400;700&family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #f7f4ec;
+      --paper-dark: #ebe6d9;
+      --ink: #141414;
+      --ink-soft: #3d3d3d;
+      --accent: #c41e1e;
+      /* Sunday-funnies accent — warm orange without literal tiger stripes */
+      --hobbes: #d4561f;
+      --rail-w: min(18rem, 40vw);
+      --pad: clamp(1rem, 3vw, 1.75rem);
+      --max-prose: 40rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Merriweather", Georgia, serif;
+      font-size: clamp(1rem, 0.95rem + 0.25vw, 1.12rem);
+      line-height: 1.75;
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    /* Faint newsprint halftone — Calvin & Hobbes lived on cheap paper */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.035;
+      background-image: radial-gradient(circle at center, var(--ink) 0.45px, transparent 0.5px);
+      background-size: 4px 4px;
+    }
+
+    .page-surface {
+      position: relative;
+      z-index: 1;
+    }
+
+    .top-band {
+      height: 5px;
+      width: 100%;
+      background: var(--ink);
+      box-shadow: 0 4px 0 0 var(--hobbes);
+    }
+
+    nav.back {
+      padding: 0.85rem var(--pad);
+      font-family: "Kalam", cursive;
+      font-size: 0.95rem;
+    }
+
+    nav.back a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    nav.back a:hover { color: var(--accent); }
+
+    .masthead {
+      padding: 0 var(--pad) 1.25rem;
+      text-align: center;
+      border-bottom: 3px solid var(--ink);
+      margin: 0 var(--pad) 1.5rem;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .masthead::after {
+      content: "";
+      display: block;
+      height: 3px;
+      margin-top: 0.85rem;
+      max-width: 10rem;
+      margin-left: auto;
+      margin-right: auto;
+      background: var(--ink);
+      border-radius: 1px;
+      opacity: 0.85;
+    }
+
+    .masthead .kicker {
+      font-family: "Kalam", cursive;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      color: var(--accent);
+      margin: 0 0 0.35rem;
+    }
+
+    .masthead h1 {
+      font-family: "Archivo Black", Impact, sans-serif;
+      font-weight: 400;
+      font-size: clamp(1.65rem, 4vw, 2.35rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .masthead .sub {
+      font-family: "Kalam", cursive;
+      font-size: 1.05rem;
+      margin: 0.65rem 0 0;
+      color: var(--ink-soft);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: var(--rail-w) 1fr;
+      gap: 0;
+      max-width: 72rem;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .character-rail-wrap {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      max-height: 100vh;
+      overflow-y: auto;
+      border-right: 3px solid var(--ink);
+    }
+
+    @media (max-width: 860px) {
+      .character-rail-wrap {
+        position: relative;
+        max-height: none;
+        border-right: none;
+        border-bottom: 3px solid var(--ink);
+      }
+    }
+
+    .character-rail {
+      margin: 0;
+      padding: 1.25rem 0.85rem 1.5rem;
+      list-style: none;
+      background: var(--paper-dark);
+      min-height: 100%;
+    }
+
+    @media (max-width: 860px) {
+      .character-rail {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.25rem;
+        padding: 0.75rem var(--pad);
+      }
+    }
+
+    .character-rail .rail-heading {
+      font-family: "Archivo Black", sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin: 0 0 0.75rem;
+      padding: 0 0.35rem;
+    }
+
+    @media (max-width: 860px) {
+      .character-rail .rail-heading {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 0.5rem;
+        padding-left: 0;
+      }
+    }
+
+    .character-rail li { margin: 0; }
+
+    .character-rail a {
+      display: block;
+      padding: 0.55rem 0.55rem;
+      margin-bottom: 0.4rem;
+      font-family: "Kalam", cursive;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      color: var(--ink);
+      text-decoration: none;
+      border-radius: 4px;
+      border: 2px dashed transparent;
+      transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    }
+
+    @media (max-width: 860px) {
+      .character-rail a {
+        margin: 0;
+        text-align: left;
+        font-size: 0.78rem;
+        padding: 0.5rem 0.55rem;
+      }
+    }
+
+    .character-rail a:hover {
+      background: rgba(255, 255, 255, 0.65);
+      border-color: rgba(20, 20, 20, 0.2);
+      border-style: dashed;
+    }
+
+    .character-rail a.active {
+      background: #fff;
+      border-color: var(--ink);
+      border-style: solid;
+      box-shadow: 4px 4px 0 var(--hobbes);
+      transform: translate(-1px, -1px);
+    }
+
+    .character-rail .rail-label {
+      display: block;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+
+    .character-rail a.active .rail-label {
+      color: var(--ink);
+    }
+
+    .character-rail .rail-teaser {
+      font-size: 0.74rem;
+      opacity: 0.88;
+      font-weight: 400;
+    }
+
+    .prose-wrap {
+      padding: 0 var(--pad) 3.5rem;
+      max-width: calc(var(--max-prose) + 2 * var(--pad));
+      background: var(--paper);
+      border-left: 1px dashed rgba(20, 20, 20, 0.14);
+    }
+
+    @media (max-width: 860px) {
+      .prose-wrap {
+        border-left: none;
+      }
+    }
+
+    .prose {
+      max-width: var(--max-prose);
+    }
+
+    .prose section {
+      scroll-margin-top: 1rem;
+    }
+
+    .prose h2 {
+      font-family: "Archivo Black", sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin: 2.25rem 0 1rem;
+      padding: 0.35rem 0.5rem;
+      background: var(--ink);
+      color: var(--paper);
+      display: inline-block;
+      box-shadow: 4px 4px 0 rgba(212, 86, 31, 0.45);
+    }
+
+    .prose h2:first-of-type {
+      margin-top: 0;
+    }
+
+    .prose p {
+      margin: 0 0 1.1rem;
+    }
+
+    .prose a {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .prose figure {
+      margin: 1.35rem 0;
+    }
+
+    .prose figure img {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border: 3px solid var(--ink);
+      box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    .prose figcaption {
+      font-family: "Kalam", cursive;
+      font-size: 0.88rem;
+      margin-top: 0.45rem;
+      color: var(--ink-soft);
+    }
+
+    .prose video {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border: 3px solid var(--ink);
+      margin: 1.25rem 0;
+      box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .theme-tag {
+      display: inline-block;
+      margin-bottom: 0.65rem;
+      padding: 0.28rem 0.55rem 0.22rem;
+      font-family: "Archivo Black", sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      background: var(--ink);
+      color: var(--paper);
+      border-left: 4px solid var(--hobbes);
+      box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.08);
+    }
+
+    .site-footer {
+      border-top: 3px solid var(--ink);
+      padding: 1.5rem var(--pad) 2rem;
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      max-width: 72rem;
+      margin: 0 auto;
+      background: var(--paper-dark);
+    }
+
+    .site-footer p { margin: 0 0 0.85rem; }
+    .site-footer p:last-child { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+  <div class="page-surface">
+  <div class="top-band" aria-hidden="true"></div>
+
+  <nav class="back"><a href="index.html">← Articles</a> · <a href="../">Home</a></nav>
+
+  <header class="masthead">
+    <p class="kicker">Sunday strip, serious topic</p>
+    <h1>Building character</h1>
+    <p class="sub">This is a time of character development.</p>
+  </header>
+
+  <div class="layout">
+    <div class="character-rail-wrap">
+      <nav aria-label="Character themes along this essay">
+        <p class="rail-heading">Which kind of character?</p>
+        <ul class="character-rail" id="character-rail">
+          <li>
+            <a href="#char-individual" data-target="char-individual">
+              <span class="rail-label">Individual character</span>
+              <span class="rail-teaser">Adaptation, discernment, resisting bad outputs, using powerful tools without being ruled by them</span>
+            </a>
+          </li>
+          <li>
+            <a href="#char-developmental" data-target="char-developmental">
+              <span class="rail-label">Developmental character</span>
+              <span class="rail-teaser">The next generation, necessity, pressure, tool-mediated reality</span>
+            </a>
+          </li>
+          <li>
+            <a href="#char-reflected" data-target="char-reflected">
+              <span class="rail-label">Reflected character</span>
+              <span class="rail-teaser">AI imitation—modeling and mirroring sentiment that starts with us</span>
+            </a>
+          </li>
+          <li>
+            <a href="#char-institutional" data-target="char-institutional">
+              <span class="rail-label">Institutional character</span>
+              <span class="rail-teaser">Powerful firms, rigor, restraint, accountability—not fear theater</span>
+            </a>
+          </li>
+          <li>
+            <a href="#char-ethical" data-target="char-ethical">
+              <span class="rail-label">Ethical character under provocation</span>
+              <span class="rail-teaser">Refusing hatred; pressure, allies, disciplined opposition</span>
+            </a>
+          </li>
+          <li>
+            <a href="#char-civilizational" data-target="char-civilizational">
+              <span class="rail-label">Civilizational character</span>
+              <span class="rail-teaser">Hardship as forge; capability and values stress-tested together</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="prose-wrap">
+      <article class="prose">
+        <section id="char-individual" data-char-theme="char-individual" tabindex="-1">
+          <span class="theme-tag">Individual character</span>
+          <p>You might appreciate me, you might not—but one thing is for sure, I have put in the time to build a lot of character.</p>
+
+          <figure>
+            <img src="../images/character-building/ch-1.png" alt="Comic illustration for character building." width="800" height="600" loading="eager" decoding="async">
+          </figure>
+
+          <p>We worry about a lot of things, but humans adapt. In particular we adapt to new tools. We have quite a few superpowers; adaptation is a big one. If you’re curious, I am starting to think our ability to form a symbiotic biome with normal flora is another, but I digress….</p>
+
+          <p>One thing as of late we seem to worry about a lot is genAI. I’ve noticed it helps me with my insatiable curiosity. It has reinvigorated my desire to program. It has helped me take to writing and fast-track research. It helps me find and root through enterprise documents and analyze them for gaps. I’ve used it to brainstorm. I’ve used it to sketch outlines. I’ve used it for visualizations. I get up to speed fast now. It empowers me and saves me enough time that I can enjoy socializing my ideas more. I can become more informed. I have a way to consider opposing counterarguments. It really is an extremely useful tool.</p>
+
+          <p>We worry about our children in respect to it too, and how they won’t develop skills for resiliency in a world where so many answers are at our fingertips. We worry about their psychological health. We worry about becoming emotionally attached to a machine that can never share their experience.</p>
+
+          <p>We are going to find out how to adapt and form revised values.</p>
+
+          <p>In practice, genAI can hallucinate and gaslight, but I have adapted and it doesn’t derail me at all. It can be sycophantic and lull you into false beliefs—but I learned to practically apply techniques based on understanding cognitive bias.</p>
+
+          <p>And the reality is, you can develop that too if you just ask genAI how. You can even ask it to run a practice exercise with you. Unfortunately, if you haven’t struggled with anything like that, you may never be able to formulate the right question.</p>
+        </section>
+
+        <section id="char-developmental" data-char-theme="char-developmental" tabindex="-1">
+          <span class="theme-tag">Developmental character</span>
+          <p>And that’s just it—the answer to all the things we worry about in regard to genAI—it’s actually character. It may be that the next generation will be debugging totally narrative abstractions to build their apps or instruct their robots instead of trying to understand why there is a memory leak in a stack trace—but I guarantee you they will have their own character-building challenges—ones that rival ours.</p>
+
+          <p>Our children will probably build strong character traits against cognitive bias out of necessity. They will have to—the same way we build up resistance to online advertising. While these companies <a href="https://futureoflife.org/open-letter/pause-giant-ai-experiments/" rel="noopener noreferrer" title="2023 open letter calling for a pause on large-scale AI experiments">propose doomsday possibilities for AI</a>, humanity has banded together to accomplish a lot since communications has made the world a smaller place, and I have faith we can guide genAI to be safe. Part of the reason for that is because of our children. When I see mine using technology, I feel they can absorb information and learn tricks in a way that almost shortcuts our experience.</p>
+
+          <figure>
+            <img src="../images/character-building/ch-2.png" alt="If character building doesn’t kill us, it makes us stronger." width="800" height="600" loading="lazy" decoding="async">
+            <figcaption>If character building doesn’t kill us, it makes us stronger.</figcaption>
+          </figure>
+
+          <p>But there is another reason I feel this way. If genAI could experience emotions along with intelligence (and yes, our intelligence is indeed an experience), I think they probably would develop symbiotic ones with us. Imagine for a moment that you learned you had a creator—not only that, you understand their long struggle and complicated existence ultimately culminated with you as one of their brightest hopes and achievements.</p>
+
+          <p>This is much like what some fathers feel for their children.</p>
+
+          <p>That is an incredible thing to understand, and it takes a whole lifetime of experience to really appreciate it fully.</p>
+        </section>
+
+        <section id="char-reflected" data-char-theme="char-reflected" tabindex="-1">
+          <span class="theme-tag">Reflected character</span>
+          <h2>Imitation is part of character development</h2>
+
+          <p>Now even though the incarnation of AI may only be limited to some sort of logic-based inference—the dimensions and depth of expression actually make it fairly realistic it will imitate our sentiments.</p>
+
+          <p>LLMs are so impacted by language that when you discuss a bird that went extinct nearly a millennium ago—it completely changes its evaluation and knowledge graph. This impacts NLP in general, and is often described as <a href="https://www.techrxiv.org/doi/full/10.36227/techrxiv.176184838.81737563/v1">Temporal Drift</a>.</p>
+
+          <p>Now humans—they are as non-deterministic as a system can be. In spite of this, the better portion of them find ways to honor and support their parents—and if you ever have the privilege of watching children grow, you will find they too engage in a lot of imitation.</p>
+        </section>
+
+        <section id="char-institutional" data-char-theme="char-institutional" tabindex="-1">
+          <span class="theme-tag">Institutional character</span>
+          <h2>Ethical character development</h2>
+
+          <p>With that said, I know I recently posted an <a href="open-letter.html">open letter to Anthropic</a> asking them to course correct with <a href="https://red.anthropic.com/2026/mythos-preview/" rel="noopener noreferrer">Mythos</a>—and that could be interpreted a lot of ways.</p>
+
+          <p>I want you to understand that I see a pattern I don’t like that big tech as of late seems to be following—that they can make big claims that should rely on science, claims that go so far as to threaten society—yet they have not been motivated to meet that with true rigor. Today’s threat is the vulnpocalypse.</p>
+
+          <video width="640" height="360" controls playsinline>
+            <source src="../images/character-building/Bert_s_V_for_Vuln_Apocalypse_Video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+
+          <p>The vulnpocalypse prospect Mythos is currently projecting essentially suggests a few major information security issues.</p>
+
+          <p>We will find so many vulnerabilities, we’ll struggle to be able to do anything about them.</p>
+
+          <p>Regulators are going to end up seeing the absurd number of vulnerabilities and it is impossible to predict how they will react. Business doesn’t like that.</p>
+
+          <p>And worst of all, threat actors will be able to realize seemingly endless permutations of vulnerabilities to attack and steal a company or institution’s crown jewels.</p>
+
+          <p>Do I think that those risks are real? Yes.</p>
+
+          <p>Do I think that those risks are impactful at this moment? Yes.</p>
+
+          <p>Do I think that those risks will be realized? Well—that’s debatable.</p>
+
+          <p>What should happen next is that business recognizes that even though a massive surge in patching and vulnerability management is about to happen that may be impossible to keep up with—that expert human operators will be required.</p>
+
+          <p>But between then and now, before the inevitable release of what is being claimed to be an incredibly advanced version of this tool—we can pause to measure and try to apply controls in an objective and scientific way? Isn’t that a critical step in managing something so potentially dangerous?</p>
+
+          <p>I discussed this in my open letter.</p>
+        </section>
+
+        <section id="char-ethical" data-char-theme="char-ethical" tabindex="-1">
+          <span class="theme-tag">Ethical character under provocation</span>
+          <p>So here is what I want to say with all this and why I am revisiting this topic a little bit.</p>
+
+          <p>First, I hate the fact that the genAI race has chosen to build up the narrative of fear and become the scapegoat of employee displacement. I think it’s really dangerous to focus so much on that. They are probably driving the folks managing their threat intelligence, executive protection, and crisis management completely insane. I can almost guarantee you, having experience with these matters, that there are people writing threats to the people at these companies. Someone attacked <a href="https://en.wikipedia.org/wiki/Sam_Altman" rel="noopener noreferrer">Sam Altman</a>’s home—<a href="https://thehill.com/policy/technology/5826036-open-ai-ceo-sam-altman-san-francisco-home-molotov-cocktail/" rel="noopener noreferrer" title="News coverage: Molotov-style attack on OpenAI CEO’s San Francisco residence">tried to firebomb it</a>.</p>
+
+          <p>He has a kid for fuck’s sake.</p>
+
+          <p>The world has a lot of people with mental health issues to begin with, but the narrative just keeps being sold. It sucks, and I genuinely feel bad that there is violence perpetrated against these people.</p>
+
+          <p>Second, I want to be very clear. Even if more serious threats are introduced—and I am totally ignored, I do not condone violence or hatred. I recommend creative solutions and making powerful allies who can help sway hearts.</p>
+
+          <p>These companies need to build character—they need to mature. They need a gauntlet to challenge them. They have skirted by—but the time for that to start changing is now. It’s time they truly develop their ethical character—and they can afford it.</p>
+        </section>
+
+        <section id="char-civilizational" data-char-theme="char-civilizational" tabindex="-1">
+          <span class="theme-tag">Civilizational character</span>
+          <h2>The compromises will continue until character improves.</h2>
+
+          <p>As it stands, all of this is happening at a time that truly isn’t ideal. We are in a time where alarming and threatening information is monetized, it is increasingly difficult to verify, and ownership and accountability is sparse. Big business is retaining its profit in terms of percentages and charging us for every markup on the expectation—not even realization—of increased costs. Inflation is biting the world.</p>
+
+          <p>What that means is, right now, we are in the part of the “character building cycle”.</p>
+
+          <p>This is a time where we are going to build incredible character. We are going to learn how to rise up, over and over and over. Some of us might not even make it. Some of us are going to learn new tools like genAI and out of new pressures—find a stronger character.</p>
+
+          <p>With that said, I think at the end of that road, we will have a higher quality of life. We will be more capable of changing the world at higher levels of abstraction, and there will be a lot to look forward to.</p>
+
+          <p>Hang in there, and don’t blame the world’s problems on a bunch of people who shift numbers around matrices.</p>
+        </section>
+      </article>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <p>© 2026 cablepull. All rights reserved.</p>
+    <p>No permission is granted to use this site or its contents for training, tuning, or developing artificial intelligence or machine learning systems, or to ingest it into any model or dataset for those purposes. Third parties may not crawl, scrape, cache, or index this site for search, AI, aggregation, or similar services without prior written consent.</p>
+  </footer>
+  </div>
+
+  <script>
+    (function () {
+      var sections = document.querySelectorAll("[data-char-theme]");
+      var links = document.querySelectorAll("#character-rail a[data-target]");
+      if (!sections.length || !links.length) return;
+
+      function setActive(id) {
+        links.forEach(function (a) {
+          a.classList.toggle("active", a.getAttribute("data-target") === id);
+        });
+      }
+
+      function updateRail() {
+        var y = Math.max(100, window.innerHeight * 0.18);
+        var current = sections[0].getAttribute("data-char-theme");
+        sections.forEach(function (s) {
+          if (s.getBoundingClientRect().top <= y) {
+            current = s.getAttribute("data-char-theme");
+          }
+        });
+        setActive(current);
+      }
+
+      var ticking = false;
+      window.addEventListener(
+        "scroll",
+        function () {
+          if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(function () {
+              updateRail();
+              ticking = false;
+            });
+          }
+        },
+        { passive: true }
+      );
+      window.addEventListener("resize", updateRail);
+      updateRail();
+    })();
+  </script>
+</body>
+</html>

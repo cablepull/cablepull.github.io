@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Security architect, father, reality auditor · articles, fiction, projects, and security field notes.">
+  <meta name="description" content="Security architect, father, reality auditor · articles, fiction, projects, security field notes, and receipts for claims.">
   <link rel="canonical" href="https://cablepull.github.io/">
   <meta property="og:site_name" content="cablepull">
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cablepull.github.io/">
   <meta property="og:title" content="cablepull">
-  <meta property="og:description" content="Security architect, father, reality auditor · articles, fiction, projects, and security field notes.">
+  <meta property="og:description" content="Security architect, father, reality auditor · articles, fiction, projects, security notes, and receipts for claims.">
   <meta property="og:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
   <meta property="og:image:alt" content="cablepull — You vibe code, I conduct code (illustration).">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="cablepull">
-  <meta name="twitter:description" content="Security architect, father, reality auditor · articles, fiction, projects, and security field notes.">
+  <meta name="twitter:description" content="Security architect, father, reality auditor · articles, fiction, projects, security notes, and receipts for claims.">
   <meta name="twitter:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
   <title>cablepull</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,8 +29,10 @@
       --accent: #c45c26;
       --accent-soft: #e8945c;
       --secure: #1a5c66;
+      --receipt: #2d6a4f;
       --glow: rgba(196, 92, 38, 0.35);
       --glow-secure: rgba(26, 92, 102, 0.22);
+      --glow-receipt: rgba(45, 106, 79, 0.2);
     }
 
     *, *::before, *::after { box-sizing: border-box; }
@@ -282,6 +284,19 @@
       outline-color: var(--secure);
     }
 
+    .card.card--receipts:hover {
+      border-color: rgba(45, 106, 79, 0.42);
+      box-shadow: 0 20px 50px -18px var(--glow-receipt);
+    }
+
+    .card.card--receipts h2::after {
+      color: var(--receipt);
+    }
+
+    .card.card--receipts:focus-visible {
+      outline-color: var(--receipt);
+    }
+
     .card h2 {
       font-family: "Bricolage Grotesque", system-ui, sans-serif;
       font-weight: 700;
@@ -361,6 +376,7 @@
           <li><a href="fiction/">Fiction</a></li>
           <li><a href="projects/">Projects</a></li>
           <li><a href="security/">Security</a></li>
+          <li><a href="receipts/">Receipts</a></li>
         </ul>
       </nav>
     </header>
@@ -370,7 +386,7 @@
         <h1 id="hero-heading">Clear thinking at <em>trust boundaries</em>.</h1>
         <p class="lead">
           Writing on security architecture—threat models, controls, and tradeoffs—alongside
-          general essays, fiction, and shipped projects. Static site; no accounts, no trackers.
+          general essays, fiction, shipped projects, and receipts when claims need proof. Static site; no accounts, no trackers.
         </p>
       </section>
 
@@ -390,6 +406,10 @@
         <a class="card card--secure" href="security/">
           <h2>Security</h2>
           <p>Architecture, reviews, and field notes from the job.</p>
+        </a>
+        <a class="card card--receipts" href="receipts/">
+          <h2>Receipts Available</h2>
+          <p>Sources, captures, and citations behind specific claims.</p>
         </a>
       </section>
     </main>
