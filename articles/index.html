@@ -174,58 +174,20 @@
       margin-top: 2rem;
     }
 
-    .preview-card__viewport--letter {
-      min-height: 10rem;
-      aspect-ratio: 16 / 10;
-      background:
-        radial-gradient(ellipse 80% 60% at 30% 20%, rgba(232, 93, 44, 0.12), transparent 55%),
-        linear-gradient(165deg, #070809 0%, #12151c 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.25rem;
-      line-height: normal;
-    }
-
-    .preview-card__letter-inner {
-      text-align: center;
-      max-width: 22ch;
-    }
-
-    .preview-card__letter-kicker {
-      font-family: ui-monospace, "Cascadia Code", Menlo, monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: #e85d2c;
-      margin: 0 0 0.5rem;
-    }
-
-    .preview-card__letter-title {
-      margin: 0;
-      font-family: "Bricolage Grotesque", system-ui, sans-serif;
-      font-size: clamp(0.95rem, 3vw, 1.15rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: #e8eaef;
-      line-height: 1.2;
-    }
-
-    .preview-card__letter-sub {
-      margin: 0.45rem 0 0;
-      font-family: ui-monospace, Menlo, monospace;
-      font-size: 0.55rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(232, 234, 239, 0.45);
-    }
-
     .preview-card--openletter:hover,
     .preview-card--openletter:focus-within {
       border-color: rgba(232, 93, 44, 0.38);
       box-shadow:
         0 0 0 1px rgba(232, 93, 44, 0.1),
         0 26px 60px -20px rgba(232, 93, 44, 0.14);
+    }
+
+    .preview-card--character:hover,
+    .preview-card--character:focus-within {
+      border-color: rgba(20, 20, 20, 0.45);
+      box-shadow:
+        0 0 0 1px rgba(20, 20, 20, 0.12),
+        0 26px 60px -20px rgba(0, 0, 0, 0.18);
     }
 
     .preview-card__meta {
@@ -318,16 +280,31 @@
           <div class="preview-card__dots"><span></span><span></span><span></span></div>
           <span class="preview-card__url">…/articles/open-letter.html</span>
         </div>
-        <div class="preview-card__viewport preview-card__viewport--letter">
-          <div class="preview-card__letter-inner">
-            <p class="preview-card__letter-kicker">Open letter</p>
-            <p class="preview-card__letter-title">Stop the theater. Go to science.</p>
-            <p class="preview-card__letter-sub">NIST · universities · scrutiny</p>
-          </div>
+        <div class="preview-card__viewport">
+          <img src="../images/go-to-science.png" alt="Open letter preview: Stop the theater. Go to science. — cablepull letterhead graphic." loading="lazy" decoding="async">
         </div>
         <div class="preview-card__meta">
           <h2 id="open-letter-preview-title" class="preview-card__title">Science, not theater</h2>
           <p class="preview-card__blurb">Existential-risk rhetoric vs. who gets access first—plus a chronology from Turing and Good to CAIS, pause letters, and NIST.</p>
+        </div>
+      </article>
+
+      <article class="preview-card preview-card--character" aria-labelledby="building-character-preview-title">
+        <a
+          class="preview-card__stretch"
+          href="building-character.html"
+          aria-label="Open Building character — articles/building-character.html"
+        ></a>
+        <div class="preview-card__chrome" aria-hidden="true">
+          <div class="preview-card__dots"><span></span><span></span><span></span></div>
+          <span class="preview-card__url">…/articles/building-character.html</span>
+        </div>
+        <div class="preview-card__viewport">
+          <img src="../images/character-building/ch-1.png" alt="Preview: comic-style character building illustration (opens full essay)." loading="lazy" decoding="async">
+        </div>
+        <div class="preview-card__meta">
+          <h2 id="building-character-preview-title" class="preview-card__title">Building character</h2>
+          <p class="preview-card__blurb">GenAI, kids, imitation, institutions, ethics under provocation—and a scroll map of six kinds of character in one essay.</p>
         </div>
       </article>
     </div>

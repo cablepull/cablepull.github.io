@@ -341,18 +341,18 @@
       box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.1);
     }
 
+    /* Section theme labels: kept for assistive tech, hidden in the visual comic layout */
     .theme-tag {
-      display: inline-block;
-      margin-bottom: 0.65rem;
-      padding: 0.28rem 0.55rem 0.22rem;
-      font-family: "Archivo Black", sans-serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.04em;
-      text-transform: none;
-      background: var(--ink);
-      color: var(--paper);
-      border-left: 4px solid var(--hobbes);
-      box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.08);
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
     }
 
     .site-footer {
