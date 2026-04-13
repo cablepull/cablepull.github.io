@@ -50,13 +50,14 @@
     nav.back a { color: var(--accent); text-decoration: none; }
     nav.back a:hover { text-decoration: underline; }
     .hero-fig {
-      max-width: min(52rem, 100%);
+      max-width: min(var(--max), 100%);
       margin: 0 auto;
-      padding: 0 var(--pad) 1.5rem;
+      padding: 0 var(--pad) 1.25rem;
     }
     .hero-fig img {
       display: block;
       width: 100%;
+      max-width: 100%;
       height: auto;
       border: 1px solid var(--rule);
       border-radius: 6px;
@@ -68,7 +69,7 @@
       color: var(--muted);
     }
     .doc-links {
-      max-width: min(52rem, 100%);
+      max-width: min(var(--max), 100%);
       margin: 0 auto 1.75rem;
       padding: 0 var(--pad);
     }
