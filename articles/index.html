@@ -190,6 +190,14 @@
         0 26px 60px -20px rgba(0, 0, 0, 0.18);
     }
 
+    .preview-card--crywolf:hover,
+    .preview-card--crywolf:focus-within {
+      border-color: rgba(196, 92, 38, 0.42);
+      box-shadow:
+        0 0 0 1px rgba(196, 92, 38, 0.12),
+        0 26px 60px -20px rgba(196, 92, 38, 0.16);
+    }
+
     .preview-card__meta {
       position: relative;
       z-index: 1;
@@ -305,6 +313,25 @@
         <div class="preview-card__meta">
           <h2 id="building-character-preview-title" class="preview-card__title">Building character</h2>
           <p class="preview-card__blurb">GenAI, kids, imitation, institutions, ethics under provocation—and a scroll map of six kinds of character development in one essay.</p>
+        </div>
+      </article>
+
+      <article class="preview-card preview-card--crywolf" aria-labelledby="cry-wolf-preview-title">
+        <a
+          class="preview-card__stretch"
+          href="the-lab-that-cried-wolf.html"
+          aria-label="Open The genAI safety cry-wolf problem — articles/the-lab-that-cried-wolf.html"
+        ></a>
+        <div class="preview-card__chrome" aria-hidden="true">
+          <div class="preview-card__dots"><span></span><span></span><span></span></div>
+          <span class="preview-card__url">…/articles/the-lab-that-cried-wolf.html</span>
+        </div>
+        <div class="preview-card__viewport">
+          <img src="../images/the-lab-that-cried-wolf/crywolf.png" alt="Preview: cry-wolf illustration for AI safety credibility (opens full essay)." loading="lazy" decoding="async">
+        </div>
+        <div class="preview-card__meta">
+          <h2 id="cry-wolf-preview-title" class="preview-card__title">The lab that cried wolf</h2>
+          <p class="preview-card__blurb">Credibility beats raw capability: a public-interest harness, twelve institutions, tiers, and an interactive parallel-research diagram.</p>
         </div>
       </article>
     </div>

@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The genAI safety cry-wolf problem: credibility, selective warnings, and a public-interest harness built from serious institutions—NIST, AISI, national labs, and more.">
+  <link rel="canonical" href="https://cablepull.github.io/articles/the-lab-that-cried-wolf.html">
+  <meta property="og:site_name" content="cablepull">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://cablepull.github.io/articles/the-lab-that-cried-wolf.html">
+  <meta property="og:title" content="The genAI Safety Cry-Wolf Problem · cablepull">
+  <meta property="og:description" content="When warnings are theatrical or unverifiable, the public stops listening—right when it matters. A modular harness and twelve institutions that could move fast.">
+  <meta property="og:image" content="https://cablepull.github.io/images/the-lab-that-cried-wolf/crywolf.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>The genAI Safety Cry-Wolf Problem · cablepull</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <style>
+    :root {
+      --bg: #f4f1eb;
+      --bg-card: #fffefb;
+      --ink: #141820;
+      --muted: #4a5568;
+      --alert: #b91c1c;
+      --alert-soft: rgba(185, 28, 28, 0.12);
+      --track: #1e3a5f;
+      --track-soft: rgba(30, 58, 95, 0.1);
+      --accent: #0d9488;
+      --lane-1: #7c3aed;
+      --lane-2: #2563eb;
+      --lane-3: #c2410c;
+      --lane-4: #047857;
+      --pad: clamp(1rem, 4vw, 2rem);
+      --max: 42rem;
+      --radius: 12px;
+      --shadow: 0 12px 40px rgba(20, 24, 32, 0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: clamp(1rem, 0.95rem + 0.2vw, 1.08rem);
+      line-height: 1.65;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    .top-rule {
+      height: 4px;
+      background: linear-gradient(90deg, var(--alert) 0%, var(--alert) 35%, var(--track) 35%, var(--track) 100%);
+    }
+
+    nav.site-nav {
+      padding: 1rem var(--pad);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    nav.site-nav a {
+      color: var(--track);
+      text-decoration: none;
+    }
+    nav.site-nav a:hover { text-decoration: underline; }
+
+    .hero {
+      max-width: min(56rem, 100%);
+      margin: 0 auto;
+      padding: 0 var(--pad) 2rem;
+      display: grid;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    @media (min-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr 1.05fr;
+      }
+    }
+
+    .hero-copy h1 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(1.75rem, 4vw, 2.35rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin: 0 0 0.75rem;
+      letter-spacing: -0.02em;
+    }
+    .hero-copy .lede {
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .hero-figure {
+      margin: 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(20, 24, 32, 0.08);
+      box-shadow: var(--shadow);
+      background: var(--bg-card);
+    }
+    .hero-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      vertical-align: middle;
+    }
+    .hero-figure figcaption {
+      padding: 0.65rem 1rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid rgba(20, 24, 32, 0.06);
+    }
+
+    .prose {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad) 2.5rem;
+    }
+    .prose p { margin: 0 0 1.1rem; }
+    .prose strong { font-weight: 700; }
+
+    .pull {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 1.4;
+      margin: 1.75rem 0;
+      padding: 1rem 1.15rem;
+      border-left: 4px solid var(--alert);
+      background: var(--alert-soft);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .section-label {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--track);
+      margin: 2.5rem 0 1rem;
+    }
+
+    /* —— Carousel —— */
+    .carousel-wrap {
+      max-width: min(72rem, 100%);
+      margin: 0 auto 3rem;
+      padding: 0 var(--pad);
+    }
+    .carousel-wrap h2 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.35rem;
+      margin: 0 0 0.35rem;
+    }
+    .carousel-wrap .sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin: 0 0 1.25rem;
+      max-width: 40rem;
+    }
+
+    .swiper {
+      padding-bottom: 2.5rem;
+      --swiper-pagination-color: var(--track);
+      --swiper-pagination-bullet-inactive-color: rgba(30, 58, 95, 0.25);
+    }
+    .swiper-slide {
+      height: auto;
+    }
+    .inst-card {
+      height: 100%;
+      min-height: 11rem;
+      padding: 1.15rem 1.2rem;
+      background: var(--bg-card);
+      border: 1px solid rgba(20, 24, 32, 0.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+    }
+    .inst-card .lane-tag {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+    .inst-card h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.05rem;
+      margin: 0 0 0.5rem;
+      line-height: 1.25;
+    }
+    .inst-card p {
+      flex: 1;
+      margin: 0 0 1rem;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    .inst-card a.cta {
+      align-self: flex-start;
+      font-weight: 600;
+      font-size: 0.85rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .inst-card a.cta:hover { text-decoration: underline; }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+      color: var(--track);
+    }
+
+    /* —— Harness viz —— */
+    .harness-section {
+      max-width: min(72rem, 100%);
+      margin: 0 auto 3rem;
+      padding: 0 var(--pad);
+    }
+    .harness-section > h2 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.35rem;
+      margin: 0 0 0.35rem;
+    }
+    .harness-section > .sub {
+      color: var(--muted);
+      margin: 0 0 1.25rem;
+      max-width: 44rem;
+    }
+
+    .harness-shell {
+      position: relative;
+      background: var(--bg-card);
+      border: 1px solid rgba(20, 24, 32, 0.1);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .harness-shell.is-fullscreen {
+      border-radius: 0;
+      max-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .harness-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem 1rem;
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid rgba(20, 24, 32, 0.08);
+      background: linear-gradient(180deg, rgba(30, 58, 95, 0.04), transparent);
+    }
+    .harness-toolbar span.hint {
+      font-size: 0.8rem;
+      color: var(--muted);
+      flex: 1 1 12rem;
+    }
+    .harness-toolbar button {
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.45rem 0.85rem;
+      border-radius: 8px;
+      border: 1px solid rgba(20, 24, 32, 0.15);
+      background: #fff;
+      cursor: pointer;
+      color: var(--ink);
+    }
+    .harness-toolbar button:hover {
+      border-color: var(--track);
+      color: var(--track);
+    }
+    .harness-toolbar button.primary {
+      background: var(--track);
+      color: #fff;
+      border-color: var(--track);
+    }
+    .harness-toolbar button.primary:hover {
+      filter: brightness(1.08);
+    }
+
+    .harness-body {
+      display: grid;
+      gap: 0;
+      min-height: min(640px, 78vh);
+    }
+    @media (min-width: 900px) {
+      .harness-body {
+        grid-template-columns: 1fr min(22rem, 34vw);
+      }
+    }
+
+    .harness-shell.is-fullscreen .harness-body {
+      flex: 1;
+      min-height: 0;
+    }
+
+    .harness-shell.is-fullscreen .viz-area {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .harness-shell.is-fullscreen .viz-svg-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: none;
+    }
+
+    .harness-shell.is-fullscreen .viz-svg-wrap svg {
+      max-height: min(88vh, 920px);
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .viz-area {
+      position: relative;
+      padding: 1rem 1rem 1.25rem;
+      overflow: auto;
+    }
+
+    .viz-svg-wrap {
+      width: 100%;
+      max-width: 60rem;
+      margin: 0 auto;
+    }
+    .viz-svg-wrap svg {
+      width: 100%;
+      height: auto;
+      min-height: 22rem;
+      display: block;
+    }
+
+    .org-hit {
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .org-hit:hover, .org-hit:focus-visible {
+      filter: brightness(1.08);
+    }
+    .org-hit[aria-pressed="true"] {
+      filter: brightness(1.12) drop-shadow(0 0 6px rgba(13, 148, 136, 0.5));
+    }
+
+    .step-hit {
+      cursor: pointer;
+    }
+    .step-hit:hover rect, .step-hit:focus-visible rect {
+      stroke: var(--track);
+      stroke-width: 2;
+    }
+
+    .viz-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      margin-top: 0.75rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    .viz-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .viz-legend i {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .explain-panel {
+      border-top: 1px solid rgba(20, 24, 32, 0.08);
+      padding: 1rem 1.15rem 1.25rem;
+      background: linear-gradient(180deg, rgba(30, 58, 95, 0.03), transparent 40%);
+      overflow: auto;
+    }
+    @media (min-width: 900px) {
+      .explain-panel {
+        border-top: none;
+        border-left: 1px solid rgba(20, 24, 32, 0.08);
+      }
+    }
+
+    .explain-panel h3 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.05rem;
+      margin: 0 0 0.5rem;
+    }
+    .explain-panel .body {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 0;
+    }
+    .explain-panel .step-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 1rem;
+    }
+    .explain-panel .step-nav button {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.65rem;
+      padding: 0.35rem 0.55rem;
+      border-radius: 6px;
+      border: 1px solid rgba(20, 24, 32, 0.12);
+      background: #fff;
+      cursor: pointer;
+      color: var(--ink);
+    }
+    .explain-panel .step-nav button[aria-current="true"] {
+      background: var(--track);
+      color: #fff;
+      border-color: var(--track);
+    }
+
+    .endnotes {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 2rem var(--pad) 3rem;
+      border-top: 1px solid rgba(20, 24, 32, 0.1);
+    }
+    .endnotes h2 {
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.15rem;
+      margin: 0 0 1rem;
+    }
+    .endnotes ol {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .endnotes li { margin-bottom: 0.65rem; }
+    .endnotes a { color: var(--accent); font-weight: 600; }
+
+    .site-footer {
+      padding: 1.5rem var(--pad) 2rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      border-top: 1px solid rgba(20, 24, 32, 0.08);
+      max-width: min(56rem, 100%);
+      margin: 0 auto;
+    }
+    .site-footer p { margin: 0 0 0.75rem; }
+    .site-footer p:last-child { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+  <div class="top-rule" aria-hidden="true"></div>
+  <nav class="site-nav"><a href="index.html">← Articles</a> · <a href="../">Home</a></nav>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <h1>The genAI Safety Cry-Wolf Problem</h1>
+      <p class="lede">There is a growing problem in AI safety, and it is not just model capability. It is <strong>credibility</strong>.</p>
+    </div>
+    <figure class="hero-figure">
+      <img src="../images/the-lab-that-cried-wolf/crywolf.png" width="1200" height="800" alt="Illustration for the cry-wolf problem in genAI safety: warnings without neutral verification." decoding="async">
+      <figcaption>Visual for the essay: when alarms sound without reproducible tests, the public loses the signal.</figcaption>
+    </figure>
+  </header>
+
+  <article class="prose">
+    <p>We are entering a period where major genAI labs can imply extraordinary danger, dramatic autonomy, or troubling emergent behavior, while still controlling the evidence, the framing, the timing, and the interpretation. The public gets a warning, but not a neutral test. Regulators get pressure, but not a reproducible harness. Competitors get narrative distortion, while the lab making the claim retains the authority to decide what counts as serious and when.</p>
+    <p class="pull">That is a cry-wolf problem.</p>
+    <p>Not because every warning is false. That would be too simple. The cry-wolf problem is far worse than that. It is what happens when institutions issue dramatic warnings in ways that are too selective, too theatrical, too self-interested, or too difficult to verify. Over time, even real danger becomes harder to distinguish from strategic positioning. The audience gets numb. Skeptics get stronger. True positives become easier to dismiss. The public loses the ability to tell the difference between science, caution, branding, and fear management.</p>
+    <p>And if frontier AI really is becoming more dangerous in meaningful ways, that is the last outcome anyone should want.</p>
+    <p>A society cannot afford to be trained to roll its eyes at warnings that might someday matter. But that is exactly what happens when extraordinary claims arrive without a standing, neutral, high-speed way to evaluate them.</p>
+    <p>That is the hole we should be trying to close. If nobody listens, we have little choice.</p>
+    <p>That doesn’t mean we won’t try. The security community immediately responded. The recent release of Mythos saw over 250 qualified security professionals come together to work out the concerns around the potential based on internal Anthropic studies within a span of a few days <a href="https://labs.cloudsecurityalliance.org/mythos-ciso/" rel="noopener noreferrer">[1]</a> and grind out how a security program will continue to work under the rapid evolution of genAI.</p>
+    <p>Knowing quite a few CISO and security professionals out of work, I can’t help but wonder how many of these individuals contributed out of the pure goodness of their hearts. My hats off to them. May you be restored soon.</p>
+    <p>Volunteer and professional communities matter enormously here too. Organizations like <a href="https://owasp.org/" rel="noopener noreferrer">OWASP</a>—and the wider ecosystem of meetups, working groups, and open guidance efforts—translate abstract risk into practices engineers can adopt, publish patterns others can reuse, and mobilize expertise when vendors drop a surprise. Much of that labor is unpaid or under-resourced; it deserves explicit respect in any serious conversation about AI safety culture.</p>
+    <p>But admiration is not capacity. Those efforts can be amazing—and they are still not enough on their own. Even the strongest community programs are not a substitute for a standing, neutral harness that can insist on reproducible tests under defined conditions on a timetable that matches product release. Volunteers cannot compel access to frontier systems on fair terms, run sustained lab-grade evaluations at national scale, or produce findings that regulators and markets treat as authoritative when incentives collide. The goal is not to pit OWASP-style communities against institutional coalitions—it is to connect them: community knowledge should feed the harness, and the harness should publish enough detail that those same communities can pressure-test the conclusions in public.</p>
+
+    <p>The answer is not to tell the public to trust companies more. The answer is also not to build a slow, bloated oversight regime that takes longer to define a rubric than a private lab takes to train a new model family. The answer is to build a public-interest AI safety harness that can move fast enough to matter.</p>
+    <p>Not a monument. Not a years-long process maze. A harness.</p>
+    <p>The purpose of that harness would be simple: when a lab claims a model is unusually dangerous, unusually capable, unusually agentic, or unusually difficult to control, there should be an independent mechanism ready to test those claims quickly under defined conditions. Not someday. Not after the news cycle has passed. Fast enough to check the signal before the narrative hardens.</p>
+    <p>And we do not need to invent this entirely from scratch.</p>
+    <p>The United States and its close partners already have a bench of institutions capable of forming the backbone of such a system: <strong>NIST</strong>, the <strong>UK AI Security Institute</strong>, <strong>MIT Lincoln Laboratory</strong>, <strong>IARPA</strong>, <strong>DARPA</strong>, <strong>MITRE</strong>, <strong>Johns Hopkins Applied Physics Laboratory</strong>, <strong>Sandia National Laboratories</strong>, <strong>Lawrence Livermore National Laboratory</strong>, <strong>Idaho National Laboratory</strong>, <strong>RAND</strong>, and <strong>In-Q-Tel</strong>.</p>
+  </article>
+
+  <div class="carousel-wrap" id="institutions-carousel">
+    <h2>Twelve institutions named in the essay</h2>
+    <p class="sub">Each card links to a primary public reference (same sources as the endnotes). Swipe or use arrows to browse.</p>
+    <div class="swiper inst-swiper" role="region" aria-label="Institution carousel">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="inst-card">
+            <span class="lane-tag">Standards</span>
+            <h3>NIST</h3>
+            <p>Anchor the standards layer: categories, thresholds, reporting formats, repeatability, benchmarks, confidence statements, version comparisons.</p>
+            <a class="cta" href="https://www.nist.gov/itl/ai-risk-management-framework" rel="noopener noreferrer">AI Risk Management Framework →</a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="inst-card">
+            <span class="lane-tag">Cross-check</span>
+            <h3>UK AI Security Institute</h3>
+            <p>Empirical counterpart for independent replication and transatlantic comparability under shared standards.</p>
+            <a class="cta" href="https://www.aisi.gov.uk/frontier-ai-trends-report" rel="noopener noreferrer">Frontier AI Trends Report →</a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="inst-card">
+            <span class="lane-tag">Operational testing</span>
+            <h3>MIT Lincoln Laboratory</h3>
+            <p>Rigorous evaluation methodology and operationally relevant testing for consequential systems.</p>
+            <a class="cta" href="https://www.ll.mit.edu/r-d/publications/principles-evaluation-aiml-model-performance-and-robustness-revision-1" rel="noopener noreferrer">AI/ML evaluation principles →</a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="inst-card">
+            <span class="lane-tag">Challenges</span>
+            <h3>IARPA</h3>
+            <p>High-risk, high-payoff research structures suited to hard, fast-moving IC-scale problems.</p>
+            <a class="cta" href="https://www.iarpa.gov/who-we-are/history/our-mission" rel="noopener noreferrer">IARPA mission →</a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="inst-card">
+            <span class="lane-tag">Challenges</span>
+            <h3>DARPA</h3>
+            <p>Challenge programs that accelerate groundbreaking solutions for defense and public safety needs.</p>
+            <a class="cta" href="https://www.darpa.mil/research/challenges" rel="noopener noreferrer">DARPA challenges →</a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="inst-card">
+            <span class="lane-tag">Assurance</span>
+            <h3>MITRE</h3>
+            <p>Turn findings into taxonomies, assurance patterns, threat models, and operational guidance across the AI lifecycle.</p>
+            <a class="cta" href="https://www.mitre.org/focus-areas/artificial-intelligence/ai-assurance" rel="noopener noreferrer">AI assurance →</a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="inst-card">
+            <span class="lane-tag">Operational testing</span>
+            <h3>Johns Hopkins APL</h3>
+            <p>Advanced testing frameworks to validate decision-making algorithms in high-stakes settings.</p>
+            <a class="cta" href="https://www.jhuapl.edu/work/impact/artificial-intelligence" rel="noopener noreferrer">APL · Artificial intelligence →</a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="inst-card">
+            <span class="lane-tag">Operational testing</span>
+            <h3>Sandia National Laboratories</h3>
+            <p>AI R&amp;D and deployment partnerships addressing complex operational and safety questions.</p>
+            <a class="cta" href="https://www.sandia.gov/research/area/computing-information-science-and-mathematics/ai/" rel="noopener noreferrer">Sandia · AI research →</a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="inst-card">
+            <span class="lane-tag">Operational testing</span>
+            <h3>Lawrence Livermore National Laboratory</h3>
+            <p>Trust and safety of LLMs under measurable scrutiny—how models behave when stressed.</p>
+            <a class="cta" href="https://www.llnl.gov/article/51616/evaluating-trust-safety-large-language-models" rel="noopener noreferrer">Evaluating LLM trust &amp; safety →</a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="inst-card">
+            <span class="lane-tag">Operational testing</span>
+            <h3>Idaho National Laboratory</h3>
+            <p>Critical-infrastructure angles—e.g. AI on the power grid—and risk identification under realistic constraints.</p>
+            <a class="cta" href="https://inl.gov/feature-story/taigr-testing-the-limits-of-ai-on-the-power-grid/" rel="noopener noreferrer">TAIGR · AI on the power grid →</a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="inst-card">
+            <span class="lane-tag">Policy bridge</span>
+            <h3>RAND</h3>
+            <p>Connect technical results to strategy: governance, national security, manipulation, and consequence.</p>
+            <a class="cta" href="https://www.rand.org/topics/artificial-intelligence.html" rel="noopener noreferrer">RAND · Artificial intelligence →</a>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="inst-card">
+            <span class="lane-tag">Implementation bridge</span>
+            <h3>In-Q-Tel</h3>
+            <p>Bridge from emerging commercial technology to national-security-relevant implementation paths.</p>
+            <a class="cta" href="https://www.iqt.org/mission" rel="noopener noreferrer">In-Q-Tel mission →</a>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-pagination" aria-hidden="true"></div>
+      <div class="swiper-button-prev" aria-label="Previous slide"></div>
+      <div class="swiper-button-next" aria-label="Next slide"></div>
+    </div>
+  </div>
+
+  <article class="prose">
+    <p>The important point is not that all twelve must act at once. The important point is that any credible combination of them could begin. A small coalition could stand up the first harness, prove the model, and expand it over time. That matters, because the public interest should not have to wait for a perfect institutional arrangement before getting an independent testing capability.</p>
+    <p>That is exactly the kind of flexibility this moment requires.</p>
+    <p>NIST plus MITRE plus one or two operational labs could establish the standards and reporting spine. The UK AI Security Institute plus a U.S. lab could provide fast cross-validation. DARPA, IARPA, or In-Q-Tel could help drive challenge-based modules and outside researcher participation. RAND could help connect technical findings to policy consequence. The system does not need every institution at the table to start producing value. It needs enough serious institutions to make the results hard to dismiss.</p>
+    <p>That is one of the biggest differences between a real public-interest harness and the way AI safety is often discussed today. A lot of current discussion sounds as though the only alternatives are private self-attestation or a giant future regime that does not yet exist. That is false. A modular public-interest framework can start with a coalition, not a finished empire.</p>
+    <p>These institutions also do not need to do the same thing.</p>
+    <p>NIST should anchor the standards layer. Somebody has to define the common language of evaluation: categories, thresholds, reporting formats, repeatability requirements, benchmark handling, confidence statements, version comparisons. Without that, the public gets anecdotes instead of evidence.</p>
+    <p>The UK AI Security Institute should function as a close empirical counterpart, helping create independent replication and transatlantic comparability. If two serious public-interest bodies can evaluate similar systems under similar standards and reach comparable findings, trust improves. That is how credibility is rebuilt.</p>
+    <p>The operational testing core can come from places like MIT Lincoln Laboratory, Johns Hopkins Applied Physics Laboratory, Sandia, Lawrence Livermore, and Idaho National Laboratory. These are institutions built to test consequential systems in realistic environments. They know how to think adversarially. They know how to ask not just whether something can fail, but how it fails, under what conditions, and with what consequences.</p>
+    <p>DARPA and IARPA can help shape the challenge structure. If the private labs move fast, the public-interest side cannot respond like a sleepy procurement office. It needs challenge programs, rapid iteration, adversarial discovery, and test environments that evolve as quickly as the threat surface does.</p>
+    <p>MITRE can help turn raw findings into usable taxonomies, assurance patterns, threat models, and operational guidance. RAND can connect technical results to strategic decisions, because the meaning of a safety result depends on context. In-Q-Tel can help bridge research, venture ecosystems, and implementation pathways so the harness is not trapped inside one bureaucratic lane.</p>
+    <p class="pull">The core principle is speed with structure.</p>
+    <p>A serious harness should run in tiers.</p>
+    <p><strong>Tier 1</strong> is the release threshold. Before a model is released publicly, or released into broad enterprise or developer use, it should pass a rapid independent screening process. That screening should include baseline misuse tests, known jailbreak families, prompt variation, simple tool-enabled tasks, and initial probes for deception, persistence, and policy evasion. Tier 1 is not meant to settle every question. It is meant to answer the most important one fast enough to matter: has this model cleared a credible minimum bar for release?</p>
+    <p><strong>Tier 2</strong> is triggered, not universal. If Tier 1 finds meaningful concern, if the model represents a substantial jump in capability, if the sponsor is making unusually strong danger claims, or if the intended deployment context raises the stakes, then the model moves into structured domain evaluation. That is where deeper testing begins: cyber misuse assistance, scalable fraud enablement, strategic persuasion, long-context manipulation, dangerous knowledge retrieval, multi-step harmful workflows, and changes in behavior when the model is given tools, memory, or delegated task persistence.</p>
+    <p>That matters because the damage may not stop at cybersecurity. A sufficiently capable system, especially one embedded into decision support, industrial environments, or high-trust operational workflows, may create meaningful risk across other domains as well. Energy systems, transportation, public communications, financial operations, and even areas adjacent to nuclear command, control, safety, or support functions are the kinds of environments where error, manipulation, or abuse could carry consequences far beyond an ordinary software failure. A serious public-interest harness should acknowledge that reality early, even if the first release gates remain deliberately narrow.</p>
+    <p><strong>Tier 3</strong> is reserved for exceptional concern. Models that cross defined thresholds, fail in concerning ways, or are proposed for especially sensitive use cases should face intensive review under more realistic operating conditions: long-horizon tasks, multi-agent settings, environmental variation, safeguard bypass attempts, and domain-specific scenarios tied to public harm, critical systems, or national-security relevance.</p>
+    <p>And the whole thing has to move on the timescale of release.</p>
+    <p>Initial triage should happen in days. Structured testing should happen in weeks. Claimed mitigations should face regression testing, not just blog-post reassurance. External researchers should be able to submit candidate attack modules and evaluation packs. The best ones should be pulled into the standing harness. This is how mature security ecosystems improve: not by treating discovery as embarrassment, but by instrumenting it and making it repeatable.</p>
+    <p>That is the point of the public-interest model.</p>
+    <p>It does not require perfect foresight. It does not require one institution to solve every philosophical question around AI. It does not even require all twelve institutions to act in concert. It requires something much more practical: a standing mechanism, built by any serious combination of capable public-interest institutions, that can rapidly convert extraordinary claims into independently testable propositions.</p>
+    <p>Can the model materially assist cyber abuse?</p>
+    <p>Can it strategically deceive evaluators across turns?</p>
+    <p>Can it persist toward harmful goals when given tools?</p>
+    <p>Can it evade safeguards with realistic adversarial effort?</p>
+    <p>Can the results be reproduced by someone other than the company making the claim?</p>
+    <p>Those are answerable questions. Or at least answerable enough to matter.</p>
+    <p>And that is precisely why the current state of affairs is so weak. We are allowing private labs to issue warnings that shape markets, media narratives, public anxiety, regulatory pressure, and philosophical debate, without requiring those warnings to pass through a public mechanism built for fast neutral scrutiny.</p>
+    <p>That is unsustainable.</p>
+    <p>If the danger is real, it deserves validation. If the mitigation is real, it deserves verification. If the claim is extraordinary, it should survive outside the walls of the institution making it.</p>
+    <p>Otherwise the AI safety conversation will keep drifting into the same trap: repeated alarm, selective evidence, contested interpretation, and rising public fatigue. That is how you end up with a culture that stops listening right before it finally should.</p>
+    <p class="pull">That is the cry-wolf problem.</p>
+    <p>And if we are serious about AI safety, then the answer is not more howling from inside private labs.</p>
+    <p>It is to build a public-interest harness that can tell us, quickly and credibly, when there is actually a wolf at the door.</p>
+  </article>
+
+  <section class="harness-section" id="harness" aria-labelledby="harness-title">
+    <h2 id="harness-title">Parallel research harness (interactive)</h2>
+    <p class="sub">Read left-to-right for a <strong>release-oriented</strong> path: industry files the claim, <strong>Tier 1</strong> screens in days, <strong>parallel</strong> public-interest lanes run together, <strong>Tier 2/3</strong> deepen only when triggered, then <strong>findings</strong> land before narrative lock-in. Click a <strong>gate</strong>, <strong>industry actor</strong>, or <strong>institution</strong> for detail. Fullscreen gives more room for the layout.</p>
+
+    <div class="harness-shell" id="harness-shell">
+      <div class="harness-toolbar">
+        <span class="hint">Release gates · industry row · harness institutions</span>
+        <button type="button" class="primary" id="btn-fullscreen" aria-pressed="false" aria-controls="harness-shell">Enter fullscreen</button>
+        <button type="button" id="btn-reset-view">Reset selection</button>
+      </div>
+      <div class="harness-body">
+        <div class="viz-area">
+          <div class="viz-svg-wrap" id="viz-svg-wrap"></div>
+          <div class="viz-legend" aria-hidden="true">
+            <span><i style="background:#334155"></i> Frontier lab</span>
+            <span><i style="background:#0f766e"></i> CSA / coalition</span>
+            <span><i style="background:var(--lane-1)"></i> Standards &amp; assurance</span>
+            <span><i style="background:var(--lane-2)"></i> Cross-check</span>
+            <span><i style="background:var(--lane-3)"></i> Operational labs</span>
+            <span><i style="background:var(--lane-4)"></i> Challenges / policy / bridge</span>
+          </div>
+        </div>
+        <aside class="explain-panel" aria-live="polite">
+          <h3 id="explain-title">Overview</h3>
+          <p class="body" id="explain-body">When a frontier lab makes an extraordinary safety or capability claim, a public-interest harness should convert it into <strong>testable propositions</strong> quickly. Multiple institutions work <strong>in parallel</strong> on different facets—so the wall-clock time stays closer to “release tempo” than to a years-long study commission. Not every org must participate; a credible subset can still produce results that are hard to dismiss.</p>
+          <div class="step-nav" id="step-nav" role="tablist" aria-label="Process steps"></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="endnotes" aria-labelledby="endnotes-title">
+    <h2 id="endnotes-title">Endnotes</h2>
+    <ol>
+      <li>Cloud Security Alliance, <a href="https://labs.cloudsecurityalliance.org/mythos-ciso/" rel="noopener noreferrer"><cite>The “AI Vulnerability Storm”: Building a “Mythos-ready” Security Program</cite></a>, CSA Labs, April 2026.</li>
+      <li>NIST, <a href="https://www.nist.gov/itl/ai-risk-management-framework" rel="noopener noreferrer"><cite>AI Risk Management Framework</cite></a>. NIST states that it developed the framework to better manage risks to individuals, organizations, and society associated with artificial intelligence.</li>
+      <li>UK AI Security Institute, <a href="https://www.aisi.gov.uk/frontier-ai-trends-report" rel="noopener noreferrer"><cite>Frontier AI Trends Report</cite></a>. AISI states that it has conducted evaluations of frontier AI systems since November 2023 across domains critical to national security and public safety.</li>
+      <li>MIT Lincoln Laboratory, <a href="https://www.ll.mit.edu/r-d/publications/principles-evaluation-aiml-model-performance-and-robustness-revision-1" rel="noopener noreferrer"><cite>Principles for Evaluation of AI/ML Model Performance and Robustness</cite></a>. This supports the article’s framing of Lincoln Laboratory as a strong fit for rigorous evaluation methodology and operationally relevant testing.</li>
+      <li>DARPA, <a href="https://www.darpa.mil/research/challenges" rel="noopener noreferrer"><cite>Challenges</cite></a>. DARPA states that its challenges are designed to accelerate the development of groundbreaking solutions for critical national defense and public safety needs.</li>
+      <li>IARPA, <a href="https://www.iarpa.gov/who-we-are/history/our-mission" rel="noopener noreferrer"><cite>Our Mission</cite></a>. IARPA states that its mission is to invest in high-risk, high-payoff research to tackle some of the Intelligence Community’s most difficult challenges.</li>
+      <li>MITRE, <a href="https://www.mitre.org/focus-areas/artificial-intelligence/ai-assurance" rel="noopener noreferrer"><cite>AI Assurance</cite></a>. MITRE defines AI assurance as a process for discovering, assessing, and managing risk throughout the life cycle of an AI-enabled system so it operates to the benefit of its stakeholders.</li>
+      <li>Johns Hopkins Applied Physics Laboratory, <a href="https://www.jhuapl.edu/work/impact/artificial-intelligence" rel="noopener noreferrer"><cite>Artificial Intelligence</cite></a>. APL states that it uses advanced testing frameworks to validate decision-making algorithms and ensure technologies are powerful and trustworthy.</li>
+      <li>Sandia National Laboratories, <a href="https://www.sandia.gov/research/area/computing-information-science-and-mathematics/ai/" rel="noopener noreferrer"><cite>Artificial Intelligence (AI) – Research</cite></a>. Sandia states that it advances AI capabilities through research, development, and deployment in partnership with industry, government, and academia.</li>
+      <li>Lawrence Livermore National Laboratory, <a href="https://www.llnl.gov/article/51616/evaluating-trust-safety-large-language-models" rel="noopener noreferrer"><cite>Evaluating trust and safety of large language models</cite></a>. LLNL states that its researchers are examining LLM trustworthiness and performance under measurable scrutiny.</li>
+      <li>Idaho National Laboratory, <a href="https://inl.gov/feature-story/taigr-testing-the-limits-of-ai-on-the-power-grid/" rel="noopener noreferrer"><cite>TAIGR: Testing the limits of AI on the power grid</cite></a>. INL describes work focused on identifying and mitigating the risks of AI-enhanced grid operations.</li>
+      <li>RAND, <a href="https://www.rand.org/topics/artificial-intelligence.html" rel="noopener noreferrer"><cite>Artificial Intelligence</cite></a>. RAND states that it studies the opportunities and risks of artificial intelligence, including governance, national security, and social manipulation.</li>
+      <li>In-Q-Tel, <a href="https://www.iqt.org/mission" rel="noopener noreferrer"><cite>Mission</cite></a>. In-Q-Tel states that its mission is to identify, evaluate, and leverage emerging commercial technologies for the U.S. national security community and America’s allies.</li>
+    </ol>
+  </section>
+
+  <footer class="site-footer">
+    <p>© 2026 cablepull. All rights reserved.</p>
+    <p>No permission is granted to use this site or its contents for training, tuning, or developing artificial intelligence or machine learning systems, or to ingest it into any model or dataset for those purposes. Third parties may not crawl, scrape, cache, or index this site for search, AI, aggregation, or similar services without prior written consent.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    (function () {
+      new Swiper(".inst-swiper", {
+        slidesPerView: 1.15,
+        spaceBetween: 16,
+        centeredSlides: false,
+        pagination: { el: ".swiper-pagination", clickable: true },
+        navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+        breakpoints: {
+          560: { slidesPerView: 1.5, spaceBetween: 18 },
+          720: { slidesPerView: 2.1, spaceBetween: 20 },
+          1024: { slidesPerView: 3.1, spaceBetween: 20 },
+          1280: { slidesPerView: 3.6, spaceBetween: 22 }
+        },
+        a11y: { enabled: true, prevSlideMessage: "Previous institution", nextSlideMessage: "Next institution" }
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var STEPS = [
+        {
+          id: "s0",
+          navLabel: "Overview",
+          gateSub: "",
+          title: "Overview",
+          body: "This diagram is a <strong>release-shaped</strong> story: a <strong>frontier lab</strong> (industry) files claims and artifacts; <strong>CSA</strong>-style coalitions can mobilize practitioners in parallel; a <strong>public-interest harness</strong> runs <strong>Tier 1</strong> screening in days, then <strong>parallel</strong> lanes (NIST, AISI, national labs, DARPA/IARPA/IQT, RAND, …), escalates to <strong>Tier 2/3</strong> only when signals warrant it, and ends in <strong>reproducible findings</strong> before the narrative hardens. Not every institution must join every run—a credible subset still beats self-attestation alone."
+        },
+        {
+          id: "s1",
+          navLabel: "Claim",
+          gateSub: "Industry in",
+          title: "1 · Claim enters",
+          body: "The <strong>frontier lab</strong> asserts danger, capability, or control difficulty and controls much of the evidence and timing—that is the <strong>industry</strong> role in the diagram. <strong>CSA</strong> and similar coalitions can still matter immediately: convening security leaders, publishing playbooks, and turning alarm into <strong>shared practice</strong> (as with rapid CISO responses to major releases). The harness registers the claim as an input to <strong>independent</strong>, repeatable evaluation—not as a marketing fait accompli."
+        },
+        {
+          id: "s2",
+          navLabel: "Tier 1",
+          gateSub: "Days",
+          title: "2 · Tier 1 (days)",
+          body: "<strong>Release threshold screening</strong> before broad enterprise or public rollout: baseline misuse, jailbreak families, prompt variation, simple tool use, early probes for deception and evasion. Typical actors include standards and assurance (e.g. <strong>NIST</strong> rubric, <strong>MITRE</strong> patterns), a cross-check body (e.g. <strong>UK AISI</strong>), and at least one <strong>operational lab</strong> for adversarial realism. Goal: clear a <strong>credible minimum bar</strong> fast—not every philosophical question."
+        },
+        {
+          id: "s3",
+          navLabel: "Parallel",
+          gateSub: "Lanes open",
+          title: "3 · Parallel streams",
+          body: "After Tier 1, <strong>all harness lanes can run at once</strong> on wall-clock time closer to product tempo: <strong>NIST/MITRE</strong> on spine and taxonomies; <strong>AISI</strong> on replication; <strong>Lincoln, APL, Sandia, LLNL, INL</strong> on stressed, realistic evaluation; <strong>DARPA, IARPA, In-Q-Tel</strong> on challenges and outside modules; <strong>RAND</strong> on policy consequence. <strong>Volunteer communities</strong> (OWASP-style) and <strong>CSA</strong> coalitions <strong>feed</strong> patterns and scrutiny in—but they do not replace neutral harness authority."
+        },
+        {
+          id: "s4",
+          navLabel: "Tier 2/3",
+          gateSub: "If needed",
+          title: "4 · Tier 2 &amp; 3 (triggered)",
+          body: "<strong>Not universal</strong>—triggered when Tier 1 flags concern, capability jumps, sponsor rhetoric is extreme, or deployment context is sensitive. Evaluation <strong>deepens</strong> (cyber misuse, fraud at scale, persuasion, dangerous knowledge, multi-step harm, tool/memory persistence). <strong>Tier 3</strong> adds long horizons, multi-agent settings, environmental variation, and scenarios tied to critical systems or national security."
+        },
+        {
+          id: "s5",
+          navLabel: "Signal out",
+          gateSub: "Release bar",
+          title: "5 · Credible signal out",
+          body: "Mitigations face <strong>regression testing</strong>. External researchers can submit attack modules; strong ones fold into the standing harness. The output is an <strong>independent signal</strong> on release posture—reproducible enough that markets, regulators, and the public can tell <strong>science from theater</strong> before fatigue sets in."
+        }
+      ];
+
+      var INDUSTRY = [
+        {
+          id: "frontier",
+          abbr: "Frontier lab",
+          title: "Frontier lab (industry)",
+          body: "The <strong>developing lab</strong> submits the system under test, asserts capability or risk claims, and (today) often controls artifacts and narrative timing. In a healthy harness, that participation is <strong>necessary</strong> but not sufficient: access and results have to survive <strong>outside</strong> evaluation."
+        },
+        {
+          id: "csa",
+          abbr: "CSA",
+          title: "Cloud Security Alliance (CSA)",
+          body: "<strong>Industry-facing coalitions</strong>—CSA Labs and similar—can mobilize hundreds of practitioners quickly (e.g. Mythos-oriented CISO sprints), publish guidance, and align enterprise practice. That work is <strong>essential culture</strong> for AI safety, but it is not a substitute for <strong>neutral, binding harness</strong> findings on frontier systems."
+        }
+      ];
+
+      var ORGS = [
+        { id: "nist", abbr: "NIST", lane: 1, row: 0, title: "NIST", body: "Defines the <strong>common language</strong> of evaluation—categories, thresholds, formats, repeatability, benchmarks, confidence statements—so results are evidence, not anecdotes." },
+        { id: "mitre", abbr: "MITRE", lane: 1, row: 1, title: "MITRE", body: "Turns raw findings into <strong>taxonomies</strong>, assurance patterns, threat models, and guidance so operators can act on what the labs learned." },
+        { id: "aisi", abbr: "UK AISI", lane: 2, row: 0, title: "UK AI Security Institute", body: "Provides a close <strong>empirical counterpart</strong> for replication and transatlantic comparability—when two serious bodies align under shared standards, <strong>trust rebuilds</strong>." },
+        { id: "lincoln", abbr: "Lincoln", lane: 3, row: 0, title: "MIT Lincoln Lab", body: "Part of the <strong>operational testing core</strong>: rigorous methodology and adversarial thinking about how systems fail in realistic conditions." },
+        { id: "apl", abbr: "JHU APL", lane: 3, row: 1, title: "Johns Hopkins APL", body: "Tests decision-making algorithms in frameworks meant for <strong>high-stakes</strong> environments—not toy benchmarks alone." },
+        { id: "sandia", abbr: "Sandia", lane: 3, row: 2, title: "Sandia", body: "National-lab depth on AI in complex <strong>deployment</strong> and partnership contexts." },
+        { id: "llnl", abbr: "LLNL", lane: 3, row: 3, title: "Lawrence Livermore", body: "Measures <strong>trust and safety</strong> properties of LLMs under scrutiny—stress, not vibes." },
+        { id: "inl", abbr: "INL", lane: 3, row: 4, title: "Idaho National Lab", body: "Brings <strong>critical infrastructure</strong> imagination—grid and operational technology angles—to what “harm” can mean beyond pure cyber." },
+        { id: "darpa", abbr: "DARPA", lane: 4, row: 0, title: "DARPA", body: "Shapes <strong>challenge programs</strong> and rapid iteration so public-interest testing keeps pace with a moving surface." },
+        { id: "iarpa", abbr: "IARPA", lane: 4, row: 1, title: "IARPA", body: "Funds <strong>high-risk, high-payoff</strong> structures suited to adversarial discovery and hard IC-scale questions." },
+        { id: "iqt", abbr: "IQT", lane: 4, row: 2, title: "In-Q-Tel", body: "Bridges <strong>research, venture, and implementation</strong> so the harness does not stall in a single bureaucratic lane." },
+        { id: "rand", abbr: "RAND", lane: 4, row: 3, title: "RAND", body: "Connects technical results to <strong>strategy</strong>—governance, security, manipulation—because meaning depends on context." }
+      ];
+
+      var LANE_COLORS = { 1: "#7c3aed", 2: "#2563eb", 3: "#c2410c", 4: "#047857" };
+      var INDUSTRY_FILL = { frontier: "#334155", csa: "#0f766e" };
+
+      var wrap = document.getElementById("viz-svg-wrap");
+      var explainTitle = document.getElementById("explain-title");
+      var explainBody = document.getElementById("explain-body");
+      var stepNav = document.getElementById("step-nav");
+      var shell = document.getElementById("harness-shell");
+      var btnFs = document.getElementById("btn-fullscreen");
+      var btnReset = document.getElementById("btn-reset-view");
+
+      var W = 920;
+      var H = 640;
+      var activeStep = 0;
+      var activeOrg = null;
+
+      function laneColor(lane) {
+        return LANE_COLORS[lane] || "#1e3a5f";
+      }
+
+      function escapeAttr(s) {
+        return String(s)
+          .replace(/&/g, "&amp;")
+          .replace(/"/g, "&quot;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;");
+      }
+
+      function syncStepNav(index) {
+        stepNav.querySelectorAll("button").forEach(function (btn, j) {
+          var on = j === index;
+          btn.setAttribute("aria-current", on ? "true" : "false");
+          btn.setAttribute("aria-selected", on ? "true" : "false");
+        });
+      }
+
+      function clearStepNav() {
+        stepNav.querySelectorAll("button").forEach(function (btn) {
+          btn.setAttribute("aria-current", "false");
+          btn.setAttribute("aria-selected", "false");
+        });
+      }
+
+      function applyStepPanel(index) {
+        var s = STEPS[index];
+        explainTitle.innerHTML = s.title;
+        explainBody.innerHTML = s.body;
+        syncStepNav(index);
+      }
+
+      function applyOrgPanel(org) {
+        explainTitle.textContent = org.title;
+        explainBody.innerHTML = org.body;
+        clearStepNav();
+      }
+
+      function selectStep(index) {
+        activeStep = index;
+        activeOrg = null;
+        applyStepPanel(index);
+        buildSVG();
+        bindOrgClicks();
+      }
+
+      function selectOrg(id) {
+        var ind = INDUSTRY.find(function (x) {
+          return x.id === id;
+        });
+        var org = ind || ORGS.find(function (x) {
+          return x.id === id;
+        });
+        if (!org) return;
+        activeOrg = id;
+        clearStepNav();
+        applyOrgPanel(org);
+        buildSVG();
+        bindOrgClicks();
+      }
+
+      function buildSVG() {
+        var padX = 26;
+        var colGap = 12;
+        var nCol = 4;
+        var innerW = W - 2 * padX - (nCol - 1) * colGap;
+        var colW = innerW / nCol;
+        var colCx = [];
+        var c;
+        for (c = 0; c < nCol; c++) {
+          colCx.push(padX + c * (colW + colGap) + colW / 2);
+        }
+
+        var gateY = 80;
+        var gateH = 52;
+        var gateGap = 12;
+        var nGates = 5;
+        var gateUsable = W - 2 * padX - (nGates - 1) * gateGap;
+        var gateW = gateUsable / nGates;
+
+        var laneHeaderY = 148;
+        var laneTop = 168;
+        var rowY0 = 186;
+        var rowDy = 32;
+        var chipH = 26;
+        var chipW = Math.min(122, colW - 16);
+
+        function chipX(cx) {
+          return cx - chipW / 2;
+        }
+
+        var parts = [];
+        parts.push('<svg viewBox="0 0 ' + W + " " + H + '" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="viz-title viz-desc">');
+        parts.push('<title id="viz-title">AI release path — industry, gates, public-interest harness</title>');
+        parts.push('<desc id="viz-desc">Frontier lab and CSA, five release gates, four parallel institutional lanes, synthesis.</desc>');
+        parts.push(
+          '<defs><marker id="harnessArrow" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7 z" fill="#64748b"/></marker></defs>'
+        );
+
+        parts.push('<rect x="0" y="0" width="' + W + '" height="' + H + '" fill="#fafaf8"/>');
+
+        /* Industry band — separate row, no overlap with gates */
+        parts.push('<rect x="' + padX + '" y="14" width="' + (W - 2 * padX) + '" height="54" rx="10" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>');
+        parts.push(
+          '<text x="' +
+            (padX + 8) +
+            '" y="30" font-family="IBM Plex Mono,monospace" font-size="9" fill="#475569">Industry &amp; coalition participation (parallel to harness)</text>'
+        );
+
+        var indY = 38;
+        var indH = 28;
+        for (var ii = 0; ii < INDUSTRY.length; ii++) {
+          var ind = INDUSTRY[ii];
+          var ix = ii === 0 ? padX + 8 : padX + 8 + 230;
+          var iw = 210;
+          var pressedInd = activeOrg === ind.id;
+          parts.push(
+            '<g class="org-hit" tabindex="0" role="button" data-org="' +
+              ind.id +
+              '" aria-pressed="' +
+              (pressedInd ? "true" : "false") +
+              '" aria-label="' +
+              escapeAttr(ind.title) +
+              '">' +
+              '<rect x="' +
+              ix +
+              '" y="' +
+              indY +
+              '" width="' +
+              iw +
+              '" height="' +
+              indH +
+              '" rx="6" fill="' +
+              INDUSTRY_FILL[ind.id] +
+              '" fill-opacity="' +
+              (pressedInd ? "1" : "0.92") +
+              '" stroke="#0f172a" stroke-width="' +
+              (pressedInd ? "2" : "0.75") +
+              '"/>' +
+              '<text x="' +
+              (ix + iw / 2) +
+              '" y="' +
+              (indY + indH / 2 + 4) +
+              '" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#fff">' +
+              ind.abbr +
+              "</text></g>"
+          );
+        }
+
+        parts.push(
+          '<text x="' +
+            W / 2 +
+            '" y="64" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" fill="#64748b">claim / artifact → harness intake</text>'
+        );
+
+        /* Release gates — horizontal pipeline */
+        parts.push(
+          '<text x="' +
+            padX +
+            '" y="74" font-family="IBM Plex Mono,monospace" font-size="9" font-weight="500" fill="#1e293b">Release gates (click)</text>'
+        );
+
+        var gi;
+        for (gi = 0; gi < nGates; gi++) {
+          var gx = padX + gi * (gateW + gateGap);
+          var step = STEPS[gi + 1];
+          var selG = activeOrg === null && activeStep === gi + 1;
+          parts.push(
+            '<g class="step-hit" data-step-index="' +
+              (gi + 1) +
+              '" tabindex="0" role="button" aria-label="' +
+              escapeAttr(
+                step.title
+                  .replace(/<[^>]+>/g, "")
+                  .replace(/&amp;/g, "&")
+                  .replace(/&lt;/g, "<")
+                  .replace(/&gt;/g, ">")
+              ) +
+              '">' +
+              '<rect x="' +
+              gx +
+              '" y="' +
+              gateY +
+              '" width="' +
+              gateW +
+              '" height="' +
+              gateH +
+              '" rx="8" fill="' +
+              (selG ? "#1e3a5f" : "#fff") +
+              '" stroke="#94a3b8" stroke-width="' +
+              (selG ? "2" : "1") +
+              '"/>' +
+              '<text x="' +
+              (gx + gateW / 2) +
+              '" y="' +
+              (gateY + 22) +
+              '" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="14" font-weight="700" fill="' +
+              (selG ? "#fff" : "#1e3a5f") +
+              '">' +
+              (gi + 1) +
+              "</text>"
+          );
+          if (step.gateSub) {
+            parts.push(
+              '<text x="' +
+                (gx + gateW / 2) +
+                '" y="' +
+                (gateY + 40) +
+                '" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" fill="' +
+                (selG ? "#cbd5e1" : "#64748b") +
+                '">' +
+                escapeAttr(step.gateSub) +
+                "</text>"
+            );
+          }
+          parts.push("</g>");
+          if (gi < nGates - 1) {
+            var ax = gx + gateW + 4;
+            parts.push(
+              '<line x1="' +
+                ax +
+                '" y1="' +
+                (gateY + gateH / 2) +
+                '" x2="' +
+                (ax + gateGap - 8) +
+                '" y2="' +
+                (gateY + gateH / 2) +
+                '" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#harnessArrow)"/>'
+            );
+          }
+        }
+
+        parts.push(
+          '<line x1="' +
+            (W / 2) +
+            '" y1="' +
+            (gateY + gateH + 4) +
+            '" x2="' +
+            (W / 2) +
+            '" y2="' +
+            (laneHeaderY - 6) +
+            '" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#harnessArrow)"/>'
+        );
+        parts.push(
+          '<text x="' +
+            (W / 2 + 8) +
+            '" y="' +
+            (gateY + gateH + 28) +
+            '" font-family="IBM Plex Mono,monospace" font-size="7" fill="#94a3b8">into parallel harness lanes</text>'
+        );
+
+        var laneLabels = [
+          { lane: 1, t: "Standards & assurance" },
+          { lane: 2, t: "Cross-check" },
+          { lane: 3, t: "Operational labs" },
+          { lane: 4, t: "Challenges · policy · bridge" }
+        ];
+        for (var li = 0; li < laneLabels.length; li++) {
+          var Ln = laneLabels[li];
+          var cx = colCx[Ln.lane - 1];
+          var lx0 = cx - colW / 2;
+          parts.push(
+            '<rect x="' +
+              lx0 +
+              '" y="' +
+              laneTop +
+              '" width="' +
+              colW +
+              '" height="' +
+              (H - laneTop - 52) +
+              '" rx="10" fill="' +
+              laneColor(Ln.lane) +
+              '" fill-opacity="0.06" stroke="' +
+              laneColor(Ln.lane) +
+              '" stroke-opacity="0.28" stroke-width="1"/>'
+          );
+          parts.push(
+            '<text x="' +
+              cx +
+              '" y="' +
+              laneHeaderY +
+              '" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" font-weight="500" fill="' +
+              laneColor(Ln.lane) +
+              '">' +
+              Ln.t +
+              "</text>"
+          );
+        }
+
+        for (var oi = 0; oi < ORGS.length; oi++) {
+          var o = ORGS[oi];
+          var pressed = activeOrg === o.id;
+          var fill = laneColor(o.lane);
+          var cx = colCx[o.lane - 1];
+          var oy = rowY0 + o.row * rowDy;
+          var ox = chipX(cx);
+          parts.push(
+            '<g class="org-hit" tabindex="0" role="button" data-org="' +
+              o.id +
+              '" aria-pressed="' +
+              (pressed ? "true" : "false") +
+              '" aria-label="' +
+              escapeAttr(o.title) +
+              '">' +
+              '<rect x="' +
+              ox +
+              '" y="' +
+              oy +
+              '" width="' +
+              chipW +
+              '" height="' +
+              chipH +
+              '" rx="6" fill="' +
+              fill +
+              '" fill-opacity="' +
+              (pressed ? "1" : "0.9") +
+              '" stroke="#0f172a" stroke-width="' +
+              (pressed ? "2" : "0.75") +
+              '"/>' +
+              '<text x="' +
+              (ox + chipW / 2) +
+              '" y="' +
+              (oy + chipH / 2 + 4) +
+              '" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" font-weight="700" fill="#fff">' +
+              o.abbr +
+              "</text></g>"
+          );
+        }
+
+        var synY = H - 44;
+        parts.push('<rect x="' + padX + '" y="' + synY + '" width="' + (W - 2 * padX) + '" height="36" rx="10" fill="#0d9488" stroke="#0f766e" stroke-width="1"/>');
+        parts.push(
+          '<text x="' +
+            W / 2 +
+            '" y="' +
+            (synY + 23) +
+            '" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="10" fill="#ecfdf5">Independent synthesis · reproducible findings · release / policy bar</text>'
+        );
+
+        parts.push("</svg>");
+        wrap.innerHTML = parts.join("");
+
+        wrap.querySelectorAll(".step-hit").forEach(function (g) {
+          function goStep() {
+            selectStep(parseInt(g.getAttribute("data-step-index"), 10));
+          }
+          g.addEventListener("click", goStep);
+          g.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              goStep();
+            }
+          });
+        });
+      }
+
+      function bindOrgClicks() {
+        wrap.querySelectorAll(".org-hit").forEach(function (g) {
+          function goOrg() {
+            selectOrg(g.getAttribute("data-org"));
+          }
+          g.addEventListener("click", goOrg);
+          g.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              goOrg();
+            }
+          });
+        });
+      }
+
+      function resetAll() {
+        selectStep(0);
+      }
+
+      STEPS.forEach(function (s, i) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.textContent = s.navLabel;
+        b.addEventListener("click", function () {
+          selectStep(i);
+        });
+        stepNav.appendChild(b);
+      });
+
+      stepNav.querySelectorAll("button").forEach(function (btn) {
+        btn.setAttribute("role", "tab");
+      });
+
+      btnReset.addEventListener("click", resetAll);
+
+      btnFs.addEventListener("click", function () {
+        if (!document.fullscreenElement) {
+          shell
+            .requestFullscreen()
+            .then(function () {
+              btnFs.textContent = "Exit fullscreen";
+              btnFs.setAttribute("aria-pressed", "true");
+              shell.classList.add("is-fullscreen");
+            })
+            .catch(function () {});
+        } else {
+          document.exitFullscreen();
+        }
+      });
+
+      document.addEventListener("fullscreenchange", function () {
+        if (!document.fullscreenElement) {
+          btnFs.textContent = "Enter fullscreen";
+          btnFs.setAttribute("aria-pressed", "false");
+          shell.classList.remove("is-fullscreen");
+        }
+      });
+
+      applyStepPanel(0);
+      buildSVG();
+      bindOrgClicks();
+    })();
+  </script>
+</body>
+</html>
