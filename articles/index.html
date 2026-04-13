@@ -198,6 +198,14 @@
         0 26px 60px -20px rgba(196, 92, 38, 0.16);
     }
 
+    .preview-card--mythos:hover,
+    .preview-card--mythos:focus-within {
+      border-color: rgba(26, 75, 110, 0.4);
+      box-shadow:
+        0 0 0 1px rgba(26, 75, 110, 0.12),
+        0 26px 60px -20px rgba(26, 75, 110, 0.14);
+    }
+
     .preview-card__meta {
       position: relative;
       z-index: 1;
@@ -332,6 +340,25 @@
         <div class="preview-card__meta">
           <h2 id="cry-wolf-preview-title" class="preview-card__title">The lab that cried wolf</h2>
           <p class="preview-card__blurb">Credibility beats raw capability: a public-interest harness, twelve institutions, tiers, and an interactive parallel-research diagram.</p>
+        </div>
+      </article>
+
+      <article class="preview-card preview-card--mythos" aria-labelledby="mythos-draft-preview-title">
+        <a
+          class="preview-card__stretch"
+          href="mythos-draft-response.html"
+          aria-label="Open Mythos-ready draft comments — articles/mythos-draft-response.html"
+        ></a>
+        <div class="preview-card__chrome" aria-hidden="true">
+          <div class="preview-card__dots"><span></span><span></span><span></span></div>
+          <span class="preview-card__url">…/articles/mythos-draft-response.html</span>
+        </div>
+        <div class="preview-card__viewport">
+          <img src="../images/mythos-draft-response/mythos-draft-response.png" alt="Preview: draft document comments illustration for CSA Mythos-ready brief review." loading="lazy" decoding="async">
+        </div>
+        <div class="preview-card__meta">
+          <h2 id="mythos-draft-preview-title" class="preview-card__title">Mythos-ready draft comments</h2>
+          <p class="preview-card__blurb">MSP and vCISO practicality for the CSA brief—cited SMB stats, PDF link, and ten structured review comments.</p>
         </div>
       </article>
     </div>

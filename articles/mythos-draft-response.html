@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Draft review comments on CSA’s Mythos-ready security brief—MSP, MSSP, MDR, and vCISO operating models, with cited SMB and service-provider statistics.">
+  <link rel="canonical" href="https://cablepull.github.io/articles/mythos-draft-response.html">
+  <meta property="og:site_name" content="cablepull">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://cablepull.github.io/articles/mythos-draft-response.html">
+  <meta property="og:title" content="Mythos-ready brief — MSP / vCISO draft comments · cablepull">
+  <meta property="og:description" content="Practical revisions so the CSA Mythos-ready guidance fits outsourced and advisory-led security, with data on SMB reliance on MSPs and vCISO demand.">
+  <meta property="og:image" content="https://cablepull.github.io/images/mythos-draft-response/mythos-draft-response.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Mythos-ready brief — MSP / vCISO draft comments · cablepull">
+  <meta name="twitter:description" content="Draft review for CSA’s Mythos-ready paper: outsourced security, MSP/vCISO stats, PDF link, ten comments.">
+  <meta name="twitter:image" content="https://cablepull.github.io/images/mythos-draft-response/mythos-draft-response.png">
+  <title>Mythos-ready brief — MSP / vCISO draft comments · cablepull</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #141820;
+      --muted: #4b5563;
+      --paper: #f8f7f4;
+      --card: #fffefb;
+      --rule: #c4c0b8;
+      --accent: #1a4b6e;
+      --accent-soft: rgba(26, 75, 110, 0.09);
+      --mark: #7c2d12;
+      --pad: clamp(1rem, 4vw, 2rem);
+      --max: 40rem;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", system-ui, sans-serif;
+      font-size: clamp(1rem, 0.95rem + 0.2vw, 1.08rem);
+      line-height: 1.65;
+      color: var(--ink);
+      background: var(--paper);
+    }
+    .top { height: 3px; background: linear-gradient(90deg, var(--accent) 0%, var(--mark) 100%); }
+    nav.back {
+      padding: 1rem var(--pad);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    nav.back a { color: var(--accent); text-decoration: none; }
+    nav.back a:hover { text-decoration: underline; }
+    .hero-fig {
+      max-width: min(52rem, 100%);
+      margin: 0 auto;
+      padding: 0 var(--pad) 1.5rem;
+    }
+    .hero-fig img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--rule);
+      border-radius: 6px;
+      box-shadow: 0 12px 40px rgba(20, 24, 32, 0.08);
+    }
+    .hero-fig figcaption {
+      margin-top: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .doc-links {
+      max-width: min(52rem, 100%);
+      margin: 0 auto 1.75rem;
+      padding: 0 var(--pad);
+    }
+    .doc-links .inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1rem;
+      align-items: center;
+      padding: 0.85rem 1rem;
+      background: var(--accent-soft);
+      border: 1px solid rgba(26, 75, 110, 0.2);
+      border-radius: 8px;
+    }
+    .doc-links a {
+      font-weight: 700;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .doc-links a:hover { text-decoration: underline; }
+    .doc-links .sep { color: var(--muted); font-weight: 400; }
+    article.main {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad) 3rem;
+    }
+    article.main h1 {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: clamp(1.45rem, 3.5vw, 1.85rem);
+      font-weight: 600;
+      line-height: 1.2;
+      margin: 0 0 1rem;
+      letter-spacing: -0.02em;
+    }
+    article.main > .lede {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 1.08rem;
+      line-height: 1.6;
+    }
+    article.main p { margin: 0 0 1rem; }
+    article.main h2 {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 1.12rem;
+      font-weight: 600;
+      margin: 2.25rem 0 0.65rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--rule);
+    }
+    article.main h2:first-of-type {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 1.5rem;
+    }
+    .loc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin: 0 0 0.5rem;
+    }
+    .loc strong { color: var(--ink); }
+    blockquote {
+      margin: 1rem 0;
+      padding: 0.85rem 1rem 0.85rem 1.1rem;
+      border-left: 4px solid var(--accent);
+      background: var(--card);
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 0.98rem;
+    }
+    blockquote p { margin: 0 0 0.65rem; }
+    blockquote p:last-child { margin-bottom: 0; }
+    blockquote ul {
+      margin: 0.5rem 0 0;
+      padding-left: 1.2rem;
+    }
+    blockquote li { margin-bottom: 0.35rem; }
+    article.main a { color: var(--accent); font-weight: 600; }
+    .refs {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 2rem var(--pad) 3rem;
+      border-top: 1px solid var(--rule);
+    }
+    .refs h2 {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 1.05rem;
+      margin: 0 0 1rem;
+    }
+    .refs ol {
+      margin: 0;
+      padding-left: 1.2rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .refs li { margin-bottom: 0.6rem; }
+    .refs a { color: var(--accent); font-weight: 600; }
+    .site-footer {
+      padding: 1.5rem var(--pad) 2rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      border-top: 1px solid var(--rule);
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+    .site-footer p { margin: 0 0 0.75rem; }
+    .site-footer p:last-child { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+  <div class="top" aria-hidden="true"></div>
+  <nav class="back"><a href="index.html">← Articles</a> · <a href="../">Home</a></nav>
+
+  <figure class="hero-fig">
+    <img src="../images/mythos-draft-response/mythos-draft-response.png" width="1600" height="900" alt="Illustration: draft document comments, magnifying glass, checklist—make your comments count." decoding="async">
+    <figcaption>Draft review theme: tighten language for outsourced operating reality.</figcaption>
+  </figure>
+
+  <div class="doc-links" aria-label="Documents this article responds to">
+    <div class="inner">
+      <span><strong>CSA brief under review:</strong></span>
+      <a href="../images/mythos-draft-response/mythosready-20260413.pdf" rel="noopener">Mythos-ready paper (PDF, Apr 2026)</a>
+      <span class="sep">·</span>
+      <a href="https://labs.cloudsecurityalliance.org/mythos-ciso/" rel="noopener noreferrer">CSA Labs · public page</a>
+    </div>
+  </div>
+
+  <article class="main">
+    <h1>Draft review comments: MSP / vCISO practicality revisions for the Mythos-ready brief</h1>
+
+    <p class="lede">The CSA Labs brief <a href="https://labs.cloudsecurityalliance.org/mythos-ciso/" rel="noopener noreferrer"><cite>The “AI Vulnerability Storm”: Building a “Mythos-ready” Security Program</cite></a> (CSA, April 2026; <a href="../images/mythos-draft-response/mythosready-20260413.pdf">PDF copy</a> we reference here) is a serious attempt to prepare organizations for a spike in vulnerability-driven security work. Much of its language, however, still assumes <strong>direct internal ownership</strong> of engineering, procurement, and incident execution. That framing under-serves a <strong>very large segment of the market</strong>: companies whose security outcomes depend on <strong>MSPs, MSSPs, MDR providers</strong>, and <strong>fractional or virtual CISO (vCISO)</strong> models—where the hands on keyboard are often a provider’s, and authority is <strong>shared, contracted, or advisory</strong> rather than absolute.</p>
+
+    <p>Survey work summarized by ConnectWise—drawing on <strong>Vanson Bourne</strong> and <em>The State of SMB Cybersecurity</em> research—reports that <strong>58%</strong> of SMBs now see improved security as a <strong>key benefit</strong> of working with an MSP (up from <strong>40%</strong> in 2024), while <strong>73%</strong> are not confident their MSP could fully protect them in an attack and <strong>47%</strong> would switch providers for stronger cybersecurity (<a href="https://connectwise.com/blog/smb-cybersecurity-statistics-and-trends" rel="noopener noreferrer">ConnectWise, July 2025</a>; underlying study: <a href="https://connectwise.com/resources/state-of-smb-cybersecurity" rel="noopener noreferrer">State of SMB Cybersecurity</a>). The same research program notes <strong>61%</strong> of SMBs worry a serious attack could put them out of business. Separately, Cynomi’s <strong>State of the Virtual CISO 2025</strong>—a survey of <strong>200</strong> senior security leaders at North American MSPs/MSSPs, fielded <strong>May 2025</strong>—found <strong>79%</strong> reporting <strong>high demand for vCISO services among SMBs</strong> (<a href="https://cynomi.com/state-of-the-vciso-2025/?lead_activity=article" rel="noopener noreferrer">Cynomi</a>). Together, these figures describe a <strong>dependent middle</strong> that will read “Mythos-ready” guidance through <strong>contracts, SLAs, escalation rights, and provider capacity</strong>—dimensions the draft should treat as first-class.</p>
+
+    <p>The comments below are draft review notes aimed at closing that gap.</p>
+
+    <h2>Comment 1 — Add an explicit outsourced-operating-model qualifier early in Section IV</h2>
+    <p class="loc"><strong>Location:</strong> Section IV, opening paragraphs on the “Mythos-ready Security Program” (pages 13–14).</p>
+    <p><strong>Comment:</strong> This section assumes a security organization with direct authority over engineering, procurement, deployment, and incident execution. That fits some enterprises, but a large portion of the market operates through MSPs, MSSPs, MDRs, and vCISOs. The document should explicitly say that a Mythos-ready program must be adapted to the organization’s operating model, especially where security is advisory, partially outsourced, or dependent on third-party providers for execution.</p>
+    <blockquote>
+      <p>The changing landscape, and resulting risk and impact, require an approach that is both operational and strategic, focused on program building over time. That approach must be adapted to the organization’s delivery model. Some firms have direct internal authority across engineering, infrastructure, and incident response. Others rely heavily on MSPs, MSSPs, MDR providers, outside counsel, and vCISO-led advisory structures. A Mythos-ready program must therefore define not only what actions are needed, but who has the authority, access, contractual obligation, and operational ability to carry them out under compressed timelines.</p>
+    </blockquote>
+
+    <h2>Comment 2 — Expand the “10 Questions” into an authority-and-execution model for outsourced firms</h2>
+    <p class="loc"><strong>Location:</strong> “10 Questions to Understand Your Security Program State and Influence” (page 15).</p>
+    <p><strong>Comment:</strong> This is one of the strongest parts of the draft, but it still assumes the organization can act once it knows the answer. For MSP/vCISO-led environments, the real issue is often not awareness but enforceability. Add questions that force clarity on contractual authority, emergency change rights, and third-party execution dependency.</p>
+    <blockquote>
+      <p><strong>Additional questions for outsourced or advisory-led environments:</strong></p>
+      <ul>
+        <li>Which security controls are executed internally, and which are executed by MSPs, MSSPs, MDRs, cloud providers, or other third parties?</li>
+        <li>Do we have contractual SLAs for emergency patching, log access, containment actions, escalation, and evidence delivery?</li>
+        <li>Can our MSP or primary service providers execute urgent security-driven changes within hours, not days?</li>
+        <li>Are pre-authorized containment actions defined across all key providers, including identity, endpoint, cloud, and network vendors?</li>
+        <li>Does the vCISO or security leader have formal escalation authority, or only advisory influence?</li>
+        <li>If a provider cannot move at the required speed, what is the fallback path?</li>
+      </ul>
+    </blockquote>
+
+    <h2>Comment 3 — Rewrite the governance language so it works for firms without direct control</h2>
+    <p class="loc"><strong>Location:</strong> Risk/governance discussion in Section IV and the risk register items around governance friction and outdated risk models (pages 13, 17–18).</p>
+    <p><strong>Comment:</strong> The current governance framing is too enterprise-internal. In practice, outsourced firms have a shared-responsibility problem, not just a governance problem. Approval friction is only part of it; the other part is that the organization may not own the hands on keyboard needed to execute fast. The rewrite should frame this as a control-allocation and contract-enforcement issue.</p>
+    <blockquote>
+      <p>Without a cross-functional governance mechanism, defensive AI adoption and response acceleration will stall. In outsourced or advisory-led environments, this challenge is compounded by shared-responsibility fragmentation. The organization may not directly operate the controls it depends on. A Mythos-ready governance model must therefore define control ownership, decision rights, emergency authority, and provider obligations across internal teams and external service partners. Governance is not only about approval speed; it is about making sure the entity that must act is both identified and obligated to act under compressed threat timelines.</p>
+    </blockquote>
+
+    <h2>Comment 4 — Rewrite the board briefing so it accounts for MSP and vCISO reliance</h2>
+    <p class="loc"><strong>Location:</strong> Section V, “Executive and Board Briefing: the AI Risk Summary” and especially the 90-day plan language on pages 22–23.</p>
+    <p><strong>Comment:</strong> This section is strong for internal programs, but it needs to tell boards of outsourced-security organizations what to ask for. Right now it implies the company can simply repurpose staff, deploy tooling, and harden systems. That is often false. The board language should include provider readiness, SLA sufficiency, and containment authority across third parties.</p>
+    <blockquote>
+      <p>This is not an open-ended AI initiative. We are seeking alignment to execute a targeted and aggressive 90-day plan with clear owners, provider commitments, and measurable outcomes. Where security operations are partially or substantially outsourced, this plan must include validation that our MSPs, MSSPs, MDRs, cloud providers, and other critical partners can execute at the speed this threat environment requires. If they cannot, that is itself a material risk requiring escalation, remediation, or replacement planning.</p>
+    </blockquote>
+    <blockquote>
+      <p><strong>Increase People and Capacity.</strong> Plan for repurposing of internal staff where possible, but also assess whether current providers can absorb the increased triage, remediation, and incident load. If not, add contractor or provider capacity and protect experienced staff from burnout.</p>
+      <p><strong>Deploy AI Tooling.</strong> Formalize AI-assisted defensive workflows not only for internal teams, but across external providers where permitted and appropriate. Ensure security review, code scanning, and investigation workflows are not dependent on a single party moving at human speed.</p>
+      <p><strong>Harden Infrastructure.</strong> Prioritize updating asset inventories, reducing unnecessary exposure, and validating segmentation, Zero Trust controls, egress filtering, and phishing-resistant authentication across both internal systems and third-party operated environments.</p>
+      <p><strong>Accelerate Governance and Provider Execution.</strong> Align security, legal, engineering, procurement, and provider management functions to fast-track defensive onboarding, emergency changes, and escalation rights.</p>
+      <p><strong>Update Playbooks.</strong> Ensure technical and communications response plans explicitly define actions, owners, and approval paths across internal teams and external providers.</p>
+      <p><strong>Track Progress.</strong> Include provider readiness, SLA compliance, evidence availability, and escalation performance in regular status reporting.</p>
+    </blockquote>
+
+    <h2>Comment 5 — Rewrite the priority actions so they do not assume internal execution</h2>
+    <p class="loc"><strong>Location:</strong> Priority Actions table, especially Actions 2, 3, 5, 8, 10, and 11 (pages 19–21).</p>
+    <p><strong>Comment:</strong> Several actions assume the company can directly require agent adoption, stand up governance, build automated response, and create VulnOps. Many firms cannot. The table should either add an “outsourced/advisory variant” column or revise the language so each action includes a direct-ownership path and a provider-dependent path.</p>
+    <blockquote>
+      <p>For organizations that rely on MSPs, MSSPs, MDR providers, or vCISO-led operating models, each priority action should be interpreted through a shared-responsibility lens. Where the organization does not directly own execution, the priority action includes validating provider capability, establishing contractual requirements, defining escalation paths, and creating fallback plans where provider response is insufficient.</p>
+    </blockquote>
+    <blockquote>
+      <p><strong>Action 2: Require AI Agent Adoption</strong><br>
+      Formalize AI-assisted defensive workflows across the security function and, where applicable, across key providers. If service providers cannot support equivalent acceleration safely, document that gap and address it through supplemental tooling, changed scopes, or provider replacement planning.</p>
+      <p><strong>Action 5: Prepare for Continuous Patching</strong><br>
+      Build internal and provider-side triage and deployment capacity for a significant increase in patch volume. Define which patches the organization can apply directly and which require provider action, and establish emergency SLAs for both.</p>
+      <p><strong>Action 8: Harden Your Environment</strong><br>
+      Implement or validate egress filtering, segmentation, Zero Trust-aligned controls, dependency restrictions, and phishing-resistant MFA across all internally managed systems and all relevant provider-managed environments.</p>
+      <p><strong>Action 10: Build an Automated Response Capability</strong><br>
+      Where the organization operates its own stack, build toward partially autonomous detection and response. Where the stack is provider-run, ensure pre-authorized containment, evidence access, and machine-speed escalation exist contractually and operationally.</p>
+      <p><strong>Action 11: Stand Up VulnOps</strong><br>
+      Build a continuous vulnerability operations function internally where feasible. For smaller or outsourced organizations, define a VulnOps operating model spanning internal owners and third-party executors, including discovery, triage, remediation tracking, exception handling, and evidence collection.</p>
+    </blockquote>
+
+    <h2>Comment 6 — Add a dedicated subsection for MSP/vCISO-operated firms</h2>
+    <p class="loc"><strong>Location:</strong> New subsection in Section IV or Appendix.</p>
+    <p><strong>Comment:</strong> This is the biggest practical gap. The document needs an explicit subsection or appendix for firms whose security function is advisory, partially outsourced, or substantially outsourced. Without it, the brief risks being credible but not executable for a large part of its audience.</p>
+    <blockquote>
+      <p><strong>Mythos-ready for MSP- and vCISO-operated Organizations</strong></p>
+      <p>Many organizations do not have a large internal security function with direct execution authority. They rely on MSPs, MSSPs, MDR providers, outside counsel, or vCISOs to deliver some or most of the security program. In these environments, Mythos-readiness depends on operational clarity across shared responsibilities.</p>
+      <p>A minimum viable approach should include:</p>
+      <ul>
+        <li>A documented responsibility matrix across internal staff and providers</li>
+        <li>Emergency SLAs for patching, logging, containment, and escalation</li>
+        <li>Pre-authorized response actions for identity, endpoint, cloud, and network incidents</li>
+        <li>Confirmed access to logs, assets, evidence, and change paths during urgent incidents</li>
+        <li>Validation that provider tooling and workflows can operate at the required speed</li>
+        <li>A fallback plan when a provider cannot meet response requirements</li>
+      </ul>
+      <p>In these models, the central security question is not only whether a control exists, but whether the organization can cause it to be executed in time.</p>
+    </blockquote>
+
+    <h2>Comment 7 — Add MSP/tooling concentration risk to the attack-surface discussion</h2>
+    <p class="loc"><strong>Location:</strong> Risk register / asset and exposure inventory discussion (pages 16–18).</p>
+    <p><strong>Comment:</strong> The document covers agentic supply chain and privileged agents, but it should also explicitly call out the outsourced service stack itself as attack surface. MSP tooling, RMM, remote admin access, ticketing systems, and privileged service accounts are exactly the kind of leverage points that become more dangerous under compressed exploitation timelines.</p>
+    <blockquote>
+      <p>Attack surface now includes not only internal assets, code, dependencies, and agents, but also the privileged tooling and access paths used by service providers. MSP and MSSP remote management tools, service accounts, administrative consoles, ticketing workflows, and upstream subcontractors may materially expand the blast radius of a successful compromise. A Mythos-ready inventory must therefore include third-party operated control planes and privileged service dependencies, not only internally managed assets.</p>
+    </blockquote>
+
+    <h2>Comment 8 — Make incident command explicit across organizations</h2>
+    <p class="loc"><strong>Location:</strong> Response/playbook recommendations in Sections IV and V (pages 20, 23).</p>
+    <p><strong>Comment:</strong> The draft calls for pre-authorized containment and faster playbooks, which is right, but it stops short of requiring a multi-party incident command structure. That is the practical failure point in many MSP/vCISO environments.</p>
+    <blockquote>
+      <p>Update playbooks to define incident command across organizational boundaries. For each major scenario, identify who can authorize containment, who executes it, who owns communications, who provides forensic evidence, and what happens if a provider is unavailable or refuses a recommended action. In outsourced environments, incident speed is limited less by detection than by coordination failure.</p>
+    </blockquote>
+
+    <h2>Comment 9 — Add a minimum viable 30-60-90 day path for smaller outsourced firms</h2>
+    <p class="loc"><strong>Location:</strong> Either after the priority actions table or as an appendix.</p>
+    <p><strong>Comment:</strong> The current timetable is still too enterprise-shaped. A smaller firm using an MSP and vCISO needs a stripped-down execution path.</p>
+    <blockquote>
+      <p><strong>Minimum Viable 90-Day Path for Smaller or Outsourced Organizations</strong></p>
+      <p><strong>First 30 days:</strong> identify crown jewels, confirm MSP/MSSP responsibilities, verify log access, enforce phishing-resistant MFA for privileged users, review internet exposure, and define emergency escalation paths.</p>
+      <p><strong>Next 30 days:</strong> validate backup and restoration workflows, confirm patch and containment SLAs, reduce unnecessary external exposure, verify provider access controls, and update the incident communications plan.</p>
+      <p><strong>Final 30 days:</strong> test one high-severity simultaneous-incident tabletop, validate provider evidence delivery, review contract gaps, and establish recurring reporting on asset visibility, patch timeliness, containment speed, and provider performance.</p>
+    </blockquote>
+
+    <h2>Comment 10 — Tighten the conclusion so it does not overstate universality</h2>
+    <p class="loc"><strong>Location:</strong> Section VI, Conclusions and Recommendations (page 24).</p>
+    <p><strong>Comment:</strong> The conclusion says every action in the brief can begin this week. That is too broad for firms dependent on third-party execution. It should be narrowed so the claim remains true.</p>
+    <blockquote>
+      <p>Empower your teams to use AI for defense, starting today. Every organization can begin this week by identifying control ownership, validating provider readiness, hardening core defenses, and establishing the execution paths required to move faster. The exact implementation path will differ depending on whether the organization operates controls directly or relies on third-party providers.</p>
+    </blockquote>
+  </article>
+
+  <section class="refs" aria-labelledby="refs-title">
+    <h2 id="refs-title">References cited in the lead-in</h2>
+    <ol>
+      <li>Cloud Security Alliance Labs, <a href="https://labs.cloudsecurityalliance.org/mythos-ciso/" rel="noopener noreferrer"><cite>The “AI Vulnerability Storm”: Building a “Mythos-ready” Security Program</cite></a> (public page). PDF mirrored for this response: <a href="../images/mythos-draft-response/mythosready-20260413.pdf">mythosready-20260413.pdf</a>.</li>
+      <li>ConnectWise, <a href="https://connectwise.com/blog/smb-cybersecurity-statistics-and-trends" rel="noopener noreferrer"><cite>SMB cybersecurity statistics and trends in 2025: What MSPs need to know</cite></a> (blog, July 8, 2025), summarizing Vanson Bourne / <em>State of SMB Cybersecurity</em> findings including the 58% / 40% MSP benefit comparison, 73% confidence gap, 47% provider-switching intent, and 61% business-existential worry.</li>
+      <li>ConnectWise, <a href="https://connectwise.com/resources/state-of-smb-cybersecurity" rel="noopener noreferrer"><cite>The State of SMB Cybersecurity</cite></a> (research hub for the underlying SMB survey).</li>
+      <li>Cynomi, <a href="https://cynomi.com/state-of-the-vciso-2025/?lead_activity=article" rel="noopener noreferrer"><cite>The State of the Virtual CISO 2025</cite></a> (article summarizing survey of 200 MSP/MSSP senior leaders in North America, May 2025), including the 79% high-demand figure for vCISO among SMBs.</li>
+    </ol>
+  </section>
+
+  <footer class="site-footer">
+    <p>© 2026 cablepull. All rights reserved.</p>
+    <p>No permission is granted to use this site or its contents for training, tuning, or developing artificial intelligence or machine learning systems, or to ingest it into any model or dataset for those purposes. Third parties may not crawl, scrape, cache, or index this site for search, AI, aggregation, or similar services without prior written consent.</p>
+  </footer>
+</body>
+</html>

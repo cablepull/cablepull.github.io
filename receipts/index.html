@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Receipts Available — primary sources, captures, and citations that back specific claims on cablepull.">
+  <link rel="canonical" href="https://cablepull.github.io/receipts/">
+  <meta property="og:site_name" content="cablepull">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cablepull.github.io/receipts/">
+  <meta property="og:title" content="Receipts Available · cablepull">
+  <meta property="og:description" content="Detailed evidence for claims—links, screenshots, logs, and primary sources in one place.">
+  <meta property="og:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
+  <meta property="og:image:alt" content="cablepull — site illustration.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Receipts Available · cablepull">
+  <meta name="twitter:description" content="Detailed evidence for claims—sources, captures, and citations.">
+  <meta name="twitter:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
+  <title>Receipts Available · cablepull</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0c0f14;
+      --paper: #e8e4dc;
+      --muted: #5c5a55;
+      --receipt: #2d6a4f;
+      --receipt-soft: #40916c;
+      --page-pad: clamp(1.25rem, 4vw, 2.5rem);
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: "Newsreader", Georgia, serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+    }
+    .page-main { flex: 1 0 auto; }
+    .wrap {
+      max-width: min(40rem, 100%);
+      margin: 0 auto;
+      padding: var(--page-pad);
+      box-sizing: border-box;
+      width: 100%;
+    }
+    a { color: var(--receipt); }
+    a:hover { color: var(--receipt-soft); }
+    h1 {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin: 0 0 0.75rem;
+    }
+    nav {
+      margin-bottom: 2rem;
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.85rem;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    nav a:hover { color: var(--receipt); }
+    .tag {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--receipt);
+      margin: 0 0 0.5rem;
+    }
+    .lede {
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin: 0 0 1.75rem;
+      max-width: 38ch;
+    }
+    .receipt-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .receipt-item {
+      margin: 0;
+      padding: 1.15rem 1.2rem;
+      border-radius: 0.65rem;
+      border: 1px solid rgba(12, 15, 20, 0.1);
+      background: rgba(255, 255, 255, 0.45);
+      box-shadow: 0 10px 36px -22px rgba(12, 15, 20, 0.35);
+    }
+    .receipt-item + .receipt-item {
+      margin-top: 1rem;
+    }
+    .receipt-item h2 {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0 0 0.4rem;
+      color: var(--ink);
+    }
+    .receipt-item p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+    .receipt-item code {
+      font-family: ui-monospace, "Cascadia Code", Menlo, monospace;
+      font-size: 0.88em;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.6);
+      padding: 0.1em 0.3em;
+      border-radius: 0.25rem;
+    }
+    .receipt-item--placeholder {
+      border-style: dashed;
+      background: rgba(255, 255, 255, 0.25);
+    }
+    .site-footer {
+      flex-shrink: 0;
+      margin-top: 3rem;
+      padding: 1.5rem var(--page-pad);
+      border-top: 1px solid rgba(12, 15, 20, 0.1);
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: min(40rem, 100%);
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      box-sizing: border-box;
+    }
+    .site-footer p { margin: 0 0 1rem; }
+    .site-footer p:last-child { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+  <div class="page-main">
+    <div class="wrap">
+      <nav><a href="../">← Home</a></nav>
+      <p class="tag">Evidence</p>
+      <h1>Receipts Available</h1>
+      <p class="lede">
+        When something on this site makes a factual claim, the receipts live here: primary sources, captures, timestamps, and links so you can verify without trusting me alone.
+      </p>
+
+      <ul class="receipt-list" aria-label="Receipt entries">
+        <li class="receipt-item receipt-item--placeholder">
+          <h2>Index</h2>
+          <p>No numbered receipts yet. Each entry will name the claim, point to the essay or note it supports, and list verifiable material (URLs, excerpts, images under <code>images/</code>, etc.).</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <p>© 2026 cablepull. All rights reserved.</p>
+    <p>No permission is granted to use this site or its contents for training, tuning, or developing artificial intelligence or machine learning systems, or to ingest it into any model or dataset for those purposes. Third parties may not crawl, scrape, cache, or index this site for search, AI, aggregation, or similar services without prior written consent.</p>
+  </footer>
+</body>
+</html>
