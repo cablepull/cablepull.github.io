@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Threat models, control design, security architecture notes—Conduct code, Copilot proxy keys, and field notes from cablepull.">
+  <meta name="description" content="Threat models, control design, security architecture notes—Conduct code, Copilot proxy keys, CISO leverage &amp; CVE trends, and field notes from cablepull.">
   <link rel="canonical" href="https://cablepull.github.io/security/">
   <meta property="og:site_name" content="cablepull">
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cablepull.github.io/security/">
   <meta property="og:title" content="Security · cablepull">
-  <meta property="og:description" content="Threat models, control design, security architecture notes—Conduct code, AI gateway credentials, and field notes from cablepull.">
+  <meta property="og:description" content="Threat models, control design, security architecture notes—Conduct code, AI gateway credentials, CISO leverage &amp; CVE data, and field notes from cablepull.">
   <meta property="og:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
   <meta property="og:image:alt" content="You vibe code, I conduct code — we are not the same.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Security · cablepull">
-  <meta name="twitter:description" content="Threat models, control design, security architecture notes—Conduct code, AI gateway credentials, and field notes from cablepull.">
+  <meta name="twitter:description" content="Threat models, control design, security architecture notes—Conduct code, AI gateway credentials, CISO leverage &amp; CVE data, and field notes from cablepull.">
   <meta name="twitter:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
   <title>Security · cablepull</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -201,6 +201,14 @@
       outline-color: #16a34a;
     }
 
+    .preview-card--ciso:hover,
+    .preview-card--ciso:focus-within {
+      border-color: rgba(26, 92, 102, 0.42);
+      box-shadow:
+        0 0 0 1px rgba(26, 92, 102, 0.12),
+        0 26px 60px -20px rgba(26, 92, 102, 0.16);
+    }
+
     .site-footer {
       flex-shrink: 0;
       margin-top: 3rem;
@@ -263,6 +271,25 @@
         <div class="preview-card__meta">
           <h2 id="proxy-preview-title" class="preview-card__title">The proxy that ate your Copilot keys</h2>
           <p class="preview-card__blurb">AI gateways, logging, and blast radius—select the card to read the full note.</p>
+        </div>
+      </article>
+
+      <article class="preview-card preview-card--ciso" aria-labelledby="ciso-cve-coe-preview-title">
+        <a
+          class="preview-card__stretch"
+          href="ciso-leverage-cve-architecture-coe.html"
+          aria-label="Open CISO leverage, CVE gravity, and an architecture center of excellence — security/ciso-leverage-cve-architecture-coe.html"
+        ></a>
+        <div class="preview-card__chrome" aria-hidden="true">
+          <div class="preview-card__dots"><span></span><span></span><span></span></div>
+          <span class="preview-card__url">…/security/ciso-leverage-cve-architecture-coe.html</span>
+        </div>
+        <div class="preview-card__viewport">
+          <img src="../images/ciso-cve-architecture/cve-five-year.svg" alt="Preview: bar chart of published CVE counts 2021–2025 (opens full essay)." loading="lazy" decoding="async">
+        </div>
+        <div class="preview-card__meta">
+          <h2 id="ciso-cve-coe-preview-title" class="preview-card__title">CISO leverage and a security architecture CoE</h2>
+          <p class="preview-card__blurb">AI-era delivery, five years of CVE publication data (chart), myth vs measurable tide, and standing up a center of excellence—with citations.</p>
         </div>
       </article>
     </div>
