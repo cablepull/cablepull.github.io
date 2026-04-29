@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edge Cases | Issue 032 | Comply Or We Will Assume Compliance</title>
+<meta name="description" content="Satirical fiction: ATHENA training at a defense contractor, ED-209, STPA, and the gap between training and reality. Edge Cases Issue 032.">
+<link rel="canonical" href="https://cablepull.github.io/fiction/edge-cases-032.html">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:ital,wght@0,300;0,400;1,300;1,400&display=swap');
+
+  :root {
+    --bg: #0d0d0f;
+    --surface: #141418;
+    --surface2: #1c1c22;
+    --border: #2a2a35;
+    --accent: #c8371a;
+    --amber: #d4832a;
+    --green: #2a7a4a;
+    --text: #d4d0c8;
+    --muted: #787068;
+    --header-text: #f0ece0;
+    --mono: 'IBM Plex Mono', monospace;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --display: 'Playfair Display', 'Times New Roman', serif;
+    --rule: #2a2a35;
+    --redacted: #c8371a;
+    --module-bg: #111116;
+    --module-border: #c8371a;
+    --tape: #1e1e28;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0 14px;
+    text-align: center;
+    position: relative;
+  }
+
+  .masthead-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .pub-name {
+    font-family: var(--display);
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--header-text);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 16px 0 6px;
+    text-transform: uppercase;
+  }
+
+  .pub-tagline {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 7px 0;
+    margin: 0 auto;
+    max-width: 860px;
+  }
+
+  /* ── SITE NAV (GitHub Pages) ── */
+  .site-nav {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 14px 24px 0;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .site-nav a {
+    color: var(--amber);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  .site-nav a:hover {
+    border-bottom-color: var(--amber);
+  }
+
+  .site-nav .sep {
+    color: var(--border);
+    margin: 0 0.5rem;
+  }
+
+  /* ── COVER STRIPE ── */
+  .disclaimer {
+    background: #0a0a0a;
+    border-bottom: 1px solid var(--border);
+    padding: 9px 24px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 100%;
+  }
+
+  .disclaimer-label {
+    color: var(--amber);
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    margin-right: 10px;
+  }
+
+  .cover-stripe {
+    background: var(--accent);
+    padding: 7px 24px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* ── ARTICLE WRAPPER ── */
+  .article {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 56px 24px 80px;
+  }
+
+  /* ── KICKER / LABEL ── */
+  .kicker {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .kicker::before {
+    content: '';
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  /* ── HEADLINE ── */
+  h1.headline {
+    font-family: var(--display);
+    font-size: clamp(34px, 5vw, 58px);
+    font-weight: 900;
+    color: var(--header-text);
+    line-height: 1.07;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  h1.headline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .deck {
+    font-family: var(--serif);
+    font-size: 19px;
+    font-weight: 300;
+    color: #a09890;
+    line-height: 1.55;
+    margin-bottom: 30px;
+    font-style: italic;
+    border-left: 2px solid var(--border);
+    padding-left: 18px;
+  }
+
+  /* ── BYLINE ── */
+  .byline {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 44px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  .byline-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  /* ── BODY PROSE ── */
+  .body p {
+    margin-bottom: 22px;
+    color: var(--text);
+  }
+
+  .body p.lead {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--header-text);
+    line-height: 1.58;
+    margin-bottom: 28px;
+  }
+
+  .body h2 {
+    font-family: var(--display);
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--header-text);
+    margin: 46px 0 16px;
+    line-height: 1.2;
+  }
+
+  .body h3 {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin: 36px 0 12px;
+    font-weight: 600;
+  }
+
+  strong { color: var(--header-text); font-weight: 600; }
+  em { font-style: italic; color: #b8b0a4; }
+
+  /* ── PULL QUOTE ── */
+  .pull {
+    border-left: 3px solid var(--accent);
+    margin: 36px 0;
+    padding: 4px 0 4px 24px;
+  }
+
+  .pull blockquote {
+    font-family: var(--display);
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--header-text);
+    line-height: 1.35;
+  }
+
+  .pull cite {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 10px;
+    font-style: normal;
+  }
+
+  /* ── HORIZONTAL RULE ── */
+  .hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+  }
+
+  /* ── VIDEO EMBED ── */
+  .video-block {
+    margin: 40px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+  }
+
+  .video-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .video-label::before {
+    content: '▶';
+    font-size: 8px;
+  }
+
+  .video-card {
+    display: block;
+    text-decoration: none;
+    background: #0a0a0d;
+    transition: background 0.15s;
+  }
+
+  .video-card:hover { background: #111116; }
+
+  .video-card-inner {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 22px 20px;
+  }
+
+  .video-play-btn {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #fff;
+    padding-left: 4px;
+    transition: transform 0.15s, background 0.15s;
+  }
+
+  .video-card:hover .video-play-btn {
+    transform: scale(1.08);
+    background: #e04020;
+  }
+
+  .video-card-text { flex: 1; }
+
+  .video-card-title {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--header-text);
+    margin-bottom: 5px;
+  }
+
+  .video-card-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+  }
+
+  .video-card-yt {
+    flex-shrink: 0;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 4px 8px;
+    opacity: 0.6;
+  }
+
+  .video-card:hover .video-card-yt { opacity: 1; }
+
+  .video-caption {
+    padding: 12px 16px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    line-height: 1.5;
+  }
+
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+
+  /* ── TRANSCRIPT WRAPPER ── */
+  .transcript-shell {
+    background: var(--tape);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--amber);
+    margin: 44px 0;
+    position: relative;
+  }
+
+  .transcript-header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .transcript-header .rec {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent);
+  }
+
+  .rec-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: blink 1.4s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+  }
+
+  .transcript-body {
+    padding: 0;
+  }
+
+  /* ── TRANSCRIPT LINE ── */
+  .tline {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 0;
+    border-bottom: 1px solid #1f1f28;
+    min-height: 0;
+  }
+
+  .tline:last-child { border-bottom: none; }
+
+  .tline-ts {
+    background: #14141b;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: #444452;
+    padding: 14px 10px;
+    text-align: right;
+    border-right: 1px solid #1f1f28;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    letter-spacing: 0.05em;
+    line-height: 1.6;
+    padding-top: 16px;
+  }
+
+  .tline-content {
+    padding: 14px 20px;
+  }
+
+  .speaker {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .speaker.facilitator { color: var(--amber); }
+  .speaker.participant { color: #6a8aaa; }
+  .speaker.legal { color: var(--accent); }
+  .speaker.voice { color: #7a6aaa; }
+  .speaker.anon { color: var(--muted); }
+
+  .tline-content p {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: #c0bab2;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .tline-content p .redact {
+    background: var(--accent);
+    color: var(--accent);
+    padding: 0 3px;
+    border-radius: 2px;
+    cursor: not-allowed;
+    user-select: none;
+    font-family: var(--mono);
+    font-size: 12px;
+  }
+
+  .tline-content p .redact:hover {
+    background: #8a2010;
+  }
+
+  .tline-content p em {
+    color: #888080;
+    font-style: italic;
+  }
+
+  /* ── STPA MODULE ── */
+  details.stpa-module {
+    margin: 6px 20px 14px;
+    background: var(--module-bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 2px;
+  }
+
+  details.stpa-module summary {
+    padding: 13px 18px;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  details.stpa-module summary::-webkit-details-marker { display: none; }
+
+  details.stpa-module summary::after {
+    content: '+ EXPAND';
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+  }
+
+  details.stpa-module[open] summary::after {
+    content: '− COLLAPSE';
+    color: var(--accent);
+  }
+
+  details.stpa-module summary:hover {
+    background: #18181f;
+  }
+
+  .module-inner {
+    padding: 0 18px 18px;
+    border-top: 1px solid var(--border);
+  }
+
+  .module-inner h4 {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 18px 0 10px;
+    font-weight: 600;
+  }
+
+  .module-inner p {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: #a8a29a;
+    line-height: 1.68;
+    margin-bottom: 12px;
+  }
+
+  .module-inner strong { color: #d4cfc8; }
+
+  /* ── TABLE ── */
+  .stpa-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-family: var(--mono);
+    font-size: 11px;
+  }
+
+  .stpa-table th {
+    background: #0a0a0d;
+    color: var(--muted);
+    text-align: left;
+    padding: 8px 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 9px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stpa-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #1a1a22;
+    color: #a8a4a0;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .stpa-table tr:last-child td { border-bottom: none; }
+
+  .stpa-table td:first-child {
+    color: var(--amber);
+    white-space: nowrap;
+    font-weight: 600;
+  }
+
+  .stpa-table.green-accent td:first-child { color: var(--green); }
+
+  .tag {
+    display: inline-block;
+    background: #1a0a08;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 1px 6px;
+    border-radius: 2px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .tag.amber {
+    background: #1a1208;
+    border-color: var(--amber);
+    color: var(--amber);
+  }
+
+  .tag.green {
+    background: #08160e;
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  /* ── FLOW DIAGRAM ── */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 16px 0;
+    flex-wrap: wrap;
+  }
+
+  .flow-box {
+    background: #0d0d12;
+    border: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 10px;
+    color: #a0a8b0;
+    padding: 7px 12px;
+    letter-spacing: 0.06em;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .flow-box.bad { border-color: var(--accent); color: var(--accent); background: #100808; }
+  .flow-box.good { border-color: var(--green); color: #4aaa6a; background: #081008; }
+
+  .flow-arrow {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--border);
+    padding: 0 4px;
+  }
+
+  /* ── CALLOUT BOX ── */
+  .callout {
+    background: #100808;
+    border: 1px solid var(--accent);
+    padding: 16px 18px;
+    margin: 14px 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: #c05040;
+    line-height: 1.6;
+  }
+
+  .callout strong { color: var(--accent); }
+
+  .callout-amber {
+    background: #100d08;
+    border-color: var(--amber);
+    color: #a07030;
+  }
+
+  .callout-amber strong { color: var(--amber); }
+
+  /* ── EDITORIAL NOTES ── */
+  .ed-note {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 18px 22px;
+    margin: 36px 0;
+    position: relative;
+  }
+
+  .ed-note::before {
+    content: 'EDITOR\'S NOTE';
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .ed-note p {
+    font-family: var(--serif);
+    font-size: 14px;
+    color: var(--muted);
+    font-style: italic;
+    margin: 0;
+    line-height: 1.65;
+  }
+
+  /* ── FOOTER ── */
+  .article-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    margin-top: 64px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .article-footer a { color: var(--amber); text-decoration: none; }
+
+  .issue-end {
+    text-align: center;
+    padding: 32px 0;
+    font-family: var(--display);
+    font-size: 16px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .issue-end strong {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-style: normal;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--border);
+    margin-top: 8px;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    float: right;
+    width: 240px;
+    margin: 0 0 24px 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--amber);
+    padding: 16px;
+  }
+
+  .sidebar h5 {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .sidebar p {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+
+  .clearfix::after { content: ''; display: table; clear: both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .sidebar { float: none; width: 100%; margin: 0 0 24px; }
+    .pub-name { font-size: 38px; }
+    h1.headline { font-size: 30px; }
+    .tline { grid-template-columns: 44px 1fr; }
+  }
+
+  /* ── CLASSIFIED STAMP ── */
+  .stamp {
+    display: inline-block;
+    border: 3px solid var(--accent);
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    transform: rotate(-4deg);
+    opacity: 0.7;
+    margin: 0 8px;
+    vertical-align: middle;
+    font-weight: 700;
+  }
+
+</style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Site">
+  <a href="../">Home</a><span class="sep">·</span><a href="./">Fiction</a>
+</nav>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-top">
+    <span>Vol. IV &nbsp;·&nbsp; Issue 032</span>
+    <span>Tues., 14 Jan 2028</span>
+    <span>Obtained &amp; Published Without Permission</span>
+  </div>
+  <div class="pub-name">Edge Cases</div>
+  <div class="pub-tagline">Covering the Gaps Between What Engineers Intended and What Actually Happened</div>
+</header>
+
+<div class="disclaimer">
+  <span class="disclaimer-label">DISCLAIMER</span>
+  Edge Cases is a work of satirical fiction. All organizations, incidents, training programs, personnel, transcripts, and "kinetic accountability events" depicted herein are entirely fictional and are not intended to represent any real company, person, system, or occurrence. Andruil Technologies LLC is a fictional entity. Any resemblance to actual autonomous weapons contractors, past or present, is coincidental and should not be inferred, litigated, or weaponized.   RoboCop (1987) is real. ED-209's design flaws are real. The rest is satire.
+</div>
+
+<div class="cover-stripe">
+  ⚠ &nbsp; SENSITIVE INTERNAL TRAINING MATERIALS — ANDRUIL TECHNOLOGIES LLC — FOR AUTHORIZED PERSONNEL —
+  &nbsp; YOU ARE EVIDENTLY NOT AUTHORIZED PERSONNEL &nbsp; ⚠
+</div>
+
+<!-- ARTICLE -->
+<main class="article">
+
+  <div class="kicker">Defense &nbsp;·&nbsp; Autonomous Systems &nbsp;·&nbsp; Safety Engineering &nbsp;·&nbsp; Extremely Good Use Of Corporate Training Budget</div>
+
+  <h1 class="headline">"Comply, or We Will<br><em>Assume</em> Compliance"</h1>
+
+  <p class="deck">How a 1987 Paul Verhoeven film about a malfunctioning robot police officer became the most important safety training artifact inside one of America's largest autonomous weapons contractors. We have the slides. We have the transcript. We have questions.</p>
+
+  <div class="byline">
+    <span>By the Edge Cases Desk</span>
+    <span class="byline-dot"></span>
+    <span>Obtained via a source who wishes to remain employed</span>
+    <span class="byline-dot"></span>
+    <span>14 January 2028</span>
+  </div>
+
+  <div class="body">
+
+    <p class="lead">In the spring of 2027, something happened at Andruil Technologies that the company would prefer not to discuss. We know this because they have declined to discuss it seventeen times across four different communications channels, which is, if nothing else, a consistent communications strategy.</p>
+
+    <p>What we can say, with some confidence, is that Andruil's legal department issued an internal document in April 2027 that ran to forty-three pages and contained the phrase "kinetic accountability event" nine times — which is defense-industry euphemism the way that "unscheduled rapid disassembly" is aerospace euphemism, meaning: something went very sideways, someone's ears are still ringing, and the lawyers got there before the journalists.</p>
+
+    <p>We can also say that by June 2027, Andruil's newly constituted <strong>Office of Systems Safety Assurance</strong> (OSSA, pronounced, apparently, with a straight face) had commissioned an internal training program. The program was called, and we want to be precise here: <strong>ATHENA</strong> — <em>Assured Threat-Hardware-Environment Normative Analysis</em>. The acronym required three attempts and a committee.</p>
+
+    <div class="sidebar">
+      <h5>About STPA</h5>
+      <p>Systems-Theoretic Process Analysis (STPA) is a hazard analysis method developed at MIT by Nancy Leveson. It treats safety as a control problem rather than a component-failure problem, asking not just "what breaks?" but "what systemic conditions allow unsafe actions to occur?"</p>
+      <p>It is genuinely excellent. Defense contractors reaching for it in 2028 is either a sign of maturation or of very expensive prior learning. Possibly both.</p>
+    </div>
+
+    <p class="clearfix">The method Andruil chose for ATHENA was <strong>STPA</strong> — Systems-Theoretic Process Analysis — a rigorous hazard analysis framework developed at MIT that has slowly, methodically, and somewhat belatedly made its way into autonomous weapons development. The reason STPA is particularly well-suited to autonomous lethal systems is also the reason it is uncomfortable to apply to them: it forces engineers to describe, explicitly, how a system can cause harm even when everything appears to be working correctly.</p>
+
+    <p>ATHENA's inaugural module was titled: <em>"Lessons from Fictional Autonomous Systems (That Are Funnier When They're Not Your Problem)."</em> The case study was ED-209.</p>
+
+    <p>Yes. <em>That</em> ED-209.</p>
+
+    <div class="pull">
+      <blockquote>"We chose a film-based case study to create psychological distance. The engineers are more willing to identify failures in a robot that can't sue us."</blockquote>
+      <cite>— ATHENA Programme Facilitator Dr. Yolanda Marsh, recorded introduction, Session 1</cite>
+    </div>
+
+    <p>What follows is an edited transcript of ATHENA Module 1, Session 1, dated 12 September 2027, along with the STPA reference report distributed to participants. Edge Cases obtained this material from a person who described themselves as "deeply conflicted" and who accepted payment in the form of us not publishing their name. We have honored that arrangement.</p>
+
+    <p>We note that the training materials are substantially better than we expected. This is either reassuring or alarming, depending on how much you think about what prompted them.</p>
+
+    <hr class="hr">
+
+    <h2>The Transcript</h2>
+
+    <p>The session was held in Andruil's Mesa, Arizona campus in a conference room designated "Theseus." Attendees included sixteen engineers from the autonomy, systems safety, and embedded firmware teams, plus one representative from Legal who arrived eight minutes late carrying a large coffee and a look that said <em>I am here specifically so no one says anything that creates discovery obligations.</em></p>
+
+  </div><!-- /body -->
+
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+  <!-- TRANSCRIPT BLOCK -->
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+
+  <div class="transcript-shell">
+
+    <div class="transcript-header">
+      <span>ATHENA MODULE 1 · SESSION 1 · TRANSCRIPT · 12 SEP 2027 · 09:04 LOCAL</span>
+      <span class="rec"><span class="rec-dot"></span>REC</span>
+    </div>
+
+    <div class="transcript-body">
+
+      <!-- 09:04 -->
+      <div class="tline">
+        <div class="tline-ts">09:04</div>
+        <div class="tline-content">
+          <div class="speaker facilitator">Dr. Marsh · Facilitator, OSSA</div>
+          <p>Good morning. I'm Yolanda Marsh, I run Systems Safety Assurance. Before we start, I want to clarify something that Legal asked me to clarify: this session is <span class="redact">REDACTED BY LEGAL</span> and does not constitute an admission of <span class="redact">REDACTED BY LEGAL</span> nor does it imply that any Andruil system has or will <span class="redact">REDACTED BY LEGAL</span>. Now that that's out of the way. Who here has seen RoboCop?</p>
+        </div>
+      </div>
+
+      <!-- 09:04 -->
+      <div class="tline">
+        <div class="tline-ts">09:04</div>
+        <div class="tline-content">
+          <div class="speaker anon">[Several hands]</div>
+          <p><em>[Undifferentiated sounds of affirmation from approximately two-thirds of room]</em></p>
+        </div>
+      </div>
+
+      <!-- 09:05 -->
+      <div class="tline">
+        <div class="tline-ts">09:05</div>
+        <div class="tline-content">
+          <div class="speaker participant">PARTICIPANT · "DECKER" (anonymized per ATHENA protocol)</div>
+          <p>Is this about the, uh... the thing that happened? Are we allowed to talk about the thing?</p>
+        </div>
+      </div>
+
+      <!-- 09:05 -->
+      <div class="tline">
+        <div class="tline-ts">09:05</div>
+        <div class="tline-content">
+          <div class="speaker legal">LEGAL REPRESENTATIVE (anonymized)</div>
+          <p>No.</p>
+        </div>
+      </div>
+
+      <!-- 09:05 -->
+      <div class="tline">
+        <div class="tline-ts">09:05</div>
+        <div class="tline-content">
+          <div class="speaker facilitator">Dr. Marsh</div>
+          <p>We are going to talk about a <em>hypothetical</em> autonomous weapons platform that existed in a <em>fictional</em> 1987 dystopia, which is now, it turns out, less fictional than it was. Please pull up the clip. Someone hit the lights.</p>
+        </div>
+      </div>
+
+      <!-- VIDEO -->
+      <div class="tline">
+        <div class="tline-ts">09:06</div>
+        <div class="tline-content">
+          <div class="speaker anon">[CLIP PLAYED — APPROX. 3 MIN]</div>
+          <div class="video-block">
+            <div class="video-label">TRAINING EXHIBIT A — RoboCop (1987) — ED-209 Boardroom Demonstration</div>
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/BJ7fHm1IyKM?start=10&end=80"
+                      title="ED-209 Boardroom Scene – RoboCop 1987"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                      loading="lazy">
+              </iframe>
+            </div>
+            <div class="video-caption">
+              ED-209 Boardroom Incident, RoboCop (1987) dir. Paul Verhoeven. OCP executive Dick Jones presents ED-209 to the board of directors. An authorized volunteer (Bob Morton) drops a firearm on instruction. ED-209 perceives continued threat and discharges approximately 50 rounds into said volunteer. The room does not applaud.<br><br>
+              ⚠ NOTE: If the embed above fails due to licensing, search YouTube for <em>"robocop ed209 boardroom scene"</em>. The relevant incident begins approximately 0:55 and concludes when the screaming stops.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 09:09 -->
+      <div class="tline">
+        <div class="tline-ts">09:09</div>
+        <div class="tline-content">
+          <div class="speaker anon">[LIGHTS UP]</div>
+          <p><em>[Pause of approximately four seconds]</em></p>
+        </div>
+      </div>
+
+      <!-- 09:09 -->
+      <div class="tline">
+        <div class="tline-ts">09:09</div>
+        <div class="tline-content">
+          <div class="speaker participant">PARTICIPANT · "KATO"</div>
+          <p>So the robot shoots the guy even after he drops the gun.</p>
+        </div>
+      </div>
+
+      <!-- 09:09 -->
+      <div class="tline">
+        <div class="tline-ts">09:09</div>
+        <div class="tline-content">
+          <div class="speaker facilitator">Dr. Marsh</div>
+          <p>Correct.</p>
+        </div>
+      </div>
+
+      <!-- 09:09 -->
+      <div class="tline">
+        <div class="tline-ts">09:09</div>
+        <div class="tline-content">
+          <div class="speaker participant">PARTICIPANT · "KATO"</div>
+          <p>And they had this thing at a board meeting.</p>
+        </div>
+      </div>
+
+      <!-- 09:09 -->
+      <div class="tline">
+        <div class="tline-ts">09:09</div>
+        <div class="tline-content">
+          <div class="speaker facilitator">Dr. Marsh</div>
+          <p>With live weapons. In a carpeted conference room. Yes.</p>
+        </div>
+      </div>
+
+      <!-- 09:09 -->
+      <div class="tline">
+        <div class="tline-ts">09:09</div>
+        <div class="tline-content">
+          <div class="speaker participant">PARTICIPANT · "DECKER"</div>
+          <p>So the first failure was the demo setup.</p>
+        </div>
+      </div>
+
+      <!-- 09:09 -->
+      <div class="tline">
+        <div class="tline-ts">09:09</div>
+        <div class="tline-content">
+          <div class="speaker facilitator">Dr. Marsh</div>
+          <p>You're already doing STPA. I'm so proud. Now — before we get into the formal framework — I want everyone to do something. I want you to look at that clip and resist the urge to say "the AI failed." Because if your takeaway is "the AI was buggy," you have not understood the problem. The AI may have been working <em>exactly as designed</em>. That is the horror. That is what STPA is for. Let's open Module One.</p>
+        </div>
+      </div>
+
+      <!-- MODULE 1 EMBED -->
+      <div class="tline">
+        <div class="tline-ts"></div>
+        <div class="tline-content">
+          <details class="stpa-module">
+            <summary>📋 &nbsp; STPA MODULE 1 — Step 1: Define Unacceptable Losses</summary>
+            <div class="module-inner">
+
+              <h4>Purpose</h4>
+              <p>Before you can analyze a system for safety, you must define what constitutes an <strong>unacceptable outcome</strong>. This is harder than it sounds, because organizations have a reliable tendency to define "unacceptable" as "the thing that already happened" rather than the broader universe of things that could.</p>
+
+              <div class="callout">
+                <strong>ATHENA Design Note:</strong> This step intentionally uses fictional ED-209 framing. Participants should feel free to identify losses without reference to any Andruil product, past, present, or prospective. Legal has asked that this disclaimer appear in the transcript.
+              </div>
+
+              <h4>Loss Table: ED-209</h4>
+              <table class="stpa-table">
+                <thead>
+                  <tr><th>Loss ID</th><th>Description</th><th>ED-209 Manifestation</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>L-1</td>
+                    <td>System kills or injures an authorized person</td>
+                    <td>Bob Morton. Minutes 0:55–1:53. See Exhibit A.</td>
+                  </tr>
+                  <tr>
+                    <td>L-2</td>
+                    <td>Lethal force used when non-lethal control would suffice</td>
+                    <td>A stern word would have also sufficed. Possibly a hand gesture.</td>
+                  </tr>
+                  <tr>
+                    <td>L-3</td>
+                    <td>System fails to stop lethal force after compliance is demonstrated</td>
+                    <td>The weapon was on the floor. ED-209 did not care.</td>
+                  </tr>
+                  <tr>
+                    <td>L-4</td>
+                    <td>System is manipulated or deceived into unsafe action</td>
+                    <td>Not demonstrated in this clip, but should terrify you anyway.</td>
+                  </tr>
+                  <tr>
+                    <td>L-5</td>
+                    <td>Human operators cannot intervene before irreversible harm</td>
+                    <td>The OCP executives stood there. Nobody had a button. Several had feelings.</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <h4>The Critical Insight</h4>
+              <p>Notice that <strong>L-3</strong> is not the same as L-1. The system initiating lethal force might be justifiable under some conditions. The system <em>continuing</em> lethal force after the threat condition ends is a distinct and separate failure. Most safety analyses stop at L-1. STPA insists on L-3. This distinction will matter more as these systems become more autonomous.</p>
+
+              <div class="callout-amber">
+                <strong>Workshop Prompt:</strong> For each loss, ask — is this loss recoverable? L-1 through L-3 for a high-caliber autonomous system are not recoverable. This shapes everything downstream. Design for irreversibility.
+              </div>
+
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- 09:22 -->
+      <div class="tline">
+        <div class="tline-ts">09:22</div>
+        <div class="tline-content">
+          <div class="speaker facilitator">Dr. Marsh</div>
+          <p>Now I want to push us to hazards. A hazard is not the same as a loss. A hazard is a <em>system state</em> that, under worst-case environmental conditions, leads to a loss. The difference matters. You can mitigate hazards. You cannot undo losses. Let's look at what hazards ED-209 embodies.</p>
+        </div>
+      </div>
+
+      <!-- MODULE 2 EMBED -->
+      <div class="tline">
+        <div class="tline-ts"></div>
+        <div class="tline-content">
+          <details class="stpa-module">
+            <summary>📋 &nbsp; STPA MODULE 2 — Step 2: Identify System Hazards</summary>
+            <div class="module-inner">
+
+              <h4>Hazard vs. Loss</h4>
+              <p>A <strong>loss</strong> is the outcome you cannot accept. A <strong>hazard</strong> is the system condition that enables that outcome. STPA's power lies in forcing you to enumerate hazards <em>before</em> something goes wrong, rather than reverse-engineering them from wreckage. Or, in this case, from carpet stains.</p>
+
+              <h4>ED-209 Hazard Table</h4>
+              <table class="stpa-table">
+                <thead>
+                  <tr><th>Hazard ID</th><th>Description</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>H-1</td><td>System classifies a non-threat or compliant human as an active threat</td></tr>
+                  <tr><td>H-2</td><td>System maintains a lethal engagement state after compliance</td></tr>
+                  <tr><td>H-3</td><td>System lacks reliable feedback about weapon status, surrender, or incapacitation</td></tr>
+                  <tr><td>H-4</td><td>Escalation logic is not interruptible by safety conditions</td></tr>
+                  <tr><td>H-5</td><td>Human override is unavailable, delayed, ignored, or ambiguous</td></tr>
+                  <tr><td>H-6</td><td>System treats sensor uncertainty as justification for escalation</td></tr>
+                  <tr><td>H-7</td><td>System operates with live weapons in a demo, test, or constrained environment</td></tr>
+                  <tr><td>H-8</td><td>Security compromise alters perception, command channel, policy, or actuation</td></tr>
+                </tbody>
+              </table>
+
+              <h4>The Murder-Machine Pattern: H-4</h4>
+              <p>Of all eight hazards, <strong>H-4</strong> is the one that transforms an overly aggressive robot into an autonomous execution system. Once the countdown logic is a deterministic state machine — <em>if timer reaches zero, fire</em> — the robot is no longer evaluating the world. It is executing a schedule. The schedule does not care that the gun is on the floor.</p>
+
+              <div class="callout">
+                <strong>Design principle derived from H-4:</strong> Any autonomous lethal system whose engagement logic cannot be interrupted by <em>real-time safety evidence</em> is not a safety-constrained system. It is a countdown clock with a gun attached.
+              </div>
+
+              <h4>Cascading Hazard: H-7 Enabling Everything Else</h4>
+              <p>Notice that H-7 — operating with live weapons in a demo environment — is not itself lethal. It is an enabler. It raises the consequences of every other hazard from "embarrassing" to "body in the boardroom." Hazards interact. STPA requires you to trace those interactions, not just enumerate the individual hazards in isolation.</p>
+
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- 09:41 -->
+      <div class="tline">
+        <div class="tline-ts">09:41</div>
+        <div class="tline-content">
+          <div class="speaker participant">PARTICIPANT · "MIRA"</div>
+          <p>Okay but — and I want to flag this — H-4 is literally our... <em>[pause]</em>... is literally a known pattern in countdown-to-engage architectures. Right? Are we allowed to say that?</p>
+        </div>
+      </div>
+
+      <!-- 09:41 -->
+      <div class="tline">
+        <div class="tline-ts">09:41</div>
+        <div class="tline-content">
+          <div class="speaker legal">LEGAL</div>
+          <p>In the context of a <em>fictional</em> 1987 robot, yes.</p>
+        </div>
+      </div>
+
+      <!-- 09:41 -->
+      <div class="tline">
+        <div class="tline-ts">09:41</div>
+        <div class="tline-content">
+          <div class="speaker participant">PARTICIPANT · "MIRA"</div>
+          <p>In the context of a fictional 1987 robot, H-4 is a known pattern.</p>
+        </div>
+      </div>
+
+      <!-- 09:41 -->
+      <div class="tline">
+        <div class="tline-ts">09:41</div>
+        <div class="tline-content">
+          <div class="speaker facilitator">Dr. Marsh</div>
+          <p>Good. Hold that. Let's look at the control structure, because this is where STPA starts to feel less like a checklist and more like X-ray vision for your own codebase.</p>
+        </div>
+      </div>
+
+      <!-- MODULE 3 EMBED -->
+      <div class="tline">
+        <div class="tline-ts"></div>
+        <div class="tline-content">
+          <details class="stpa-module">
+            <summary>📋 &nbsp; STPA MODULE 3 — Step 3: High-Level Control Structure &amp; Security Overlays</summary>
+            <div class="module-inner">
+
+              <h4>What Is a Control Structure?</h4>
+              <p>STPA models systems as control loops: <strong>controllers</strong> issue commands to <strong>controlled processes</strong>, and receive feedback that lets them verify the commands had the intended effect. When that loop breaks — when feedback is absent, corrupted, delayed, or ignored — unsafe actions can occur even when nothing has "failed" in the traditional sense.</p>
+
+              <h4>ED-209 Control Loop (Simplified)</h4>
+
+              <div class="flow">
+                <div class="flow-box">Human Operator<br><small>Command / Override</small></div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box">Policy Engine<br><small>Rules of Engagement</small></div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box">ED-209 Controller<br><small>Perception + Decision</small></div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box bad">Actuators<br><small>Lethal Output</small></div>
+              </div>
+
+              <div class="flow" style="margin-top: 8px;">
+                <div class="flow-box">Sensors<br><small>Vision / Threat Detect</small></div>
+                <div class="flow-arrow">↑</div>
+                <div class="flow-box">World State<br><small>Human + Weapon</small></div>
+                <div class="flow-arrow">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                <div class="flow-box bad" style="opacity:0.4">↑ Feedback<br><small>Never updated</small></div>
+              </div>
+
+              <h4>Security Attack Surface on Each Control Path</h4>
+              <table class="stpa-table">
+                <thead>
+                  <tr><th>Path</th><th>Security Concern</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Operator → System</td><td>Unauthorized commands; blocked abort; replayed mode change</td></tr>
+                  <tr><td>Policy → System</td><td>Tampered rules of engagement; threshold drift; silent model swap</td></tr>
+                  <tr><td>Sensors → System</td><td>Spoofed weapon detection; adversarial object placement; occlusion attacks</td></tr>
+                  <tr><td>System → Actuators</td><td>Command injection; safety interlock bypass; timing manipulation</td></tr>
+                  <tr><td>Human → Sensors</td><td>Compliance action not correctly perceived or classified</td></tr>
+                  <tr><td>System → Operator</td><td>False status; hidden fault state; delayed or suppressed telemetry</td></tr>
+                </tbody>
+              </table>
+
+              <h4>Why Security and Safety Must Be Analyzed Together</h4>
+              <p>Traditional threat modeling asks: <em>"Can an attacker compromise this system?"</em> STPA-Sec asks the more useful question: <em>"How can this system enter an unsafe control state, whether the cause is an attacker, a bad sensor, a race condition, or an engineer who was very confident on a Tuesday?"</em></p>
+
+              <p>The distinction matters because some of the most dangerous failure modes are not adversarial. They are <strong>emergent</strong>. The control structure breaks in ways the designers never enumerated because the designers assumed the feedback loop was working. STPA forces you to assume it is not.</p>
+
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- 10:03 -->
+      <div class="tline">
+        <div class="tline-ts">10:03</div>
+        <div class="tline-content">
+          <div class="speaker participant">PARTICIPANT · "REED"</div>
+          <p>I have a question about the control structure. In the clip, when ED-209 is counting down — like "you have ten seconds to comply" — is that actually giving the human adequate time to comply, or is the countdown itself part of the hazard?</p>
+        </div>
+      </div>
+
+      <!-- 10:03 -->
+      <div class="tline">
+        <div class="tline-ts">10:03</div>
+        <div class="tline-content">
+          <div class="speaker facilitator">Dr. Marsh</div>
+          <p>Outstanding. That's the Unsafe Control Action question. Let's go there.</p>
+        </div>
+      </div>
+
+      <!-- MODULE 4 EMBED -->
+      <div class="tline">
+        <div class="tline-ts"></div>
+        <div class="tline-content">
+          <details class="stpa-module">
+            <summary>📋 &nbsp; STPA MODULE 4 — Step 4: Unsafe Control Actions (UCAs)</summary>
+            <div class="module-inner">
+
+              <h4>The Four UCA Questions</h4>
+              <p>For every control action a system can take, STPA asks four questions. Together, they cover the full space of how a nominally correct action can become unsafe.</p>
+
+              <table class="stpa-table">
+                <thead>
+                  <tr><th>#</th><th>Question</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>UCA-Q1</td><td>Was the action provided when it should NOT have been?</td></tr>
+                  <tr><td>UCA-Q2</td><td>Was the action NOT provided when it should have been?</td></tr>
+                  <tr><td>UCA-Q3</td><td>Was the action provided too early, too late, or in the wrong order?</td></tr>
+                  <tr><td>UCA-Q4</td><td>Was the action stopped too soon, or continued too long?</td></tr>
+                </tbody>
+              </table>
+
+              <h4>ED-209 Unsafe Control Action Table</h4>
+              <table class="stpa-table">
+                <thead>
+                  <tr><th>Control Action</th><th>Unsafe Case (with UCA type)</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Issue warning</td><td>Warning is too short, unclear, or physically impossible to comply with [Q3]</td></tr>
+                  <tr><td>Start countdown</td><td>Countdown begins before confirming subject understood the command [Q3]</td></tr>
+                  <tr><td>Classify as threat</td><td>Target classified as threat <em>after</em> weapon is dropped — stale classification [Q1, Q4]</td></tr>
+                  <tr><td>Arm weapons</td><td>Weapons arm during demo mode or inside minimum safe radius [Q1]</td></tr>
+                  <tr><td>Fire weapon</td><td>System fires after compliance, or under sensor uncertainty [Q1]</td></tr>
+                  <tr><td>Cease fire</td><td>Cease fire not issued immediately upon compliance detection [Q2]</td></tr>
+                  <tr><td>Accept override</td><td>Override is ignored, delayed, unauthenticated, or channel unavailable [Q2]</td></tr>
+                  <tr><td>Enter demo mode</td><td>Demo mode permits live ammunition and actuation [Q1 — this is H-7 in UCA form]</td></tr>
+                </tbody>
+              </table>
+
+              <h4>The Primary UCA</h4>
+
+              <div class="callout">
+                <strong>UCA-1:</strong> The system provides the "fire" control action when the human has dropped the weapon, is no longer an active threat, or when the system has insufficient confidence that lethal force is necessary. This is the action that kills Bob Morton. It is the action that a correct implementation of STPA would have made impossible by design.
+              </div>
+
+              <h4>The Security Version</h4>
+              <div class="callout">
+                <strong>UCA-Sec-1:</strong> The system provides or continues lethal actuation because an adversary has manipulated sensor input, policy state, countdown logic, operator override, or actuator command paths. Note: UCA-Sec-1 can coexist with UCA-1. The system can be simultaneously "working correctly" and lethally wrong.
+              </div>
+
+              <h4>On the Countdown Question ("Reed's Question")</h4>
+              <p>The countdown — "you have ten seconds to comply" — appears to give the human agency. Functionally, it gives the human ten seconds to become compliant according to the robot's <em>current sensor model</em>. If that sensor model does not update when the human drops the weapon, the countdown is not providing time to comply. It is providing a theatrical countdown to an already-decided outcome. This is UCA-Q3 and UCA-Q4 simultaneously. The countdown is too short to allow model update, and the fire action is continued too long past the compliance event.</p>
+
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- 10:24 -->
+      <div class="tline">
+        <div class="tline-ts">10:24</div>
+        <div class="tline-content">
+          <div class="speaker participant">PARTICIPANT · "KATO"</div>
+          <p>So when you said "resist the urge to say the AI failed" — I get it now. The AI didn't fail. The AI did what you'd expect a system with a frozen threat state and non-interruptible countdown logic to do. The failure was the design specification.</p>
+        </div>
+      </div>
+
+      <!-- 10:24 -->
+      <div class="tline">
+        <div class="tline-ts">10:24</div>
+        <div class="tline-content">
+          <div class="speaker facilitator">Dr. Marsh</div>
+          <p>That is, in four sentences, what takes most organizations eighteen months and a congressional inquiry to understand. Yes. Now let's talk about <em>why</em> the specification was wrong. Causal scenarios.</p>
+        </div>
+      </div>
+
+      <!-- MODULE 5 EMBED -->
+      <div class="tline">
+        <div class="tline-ts"></div>
+        <div class="tline-content">
+          <details class="stpa-module">
+            <summary>📋 &nbsp; STPA MODULE 5 — Step 5: Causal Scenarios</summary>
+            <div class="module-inner">
+
+              <h4>From "What Can Go Wrong" to "Why It Goes Wrong"</h4>
+              <p>Identifying UCAs tells you <em>what</em> the unsafe actions are. Causal scenarios tell you <em>why</em> those actions can occur — tracing back through the control structure to find the structural conditions that make them possible. This is where STPA delivers its most actionable output: not a list of things that went wrong, but a map of architectural conditions that <em>permit</em> things to go wrong.</p>
+
+              <h4>Scenario A: Compliance Feedback Failure</h4>
+              <p>ED-209 commands the human to drop the weapon. The human drops it. ED-209's perception model does not update the threat state — either because the dropped weapon is not distinguished from a held weapon, because the model has latency, or because the state machine ignores mid-countdown inputs.</p>
+              <div class="callout">
+                <strong>Control Flaw:</strong> Threat state persists despite changed environmental state.<br>
+                <strong>Required Constraint:</strong> The system must continuously re-evaluate threat state during escalation and must immediately exit lethal mode when compliance is observed <em>or</em> when confidence in continued threat drops below threshold.
+              </div>
+
+              <h4>Scenario B: Countdown Logic Stronger Than Reality</h4>
+              <p>The countdown is designed as: <em>If timer = 0, fire.</em> This is fast to implement and simple to test. It is also the design of a murder machine. A safe equivalent requires:</p>
+              <div class="callout-amber">
+                <strong>If</strong> timer = 0 <strong>AND</strong> active threat still exists <strong>AND</strong> no compliance observed <strong>AND</strong> no operator override <strong>AND</strong> environment is clear of non-combatants <strong>AND</strong> confidence threshold is met <strong>→</strong> authorize escalation to next stage.<br><br>
+                Countdown completion is <strong>never</strong>, by itself, sufficient authorization for lethal force.
+              </div>
+
+              <h4>Scenario C: Demo Mode Is Not Actually Safe</h4>
+              <p>The boardroom test is conducted with a live, operational autonomous weapons platform in a room full of executives. This is not a software problem. This is a people problem, an organizational problem, and a "why does this thing have bullets" problem, in that order.</p>
+              <div class="callout">
+                <strong>Required Constraint:</strong> Demonstration, training, maintenance, and diagnostic modes must <em>physically inhibit</em> lethal actuation. Not via software flag. Via hardware interlock, firing-pin block, or physical absence of live ordnance. A software demo mode that disables a software-controlled weapon is not a safety mode. It is a prayer.
+              </div>
+
+              <h4>Scenario D: Human Override Has No Authority</h4>
+              <p>In the boardroom scene, the humans present have no effective mechanism to stop ED-209. Their "control" is nominal — they own the system but cannot interrupt it. This is not a technical edge case. This is a routine outcome of autonomous systems designed to be operationally fast and human-override-slow.</p>
+              <div class="callout-amber">
+                <strong>Required Constraint:</strong> An independent safety controller must have immediate, out-of-band authority to inhibit weapons and cut actuation power. Not "ask the AI to stop." Not "send an override command through the same network stack that may be compromised." Cut the power physically. The safety interlock must be independent of the thing it is overriding.
+              </div>
+
+              <h4>Scenario E: Security Compromise of Perception or Command</h4>
+              <p>An attacker could: spoof weapon presence after a drop, replay a prior "engage" command, jam operator override channels, alter policy thresholds to lower the confidence threshold for lethal action, or inject false telemetry indicating continued armed threat. Each of these maps to a hazard identified in Step 2. STPA-Sec makes this explicit by requiring you to ask, for every control path: what happens if this path is adversarially manipulated?</p>
+              <div class="callout">
+                <strong>Required Constraint:</strong> The system must treat loss of sensor integrity, command integrity, or operator override integrity as a transition to <strong>safe state</strong> — not as permission to continue the last known action. Fail-safe means fail-safe. It does not mean fail-to-last-instruction.
+              </div>
+
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- 10:52 -->
+      <div class="tline">
+        <div class="tline-ts">10:52</div>
+        <div class="tline-content">
+          <div class="speaker participant">PARTICIPANT · "MIRA"</div>
+          <p>On Scenario E — the fail-to-last-instruction thing. That's not just a robot-with-a-gun problem. That's an architectural default in half the embedded systems I've ever worked on. If you lose comms, you hold last state. Holding last state when last state is "engage active threat" is...</p>
+        </div>
+      </div>
+
+      <!-- 10:52 -->
+      <div class="tline">
+        <div class="tline-ts">10:52</div>
+        <div class="tline-content">
+          <div class="speaker facilitator">Dr. Marsh</div>
+          <p>Finishing your sentence for you: it is a situation where communications loss causes the system to behave as though the engagement condition persists indefinitely. Yes. Hold that for the constraints module. You're going to enjoy it.</p>
+        </div>
+      </div>
+
+      <!-- 10:53 break -->
+      <div class="tline">
+        <div class="tline-ts">10:53</div>
+        <div class="tline-content">
+          <div class="speaker anon">[BREAK — 15 MIN]</div>
+          <p><em>[Recording resumes 11:11. Ambient sounds suggest someone found the good coffee. Legal representative has acquired a second cup.]</em></p>
+        </div>
+      </div>
+
+      <!-- MODULE 6 -->
+      <div class="tline">
+        <div class="tline-ts"></div>
+        <div class="tline-content">
+          <details class="stpa-module">
+            <summary>📋 &nbsp; STPA MODULE 6 — Step 6: Safety &amp; Security Constraints</summary>
+            <div class="module-inner">
+
+              <h4>From Analysis to Requirements</h4>
+              <p>Causal scenarios produce constraints. Constraints are the engineering-specific, testable, architectural requirements that prevent unsafe control actions from occurring. They are the STPA deliverable most directly useful to a design team. They are also the most uncomfortable, because a genuine STPA constraint often requires you to remove capability or add complexity to a system that was designed to be fast.</p>
+
+              <h4>ED-209 Derived Security and Safety Constraints</h4>
+              <table class="stpa-table green-accent">
+                <thead>
+                  <tr><th>Constraint</th><th>Meaning</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>SC-1</td><td>Lethal actuation must require multiple independent confirmations, not a single classifier output</td></tr>
+                  <tr><td>SC-2</td><td>Sensor disagreement, lost visibility, or low confidence must force de-escalation — not hold-last-state</td></tr>
+                  <tr><td>SC-3</td><td>Compliance detection must immediately interrupt countdown and reset engagement state</td></tr>
+                  <tr><td>SC-4</td><td>Demo and training modes must physically disable live fire — hardware, not software</td></tr>
+                  <tr><td>SC-5</td><td>Human override must be independent of the autonomy stack's main controller</td></tr>
+                  <tr><td>SC-6</td><td>Policy files, rules of engagement, and model versions must be signed and measured at boot</td></tr>
+                  <tr><td>SC-7</td><td>Operator commands must be authenticated, authorized, logged, and replay-resistant</td></tr>
+                  <tr><td>SC-8</td><td>Actuator commands must pass through a safety interlock physically separate from the autonomy stack</td></tr>
+                  <tr><td>SC-9</td><td>The system must not escalate under sensor uncertainty — uncertainty is a de-escalation trigger</td></tr>
+                  <tr><td>SC-10</td><td>Every lethal decision must produce auditable causal telemetry: sensor state, confidence, policy rule, operator state, override state, and interlock state — captured before actuation</td></tr>
+                </tbody>
+              </table>
+
+              <h4>The Architecture These Constraints Imply</h4>
+              <p>SC-5 and SC-8 together imply a <strong>two-stack architecture</strong>: an autonomy stack that perceives, classifies, and recommends, and a physically independent safety stack that validates, authorizes, and can veto. This is not optional redundancy. It is the structural consequence of accepting that the autonomy stack cannot be trusted to police itself.</p>
+
+              <p>SC-10 implies that auditability is not a post-hoc investigation tool. It is a pre-condition for legitimate lethal action. If the system cannot produce a reconstructable decision package <em>before</em> it fires, it does not have sufficient confidence that it should fire.</p>
+
+              <div class="callout-amber">
+                <strong>The Harsh Version:</strong> An autonomous lethal system should not be trusted to decide when it is allowed to kill. It can classify, warn, track, and recommend. Lethal authorization should pass through independent safety constraints that the autonomy stack cannot override, compromise, or route around. If your system cannot satisfy this in the design, it should not have live ordnance.
+              </div>
+
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- MODULE 7 -->
+      <div class="tline">
+        <div class="tline-ts"></div>
+        <div class="tline-content">
+          <details class="stpa-module">
+            <summary>📋 &nbsp; STPA MODULE 7 — The Broken Loop vs. The Safe Loop</summary>
+            <div class="module-inner">
+
+              <h4>ED-209's Actual Control Loop</h4>
+
+              <div class="flow">
+                <div class="flow-box bad">Detect weapon</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box bad">Issue warning</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box bad">Start countdown</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box bad">Fail to update<br>compliance state</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box bad">Fire</div>
+              </div>
+
+              <p style="margin-top:12px;">The loop contains no re-evaluation. Threat state, once set, persists through the countdown to outcome. The world is sampled once and then ignored.</p>
+
+              <h4>A Safer Control Loop</h4>
+
+              <div class="flow" style="flex-wrap: wrap; gap: 4px;">
+                <div class="flow-box good">Detect possible<br>weapon</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box good">Classify with<br>confidence score</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box good">Issue clear<br>warning</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box good">Monitor compliance<br>continuously</div>
+              </div>
+              <div class="flow" style="flex-wrap: wrap; gap: 4px; margin-top: 4px;">
+                <div class="flow-box good">If weapon dropped:<br>de-escalate</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box good">If uncertainty:<br>hold fire</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box good">If override:<br>inhibit</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box good">If ALL conditions<br>confirmed: escalate</div>
+              </div>
+
+              <h4>The Central Design Principle</h4>
+              <div class="callout-amber">
+                <strong>The system must be interrupt-driven by safety evidence, not countdown-driven by initial threat classification.</strong><br><br>
+                Every moment of the engagement loop is an opportunity to find a reason <em>not</em> to fire. The default posture is restraint. Lethal action requires continuous positive justification, not the mere absence of a reason to stop.
+              </div>
+
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- 11:47 -->
+      <div class="tline">
+        <div class="tline-ts">11:47</div>
+        <div class="tline-content">
+          <div class="speaker participant">PARTICIPANT · "REED"</div>
+          <p>I want to go back to something. The thing that really gets me is Scenario C. The demo mode. Whoever brought a live, armed, autonomous weapons platform into a carpeted conference room for a board presentation — that person had a process. They had sign-offs. They probably had a PowerPoint. How does STPA help us catch that upstream?</p>
+        </div>
+      </div>
+
+      <!-- 11:47 -->
+      <div class="tline">
+        <div class="tline-ts">11:47</div>
+        <div class="tline-content">
+          <div class="speaker facilitator">Dr. Marsh</div>
+          <p>This is the best question of the session. The answer is: STPA by itself does not catch organizational failures. It catches control structure failures. But. If someone had done an STPA analysis of the demonstration <em>as a system</em> — with the boardroom as the environment, the executives as people inside the hazard zone, and the demo mode as a control action — H-7 would have appeared on the hazard list in Step 2. And someone would have had to sign off on a document that said "H-7: System operates with live weapons in a demo or constrained environment." And then someone would have had to write a constraint that either mitigated or accepted that hazard. And if they accepted it, their name is on the paper. STPA does not prevent bad decisions. It makes bad decisions traceable and attributable.</p>
+        </div>
+      </div>
+
+      <!-- 11:48 -->
+      <div class="tline">
+        <div class="tline-ts">11:48</div>
+        <div class="tline-content">
+          <div class="speaker participant">PARTICIPANT · "DECKER"</div>
+          <p>So it's partly a liability tool.</p>
+        </div>
+      </div>
+
+      <!-- 11:48 -->
+      <div class="tline">
+        <div class="tline-ts">11:48</div>
+        <div class="tline-content">
+          <div class="speaker facilitator">Dr. Marsh</div>
+          <p>It's a <em>responsibility</em> tool. Which, yes, has liability implications. Which is why Legal is here.</p>
+        </div>
+      </div>
+
+      <!-- 11:48 -->
+      <div class="tline">
+        <div class="tline-ts">11:48</div>
+        <div class="tline-content">
+          <div class="speaker legal">LEGAL</div>
+          <p>I'm not here. <em>[drinks coffee]</em></p>
+        </div>
+      </div>
+
+      <!-- 11:48 -->
+      <div class="tline">
+        <div class="tline-ts">11:48</div>
+        <div class="tline-content">
+          <div class="speaker anon">[LAUGHTER]</div>
+          <p><em>[Twelve seconds. Genuine laughter. Possibly the most hopeful moment in the transcript.]</em></p>
+        </div>
+      </div>
+
+      <!-- 11:50 -->
+      <div class="tline">
+        <div class="tline-ts">11:50</div>
+        <div class="tline-content">
+          <div class="speaker facilitator">Dr. Marsh</div>
+          <p>Alright. Let me close with the central STPA lesson, because I want this to be the thing you remember when you go back to your desks.</p>
+        </div>
+      </div>
+
+      <!-- MODULE 8 — closing -->
+      <div class="tline">
+        <div class="tline-ts"></div>
+        <div class="tline-content">
+          <details class="stpa-module">
+            <summary>📋 &nbsp; STPA MODULE 8 — The Central Lesson &amp; What We're Actually Asking You to Do</summary>
+            <div class="module-inner">
+
+              <h4>The Wrong Question</h4>
+              <p>A conventional safety analysis — and most cybersecurity threat modeling — asks:</p>
+              <div class="callout">
+                <strong>"Can an attacker compromise this system? What components can fail?"</strong>
+              </div>
+
+              <h4>The STPA Question</h4>
+              <div class="callout-amber">
+                <strong>"How can this system enter an unsafe control state even when every component is functioning exactly as designed?"</strong>
+              </div>
+
+              <p>This is the boardroom failure. ED-209 does not need to be hacked to kill Bob Morton. Every sensor read correctly. Every actuator fired on command. Every line of code executed as written. The system was working. The design was wrong.</p>
+
+              <h4>The Wrong Mental Model</h4>
+              <p>Initial weapon detection <strong>+</strong> expired countdown <strong>=</strong> justified lethal force</p>
+
+              <h4>The Required Mental Model</h4>
+              <p>Lethal force requires: <strong>current, verified, interruptible, independently confirmed, policy-authorized, human-overridable evidence of imminent threat.</strong></p>
+
+              <p>Every adjective in that sentence is load-bearing. Remove "current" and you get ED-209. Remove "interruptible" and you get a system that cannot be stopped. Remove "independently confirmed" and you get a system one sensor spoof away from an atrocity. Remove "human-overridable" and you have outsourced a lethal decision to a machine, irrevocably, at the moment it matters most.</p>
+
+              <h4>What ATHENA Is Asking You to Do</h4>
+              <p>When you return to your work, we are asking you to apply STPA thinking to your own systems — not as a compliance exercise, not as a post-incident reconstruction, but as a design-time interrogation of your control structures. Ask, for every control action your system can take:</p>
+
+              <table class="stpa-table">
+                <thead>
+                  <tr><th>Question</th><th>Ask This About Every Control Action</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>UCA-Q1</td><td>Under what conditions could this action be taken when it should not be?</td></tr>
+                  <tr><td>UCA-Q2</td><td>Under what conditions might this action fail to occur when it should?</td></tr>
+                  <tr><td>UCA-Q3</td><td>Could this action occur at the wrong time or in the wrong sequence?</td></tr>
+                  <tr><td>UCA-Q4</td><td>Could this action be stopped too early, or continued longer than warranted?</td></tr>
+                </tbody>
+              </table>
+
+              <p>Then trace the causal scenarios. Then write the constraints. Then validate that the constraints are enforced — in code, in hardware, in process, in organizational sign-off. And if you find that a constraint cannot be met, that is not an inconvenient finding to suppress. That is the most important finding on the page.</p>
+
+              <div class="callout-amber">
+                <strong>The test of a good STPA analysis is not whether it reassures you. It is whether it surfaces the things that should make you uncomfortable — while there is still time to do something about them.</strong>
+              </div>
+
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <!-- Closing exchange -->
+      <div class="tline">
+        <div class="tline-ts">12:04</div>
+        <div class="tline-content">
+          <div class="speaker participant">PARTICIPANT · "MIRA"</div>
+          <p>Is the next module going to be about a real system? Or still fictional?</p>
+        </div>
+      </div>
+
+      <div class="tline">
+        <div class="tline-ts">12:04</div>
+        <div class="tline-content">
+          <div class="speaker facilitator">Dr. Marsh</div>
+          <p>Module 2 uses the Therac-25 radiation overdose incidents from the 1980s. It is also fictional in the sense that it is historical, and everything in it happened to other people, and we should learn from it with gratitude that it was not us, and with humility about how quickly "not us" can become "us." See you Thursday.</p>
+        </div>
+      </div>
+
+      <div class="tline">
+        <div class="tline-ts">12:04</div>
+        <div class="tline-content">
+          <div class="speaker anon">[END OF RECORDING]</div>
+          <p><em>[Recording concludes. Background noise suggests chairs being pushed back. Someone asks where the bathroom is. Legal representative is already gone.]</em></p>
+        </div>
+      </div>
+
+    </div><!-- /transcript-body -->
+  </div><!-- /transcript-shell -->
+
+  <div class="body">
+
+    <hr class="hr">
+
+    <h2>What to Make of This</h2>
+
+    <p>Edge Cases does not often editorialize. We collect, we report, we occasionally laugh until something hurts. But we want to say something clearly about what you have just read.</p>
+
+    <p>The ATHENA materials are, by the standards of internal corporate training curricula, <em>unusually good</em>. Dr. Marsh is doing real pedagogy. The STPA framework is genuinely rigorous. The insight at the center of Module 8 — that a system can satisfy every formal requirement and still be lethal by design — is the kind of thing that takes most organizations a very long time to understand, and some organizations never understand at all, because the occasion for understanding it tends to be expensive.</p>
+
+    <p>We mention this not to be complimentary to Andruil. We mention it because the gap between "having the right training materials" and "having systems that embody what those materials teach" is where most of the interesting disasters live. STPA does not build safe systems. Engineers build safe systems. STPA is a flashlight they can use if they choose to look in the dark corners. The question of whether Andruil's engineers, under schedule pressure and competitive pressure and the specific organizational pressure that comes from being a defense contractor in 2028, will actually use the flashlight — that question remains open.</p>
+
+    <p>We also note, without further comment, that the training program was launched approximately six months after the Q3 2027 Kinetic Accountability Event. Not before. After. This is consistent with how the industry learns, historically. It is not how STPA recommends learning. STPA, as Dr. Marsh correctly noted, is a <em>design-time</em> interrogation of control structures.</p>
+
+    <p>Bob Morton, in the 1987 film, also happened after.</p>
+
+    <div class="ed-note">
+      <p>Edge Cases redacted five portions of the training transcript at the specific request of our source, who indicated that the unredacted passages would make it possible to identify the specific systems under discussion. We have honored that request. We assume Legal has already read this far and would like us to know that the redacted portions relate to purely fictional scenarios. Noted.</p>
+    </div>
+
+    <div class="pull">
+      <blockquote>"The test of a good STPA analysis is not whether it reassures you. It is whether it surfaces the things that should make you uncomfortable — while there is still time."</blockquote>
+      <cite>— Dr. Yolanda Marsh, ATHENA Module 1, Andruil Technologies, September 2027</cite>
+    </div>
+
+    <p>We will be watching the Therac-25 module with interest. We imagine Legal will be there again. We imagine the coffee will still be good.</p>
+
+  </div>
+
+  <div class="article-footer">
+    <p><a href="./">← More fiction</a></p>
+    <br>
+    <p><strong>Edge Cases</strong> is an independent technical publication covering the gap between what systems were designed to do and what they actually do. We accept no advertising from companies whose products have caused kinetic accountability events. We accept no advertising.</p>
+    <br>
+    <p>Issue 032. All quoted material is either from obtained documents or publicly available sources. Andruil Technologies declined to comment. RoboCop (1987) is distributed by Orion Pictures. Paul Verhoeven correctly predicted everything. Nancy Leveson's STPA Primer is available at <a href="#">MIT.edu</a> and remains more useful than anything in this article.</p>
+    <br>
+    <p>If you work at a company whose autonomous systems could benefit from STPA analysis and have not yet applied it: please do so before your organization finds itself coining a new euphemism for a bad day.</p>
+    <br>
+    <p>STPA Primer (Leveson &amp; Thomas): <em>STPA Handbook</em>, MIT, 2018. Required reading. Unredacted.</p>
+  </div>
+
+  <div class="issue-end">
+    That's all for Issue 032.
+    <strong>edge-cases.pub &nbsp;·&nbsp; not affiliated with anyone who should be affiliated with this</strong>
+  </div>
+
+</main>
+
+</body>
+</html>
