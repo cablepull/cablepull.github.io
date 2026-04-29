@@ -128,24 +128,44 @@
     margin: 0 0.5rem;
   }
 
-  /* ── COVER STRIPE ── */
+  /* ── DISCLAIMER (readable) ── */
   .disclaimer {
-    background: #0a0a0a;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
-    padding: 9px 24px;
-    text-align: center;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    line-height: 1.6;
-    max-width: 100%;
+    padding: 1.35rem clamp(1.25rem, 4vw, 2rem) 1.5rem;
+    max-width: 860px;
+    margin: 0 auto;
+    box-sizing: border-box;
   }
 
   .disclaimer-label {
-    color: var(--amber);
+    font-family: var(--mono);
+    font-size: 0.68rem;
     font-weight: 600;
-    letter-spacing: 0.2em;
-    margin-right: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin: 0 0 0.85rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .disclaimer-body {
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 1.02rem;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--text);
+    text-align: left;
+    max-width: 65ch;
+  }
+
+  @media (max-width: 600px) {
+    .disclaimer-body {
+      font-size: 0.98rem;
+    }
   }
 
   .cover-stripe {
@@ -865,8 +885,8 @@
 </header>
 
 <div class="disclaimer">
-  <span class="disclaimer-label">DISCLAIMER</span>
-  Edge Cases is a work of satirical fiction. All organizations, incidents, training programs, personnel, transcripts, and "kinetic accountability events" depicted herein are entirely fictional and are not intended to represent any real company, person, system, or occurrence. Andruil Technologies LLC is a fictional entity. Any resemblance to actual autonomous weapons contractors, past or present, is coincidental and should not be inferred, litigated, or weaponized.   RoboCop (1987) is real. ED-209's design flaws are real. The rest is satire.
+  <div class="disclaimer-label">Disclaimer</div>
+  <p class="disclaimer-body">Edge Cases is a work of satirical fiction. All organizations, incidents, training programs, personnel, transcripts, and &ldquo;kinetic accountability events&rdquo; depicted herein are entirely fictional and are not intended to represent any real company, person, system, or occurrence. Andruil Technologies LLC is a fictional entity. Any resemblance to actual autonomous weapons contractors, past or present, is coincidental and should not be inferred, litigated, or weaponized. <em>RoboCop</em> (1987) is real. ED-209&rsquo;s design flaws are real. The rest is satire.</p>
 </div>
 
 <div class="cover-stripe">
