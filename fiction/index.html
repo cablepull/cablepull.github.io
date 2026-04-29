@@ -187,17 +187,20 @@
     }
 
     .preview-card__viewport--hosted {
-      min-height: 11.5rem;
+      position: relative;
       aspect-ratio: 16 / 10;
-      background:
-        radial-gradient(ellipse 100% 70% at 15% 25%, rgba(200, 55, 26, 0.28), transparent 50%),
-        radial-gradient(ellipse 80% 60% at 90% 80%, rgba(212, 131, 42, 0.2), transparent 45%),
-        linear-gradient(160deg, #0d0d0f 0%, #141418 55%, #0a0a0c 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: clamp(1rem, 4vw, 1.75rem);
-      box-sizing: border-box;
+      overflow: hidden;
+      background: #0d0d0f;
+      line-height: 0;
+    }
+
+    .preview-card__viewport--hosted img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
     }
 
     .preview-card__edge-inner {
@@ -314,11 +317,12 @@
           <span class="preview-card__url">…/fiction/edge-cases-032.html</span>
         </div>
         <div class="preview-card__viewport preview-card__viewport--hosted">
-          <div class="preview-card__edge-inner">
-            <p class="preview-card__edge-kicker">On this site · Issue 032</p>
-            <p class="preview-card__edge-title">Comply, or We Will Assume Compliance</p>
-            <p class="preview-card__edge-lede">ATHENA, ED-209, and defense-industry STPA training as satire.</p>
-          </div>
+          <img
+            src="../images/fan-art-ed209.png"
+            alt="Fan art: ED-209 firing in a dark industrial interior, low angle, muzzle flash."
+            loading="lazy"
+            decoding="async"
+          >
         </div>
         <div class="preview-card__meta">
           <h2 id="edge-cases-032-preview-title" class="preview-card__title">Edge Cases · Issue 032</h2>
