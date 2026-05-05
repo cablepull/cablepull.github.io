@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Threat models, control design, security architecture notes—Dangerous AI governance, Conduct code, Copilot proxy keys, CISO leverage &amp; CVE trends, and field notes from cablepull.">
+  <meta name="description" content="Threat models, control design, and security architecture notes—Ilithios BYOVD pipeline analysis, Dangerous AI governance, Conduct code, Copilot proxy keys, CISO leverage &amp; CVE trends, and field notes from cablepull.">
   <link rel="canonical" href="https://cablepull.github.io/security/">
   <meta property="og:site_name" content="cablepull">
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cablepull.github.io/security/">
   <meta property="og:title" content="Security · cablepull">
-  <meta property="og:description" content="Threat models, control design, security architecture notes—Dangerous AI governance, Conduct code, AI gateway credentials, CISO leverage &amp; CVE data, and field notes from cablepull.">
+  <meta property="og:description" content="Threat models, control design, security architecture notes—Ilithios BYOVD pipeline analysis, Dangerous AI governance, Conduct code, AI gateway credentials, CISO leverage &amp; CVE data, and field notes from cablepull.">
   <meta property="og:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
   <meta property="og:image:alt" content="You vibe code, I conduct code — we are not the same.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Security · cablepull">
-  <meta name="twitter:description" content="Threat models, control design, security architecture notes—Dangerous AI governance, Conduct code, AI gateway credentials, CISO leverage &amp; CVE data, and field notes from cablepull.">
+  <meta name="twitter:description" content="Threat models, control design, security architecture notes—Ilithios BYOVD pipeline analysis, Dangerous AI governance, Conduct code, AI gateway credentials, CISO leverage &amp; CVE data, and field notes from cablepull.">
   <meta name="twitter:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
   <title>Security · cablepull</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -217,6 +217,18 @@
         0 26px 60px -20px rgba(122, 30, 18, 0.24);
     }
 
+    .preview-card--ilithios:hover,
+    .preview-card--ilithios:focus-within {
+      border-color: rgba(0, 229, 160, 0.42);
+      box-shadow:
+        0 0 0 1px rgba(0, 229, 160, 0.14),
+        0 26px 60px -20px rgba(0, 229, 160, 0.2);
+    }
+
+    .preview-card--ilithios .preview-card__stretch:focus-visible {
+      outline-color: #00e5a0;
+    }
+
     .preview-card__viewport--dangerous {
       display: flex;
       align-items: flex-end;
@@ -263,6 +275,25 @@
     </div>
 
     <div class="preview-stage">
+      <article class="preview-card preview-card--ilithios" aria-labelledby="ilithios-preview-title">
+        <a
+          class="preview-card__stretch"
+          href="Ilithios.html"
+          aria-label="Open Ilithios BYOVD pipeline analysis — security/Ilithios.html"
+        ></a>
+        <div class="preview-card__chrome" aria-hidden="true">
+          <div class="preview-card__dots"><span></span><span></span><span></span></div>
+          <span class="preview-card__url">…/security/Ilithios.html</span>
+        </div>
+        <div class="preview-card__viewport">
+          <img src="../images/ilithios/Marcus Hutchins Question.png" alt="Preview: Marcus Hutchins question capture for Ilithios BYOVD pipeline analysis." loading="lazy" decoding="async">
+        </div>
+        <div class="preview-card__meta">
+          <h2 id="ilithios-preview-title" class="preview-card__title">Ilithios BYOVD pipeline analysis</h2>
+          <p class="preview-card__blurb">Interactive walkthrough of Marcus Hutchins' experiment: driver triage, reverse engineering flow, LLM reasoning failures, and exploit economics.</p>
+        </div>
+      </article>
+
       <article class="preview-card preview-card--dangerous" aria-labelledby="dangerous-ai-preview-title">
         <a
           class="preview-card__stretch"

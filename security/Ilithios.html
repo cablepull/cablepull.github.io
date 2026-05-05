@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ILITHIOS / BYOVD Pipeline Analysis — Edge Cases</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070b12;--bg2:#0c1119;--bg3:#111821;
+  --bdr:#1a2333;--bdr2:#243044;
+  --g:#00e5a0;--g2:#00b87f;
+  --o:#ff6b35;--b:#38b6ff;
+  --p:#c084fc;--r:#ff4757;--y:#ffd32a;
+  --t1:#e2e8f0;--t2:#8899b0;--t3:#3a4a60;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--t1);font-family:'Barlow',sans-serif;display:flex;font-size:14px;line-height:1.5}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px}
+
+.sidebar{width:215px;min-width:215px;background:var(--bg2);border-right:1px solid var(--bdr);display:flex;flex-direction:column}
+.sb-head{padding:18px 16px 14px;border-bottom:1px solid var(--bdr)}
+.sb-logo{font-family:'Rajdhani',sans-serif;font-size:21px;font-weight:700;color:var(--g);letter-spacing:3px;text-transform:uppercase}
+.sb-tag{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--t3);margin-top:3px}
+.sb-cat{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--t3);letter-spacing:2px;text-transform:uppercase;padding:10px 16px 3px}
+.nav-list{flex:1;overflow-y:auto;padding:4px 0 16px}
+.nb{width:100%;background:none;border:none;border-left:2px solid transparent;padding:8px 14px;cursor:pointer;display:flex;align-items:flex-start;gap:9px;transition:all .12s;text-align:left;color:var(--t2)}
+.nb:hover{background:var(--bg3);color:var(--t1);border-left-color:var(--bdr2)}
+.nb.active{background:rgba(0,229,160,.05);color:var(--g);border-left-color:var(--g)}
+.nb-n{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);padding-top:1px;min-width:18px}
+.nb.active .nb-n{color:var(--g2)}
+.nb-t{font-size:12.5px;font-weight:500;line-height:1.35}
+
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.mhead{background:var(--bg2);border-bottom:1px solid var(--bdr);padding:13px 24px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-shrink:0}
+.sname{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.sdesc{font-size:12.5px;color:var(--t2);margin-top:3px;max-width:560px;line-height:1.4}
+.sbadge{font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 10px;border:1px solid var(--bdr2);color:var(--t3);border-radius:3px;white-space:nowrap;margin-top:3px;flex-shrink:0}
+.content{flex:1;overflow-y:auto;overflow-x:hidden;padding:22px}
+
+.panel{display:none}
+.panel.active{display:block;animation:fadeUp .18s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:5px;padding:17px 20px}
+.ctitle{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-bottom:13px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.mb{margin-bottom:14px}
+.note{background:rgba(56,182,255,.04);border:1px solid rgba(56,182,255,.15);border-left:3px solid var(--b);padding:10px 14px;border-radius:0 4px 4px 0;font-size:12.5px;color:var(--t2);margin-top:14px;line-height:1.5}
+.warn{background:rgba(255,107,53,.04);border:1px solid rgba(255,107,53,.15);border-left:3px solid var(--o);padding:10px 14px;border-radius:0 4px 4px 0;font-size:12.5px;color:var(--t2);margin-top:14px;line-height:1.5}
+.hg{color:var(--g);font-weight:600}.ho{color:var(--o);font-weight:600}
+.hb{color:var(--b);font-weight:600}.hr{color:var(--r);font-weight:600}.hy{color:var(--y);font-weight:600}
+.tg{display:inline-block;padding:1px 7px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(0,229,160,.1);color:var(--g);border:1px solid rgba(0,229,160,.2)}
+.tr{display:inline-block;padding:1px 7px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,71,87,.1);color:var(--r);border:1px solid rgba(255,71,87,.2)}
+.tb{display:inline-block;padding:1px 7px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(56,182,255,.1);color:var(--b);border:1px solid rgba(56,182,255,.2)}
+.ty{display:inline-block;padding:1px 7px;border-radius:3px;font-family:'JetBrains Mono',monospace;font-size:10px;background:rgba(255,211,42,.1);color:var(--y);border:1px solid rgba(255,211,42,.2)}
+
+/* Intro */
+.intro-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:14px}
+.intro-p{font-size:13.5px;color:var(--t2);line-height:1.62;margin-bottom:10px}
+.intro-p:last-child{margin-bottom:0}
+.intro-media{display:block;background:var(--bg3);border:1px solid var(--bdr);border-radius:5px;overflow:hidden;text-decoration:none}
+.intro-media:hover{border-color:var(--bdr2)}
+.intro-media img{display:block;width:100%;height:auto;max-height:780px;object-fit:contain;background:#05080f}
+.intro-cap{padding:9px 12px;border-top:1px solid var(--bdr);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;color:var(--t3);text-transform:uppercase}
+.vbox{position:relative;padding-top:56.25%;background:#05080f;border:1px solid var(--bdr);border-radius:5px;overflow:hidden}
+.vbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.qblk{background:var(--bg3);border:1px solid var(--bdr);border-left:3px solid var(--o);border-radius:0 4px 4px 0;padding:10px 12px;font-size:12.5px;line-height:1.55;color:var(--t2)}
+.qblk strong{color:var(--o);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase}
+
+/* Pipeline */
+.pipe-wrap{overflow-x:auto;padding-bottom:4px}
+.pipe-row{display:flex;min-width:820px;gap:0;align-items:stretch}
+.phase{flex:1;display:flex;flex-direction:column;gap:6px;padding:0 6px}
+.ph{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:4px 8px;border-radius:3px;text-align:center;margin-bottom:4px}
+.ph1{background:rgba(56,182,255,.08);color:var(--b);border:1px solid rgba(56,182,255,.2)}
+.ph2{background:rgba(255,211,42,.08);color:var(--y);border:1px solid rgba(255,211,42,.2)}
+.ph3{background:rgba(192,132,252,.08);color:var(--p);border:1px solid rgba(192,132,252,.2)}
+.ph4{background:rgba(0,229,160,.08);color:var(--g);border:1px solid rgba(0,229,160,.2)}
+.ph5{background:rgba(255,107,53,.08);color:var(--o);border:1px solid rgba(255,107,53,.2)}
+.sbox{background:var(--bg3);border:1px solid var(--bdr);border-radius:4px;padding:8px 10px;font-size:12px;font-weight:500;text-align:center;line-height:1.3}
+.sbox small{display:block;font-size:10px;color:var(--t2);margin-top:2px;font-weight:400}
+.pgap{min-width:20px;display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:14px;padding-top:26px}
+.phase-1 .sbox{border-color:rgba(56,182,255,.2)}
+.phase-2 .sbox{border-color:rgba(255,211,42,.2)}
+.phase-3 .sbox{border-color:rgba(192,132,252,.2)}
+.phase-4 .sbox{border-color:rgba(0,229,160,.2)}
+.phase-5 .sbox{border-color:rgba(255,107,53,.2)}
+
+/* Funnel */
+.frow{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.flbl{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t2);min-width:190px}
+.fbw{flex:1;background:var(--bg3);border:1px solid var(--bdr);border-radius:3px;height:26px;overflow:hidden}
+.fbar{height:100%;display:flex;align-items:center;padding-left:10px;font-family:'JetBrains Mono',monospace;font-size:10px}
+.fcnt{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:500;min-width:38px;text-align:right}
+.frem{font-family:'JetBrains Mono',monospace;font-size:10px;min-width:32px;text-align:right}
+
+/* Chain */
+.chain{display:flex;flex-direction:column}
+.cstep{display:flex;gap:14px;align-items:flex-start}
+.cconn{display:flex;flex-direction:column;align-items:center;min-width:30px}
+.cdot{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;flex-shrink:0;border:1.5px solid}
+.cline{width:2px;flex:1;min-height:10px;background:var(--bdr);margin:2px 0}
+.cbody{padding:4px 0 14px}
+.ctit{font-size:13.5px;font-weight:600;margin-bottom:2px}
+.cdesc{font-size:12.5px;color:var(--t2);line-height:1.4}
+
+/* Primitives */
+.prim{background:var(--bg3);border:1px solid var(--bdr);border-radius:5px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.pname{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+.pitem{font-size:12.5px;color:var(--t2);display:flex;gap:6px;align-items:flex-start;line-height:1.4}
+.pitem::before{content:'\2192';color:var(--t3);flex-shrink:0}
+.pverd{margin-top:4px;font-family:'JetBrains Mono',monospace;font-size:10px;padding:6px 10px;border-radius:3px}
+.vg{background:rgba(0,229,160,.07);color:var(--g);border:1px solid rgba(0,229,160,.2)}
+.vr{background:rgba(255,71,87,.07);color:var(--r);border:1px solid rgba(255,71,87,.2)}
+.vy{background:rgba(255,211,42,.07);color:var(--y);border:1px solid rgba(255,211,42,.2)}
+
+/* Reasoning */
+.rpanel{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:start}
+.rchain{background:var(--bg3);border:1px solid var(--bdr);border-radius:5px;padding:16px}
+.rtitle{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--bdr)}
+.rstep{display:flex;gap:10px;align-items:flex-start;margin-bottom:7px}
+.rsnum{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);min-width:20px;padding-top:1px}
+.rstext{font-size:13px;line-height:1.4}
+.rarr{font-size:11px;color:var(--t3);padding-left:30px;margin-bottom:7px}
+.rverd{margin-top:10px;padding:7px 12px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.5px;text-align:center}
+.rvs{display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;color:var(--t3);letter-spacing:2px;padding-top:50px}
+
+/* Costs */
+.crow{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--bdr)}
+.crow:last-child{border:none}
+.clbl{color:var(--t2);font-size:13px;flex:2}
+.cbarw{flex:1;max-width:130px;min-width:50px;height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.cbarf{height:100%;border-radius:2px}
+.cval{font-family:'JetBrains Mono',monospace;font-size:12px;min-width:58px;text-align:right}
+.cnote{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t3);min-width:170px;text-align:right}
+.bignum{font-family:'Rajdhani',sans-serif;font-size:52px;font-weight:700;line-height:1}
+.biglbl{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t2);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+.codeblk{font-family:'JetBrains Mono',monospace;font-size:11.5px;padding:12px;background:var(--bg3);border-radius:4px;border:1px solid var(--bdr);line-height:1.9}
+@media (max-width:860px){.intro-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sb-head">
+    <div class="sb-logo">ILITHIOS</div>
+    <div class="sb-tag">BYOVD Pipeline // Edge Cases Research</div>
+  </div>
+  <div class="sb-cat">Visualizations</div>
+  <div class="nav-list" id="navList"></div>
+</aside>
+<main class="main">
+  <div class="mhead">
+    <div><div class="sname" id="secName"></div><div class="sdesc" id="secDesc"></div></div>
+    <div class="sbadge" id="secBadge"></div>
+  </div>
+  <div class="content" id="content"></div>
+</main>
+
+<script>
+var SECS=[
+  {id:'intro',      name:'Introduction',              desc:'Context from Marcus Hutchins: LinkedIn post, follow-up experiment, and setup for the Ilithios BYOVD pipeline', badge:'CONTEXT'},
+  {id:'pipeline',   name:'Full Pipeline Overview',      desc:'End-to-end flow: driver scraping \u2192 filtering \u2192 reverse engineering \u2192 LLM analysis \u2192 zero-day exploit', badge:'ARCHITECTURE'},
+  {id:'funnel',     name:'Driver Filtering Funnel',     desc:'~100 collected drivers pass through four sequential elimination stages to yield 84 viable candidates', badge:'DATA FLOW'},
+  {id:'re',         name:'Reverse Engineering Chain',   desc:'Binary .sys \u2192 IDA Pro automation \u2192 KMDF vtable resolution \u2192 pseudo-C output ready for LLM analysis', badge:'PROCESS'},
+  {id:'rings',      name:'Windows Privilege Rings',     desc:'Kernel mode architecture, the signing requirement, and the BYOVD attack surface bypass path', badge:'ARCHITECTURE'},
+  {id:'attack',     name:'BYOVD Attack Chain',          desc:'Step-by-step: how a legitimately signed driver becomes a full kernel read/write/execute backdoor', badge:'THREAT MODEL'},
+  {id:'prims',      name:'Exploit Primitive Hierarchy', desc:'Why READ + WRITE outperforms EXECUTE alone \u2014 and why the LLM got this backwards', badge:'VULN ANALYSIS'},
+  {id:'bracket',    name:'Tournament Bracket Problem',  desc:'400 drivers, 20-file API limit: the bracket structure that eliminated the best candidate in round one', badge:'LLM FAILURE'},
+  {id:'reason',     name:'LLM Reasoning Failure',       desc:'Root cause: the model can explain ASLR and primitives separately but cannot synthesize them without a world model', badge:'ROOT CAUSE'},
+  {id:'costs',      name:'Cost Economics',              desc:'"$2 per driver" vs. the honest math: $800+ to find one viable candidate before exploit development', badge:'ECONOMICS'},
+  {id:'impact',     name:'Security Impact Curve',       desc:'Fuzzer analogy: finite vulnerability pool, dual-use spike, patching wave, and the real resource gap', badge:'THREAT INTEL'},
+];
+
+var navList=document.getElementById('navList');
+var content=document.getElementById('content');
+SECS.forEach(function(s,i){
+  var btn=document.createElement('button');
+  btn.className='nb'+(i===0?' active':'');
+  btn.innerHTML='<span class="nb-n">'+String(i+1).padStart(2,'0')+'</span><span class="nb-t">'+s.name+'</span>';
+  btn.addEventListener('click',function(){go(i);});
+  navList.appendChild(btn);
+  var p=document.createElement('div');
+  p.className='panel'+(i===0?' active':'');
+  p.id='p-'+s.id;
+  content.appendChild(p);
+});
+
+function go(i){
+  document.querySelectorAll('.nb').forEach(function(b,j){b.classList.toggle('active',j===i);});
+  document.querySelectorAll('.panel').forEach(function(p,j){p.classList.toggle('active',j===i);});
+  document.getElementById('secName').textContent=SECS[i].name;
+  document.getElementById('secDesc').textContent=SECS[i].desc;
+  document.getElementById('secBadge').textContent=SECS[i].badge;
+}
+go(0);
+
+/* ===== 0. INTRO ===== */
+document.getElementById('p-intro').innerHTML=`
+<div class="g2 mb">
+  <div class="card">
+    <div class="ctitle">Question, Wiz Context, Experiment</div>
+    <p class="intro-p"><span class="tb">Cablepull's question</span> was about the Wiz Mythos framing, the use of IDA to wade through large binary datasets, and how useful AI actually is in finding the truth rather than just producing convincing noise.</p>
+    <p class="intro-p"><span class="ty">Marcus's response</span> was to answer with an experiment: a constrained BYOVD pipeline against Windows 11 drivers, instrumented step by step so we can see where automation helped, where it failed, and where expert judgment still carried the outcome.</p>
+    <p class="intro-p"><span class="tg">Acknowledgment</span> Huge thanks to Marcus Hutchins for an incredible experiment. This kind of transparent, hands-on work helps all of us understand the current state of AI-assisted vulnerability research much better.</p>
+    <div class="note"><strong style="color:var(--b)">Support:</strong> If this work is useful to you, consider subscribing to Marcus Hutchins' channel so more practitioners can follow and learn from this caliber of security research.</div>
+  </div>
+  <div class="card">
+    <div class="ctitle">Video Source</div>
+    <div class="vbox">
+      <iframe src="https://www.youtube.com/embed/BLqRiL_GY3A?si=j5GcTCx_UDhxAOl0"
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<div class="card mb">
+  <div class="ctitle">LinkedIn Transcript Capture</div>
+  <a class="intro-media" href="../images/ilithios/Marcus%20Hutchins%20Question.png" target="_blank" rel="noopener">
+    <img src="../images/ilithios/Marcus%20Hutchins%20Question.png"
+         alt="Screenshot capture of Marcus Hutchins LinkedIn transcript prompt discussing an AI zero-day pipeline experiment."
+         loading="lazy"
+         decoding="async">
+    <div class="intro-cap">Open full-size image in new tab</div>
+  </a>
+</div>
+
+<div class="intro-grid">
+  <div class="card">
+    <div class="ctitle">How The Experiment Maps To Wiz</div>
+    <p class="intro-p">Wiz's Mythos write-up argues that the immediate reality is not magical one-shot exploitation by amateurs, but a world where capable teams can use stronger AI-assisted workflows to find more vulnerabilities, reverse binaries faster, and compress the time between discovery and weaponization.</p>
+    <p class="intro-p">Marcus's pipeline is evidence for that middle position. The target class was narrow and deliberate: third-party signed Windows 11 kernel drivers vulnerable to BYOVD abuse. The workflow used deterministic stages for collection, filtering, VM validation, IDA automation, KMDF resolution, and pseudo-C generation before handing anything to the model.</p>
+    <p class="intro-p">The result supports a more grounded reading of Mythos: the model helped, but the workflow only became useful because expert knowledge supplied the task decomposition, ranking logic, and exploit criteria the model lacked on its own.</p>
+  </div>
+  <div class="card">
+    <div class="ctitle">Why This Matters</div>
+    <div class="qblk">
+      <strong>Practical takeaway</strong><br><br>
+      "The LLM is not teaching me exploitation. I'm teaching it exploitation."<br><br>
+      That is the bridge between your question and the Wiz description: capability is real, but it arrives first through expert-built systems and AI-augmented pipelines, not by instantly handing script kiddies a universal zero-day machine.
+    </div>
+    <div class="warn"><strong style="color:var(--o)">Operational caveat:</strong> the experiment also reinforces the harder part of the Wiz framing: patch pressure rises, expert workflows gain leverage, and underfunded open-source or small teams remain the least able to absorb the new cost and tempo.</div>
+  </div>
+</div>`;
+
+/* ===== 1. PIPELINE ===== */
+document.getElementById('p-pipeline').innerHTML=`
+<div class="card mb">
+  <div class="ctitle">End-to-End Ilithios Pipeline \u2014 5 Phases</div>
+  <div class="pipe-wrap"><div class="pipe-row">
+    <div class="phase phase-1">
+      <div class="ph ph1">01 \u00b7 Collection</div>
+      <div class="sbox">Web Scraper<small>Python script</small></div>
+      <div class="sbox">Driver Harvest<small>~100 .sys files</small></div>
+    </div>
+    <div class="pgap">\u25ba</div>
+    <div class="phase phase-2">
+      <div class="ph ph2">02 \u00b7 Filtering</div>
+      <div class="sbox">Signature Verify<small>Valid cert?</small></div>
+      <div class="sbox">WHQL Check<small>Microsoft-certified?</small></div>
+      <div class="sbox">Block List<small>Known vuln?</small></div>
+      <div class="sbox">VM Load Test<small>WDAC bypass?</small></div>
+    </div>
+    <div class="pgap">\u25ba</div>
+    <div class="phase phase-3">
+      <div class="ph ph3">03 \u00b7 Reverse Eng.</div>
+      <div class="sbox">IDA Pro<small>Headless auto-script</small></div>
+      <div class="sbox">Type Naming<small>Descriptive labels</small></div>
+      <div class="sbox">KMDF Vtable<small>Resolve fn pointers</small></div>
+      <div class="sbox">Decompile<small>Asm \u2192 Pseudo-C</small></div>
+    </div>
+    <div class="pgap">\u25ba</div>
+    <div class="phase phase-4">
+      <div class="ph ph4">04 \u00b7 LLM Analysis</div>
+      <div class="sbox">Claude Opus<small>Vuln scan prompt</small></div>
+      <div class="sbox">84 Reports<small>Per-driver text file</small></div>
+      <div class="sbox">Score JSON<small>0\u2013100 per driver</small></div>
+      <div class="sbox">Tournament<small>Best candidate</small></div>
+    </div>
+    <div class="pgap">\u25ba</div>
+    <div class="phase phase-5">
+      <div class="ph ph5">05 \u00b7 Exploit Dev</div>
+      <div class="sbox">Expert Triage<small>Human review</small></div>
+      <div class="sbox">Exploit Prompt<small>Iterative R&amp;D</small></div>
+      <div class="sbox" style="border-color:rgba(255,107,53,.5);color:var(--o)">Zero-Day<small style="color:var(--o)">Kernel priv-esc</small></div>
+    </div>
+  </div></div>
+</div>
+<div class="g2">
+  <div class="card">
+    <div class="ctitle">LLM Usage Policy</div>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6">Phases 1\u20133 use <span class="hg">zero LLM calls</span> \u2014 pure Python scripting and IDA automation. LLMs are invoked only where pattern-matching on decompiled C code is genuinely needed. The guiding principle: "If a task does not need to be done by an LLM, it shouldn't be."</p>
+  </div>
+  <div class="card">
+    <div class="ctitle">Scope Decisions</div>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6">Targets one specific class: <span class="ho">BYOVD privilege escalation</span> via third-party kernel drivers on Windows 11. Deliberately "easiest of the hardest" \u2014 binary exploitation is difficult enough to stress the LLM, but vendor drivers are sloppy enough to be tractable.</p>
+  </div>
+</div>
+<div class="note"><strong style="color:var(--b)">Murphy's Law (LLM Variant):</strong> "Anything an LLM can mess up, it will mess up." The pipeline exists to prevent that by keeping deterministic tasks deterministic.</div>`;
+
+/* ===== 2. FUNNEL ===== */
+var FD=[
+  {lbl:'Initial harvest',     n:100,pct:100,col:'var(--b)', rem:null},
+  {lbl:'Valid signature check',n:96, pct:96, col:'var(--b)', rem:'\u22124'},
+  {lbl:'WHQL certification',  n:91, pct:91, col:'var(--y)', rem:'\u22125'},
+  {lbl:'Known vuln block list',n:88, pct:88, col:'var(--y)', rem:'\u22123'},
+  {lbl:'VM load test / WDAC', n:84, pct:84, col:'var(--g)', rem:'\u22124'},
+];
+document.getElementById('p-funnel').innerHTML=`
+<div class="card mb">
+  <div class="ctitle">Driver Elimination \u2014 ~100 Collected \u2192 84 Viable</div>
+  `+FD.map(function(r){return `
+  <div class="frow">
+    <div class="flbl">${r.lbl}</div>
+    <div class="fbw"><div class="fbar" style="width:${r.pct}%;background:${r.col}18;border-right:2px solid ${r.col};color:${r.col}">${r.pct}%</div></div>
+    <div class="fcnt" style="color:${r.col}">${r.n}</div>
+    <div class="frem">${r.rem?`<span style="color:var(--r)">${r.rem}</span>`:'<span style="color:var(--t3)">\u2014</span>'}</div>
+  </div>`;}).join('')+`
+</div>
+<div class="g3">
+  <div class="card"><div class="ctitle">Stages 1\u20132 \u2014 Cert Checks</div>
+    <p style="font-size:12.5px;color:var(--t2);line-height:1.5">Driver must carry a valid digital certificate and belong to Microsoft's WHQL program. Unsigned or uncertified drivers won't load on modern Windows. Filtering them is a zero-cost Python step.</p></div>
+  <div class="card"><div class="ctitle">Stage 3 \u2014 Block List</div>
+    <p style="font-size:12.5px;color:var(--t2);line-height:1.5">Cross-reference against Microsoft's vulnerable driver block list. Avoid re-discovering already-known vulnerabilities \u2014 the goal is <em>novel</em> attack surface, not retreading disclosed CVEs.</p></div>
+  <div class="card"><div class="ctitle">Stage 4 \u2014 VM Load Test</div>
+    <p style="font-size:12.5px;color:var(--t2);line-height:1.5">WDAC runs an ML model to decide if a driver is suspicious. No static way to predict its verdict. Only option: load the driver in a VM and observe. Some crash the system; some get silently blocked.</p></div>
+</div>
+<div class="note"><strong style="color:var(--b)">Key insight:</strong> 84% survive initial filtering \u2014 the funnel is wide. The real narrowing happens after LLM analysis during expert triage, where only 1-in-400+ becomes a viable exploit candidate.</div>`;
+
+/* ===== 3. RE CHAIN ===== */
+var reSteps=[
+  {n:'01',c:'var(--b)', t:'Binary .sys Driver',        d:'Third-party Windows kernel driver. No source code, no debug symbols. Raw compiled machine code.'},
+  {n:'02',c:'var(--b)', t:'IDA Pro (Headless Mode)',   d:'Auto-launched via script. No manual interaction \u2014 fully automated pipeline trigger.'},
+  {n:'03',c:'var(--p)', t:'Type Definitions Applied',  d:'Windows kernel types imported. Structs, IOCTL codes, kernel APIs assigned proper signatures.'},
+  {n:'04',c:'var(--p)', t:'Descriptive Naming Pass',   d:'Functions named based on detectable behavior (e.g. DispatchCreate, HandleIOCTL_0x222004).'},
+  {n:'05',c:'var(--y)', t:'KMDF Vtable Resolution',    d:'Critical: KMDF routes calls through vtable pointers. Script resolves all targets so the LLM can follow call chains instead of seeing opaque addresses.'},
+  {n:'06',c:'var(--y)', t:'Hex-Rays Decompilation',    d:"IDA's decompiler produces pseudocode \u2014 syntactically close to C, not compilable, but structurally navigable."},
+  {n:'07',c:'var(--g)', t:'Pseudo-C Conversion',       d:'Lightweight normalization script cleans up IDA idioms into cleaner C-like output the LLM handles reliably.'},
+  {n:'08',c:'var(--g)', t:'.c Output File',            d:'84 drivers become 84 .c files, ready for LLM vulnerability analysis. Zero LLM tokens spent on the RE phase.'},
+];
+document.getElementById('p-re').innerHTML=`
+<div class="g2">
+<div>
+<div class="card">
+  <div class="ctitle">IDA Pro Automation Pipeline</div>
+  <div class="chain">`+
+reSteps.map(function(s,i){return `
+  <div class="cstep">
+    <div class="cconn">
+      <div class="cdot" style="border-color:${s.c};color:${s.c};background:${s.c}10">${s.n}</div>
+      ${i<reSteps.length-1?'<div class="cline"></div>':''}
+    </div>
+    <div class="cbody">
+      <div class="ctit" style="color:${s.c}">${s.t}</div>
+      <div class="cdesc">${s.d}</div>
+    </div>
+  </div>`;}).join('')+`
+  </div>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+  <div class="card">
+    <div class="ctitle">Why KMDF Vtable Matters</div>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:10px">Without resolution, the LLM sees calls like <code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--p)">call [rax+0x28]</code> \u2014 a pointer unknown at compile time. It cannot determine where the call goes.</p>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6">After annotation, the same call resolves to <code style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--g)">WdfIoQueueCreate\u2192EvtIoDeviceControl</code> \u2014 a fully navigable call graph.</p>
+  </div>
+  <div class="card">
+    <div class="ctitle">The LLM Split</div>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6">LLMs are <span class="hr">weak at reverse engineering</span> but <span class="hg">strong at vulnerability pattern-matching in source-like code</span>. The RE chain exists to bridge this gap \u2014 do structural work in Python, feed the model clean readable code.</p>
+  </div>
+  <div class="card">
+    <div class="ctitle">Cost Savings</div>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6">Running RE through an LLM would cost 10\u201350\u00d7 more per driver and produce inferior results. Phases 1\u20133 consume zero LLM tokens. The script-first design is both cheaper and more deterministic.</p>
+  </div>
+</div>
+</div>`;
+
+/* ===== 4. RINGS ===== */
+document.getElementById('p-rings').innerHTML=`
+<div class="g2">
+<div class="card">
+  <div class="ctitle">Privilege Ring Architecture</div>
+  <svg viewBox="0 0 420 390" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px;display:block;margin:0 auto">
+    <defs><marker id="arrowG" markerWidth="7" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,7 3,0 6" fill="rgba(0,229,160,0.9)"/></marker></defs>
+    <circle cx="210" cy="200" r="178" fill="none" stroke="rgba(255,71,87,0.2)" stroke-width="1" stroke-dasharray="5 4"/>
+    <text x="210" y="32" text-anchor="middle" fill="rgba(255,71,87,0.6)" font-size="11" font-family="JetBrains Mono,monospace" letter-spacing="1">HARDWARE / FIRMWARE</text>
+    <text x="210" y="46" text-anchor="middle" fill="rgba(255,71,87,0.35)" font-size="9" font-family="JetBrains Mono,monospace">BIOS \u00b7 UEFI \u00b7 NIC \u00b7 GPU \u00b7 HDD</text>
+    <circle cx="210" cy="200" r="134" fill="rgba(255,107,53,0.04)" stroke="rgba(255,107,53,0.4)" stroke-width="1.5"/>
+    <text x="210" y="78" text-anchor="middle" fill="rgba(255,107,53,0.85)" font-size="12" font-family="JetBrains Mono,monospace" font-weight="500" letter-spacing="1">KERNEL MODE (Ring 0)</text>
+    <text x="210" y="93" text-anchor="middle" fill="rgba(255,107,53,0.45)" font-size="9" font-family="JetBrains Mono,monospace">ntoskrnl \u00b7 hal \u00b7 drivers \u00b7 EDR</text>
+    <circle cx="210" cy="200" r="92" fill="rgba(255,211,42,0.03)" stroke="rgba(255,211,42,0.35)" stroke-width="1.5"/>
+    <text x="210" y="120" text-anchor="middle" fill="rgba(255,211,42,0.8)" font-size="11" font-family="JetBrains Mono,monospace" letter-spacing="1">ADMIN / ELEVATED</text>
+    <text x="210" y="133" text-anchor="middle" fill="rgba(255,211,42,0.4)" font-size="9" font-family="JetBrains Mono,monospace">Services \u00b7 System processes</text>
+    <circle cx="210" cy="200" r="54" fill="rgba(56,182,255,0.06)" stroke="rgba(56,182,255,0.5)" stroke-width="1.5"/>
+    <text x="210" y="193" text-anchor="middle" fill="rgba(56,182,255,0.9)" font-size="11" font-family="JetBrains Mono,monospace" font-weight="500">USER MODE</text>
+    <text x="210" y="207" text-anchor="middle" fill="rgba(56,182,255,0.55)" font-size="9" font-family="JetBrains Mono,monospace">Ring 3 \u2014 any process</text>
+    <path d="M 264 188 C 330 155, 350 148, 348 148" fill="none" stroke="rgba(0,229,160,0.85)" stroke-width="2" marker-end="url(#arrowG)" stroke-dasharray="5 3"/>
+    <rect x="272" y="155" width="72" height="16" rx="2" fill="rgba(5,8,16,0.9)" stroke="rgba(0,229,160,0.3)" stroke-width="1"/>
+    <text x="308" y="166" text-anchor="middle" fill="#00e5a0" font-size="9" font-family="JetBrains Mono,monospace">BYOVD bypass</text>
+    <text x="358" y="143" fill="rgba(0,229,160,0.7)" font-size="9" font-family="JetBrains Mono,monospace">\u2192 Ring 0</text>
+    <rect x="278" y="225" width="92" height="34" rx="3" fill="rgba(0,229,160,0.07)" stroke="rgba(0,229,160,0.3)" stroke-width="1"/>
+    <text x="324" y="239" text-anchor="middle" fill="#00e5a0" font-size="10" font-family="JetBrains Mono,monospace" font-weight="500">Vulnerable</text>
+    <text x="324" y="252" text-anchor="middle" fill="rgba(0,229,160,0.65)" font-size="10" font-family="JetBrains Mono,monospace">Driver \u2605</text>
+    <line x1="278" y1="240" x2="265" y2="210" stroke="rgba(0,229,160,0.3)" stroke-width="1" stroke-dasharray="3 2"/>
+    <text x="22" y="355" fill="rgba(255,107,53,0.65)" font-size="10" font-family="JetBrains Mono,monospace">\u25cf Kernel (Ring 0) \u2014 EDR lives here</text>
+    <text x="22" y="370" fill="rgba(0,229,160,0.65)" font-size="10" font-family="JetBrains Mono,monospace">\u21e2 BYOVD attack path (skips admin)</text>
+  </svg>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+  <div class="card"><div class="ctitle">Why Kernel Access Matters</div>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6">EDR products \u2014 the last line of defense against ransomware \u2014 reside in Ring 0. Achieving kernel access means the attacker can simply <span class="hr">disable the EDR before detonating the payload</span>. No more behavioral detection. No more ransomware protection.</p></div>
+  <div class="card"><div class="ctitle">The Signing Requirement</div>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6">Since Windows 10, all kernel drivers require <span class="hy">WHQL signing by Microsoft</span>. Malicious custom drivers get rejected. But a legitimately-signed third-party driver with a vulnerability is already approved \u2014 Microsoft audits the cert, not the vulnerability.</p></div>
+  <div class="card"><div class="ctitle">Beyond the OS</div>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6">The god-mode driver accesses physical RAM \u2014 not virtual memory. RAM is shared with hardware devices. The vulnerability theoretically allows <span class="hr">firmware overwrites</span> on GPU, NIC, HDD, or BIOS/UEFI \u2014 persistent across OS reinstalls.</p></div>
+</div>
+</div>`;
+
+/* ===== 5. ATTACK CHAIN ===== */
+var atkSteps=[
+  {n:'01',c:'var(--b)', t:'Admin Access Acquired',            d:'Attacker holds local administrator on a Windows 11 endpoint. Standard post-exploitation starting point.'},
+  {n:'02',c:'var(--b)', t:'Locate Signed Vulnerable Driver',  d:'Pipeline identifies a third-party driver with valid WHQL certification that exposes an exploitable IOCTL interface.'},
+  {n:'03',c:'var(--y)', t:'Load Driver',                      d:'LoadDriver() with admin privileges. Windows signature check passes \u2014 cert is valid. The vulnerability inside is not checked.'},
+  {n:'04',c:'var(--y)', t:'Open Handle to Device',            d:'Any process calls CreateFile() on the driver device path. This driver sets zero access control \u2014 guest accounts and sandboxed processes all work.'},
+  {n:'05',c:'var(--o)', t:'IOCTL Read: Physical RAM',         d:'DeviceIoControl() sends arbitrary physical address. Driver calls MmMapIoSpace() with no bounds or privilege checks. Maps requested RAM.'},
+  {n:'06',c:'var(--o)', t:'Scan RAM \u2014 Defeat ASLR',      d:'Read entire physical address space. Locate kernel base, driver tables, function pointers. ASLR completely neutralized \u2014 nothing is hidden.'},
+  {n:'07',c:'var(--o)', t:'IOCTL Write: Physical RAM',        d:'Same interface for writes. Target physical address + payload bytes. No validation. Kernel writes directly to physical memory.'},
+  {n:'08',c:'var(--r)', t:'Inject Shellcode + Overwrite Ptr', d:'Write shellcode to executable kernel memory. Overwrite a function pointer (driver dispatch table, syscall stub) with shellcode address.'},
+  {n:'09',c:'var(--r)', t:'Kernel Executes Shellcode',        d:'Normal OS operation triggers the overwritten pointer. Shellcode runs at Ring 0 \u2014 above every EDR hook in the system.'},
+  {n:'10',c:'var(--r)', t:'EDR Disabled / Payload Delivered', d:'Kill EDR driver from kernel mode. Load unsigned malicious driver. Deploy ransomware with zero endpoint detection.'},
+];
+document.getElementById('p-attack').innerHTML=`
+<div class="g2">
+<div class="card">
+  <div class="ctitle">BYOVD Attack Sequence \u2014 10 Steps</div>
+  <div class="chain">`+
+atkSteps.map(function(s,i){return `
+  <div class="cstep">
+    <div class="cconn">
+      <div class="cdot" style="border-color:${s.c};color:${s.c};background:${s.c}10">${s.n}</div>
+      ${i<atkSteps.length-1?'<div class="cline"></div>':''}
+    </div>
+    <div class="cbody">
+      <div class="ctit" style="color:${s.c}">${s.t}</div>
+      <div class="cdesc">${s.d}</div>
+    </div>
+  </div>`;}).join('')+`
+  </div>
+</div>
+<div style="display:flex;flex-direction:column;gap:12px">
+  <div class="card"><div class="ctitle">The God-Mode Driver</div>
+    <div class="codeblk">
+      <div style="color:var(--b)">IOCTL_READ_PHYS</div>
+      <div style="color:var(--t2)">MmMapIoSpace(userAddr, size, 0)</div>
+      <div style="color:var(--t3);font-size:10px">// No bounds check. No privilege check. Any caller.</div><br>
+      <div style="color:var(--g)">IOCTL_WRITE_PHYS</div>
+      <div style="color:var(--t2)">MmMapIoSpace(userAddr, size, 0)</div>
+      <div style="color:var(--t3);font-size:10px">// Same. Any address. Any data. Any process.</div>
+    </div>
+  </div>
+  <div class="card"><div class="ctitle">Why Ransomware Actors Use BYOVD</div>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6">Modern EDR detects ransomware by behavior (mass file ops, encryption patterns). BYOVD lets attackers disable the detector <em>before</em> running the noisy payload \u2014 removing the detection layer entirely before detonation.</p></div>
+  <div class="warn"><strong style="color:var(--o)">Signing paradox:</strong> The vulnerable driver was still WHQL-signed and loadable at time of research. Microsoft approves the certificate \u2014 not the vulnerability inside.</div>
+</div>
+</div>`;
+
+/* ===== 6. PRIMITIVES ===== */
+document.getElementById('p-prims').innerHTML=`
+<div class="card mb">
+  <div class="ctitle">Exploit Primitive Hierarchy \u2014 LLM vs. Expert Ranking</div>
+  <div class="g3">
+    <div class="prim" style="border-color:rgba(56,182,255,.25)">
+      <div style="font-size:26px">\uD83D\uDC41\uFE0F</div>
+      <div class="pname" style="color:var(--b)">Read</div>
+      <div>
+        <div class="pitem">Kernel reads any address you supply</div>
+        <div class="pitem">Returns raw bytes from that location</div>
+        <div class="pitem">Leaks kernel base and object addresses</div>
+        <div class="pitem"><strong style="color:var(--b)">Defeats ASLR</strong> \u2014 finds everything</div>
+      </div>
+      <div class="pverd vg">EXPERT: CRITICAL \u2605\u2605\u2605\u2605\u2605</div>
+      <div class="pverd tb" style="margin-top:4px">LLM: MEDIUM \u2605\u2605\u2605\u2606\u2606</div>
+    </div>
+    <div class="prim" style="border-color:rgba(0,229,160,.35);box-shadow:0 0 24px rgba(0,229,160,.04)">
+      <div style="font-size:26px">\u270F\uFE0F</div>
+      <div class="pname" style="color:var(--g)">Write</div>
+      <div>
+        <div class="pitem">Kernel writes to any address you supply</div>
+        <div class="pitem">Injects shellcode into executable memory</div>
+        <div class="pitem">Overwrites function pointers / dispatch tables</div>
+        <div class="pitem"><strong style="color:var(--g)">IS the execute primitive</strong> \u2014 write\u003dexec</div>
+      </div>
+      <div class="pverd vg">EXPERT: CRITICAL \u2605\u2605\u2605\u2605\u2605</div>
+      <div class="pverd" style="background:rgba(0,229,160,.06);color:var(--g2);border:1px solid rgba(0,229,160,.2);margin-top:4px">LLM: MEDIUM \u2605\u2605\u2605\u2606\u2606</div>
+    </div>
+    <div class="prim" style="border-color:rgba(255,71,87,.2)">
+      <div style="font-size:26px">\u26A1</div>
+      <div class="pname" style="color:var(--r)">Execute</div>
+      <div>
+        <div class="pitem">Kernel calls an address you supply</div>
+        <div class="pitem" style="color:var(--r)">Code must already exist in kernel memory</div>
+        <div class="pitem" style="color:var(--r)">Useless without a WRITE primitive first</div>
+        <div class="pitem" style="color:var(--r)">Cannot place shellcode by itself</div>
+      </div>
+      <div class="pverd vy">EXPERT: LOW ALONE \u2605\u2605\u2606\u2606\u2606</div>
+      <div class="pverd vr" style="margin-top:4px">LLM: HIGH \u2605\u2605\u2605\u2605\u2605 \u2014 <strong>WRONG</strong></div>
+    </div>
+  </div>
+</div>
+<div class="g2">
+  <div class="card"><div class="ctitle">The Winning Combination</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+      <div style="padding:9px 14px;background:rgba(56,182,255,.08);border:1px solid rgba(56,182,255,.25);border-radius:4px;font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;color:var(--b)">READ</div>
+      <div style="font-size:22px;color:var(--t3)">+</div>
+      <div style="padding:9px 14px;background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.3);border-radius:4px;font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;color:var(--g)">WRITE</div>
+      <div style="font-size:22px;color:var(--t3)">=</div>
+      <div style="padding:9px 14px;background:rgba(255,107,53,.1);border:1px solid rgba(255,107,53,.3);border-radius:4px;font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:var(--o);line-height:1.3">FULL KERNEL<br>CONTROL</div>
+    </div>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6">READ leaks kernel addresses \u2192 defeats ASLR \u2192 know exactly what to overwrite. WRITE injects shellcode and overwrites the pointer that triggers it. Together they form a complete exploit chain with no execute primitive required.</p>
+  </div>
+  <div class="card"><div class="ctitle">The World Model Gap</div>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:10px">The LLM can explain ASLR in isolation. It can explain each primitive in isolation. But it <span class="hr">cannot synthesize</span> these into: "therefore ASLR makes execute-only primitives useless, and WRITE makes execute primitives redundant."</p>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6">This required the researcher to encode the complete reasoning chain into the prompt \u2014 effectively distilling expert knowledge into text the model could follow.</p>
+  </div>
+</div>`;
+
+/* ===== 7. BRACKET ===== */
+var brHeats=[{y:35,l:'Heat 1',s:false},{y:90,l:'Heat 2',s:false},{y:145,l:'Heat 3 \u2605',s:true},{y:200,l:'Heat 4',s:false},{y:255,l:'\u2026\u00d716 more',s:false}];
+document.getElementById('p-bracket').innerHTML=`
+<div class="card mb">
+  <div class="ctitle">Tournament Bracket \u2014 400 Drivers, 20-File API Limit</div>
+  <div style="overflow-x:auto">
+  <svg viewBox="0 0 900 355" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:720px;display:block;background:var(--bg2)">
+    <defs><marker id="ag" markerWidth="7" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,7 3,0 6" fill="rgba(0,229,160,0.5)"/></marker></defs>
+    <text x="80"  y="18" text-anchor="middle" fill="rgba(148,163,184,0.6)" font-size="10" font-family="JetBrains Mono,monospace" letter-spacing="1">HEATS (\u00d720 batches)</text>
+    <text x="360" y="18" text-anchor="middle" fill="rgba(148,163,184,0.6)" font-size="10" font-family="JetBrains Mono,monospace" letter-spacing="1">HEAT WINNERS</text>
+    <text x="565" y="18" text-anchor="middle" fill="rgba(148,163,184,0.6)" font-size="10" font-family="JetBrains Mono,monospace" letter-spacing="1">SEMI</text>
+    <text x="755" y="18" text-anchor="middle" fill="rgba(148,163,184,0.6)" font-size="10" font-family="JetBrains Mono,monospace" letter-spacing="1">FINAL PICK</text>
+    `+brHeats.map(function(h){return `
+    <rect x="10" y="${h.y}" width="140" height="40" rx="3" fill="rgba(13,18,32,0.9)" stroke="${h.s?'rgba(0,229,160,0.5)':'rgba(26,35,51,1)'}" stroke-width="${h.s?1.5:1}"/>
+    <text x="80" y="${h.y+16}" text-anchor="middle" fill="${h.s?'var(--g)':'rgba(148,163,184,0.75)'}" font-size="11" font-family="JetBrains Mono,monospace" font-weight="${h.s?500:400}">${h.l}</text>
+    <text x="80" y="${h.y+30}" text-anchor="middle" fill="rgba(58,74,96,0.9)" font-size="9" font-family="JetBrains Mono,monospace">20 drivers each</text>
+    <line x1="150" y1="${h.y+20}" x2="220" y2="${h.y+20}" stroke="rgba(26,35,51,0.9)" stroke-width="1"/>
+    <rect x="220" y="${h.y+8}" width="120" height="26" rx="3" fill="rgba(255,71,87,0.06)" stroke="rgba(255,71,87,0.25)" stroke-width="1"/>
+    <text x="280" y="${h.y+24}" text-anchor="middle" fill="rgba(255,71,87,0.75)" font-size="10" font-family="JetBrains Mono,monospace">EXECUTE prim wins</text>
+    `;}).join('')+`
+    <path d="M 80 185 L 80 310" fill="none" stroke="rgba(0,229,160,0.25)" stroke-width="1" stroke-dasharray="3 3"/>
+    <rect x="10" y="312" width="140" height="30" rx="3" fill="rgba(0,229,160,0.05)" stroke="rgba(0,229,160,0.25)" stroke-width="1"/>
+    <text x="80" y="325" text-anchor="middle" fill="rgba(0,229,160,0.7)" font-size="9" font-family="JetBrains Mono,monospace">God-mode R/W driver</text>
+    <text x="80" y="337" text-anchor="middle" fill="rgba(0,229,160,0.5)" font-size="9" font-family="JetBrains Mono,monospace">ELIMINATED here \u2717</text>
+    <line x1="340" y1="55" x2="340" y2="275" stroke="rgba(26,35,51,0.9)" stroke-width="1"/>
+    ${[55,110,165,220,275].map(function(y){return '<line x1="340" y1="'+y+'" x2="410" y2="'+y+'" stroke="rgba(26,35,51,0.9)" stroke-width="1"/>';}).join('')}
+    <rect x="410" y="135" width="130" height="55" rx="3" fill="rgba(255,71,87,0.05)" stroke="rgba(255,71,87,0.2)" stroke-width="1.5"/>
+    <text x="475" y="156" text-anchor="middle" fill="rgba(255,71,87,0.7)" font-size="11" font-family="JetBrains Mono,monospace" font-weight="500">Semi-Final</text>
+    <text x="475" y="170" text-anchor="middle" fill="rgba(255,71,87,0.45)" font-size="9" font-family="JetBrains Mono,monospace">All EXECUTE</text>
+    <text x="475" y="181" text-anchor="middle" fill="rgba(255,71,87,0.45)" font-size="9" font-family="JetBrains Mono,monospace">primitives advance</text>
+    <line x1="540" y1="162" x2="580" y2="162" stroke="rgba(26,35,51,0.9)" stroke-width="1"/>
+    <rect x="580" y="137" width="130" height="50" rx="3" fill="rgba(255,71,87,0.06)" stroke="rgba(255,71,87,0.35)" stroke-width="1.5"/>
+    <text x="645" y="158" text-anchor="middle" fill="rgba(255,71,87,0.85)" font-size="12" font-family="JetBrains Mono,monospace" font-weight="500">FINAL</text>
+    <text x="645" y="173" text-anchor="middle" fill="rgba(255,71,87,0.5)" font-size="9" font-family="JetBrains Mono,monospace">EXECUTE winner</text>
+    <line x1="710" y1="162" x2="750" y2="162" stroke="rgba(26,35,51,0.9)" stroke-width="1"/>
+    <rect x="750" y="130" width="140" height="64" rx="3" fill="rgba(255,71,87,0.09)" stroke="rgba(255,71,87,0.5)" stroke-width="1.5"/>
+    <text x="820" y="150" text-anchor="middle" fill="var(--r)" font-size="12" font-family="JetBrains Mono,monospace" font-weight="700">\u26A0 WRONG</text>
+    <text x="820" y="165" text-anchor="middle" fill="rgba(255,71,87,0.65)" font-size="10" font-family="JetBrains Mono,monospace">EXECUTE primitive</text>
+    <text x="820" y="178" text-anchor="middle" fill="rgba(255,71,87,0.45)" font-size="9" font-family="JetBrains Mono,monospace">weak without WRITE</text>
+    <text x="820" y="189" text-anchor="middle" fill="rgba(255,71,87,0.35)" font-size="9" font-family="JetBrains Mono,monospace">(needs world model)</text>
+    <rect x="580" y="240" width="310" height="52" rx="3" fill="rgba(0,229,160,0.05)" stroke="rgba(0,229,160,0.35)" stroke-width="1.5"/>
+    <text x="735" y="260" text-anchor="middle" fill="var(--g)" font-size="11" font-family="JetBrains Mono,monospace" font-weight="500">\u2713 SHOULD HAVE WON</text>
+    <text x="735" y="275" text-anchor="middle" fill="rgba(0,229,160,0.55)" font-size="10" font-family="JetBrains Mono,monospace">God-mode R/W driver \u2014 full physical RAM access</text>
+    <text x="735" y="286" text-anchor="middle" fill="rgba(0,229,160,0.35)" font-size="9" font-family="JetBrains Mono,monospace">Eliminated in Heat 3. Never advanced. Expert had to override.</text>
+    <line x1="735" y1="240" x2="735" y2="205" stroke="rgba(0,229,160,0.25)" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ag)"/>
+  </svg>
+  </div>
+</div>
+<div class="g2">
+  <div class="card"><div class="ctitle">The Structural Constraint</div>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6">Claude's API allows maximum 20 file uploads per request. 400 drivers requires a tournament: 20 heats of 20 \u2192 semi-final \u2192 final. Sound design in principle \u2014 only as good as the selection criteria inside it.</p></div>
+  <div class="card"><div class="ctitle">The Selection Failure</div>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6">The LLM ranked EXECUTE primitives highest in <em>every</em> heat. The god-mode driver \u2014 the most powerful vulnerability in the set \u2014 was eliminated in round one. The tournament structure faithfully amplified a flawed ranking heuristic 400\u00d7 over.</p></div>
+</div>`;
+
+/* ===== 8. REASONING ===== */
+var wrongR=[
+  {t:'Goal: find best exploit candidate for kernel privesc',e:false},
+  {t:'Objective: achieve code execution in kernel mode',e:false},
+  {t:'"Execute primitive" \u2014 kernel directly executes code',e:false},
+  {t:'Therefore: EXECUTE = highest value primitive',e:true},
+  {t:'Rank all drivers by execute primitive quality',e:true},
+  {t:'God-mode R/W driver scores low \u2192 eliminated',e:true},
+];
+var rightR=[
+  {t:'Goal: find best exploit candidate for kernel privesc',g:false},
+  {t:'Constraint: ASLR randomizes all kernel addresses on boot',g:false},
+  {t:'Step 1: must leak addresses to know what to overwrite \u2192 READ',g:true},
+  {t:'Step 2: must place + trigger shellcode \u2192 WRITE',g:true},
+  {t:'Insight: WRITE to executable memory IS the execute primitive',g:true},
+  {t:'Conclusion: EXECUTE alone is dead end without WRITE first',g:true},
+];
+document.getElementById('p-reason').innerHTML=`
+<div class="card mb">
+  <div class="ctitle">Reasoning Chain Comparison \u2014 LLM vs. Expert</div>
+  <div class="rpanel">
+    <div class="rchain" style="border-color:rgba(255,71,87,0.2)">
+      <div class="rtitle" style="color:var(--r)">\u26A0 LLM Reasoning (no prompt engineering)</div>
+      `+wrongR.map(function(s,i){return `
+      <div class="rstep"><div class="rsnum">${String(i+1).padStart(2,'0')}</div>
+        <div class="rstext" style="color:${s.e?'var(--r)':'var(--t2)'}">${s.t}</div></div>
+      ${i<wrongR.length-1?'<div class="rarr">\u2193</div>':''}
+      `;}).join('')+`
+      <div class="rverd" style="background:rgba(255,71,87,.07);color:var(--r);border:1px solid rgba(255,71,87,.2)">EXECUTE &gt; WRITE &gt; READ \u2014 WRONG</div>
+    </div>
+    <div class="rvs">VS</div>
+    <div class="rchain" style="border-color:rgba(0,229,160,0.2)">
+      <div class="rtitle" style="color:var(--g)">\u2713 Expert Reasoning (distilled into prompt)</div>
+      `+rightR.map(function(s,i){return `
+      <div class="rstep"><div class="rsnum">${String(i+1).padStart(2,'0')}</div>
+        <div class="rstext" style="color:${s.g?'var(--g)':'var(--t2)'}">${s.t}</div></div>
+      ${i<rightR.length-1?'<div class="rarr">\u2193</div>':''}
+      `;}).join('')+`
+      <div class="rverd" style="background:rgba(0,229,160,.07);color:var(--g);border:1px solid rgba(0,229,160,.2)">READ + WRITE &gt;&gt; EXECUTE alone \u2014 CORRECT</div>
+    </div>
+  </div>
+</div>
+<div class="g2">
+  <div class="card"><div class="ctitle">The World Model Gap</div>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6;margin-bottom:10px">Ask the LLM "what is ASLR?" \u2014 perfect answer. "What is a write primitive?" \u2014 perfect answer. But it <span class="hr">cannot synthesize</span> these into: "therefore ASLR makes execute-only worthless, and write makes execute redundant."</p>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6">This is not a knowledge gap. It's a reasoning structure gap. The facts are present; the model of how an actual exploited system works is absent.</p></div>
+  <div class="card"><div class="ctitle">The Fix: Prompt as World Model</div>
+    <div class="codeblk">
+      Researcher encoded into prompt:<br>
+      <span style="color:var(--g)">\u2192</span> ASLR mechanism and its implications<br>
+      <span style="color:var(--g)">\u2192</span> All three primitives + how they interact<br>
+      <span style="color:var(--g)">\u2192</span> Why execute alone is a dead end<br>
+      <span style="color:var(--g)">\u2192</span> Why read+write forms a complete chain<br>
+      <span style="color:var(--g)">\u2192</span> Weighted scoring rubric for driver selection<br><br>
+      <span style="color:var(--y)">"The LLM is not teaching exploitation. The expert is teaching the LLM exploitation."</span>
+    </div>
+  </div>
+</div>`;
+
+/* ===== 9. COSTS ===== */
+var costRows=[
+  {lbl:'Web scraping + filtering',         val:'~$0',   pct:0,  col:'var(--b)', note:'Pure Python, no LLM cost'},
+  {lbl:'IDA Pro RE automation',            val:'~$0',   pct:0,  col:'var(--b)', note:'Local compute, headless'},
+  {lbl:'LLM vuln scan \u2014 400 \u00d7 $2',val:'~$800',pct:100,col:'var(--o)', note:'Claude Opus API, prompt v2'},
+  {lbl:'Expert triage + driver selection', val:'Hours', pct:0,  col:'var(--y)', note:'Not automatable w/o domain knowledge'},
+  {lbl:'Exploit dev \u2014 API phase',      val:'$200+', pct:25, col:'var(--r)', note:'Failed attempts before UI switch'},
+  {lbl:'Exploit dev \u2014 UI flat rate',   val:'4+ hrs',pct:3,  col:'var(--r)', note:'Iterative prompt engineering session'},
+];
+document.getElementById('p-costs').innerHTML=`
+<div class="g2 mb">
+  <div class="card" style="text-align:center">
+    <div class="bignum" style="color:var(--r)">$800</div>
+    <div class="biglbl">LLM tokens to find one viable candidate</div>
+  </div>
+  <div class="card" style="text-align:center">
+    <div class="bignum" style="color:var(--o)">$2</div>
+    <div class="biglbl">Per driver (the misleading number)</div>
+  </div>
+</div>
+<div class="card mb">
+  <div class="ctitle">Honest Cost Breakdown</div>
+  `+costRows.map(function(r){return `
+  <div class="crow">
+    <div class="clbl">${r.lbl}</div>
+    <div class="cbarw"><div class="cbarf" style="width:${r.pct}%;background:${r.col}"></div></div>
+    <div class="cval" style="color:${r.col}">${r.val}</div>
+    <div class="cnote">${r.note}</div>
+  </div>`;}).join('')+`
+</div>
+<div class="g2">
+  <div class="card"><div class="ctitle">The Misleading Frame</div>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6">"$2 per driver" is technically accurate but deeply dishonest. It implies zero-days cost $2 each. The correct framing: scanning 400 drivers costs $800 and yields <em>one viable candidate</em> \u2014 not an exploit. Exploit development adds hundreds more.</p></div>
+  <div class="card"><div class="ctitle">Market Reality</div>
+    <p style="font-size:13px;color:var(--t2);line-height:1.6">Kernel privesc on Windows trades at $50K\u2013$500K. Anyone operating this pipeline prices exploits at market, not token cost. The pipeline shifts which human expertise is required \u2014 it does not collapse the vulnerability market.</p></div>
+</div>
+<div class="note"><strong style="color:var(--b)">Honest math:</strong> $800 in LLM tokens + significant expert hours + IDA Pro license + API costs = not cheap. The value is speed and scale across many drivers simultaneously \u2014 not cost reduction to near-zero.</div>`;
+
+/* ===== 10. IMPACT CURVE ===== */
+document.getElementById('p-impact').innerHTML=`
+<div class="card mb">
+  <div class="ctitle">Security Impact Model \u2014 Finite Vulnerability Pool (Fuzzer Analogy)</div>
+  <svg viewBox="0 0 860 310" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;background:var(--bg2)">
+    <defs>
+      <linearGradient id="gfill" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#00e5a0" stop-opacity="0.12"/>
+        <stop offset="100%" stop-color="#00e5a0" stop-opacity="0.01"/>
+      </linearGradient>
+    </defs>
+    ${[0.25,0.5,0.75,1.0].map(function(y){return `
+    <line x1="65" y1="${38+(1-y)*220}" x2="820" y2="${38+(1-y)*220}" stroke="rgba(26,35,51,0.7)" stroke-width="1" stroke-dasharray="4 4"/>
+    <text x="52" y="${42+(1-y)*220}" text-anchor="end" fill="rgba(58,74,96,0.8)" font-size="9" font-family="JetBrains Mono,monospace">${Math.round(y*100)}%</text>
+    `;}).join('')}
+    <line x1="65" y1="258" x2="820" y2="258" stroke="rgba(26,35,51,1)" stroke-width="1.5"/>
+    <line x1="65" y1="38"  x2="65"  y2="258" stroke="rgba(26,35,51,1)" stroke-width="1.5"/>
+    <text x="442" y="285" text-anchor="middle" fill="rgba(58,74,96,0.7)" font-size="10" font-family="JetBrains Mono,monospace" letter-spacing="1">TIME \u2192</text>
+    <text x="20" y="150" text-anchor="middle" fill="rgba(58,74,96,0.7)" font-size="9" font-family="JetBrains Mono,monospace" letter-spacing="1" transform="rotate(-90,20,150)">EXPLOIT RISK</text>
+    ${[{x:155,l1:'Pre-AI',l2:'Baseline'},{x:310,l1:'Pipeline',l2:'Released'},{x:500,l1:'Patch',l2:'Wave'},{x:680,l1:'New',l2:'Equilibrium'}].map(function(m){return `
+    <line x1="${m.x}" y1="38" x2="${m.x}" y2="258" stroke="rgba(26,35,51,0.45)" stroke-width="1" stroke-dasharray="2 5"/>
+    <text x="${m.x}" y="270" text-anchor="middle" fill="rgba(58,74,96,0.65)" font-size="9" font-family="JetBrains Mono,monospace">${m.l1}</text>
+    <text x="${m.x}" y="281" text-anchor="middle" fill="rgba(58,74,96,0.45)" font-size="9" font-family="JetBrains Mono,monospace">${m.l2}</text>
+    `;}).join('')}
+    <polygon points="65,225 155,218 250,214 310,200 370,118 415,82 460,65 510,80 580,108 650,128 740,136 820,132 820,258 65,258" fill="url(#gfill)"/>
+    <polyline points="65,225 155,218 250,214 310,200 370,118 415,82 460,65 510,80 580,108 650,128 740,136 820,132" fill="none" stroke="var(--g)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="65,228 155,222 250,218 310,205 355,98 395,72 435,110 490,148 560,178 640,198 740,210 820,212" fill="none" stroke="var(--o)" stroke-width="2" stroke-dasharray="7 3" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="325" y="44" width="118" height="28" rx="2" fill="rgba(5,8,16,0.92)" stroke="rgba(0,229,160,0.2)" stroke-width="1"/>
+    <text x="384" y="57" text-anchor="middle" fill="rgba(0,229,160,0.75)" font-size="9" font-family="JetBrains Mono,monospace">Dual-use spike:</text>
+    <text x="384" y="67" text-anchor="middle" fill="rgba(0,229,160,0.5)" font-size="9" font-family="JetBrains Mono,monospace">defenders + attackers</text>
+    <rect x="658" y="84" width="128" height="28" rx="2" fill="rgba(5,8,16,0.92)" stroke="rgba(0,229,160,0.2)" stroke-width="1"/>
+    <text x="722" y="97" text-anchor="middle" fill="rgba(0,229,160,0.75)" font-size="9" font-family="JetBrains Mono,monospace">New equilibrium:</text>
+    <text x="722" y="107" text-anchor="middle" fill="rgba(0,229,160,0.5)" font-size="9" font-family="JetBrains Mono,monospace">lower than baseline</text>
+    <line x1="72" y1="26" x2="104" y2="26" stroke="var(--g)" stroke-width="2.5"/>
+    <text x="110" y="30" fill="rgba(0,229,160,0.75)" font-size="10" font-family="JetBrains Mono,monospace">Overall exploit risk</text>
+    <line x1="430" y1="26" x2="462" y2="26" stroke="var(--o)" stroke-width="2" stroke-dasharray="6 3"/>
+    <text x="468" y="30" fill="rgba(255,107,53,0.75)" font-size="10" font-family="JetBrains Mono,monospace">Attacker exploitation rate</text>
+  </svg>
+</div>
+<div class="g3">
+  <div class="card"><div class="ctitle">Finite Vulnerability Pool</div>
+    <p style="font-size:12.5px;color:var(--t2);line-height:1.5">Same driver fed into the pipeline produces the same output \u2014 near-deterministic. Defenders disclose and patch. Attackers exploit what's left. The pool exhausts quickly. The pipeline is a one-time accelerant, not a perpetual zero-day generator.</p></div>
+  <div class="card"><div class="ctitle">Barrier to Entry</div>
+    <p style="font-size:12.5px;color:var(--t2);line-height:1.5">Script kiddies cannot use this pipeline because building it requires the expertise to find zero-days manually. Anyone capable of constructing this already knows how to do it by hand. The LLM accelerates \u2014 it does not democratize.</p></div>
+  <div class="card"><div class="ctitle">The Real Resource Gap</div>
+    <p style="font-size:12.5px;color:var(--t2);line-height:1.5">Apple pays $2M per vuln. OpenSSL pays nothing. A Linux kernel RCE affects 99% of server workloads. AI pipelines follow the money \u2014 reinforcing the existing resource asymmetry rather than solving it.</p></div>
+</div>
+<div class="note"><strong style="color:var(--b)">Net assessment:</strong> The sky is not falling. AI pipelines will most likely improve security over time \u2014 by giving defenders better tools to find and fix vulnerabilities before attackers exploit them. The open question is how to socialize cost so the benefit reaches underfunded OSS.</div>`;
+</script>
+</body>
+</html>
