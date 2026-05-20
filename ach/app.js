@@ -81,6 +81,9 @@
   }
 
   let suppressPickerChange = false;
+  let suppressRouteSync = false;
+
+  const ROUTE_VIEWS = ['overview', 'matrix', 'network', 'evidence', 'hypotheses', 'whatif'];
 
   const state = {
     manifest: null,
@@ -110,6 +113,28 @@
     if (!confidence) return 'confidence-pill';
     const slug = String(confidence).toLowerCase().replace(/[^a-z0-9-]+/g, '-');
     return 'confidence-pill is-' + slug;
+  }
+
+  // Natural sort for ACH IDs: letter prefix + numeric suffix (E1, E2, E10, H1, …).
+  function parseAchId(id) {
+    const s = String(id);
+    const m = s.match(/^(\D*)(\d+)(.*)$/);
+    if (!m) return { prefix: s, num: null, suffix: '' };
+    return { prefix: m[1], num: parseInt(m[2], 10), suffix: m[3] };
+  }
+
+  function compareAchIds(a, b) {
+    const pa = parseAchId(a);
+    const pb = parseAchId(b);
+    if (pa.prefix !== pb.prefix) return pa.prefix.localeCompare(pb.prefix);
+    if (pa.num != null && pb.num != null) {
+      if (pa.num !== pb.num) return pa.num - pb.num;
+      if (pa.suffix !== pb.suffix) return pa.suffix.localeCompare(pb.suffix);
+      return 0;
+    }
+    if (pa.num != null) return -1;
+    if (pb.num != null) return 1;
+    return String(a).localeCompare(String(b));
   }
 
   function t(key, fallback) {
@@ -330,8 +355,111 @@
     networkRefs.nodes = null;
   }
 
-  async function switchAnalysis(analysisId) {
-    if (!analysisId || analysisId === state.currentAnalysisId) return;
+  function parseRoute() {
+    const raw = (location.hash || '').replace(/^#\/?/, '');
+    const parts = raw.split('/').filter(Boolean).map(p => decodeURIComponent(p));
+    let analysisId = null;
+    let view = null;
+
+    if (parts.length === 1) {
+      if (ROUTE_VIEWS.includes(parts[0])) view = parts[0];
+      else analysisId = parts[0];
+    } else if (parts.length >= 2) {
+      analysisId = parts[0];
+      if (ROUTE_VIEWS.includes(parts[1])) view = parts[1];
+    }
+    return { analysisId, view };
+  }
+
+  function buildRouteHash(analysisId, view) {
+    const v = ROUTE_VIEWS.includes(view) ? view : 'overview';
+    return '#/' + encodeURIComponent(analysisId) + '/' + v;
+  }
+
+  function routeHref() {
+    return location.pathname + location.search + buildRouteHash(state.currentAnalysisId, state.view);
+  }
+
+  function routeMatchesState() {
+    if (!state.currentAnalysisId) return false;
+    const route = parseRoute();
+    const hash = buildRouteHash(state.currentAnalysisId, state.view);
+    if (location.hash !== hash) return false;
+    if (route.analysisId && route.analysisId !== state.currentAnalysisId) return false;
+    if (route.view && route.view !== state.view) return false;
+    return true;
+  }
+
+  function syncRouteToUrl(opts) {
+    opts = opts || {};
+    if (suppressRouteSync || !state.currentAnalysisId) return;
+    const hash = buildRouteHash(state.currentAnalysisId, state.view);
+    if (location.hash === hash) return;
+
+    suppressRouteSync = true;
+    const st = { ach: true, analysisId: state.currentAnalysisId, view: state.view };
+    const url = location.pathname + location.search + hash;
+
+    try {
+      if (opts.replace) history.replaceState(st, '', url);
+      else history.pushState(st, '', url);
+    } catch (e) {
+      if (opts.replace) history.replaceState(st, '', hash);
+      else history.pushState(st, '', hash);
+    }
+
+    // Some static hosts ignore pushState fragments; hash assignment always updates the bar.
+    if (location.hash !== hash) {
+      location.hash = hash.replace(/^#/, '');
+    }
+
+    suppressRouteSync = false;
+  }
+
+  function setActiveViewUI(view) {
+    if (!ROUTE_VIEWS.includes(view)) view = 'overview';
+    state.view = view;
+    $$('.tab').forEach(t => t.classList.toggle('is-active', t.dataset.view === view));
+    $$('.view').forEach(v => v.classList.toggle('is-active', v.dataset.view === view));
+  }
+
+  function navigateToView(view, opts) {
+    opts = opts || {};
+    setActiveViewUI(view);
+    if (!opts.skipRender) renderActiveView();
+    if (!opts.skipUrl) syncRouteToUrl({ replace: !!opts.replace });
+  }
+
+  async function applyRouteFromUrl() {
+    if (!state.manifest) return;
+    if (routeMatchesState()) {
+      setActiveViewUI(state.view);
+      return;
+    }
+    const ids = new Set(state.manifest.analyses.map(a => a.id));
+    const route = parseRoute();
+    const targetView = route.view && ROUTE_VIEWS.includes(route.view)
+      ? route.view
+      : (state.view || 'overview');
+
+    if (route.analysisId && ids.has(route.analysisId)
+        && route.analysisId !== state.currentAnalysisId) {
+      await switchAnalysis(route.analysisId, { skipUrl: true });
+    }
+    if (targetView !== state.view) {
+      navigateToView(targetView, { skipUrl: true });
+    } else {
+      setActiveViewUI(targetView);
+    }
+  }
+
+  async function switchAnalysis(analysisId, opts) {
+    opts = opts || {};
+    if (!analysisId) return;
+    if (analysisId === state.currentAnalysisId) {
+      if (!opts.skipUrl) syncRouteToUrl({ replace: !!opts.replaceUrl });
+      return;
+    }
     const previousId = state.currentAnalysisId;
     closeDrilldown();
     $('#drilldown-content').innerHTML = '';
@@ -343,6 +471,7 @@
       const activeView = $('.view.is-active');
       if (activeView) activeView.scrollTop = 0;
       renderAll();
+      if (!opts.skipUrl) syncRouteToUrl({ replace: !!opts.replaceUrl });
     } catch (err) {
       console.error(err);
       setStatus('ERROR: ' + err.message);
@@ -409,10 +538,7 @@
   function setupTabs() {
     $$('.tab').forEach(tab => {
       tab.addEventListener('click', () => {
-        state.view = tab.dataset.view;
-        $$('.tab').forEach(t => t.classList.toggle('is-active', t === tab));
-        $$('.view').forEach(v => v.classList.toggle('is-active', v.dataset.view === state.view));
-        renderActiveView();
+        navigateToView(tab.dataset.view);
       });
     });
     // Localize tab labels
@@ -600,23 +726,16 @@
     const sortCol = state.matrixSort.col;
     const sortDir = state.matrixSort.dir;
     evidenceList.sort((a, b) => {
-      let av, bv;
-      if (sortCol === 'id')        { av = a.id; bv = b.id; }
-      else if (sortCol === 'diag') { av = a._diag; bv = b._diag; }
-      else if (sortCol === 'rel')  { av = a.reliability; bv = b.reliability; }
-      else if (sortCol === 'cred') { av = a.credibility; bv = b.credibility; }
+      let cmp;
+      if (sortCol === 'id') cmp = compareAchIds(a.id, b.id);
+      else if (sortCol === 'diag') cmp = a._diag - b._diag;
+      else if (sortCol === 'rel') cmp = a.reliability.localeCompare(b.reliability);
+      else if (sortCol === 'cred') cmp = a.credibility - b.credibility;
       else if (sortCol.startsWith('H')) {
-        av = getEffectiveScore(a.id, sortCol);
-        bv = getEffectiveScore(b.id, sortCol);
-      } else { av = a.id; bv = b.id; }
-      if (av === bv) {
-        // Tiebreaker: numeric part of ID
-        const an = parseInt(a.id.replace(/\D/g, ''), 10) || 0;
-        const bn = parseInt(b.id.replace(/\D/g, ''), 10) || 0;
-        return an - bn;
-      }
-      const order = av < bv ? -1 : 1;
-      return sortDir === 'asc' ? order : -order;
+        cmp = getEffectiveScore(a.id, sortCol) - getEffectiveScore(b.id, sortCol);
+      } else cmp = compareAchIds(a.id, b.id);
+      if (cmp === 0) cmp = compareAchIds(a.id, b.id);
+      return sortDir === 'asc' ? cmp : -cmp;
     });
 
     // Toolbar
@@ -990,11 +1109,7 @@
     // Sort
     filtered = filtered.slice();
     if (state.evidenceSort === 'id') {
-      filtered.sort((a, b) => {
-        const an = parseInt(a.id.replace(/\D/g, ''), 10);
-        const bn = parseInt(b.id.replace(/\D/g, ''), 10);
-        return an - bn;
-      });
+      filtered.sort((a, b) => compareAchIds(a.id, b.id));
     } else if (state.evidenceSort === 'diag') {
       filtered.forEach(e => { e._diag = computeDiagnosticity(e); });
       filtered.sort((a, b) => b._diag - a._diag);
@@ -1465,13 +1580,18 @@
 
   function preferredAnalysisId() {
     const ids = new Set(state.manifest.analyses.map(a => a.id));
-    const fromHash = (location.hash || '').replace(/^#/, '');
+    const { analysisId: fromRoute } = parseRoute();
     let fromStorage = null;
     try { fromStorage = localStorage.getItem('ach-explorer:last-analysis'); } catch (e) { /* fine */ }
-    for (const candidate of [fromHash, fromStorage, state.manifest.analyses[0]?.id]) {
+    for (const candidate of [fromRoute, fromStorage, state.manifest.analyses[0]?.id]) {
       if (candidate && ids.has(candidate)) return candidate;
     }
     return null;
+  }
+
+  function preferredView() {
+    const { view } = parseRoute();
+    return view && ROUTE_VIEWS.includes(view) ? view : 'overview';
   }
 
   async function boot() {
@@ -1482,8 +1602,11 @@
       await loadManifest();
       const analysisId = preferredAnalysisId();
       if (!analysisId) throw new Error(t('ui.noAnalysesFound'));
+      state.view = preferredView();
       await loadAnalysis(analysisId);
       renderAll();
+      setActiveViewUI(state.view);
+      syncRouteToUrl({ replace: true });
     } catch (e) {
       setStatus('ERROR: ' + e.message);
       $('.view-overview').innerHTML = '<div class="loading">' + e.message + '</div>';
@@ -1502,6 +1625,14 @@
   });
 
   document.addEventListener('DOMContentLoaded', boot);
+  window.addEventListener('popstate', () => {
+    if (suppressRouteSync) return;
+    applyRouteFromUrl();
+  });
+  window.addEventListener('hashchange', () => {
+    if (suppressRouteSync) return;
+    applyRouteFromUrl();
+  });
   // Esc closes drilldown
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeDrilldown();
