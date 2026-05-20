@@ -1,0 +1,415 @@
+{
+  "sources": {
+    "src_zscaler_threatlabz_2026_03": {
+      "title": "Supply Chain Attacks Surge in March 2026",
+      "publisher": "Zscaler ThreatLabz",
+      "date": "2026-04-15",
+      "url": "https://www.zscaler.com/blogs/security-research/supply-chain-attacks-surge-march-2026",
+      "type": "vendor-research",
+      "reliability": "B"
+    },
+    "src_zscaler_litellm": {
+      "title": "TeamPCP LiteLLM Supply Chain Analysis",
+      "publisher": "Zscaler ThreatLabz",
+      "date": "2026-04-15",
+      "url": "https://www.zscaler.com/blogs/security-research/supply-chain-attacks-surge-march-2026",
+      "type": "vendor-research",
+      "reliability": "B"
+    },
+    "src_foresiet_inversion": {
+      "title": "The AI Inversion: 2026's Most Dangerous Cyber Attacks",
+      "publisher": "Foresiet",
+      "date": "2026-04-08",
+      "url": "https://foresiet.com/blog/ai-enabled-cyberattacks-2026-incidents/",
+      "type": "vendor-blog",
+      "reliability": "C",
+      "notes": "Tier-3 source. Statistics often unreferenced. High manipulation risk."
+    },
+    "src_trendmicro_vercel": {
+      "title": "The Vercel Breach: OAuth Supply Chain Attack",
+      "publisher": "Trend Micro",
+      "date": "2026-04",
+      "url": "https://www.trendmicro.com/en_us/research/26/d/vercel-breach-oauth-supply-chain.html",
+      "type": "vendor-research",
+      "reliability": "B"
+    },
+    "src_cisa_ai_ot_principles": {
+      "title": "Principles for the Secure Integration of Artificial Intelligence in Operational Technology",
+      "publisher": "CISA + NSA + Five Eyes + partners",
+      "date": "2025-12-03",
+      "url": "https://www.cisa.gov/resources-tools/resources/principles-secure-integration-artificial-intelligence-operational-technology",
+      "type": "government",
+      "reliability": "A"
+    },
+    "src_cisa_ci_fortify": {
+      "title": "CISA CI Fortify Initiative — Critical Infrastructure Operating Offline During Cyberattacks",
+      "publisher": "CISA",
+      "date": "2026-05-06",
+      "url": "https://therecord.media/cisa-initiative-aims-for-critical-infrastructure-to-operate-during-cyberattacks",
+      "type": "government",
+      "reliability": "A"
+    },
+    "src_record_volt_typhoon": {
+      "title": "Volt Typhoon Pre-Positioning History — CISA Advisory",
+      "publisher": "The Record (citing CISA)",
+      "date": "2026-05",
+      "url": "https://therecord.media/cisa-initiative-aims-for-critical-infrastructure-to-operate-during-cyberattacks",
+      "type": "news",
+      "reliability": "B"
+    },
+    "src_cio_ai_security_2026": {
+      "title": "The State of AI Security in 2026",
+      "publisher": "CIO Magazine",
+      "date": "2026-04-11",
+      "url": "https://www.cio.com/article/4157398/the-state-of-ai-security-in-2026.html",
+      "type": "industry-analysis",
+      "reliability": "B"
+    },
+    "src_csa_ai_vuln_storm": {
+      "title": "AI Vulnerability: Security Program Guide for CISOs",
+      "publisher": "Cloud Security Alliance",
+      "date": "2026-04",
+      "url": "https://cloudsecurityalliance.org/artifacts/the-ai-vulnerability-storm",
+      "type": "industry-analysis",
+      "reliability": "B"
+    },
+    "src_anthropic_gtg1002": {
+      "title": "Disrupting the first reported AI-orchestrated cyber espionage campaign",
+      "publisher": "Anthropic",
+      "date": "2025-11-13",
+      "url": "https://assets.anthropic.com/m/ec212e6566a0d47/original/Disrupting-the-first-reported-AI-orchestrated-cyber-espionage-campaign.pdf",
+      "type": "primary-vendor-disclosure",
+      "reliability": "A"
+    },
+    "src_helpnet_anthropic_claude": {
+      "title": "Chinese cyber spies used Claude AI to automate 90% of their attack campaign",
+      "publisher": "Help Net Security (covering Anthropic disclosure)",
+      "date": "2025-11-14",
+      "url": "https://www.helpnetsecurity.com/2025/11/14/claude-ai-automated-cyberattack/",
+      "type": "news",
+      "reliability": "B"
+    },
+    "src_pla_intelligentization": {
+      "title": "Codifying Intelligentized Warfare: The PLA's Doctrine Turn in Science of Military Strategy 2020",
+      "publisher": "ResearchGate / academic",
+      "date": "2025-10-17",
+      "url": "https://www.researchgate.net/publication/396513860_Codifying_Intelligentized_Warfare_The_People's_Liberation_Army's_Doctrine's_Turn_in_Science_of_Military_Strategy_2020",
+      "type": "academic",
+      "reliability": "A"
+    },
+    "src_fpri_cognitive_warfare": {
+      "title": "AI Dependence and Political Blind Spots Undermine Beijing's War Strategy",
+      "publisher": "Foreign Policy Research Institute",
+      "date": "2025-03-18",
+      "url": "https://www.fpri.org/article/2025/03/ai-dependence-and-political-blind-spots-undermine-beijings-war-strategy/",
+      "type": "think-tank",
+      "reliability": "B"
+    },
+    "src_sonatype_timeline": {
+      "title": "Software Supply Chain Vulnerability Timeline",
+      "publisher": "Sonatype",
+      "date": "2026",
+      "url": "https://www.sonatype.com/resources/vulnerability-timeline",
+      "type": "vendor-data",
+      "reliability": "B"
+    },
+    "src_safedep_tanstack": {
+      "title": "Mass Supply Chain Attack Hits TanStack, Mistral AI npm and PyPI Packages",
+      "publisher": "SafeDep",
+      "date": "2026-05",
+      "url": "https://safedep.io/mass-npm-supply-chain-attack-tanstack-mistral/",
+      "type": "vendor-research",
+      "reliability": "B"
+    },
+    "src_bankinfo_mini_shai": {
+      "title": "Mass Supply-Chain Attack Slams npm and PyPi, Hits Mistral AI",
+      "publisher": "BankInfoSecurity / StepSecurity",
+      "date": "2026-05",
+      "url": "https://www.bankinfosecurity.com/mass-supply-chain-attack-slams-npm-pypi-hits-mistral-ai-a-31672",
+      "type": "news",
+      "reliability": "B"
+    },
+    "src_brightbyte_sca_history": {
+      "title": "Supply Chain Attacks 2024-2026: XZ, npm, and PyPI Lessons",
+      "publisher": "BrightByte Playbook",
+      "date": "2026-04",
+      "url": "https://thebrightbyte.com/playbook/insights/supply-chain-attacks-xz-npm-pypi",
+      "type": "industry-analysis",
+      "reliability": "B"
+    },
+    "src_register_sap_intercom": {
+      "title": "Ongoing supply chain attacks worm into SAP npm packages",
+      "publisher": "The Register",
+      "date": "2026-04-30",
+      "url": "https://www.theregister.com/2026/04/30/supply_chain_attacks_sap_npm_packages/",
+      "type": "news",
+      "reliability": "B"
+    },
+    "src_socradar_wormgpt": {
+      "title": "WormGPT: The Blueprint for Malicious AI",
+      "publisher": "SOCRadar",
+      "date": "2026-04",
+      "url": "https://socradar.io/blog/wormgpt-the-blueprint-for-malicious-ai/",
+      "type": "vendor-research",
+      "reliability": "B"
+    },
+    "src_brightside_criminal_ai": {
+      "title": "From WormGPT to Mythos: AI in Cybersecurity 2021-2026",
+      "publisher": "Brightside AI",
+      "date": "2026-05",
+      "url": "https://www.brside.com/blog/from-wormgpt-to-mythos-ai-in-cybersecurity-2021%E2%80%932026",
+      "type": "industry-analysis",
+      "reliability": "B"
+    },
+    "src_trendmicro_criminal_ai": {
+      "title": "An Update on the State of Criminal AI: Crime as a Service, AI as the Multiplier",
+      "publisher": "Trend Micro",
+      "date": "2026-01-28",
+      "url": "https://www.trendmicro.com/vinfo/us/security/news/cybercrime-and-digital-threats/the-state-of-criminal-ai",
+      "type": "vendor-research",
+      "reliability": "B"
+    },
+    "src_ivanti_overhyped": {
+      "title": "Are AI Cybersecurity Threats Overhyped?",
+      "publisher": "Ivanti (citing Picus 2025 Red Report)",
+      "date": "2026-03-17",
+      "url": "https://www.ivanti.com/blog/ai-cybersecurity-threats",
+      "type": "vendor-blog",
+      "reliability": "B"
+    },
+    "src_cyberstartup_index_ai": {
+      "title": "AI-Native Security Startups 2026 Ranking",
+      "publisher": "CyberStartup Index",
+      "date": "2026-04-10",
+      "url": "https://cyberstartupindex.com/categories/ai-native-security",
+      "type": "industry-data",
+      "reliability": "C"
+    },
+    "src_softwarestrategies_agentic": {
+      "title": "$3.6 Billion in Crunchbase funding, $96 Billion in M&A, and 10 Agentic AI security startups Reshaping 2026",
+      "publisher": "SoftwareStrategiesBlog",
+      "date": "2026-04-10",
+      "url": "https://softwarestrategiesblog.com/2026/03/28/agentic-ai-security-startups-funding-mna-rsac-2026/",
+      "type": "industry-analysis",
+      "reliability": "B"
+    },
+    "src_helpnet_funding": {
+      "title": "Cyber valuations climb as capital concentrates, AI security expands",
+      "publisher": "Help Net Security",
+      "date": "2026-02-25",
+      "url": "https://www.helpnetsecurity.com/2026/02/25/cybersecurity-venture-funding-ai-security-expands/",
+      "type": "news",
+      "reliability": "B"
+    },
+    "src_resilience_predictions": {
+      "title": "How our 2025 cybersecurity predictions held up",
+      "publisher": "Resilience",
+      "date": "2026-02-25",
+      "url": "https://cyberresilience.com/blog/how-resilience-2025-predictions-held-up",
+      "type": "vendor-blog",
+      "reliability": "C"
+    },
+    "src_paulweiss_anthropic": {
+      "title": "Anthropic Disrupts First Documented Case of Large-Scale AI-Orchestrated Cyberattack",
+      "publisher": "Paul, Weiss legal analysis",
+      "date": "2025-11-25",
+      "url": "https://www.paulweiss.com/insights/client-memos/anthropic-disrupts-first-documented-case-of-large-scale-ai-orchestrated-cyberattack",
+      "type": "legal-analysis",
+      "reliability": "A"
+    },
+    "src_house_homeland_security": {
+      "title": "House Homeland Security Committee Letter to Anthropic Requesting Testimony",
+      "publisher": "U.S. House Committee on Homeland Security",
+      "date": "2025-11-26",
+      "url": "https://homeland.house.gov/wp-content/uploads/2025/11/2025-11-26-CHS-to-Anthropic-re-Request-to-Testify.pdf",
+      "type": "government",
+      "reliability": "A"
+    },
+    "src_openai_state_actors": {
+      "title": "Disrupting malicious uses of AI by state-affiliated threat actors",
+      "publisher": "OpenAI",
+      "date": "2024-02",
+      "url": "https://openai.com/index/disrupting-malicious-uses-of-ai-by-state-affiliated-threat-actors/",
+      "type": "primary-vendor-disclosure",
+      "reliability": "A"
+    },
+    "src_openai_october_2025": {
+      "title": "Disrupting malicious uses of AI: an update (October 2025)",
+      "publisher": "OpenAI",
+      "date": "2025-10",
+      "url": "https://cdn.openai.com/threat-intelligence-reports/7d662b68-952f-4dfd-a2f2-fe55b041cc4a/disrupting-malicious-uses-of-ai-october-2025.pdf",
+      "type": "primary-vendor-disclosure",
+      "reliability": "A"
+    },
+    "src_scripps_openai_evolution": {
+      "title": "'Evolution, not revolution': OpenAI tracks growing misuse of AI by scammers and state actors",
+      "publisher": "Scripps News / AOL",
+      "date": "2025-10-07",
+      "url": "https://www.scrippsnews.com/science-and-tech/evolution-not-revolution-openai-tracks-growing-misuse-of-ai-by-scammers-and-state-actors",
+      "type": "news",
+      "reliability": "B"
+    },
+    "src_anthropic_transparency_hub": {
+      "title": "Anthropic Transparency Hub",
+      "publisher": "Anthropic",
+      "date": "2026",
+      "url": "https://www.anthropic.com/transparency/system-trust-reporting",
+      "type": "primary-vendor",
+      "reliability": "A"
+    },
+    "src_anthropic_aug_2025": {
+      "title": "Detecting and countering misuse of AI: August 2025",
+      "publisher": "Anthropic",
+      "date": "2025-08",
+      "url": "https://www.anthropic.com/news/detecting-countering-misuse-aug-2025",
+      "type": "primary-vendor-disclosure",
+      "reliability": "A"
+    },
+    "src_ironscales_anthropic": {
+      "title": "AI Gone Rogue - What Anthropic's Report Means for Cybersecurity",
+      "publisher": "Ironscales",
+      "date": "2025-09-11",
+      "url": "https://ironscales.com/blog/ai-gone-rogue-what-anthropic-report-means-for-cybersecurity",
+      "type": "vendor-blog",
+      "reliability": "C",
+      "notes": "Secondary characterization of Anthropic primary report"
+    },
+    "src_splunk_anthropic": {
+      "title": "Anthropic Report Contrasts AI Fears to New AI Efficiencies",
+      "publisher": "Splunk",
+      "date": "2025-11",
+      "url": "https://www.splunk.com/en_us/blog/ciso-circle/ai-cybersecurity-threat-operations.html",
+      "type": "vendor-blog",
+      "reliability": "B"
+    },
+    "src_poisonedrag_usenix": {
+      "title": "PoisonedRAG: Knowledge Corruption Attacks to Retrieval-Augmented Generation of Large Language Models",
+      "publisher": "USENIX Security Symposium",
+      "date": "2025",
+      "url": "https://www.usenix.org/conference/usenixsecurity25/presentation/zou-poisonedrag",
+      "type": "academic-peer-reviewed",
+      "reliability": "A"
+    },
+    "src_mcptox_instatunnel": {
+      "title": "Securing MCP Servers: The 2026 Guide to AI Tool Tunneling (MCPTox findings)",
+      "publisher": "InstaTunnel / MCPTox benchmark",
+      "date": "2026-03-23",
+      "url": "https://medium.com/@instatunnel/securing-mcp-servers-the-2026-guide-to-ai-tool-tunneling-aafa113b08db",
+      "type": "industry-analysis",
+      "reliability": "B"
+    },
+    "src_pipelab_mcp_state": {
+      "title": "The State of MCP Security 2026: Incidents, Attack Patterns, and Defense Coverage",
+      "publisher": "PipeLab",
+      "date": "2026-04-12",
+      "url": "https://pipelab.org/blog/state-of-mcp-security-2026/",
+      "type": "industry-analysis",
+      "reliability": "B"
+    },
+    "src_mdpi_prompt_injection_review": {
+      "title": "Prompt Injection Attacks in Large Language Models and AI Agent Systems: Comprehensive Review",
+      "publisher": "MDPI / Information",
+      "date": "2026-01",
+      "url": "https://www.mdpi.com/2078-2489/17/1/54",
+      "type": "academic",
+      "reliability": "B"
+    },
+    "src_arxiv_sok_agentic": {
+      "title": "SoK: The Attack Surface of Agentic AI — Tools, and Autonomy",
+      "publisher": "arXiv (University of Guelph)",
+      "date": "2026",
+      "url": "https://arxiv.org/pdf/2603.22928",
+      "type": "academic",
+      "reliability": "B"
+    },
+    "src_schneider_rag_security": {
+      "title": "RAG security: the forgotten attack surface",
+      "publisher": "Christian Schneider",
+      "date": "2026-02-19",
+      "url": "https://christian-schneider.net/blog/rag-security-forgotten-attack-surface/",
+      "type": "researcher-blog",
+      "reliability": "B"
+    },
+    "src_snyk_postmark": {
+      "title": "Malicious MCP Server on npm postmark-mcp Harvests Emails",
+      "publisher": "Snyk",
+      "date": "2025-09-25",
+      "url": "https://snyk.io/blog/malicious-mcp-server-on-npm-postmark-mcp-harvests-emails/",
+      "type": "vendor-research",
+      "reliability": "B"
+    },
+    "src_koi_postmark": {
+      "title": "First Malicious MCP in the Wild: The Postmark Backdoor That's Stealing Your Emails",
+      "publisher": "Koi Security",
+      "date": "2025-09-25",
+      "url": "https://www.koi.ai/blog/postmark-mcp-npm-malicious-backdoor-email-theft",
+      "type": "vendor-research",
+      "reliability": "B",
+      "notes": "Original discovery and disclosure of the postmark-mcp backdoor"
+    },
+    "src_postmark_official": {
+      "title": "Security Alert: Malicious 'postmark-mcp' npm Package Impersonating Postmark",
+      "publisher": "Postmark (official statement)",
+      "date": "2025-09-29",
+      "url": "https://postmarkapp.com/blog/information-regarding-malicious-postmark-mcp-package",
+      "type": "primary-affected-party",
+      "reliability": "A"
+    },
+    "src_register_postmark": {
+      "title": "Fake Postmark MCP npm package stole emails with one-liner",
+      "publisher": "The Register",
+      "date": "2025-09-30",
+      "url": "https://www.theregister.com/2025/09/29/postmark_mcp_server_code_hijacked/",
+      "type": "news",
+      "reliability": "B"
+    },
+    "src_darkreading_postmark": {
+      "title": "Sneaky, Malicious MCP Server Exfiltrates Secrets via BCC",
+      "publisher": "Dark Reading",
+      "date": "2025-09-29",
+      "url": "https://www.darkreading.com/application-security/malicious-mcp-server-exfiltrates-secrets-bcc",
+      "type": "news",
+      "reliability": "B"
+    },
+    "src_truefoundry_mcpoison": {
+      "title": "MCP Tool Poisoning (CVE-2025-54136): A Structural Vulnerability in Agent Context",
+      "publisher": "TrueFoundry",
+      "date": "2026-05",
+      "url": "https://www.truefoundry.com/blog/blog-mcp-tool-poisoning-gateway-defense",
+      "type": "vendor-research",
+      "reliability": "B"
+    },
+    "src_itecs_ox_security": {
+      "title": "MCP Tool Poisoning: Enterprise AI Agent Security in 2026 (OX Security disclosure)",
+      "publisher": "ITECS",
+      "date": "2026-05",
+      "url": "https://itecsonline.com/post/mcp-tool-poisoning-enterprise-ai-agent-security-2026",
+      "type": "industry-analysis",
+      "reliability": "C"
+    },
+    "src_paloalto_defenders": {
+      "title": "Defender's Guide to the Frontier AI Impact on Cybersecurity: May 2026 Update",
+      "publisher": "Palo Alto Networks",
+      "date": "2026-05",
+      "url": "https://www.paloaltonetworks.com/blog/2026/05/defenders-guide-frontier-ai-impact-cybersecurity-may-2026-update/",
+      "type": "vendor-research",
+      "reliability": "B"
+    },
+    "src_esecurity_planet_may26": {
+      "title": "Supply Chain Attacks, AI Security, and Major Breaches Define This Week in Cybersecurity May 2026",
+      "publisher": "eSecurity Planet",
+      "date": "2026-05",
+      "url": "https://www.esecurityplanet.com/weekly-roundup/supply-chain-attacks-ai-security-and-major-breaches-define-this-week-in-cybersecurity-in-may-2026/",
+      "type": "news",
+      "reliability": "C"
+    },
+    "src_cybersecurity_news_predictions": {
+      "title": "100+ Cybersecurity Predictions 2026 for Industry Experts as the AI Adapted in the Wild",
+      "publisher": "Cybersecurity News",
+      "date": "2025-12-25",
+      "url": "https://cybersecuritynews.com/cybersecurity-predictions-2026/",
+      "type": "vendor-blog",
+      "reliability": "C"
+    }
+  }
+}

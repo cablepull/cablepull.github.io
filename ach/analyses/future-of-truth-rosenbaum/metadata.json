@@ -1,0 +1,21 @@
+{
+  "id": "future-of-truth-rosenbaum",
+  "title": "The Future of Truth — AI-Fabricated Quotes Incident",
+  "subtitle": "Why does a book about AI-driven truth decay contain AI-fabricated quotes?",
+  "version": "1.0",
+  "date": "2026-05-19",
+  "analyst": "Cablepull",
+  "languages": ["en"],
+  "defaultLanguage": "en",
+  "analyticQuestion": "Why does a credentialed media-establishment book about AI-driven truth decay contain more than six AI-fabricated or misattributed quotes — and which hypothesis best explains the pattern of errors, editorial pipeline failure, and author's response framing?",
+  "keyJudgment": {
+    "summary": "The best-supported explanation is ordinary AI-assisted research negligence amplified by an editorial pipeline that treated high-status endorsements as a substitute for fact-checking (H1 + H4 in combination). Confidence: Moderate-to-High.",
+    "confidence": "moderate-to-high"
+  },
+  "subDomains": [],
+  "inflectionPoints": {},
+  "remainingGaps": [
+    "Internal communications between author, editor, and publisher about manuscript review",
+    "Statements from endorsers about whether they fact-checked the manuscript"
+  ]
+}

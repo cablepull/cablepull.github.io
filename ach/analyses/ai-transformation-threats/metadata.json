@@ -1,0 +1,71 @@
+{
+  "id": "ai-transformation-threats",
+  "title": "Are Threat Actors Preparing for and Exploiting AI Transformations?",
+  "subtitle": "ACH across four sub-domains: AI-as-tool, AI-as-target, AI-transformed workflows, AI-relevant pre-positioning",
+  "version": "3.0",
+  "date": "2026-05-19",
+  "analyst": "Cablepull",
+  "languages": ["en"],
+  "defaultLanguage": "en",
+  "analyticQuestion": "Are threat actors deliberately preparing for and exploiting the enterprise transformation toward AI/agentic systems — and what does the actual evidence show about the scope, intent, and maturity of that activity, separated from vendor-narrative inflation and research-versus-in-the-wild misclassification?",
+  "keyJudgment": {
+    "summary": "Hypothesis is partially supported with sharp variation across four sub-domains. AI-as-tool is mature and confirmed; AI-as-target is observed but opportunistic, not strategic; AI-transformed workflows are exploitable and now seeing first in-the-wild attacks; deliberate state pre-positioning against AI orchestration layers remains inferred from trajectory, not documented in trace evidence.",
+    "confidence": "moderate-to-high",
+    "confidenceScale": ["low", "moderate", "moderate-to-high", "high", "very-high"]
+  },
+  "subDomains": [
+    {
+      "id": "A",
+      "name": "AI-as-tool",
+      "definition": "Attackers using LLMs and agents to conduct attacks against conventional targets",
+      "maturityQuestion": "How much of attacker tradecraft is now AI-accelerated?",
+      "confidence": "high",
+      "verdict": "Confirmed, mature, observed in the wild"
+    },
+    {
+      "id": "B",
+      "name": "AI-as-target",
+      "definition": "Attacks against AI infrastructure itself (supply chain on AI libs, model trojans, MCP server compromise)",
+      "maturityQuestion": "Are we seeing deliberate targeting of AI components?",
+      "confidence": "high",
+      "verdict": "Observed, opportunistic, not strategic"
+    },
+    {
+      "id": "C",
+      "name": "AI-transformed workflows as surface",
+      "definition": "Exploitation of enterprises because they've adopted AI (prompt injection in agents, RAG poisoning, indirect injection, agent privilege abuse)",
+      "maturityQuestion": "Is this in-the-wild or still mostly PoC?",
+      "confidence": "moderate-to-high",
+      "verdict": "Real, first in-the-wild attacks now documented (postmark-mcp), most corpus still research"
+    },
+    {
+      "id": "D",
+      "name": "AI-relevant pre-positioning",
+      "definition": "Long-horizon implant activity in environments that will host AI orchestration (Volt Typhoon-class staying-power against future AI-mediated effects)",
+      "maturityQuestion": "Is there strategic, multi-year preparation?",
+      "confidence": "low-to-moderate",
+      "verdict": "Inferred from doctrinal trajectory, not directly evidenced in public attribution"
+    }
+  ],
+  "inflectionPoints": {
+    "criminal": {
+      "name": "Criminal opportunistic exploitation of MCP infrastructure",
+      "status": "crossed",
+      "markedBy": "postmark-mcp incident (September 2025) — first publicly documented in-the-wild malicious MCP server",
+      "evidenceId": "E68"
+    },
+    "state": {
+      "name": "Deliberate state pre-positioning against AI orchestration layers",
+      "status": "not-yet-crossed",
+      "currentClosestEvidence": "GTG-1002 (state actor uses MCP as orchestration platform, but targets are conventional)",
+      "evidenceId": "E75",
+      "watchSignature": "Compromise of widely-used MCP server with payload structured for selective behavioral modification rather than broad credential harvesting"
+    }
+  },
+  "remainingGaps": [
+    "Anthropic August 2025 primary report verification (currently read through secondary characterizations)",
+    "Google Threat Intelligence Group AI-enabled malware disclosures",
+    "Primary attribution for the Blackswan-reported Mexican government Claude jailbreak incident",
+    "Next 6-18 months of MCP-specific incident disclosures to test H1 inflection"
+  ]
+}

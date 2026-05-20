@@ -1,0 +1,72 @@
+{
+  "scoreScale": {
+    "-2": { "symbol": "−−", "label": "Strongly inconsistent", "color": "#dc2626" },
+    "-1": { "symbol": "−",  "label": "Inconsistent",          "color": "#f87171" },
+    "0":  { "symbol": "·",  "label": "Neutral / not relevant", "color": "#6b7280" },
+    "1":  { "symbol": "+",  "label": "Consistent",            "color": "#86efac" },
+    "2":  { "symbol": "++", "label": "Strongly consistent",   "color": "#22c55e" }
+  },
+  "confidenceScale": {
+    "low":              { "weight": 0.25, "label": "Low" },
+    "moderate":         { "weight": 0.50, "label": "Moderate" },
+    "moderate-to-high": { "weight": 0.65, "label": "Moderate-to-High" },
+    "high":             { "weight": 0.80, "label": "High" },
+    "very-high":        { "weight": 0.95, "label": "Very High" }
+  },
+  "hypotheses": [
+    {
+      "id": "H1",
+      "shortLabel": "Ordinary negligence",
+      "label": "Ordinary author negligence — over-reliance on LLMs without verification",
+      "description": "The author drafted with AI tools and did not verify quoted attributions, producing the errors that LLM-assisted research typically produces.",
+      "assessment": "Best supported. Consistent with every primary-evidence item; explains the mix of error types; consistent with pre-disclosed AI use and author's response framing.",
+      "confidence": "high",
+      "counterevidence": ["Internal communications showing author or editor knew about errors and shipped anyway"]
+    },
+    {
+      "id": "H2",
+      "shortLabel": "Manufactured controversy",
+      "label": "Deliberate manufactured controversy",
+      "description": "Errors were planted or knowingly tolerated for 'ironic' PR payoff.",
+      "assessment": "Weakly supported by motive alone; contradicted by trace, means, and risk evidence.",
+      "confidence": "low",
+      "counterevidence": ["Discovery of PR memo or coordinated pre-placement timeline"]
+    },
+    {
+      "id": "H3",
+      "shortLabel": "Publisher pipeline failure",
+      "label": "Publisher fact-checking pipeline failure",
+      "description": "Atria/Simon & Schuster verification workflow degraded for non-fiction.",
+      "assessment": "Structurally supported. Trade non-fiction fact-checking has been thinning for years.",
+      "confidence": "moderate",
+      "counterevidence": ["Demonstration that publisher pipeline is similar to peers"]
+    },
+    {
+      "id": "H4",
+      "shortLabel": "Credentialing effect",
+      "label": "Credentialing ecosystem effect",
+      "description": "Ressa foreword, Atlantic CEO blurb, and other endorsements substituted for fact-checking.",
+      "assessment": "Strongly supported by inference. Best complement to H1.",
+      "confidence": "moderate-to-high",
+      "counterevidence": ["Statements from Ressa or endorsers confirming they fact-checked"]
+    },
+    {
+      "id": "H5",
+      "shortLabel": "Genre artifact",
+      "label": "Trade non-fiction genre artifact",
+      "description": "Thought leadership books are now routinely AI-augmented; this is what the failure mode looks like.",
+      "assessment": "Supported and useful framing. Vandermeersch case (E9) establishes broader pattern.",
+      "confidence": "moderate-to-high",
+      "counterevidence": ["This is a one-off; no comparable AI-fabrication failures in 2026 trade non-fiction"]
+    },
+    {
+      "id": "H6",
+      "shortLabel": "AI tool failure",
+      "label": "Mixed-mode AI failure mechanism",
+      "description": "Author used LLMs in a way that produced source-mixing errors specifically resistant to skim verification.",
+      "assessment": "Supported as mechanism, not as exoneration. Explains how H1 happened mechanically.",
+      "confidence": "moderate",
+      "counterevidence": []
+    }
+  ]
+}

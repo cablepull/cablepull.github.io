@@ -1,0 +1,36 @@
+{
+  "$schema": "https://cablepull.github.io/ach-explorer/schemas/index.schema.json",
+  "name": "ACH Explorer",
+  "version": "1.0.0",
+  "description": "Analysis of Competing Hypotheses workbench. Each analysis lives in its own directory under analyses/<id>/.",
+  "discovery": {
+    "convention": "Each entry below points to a directory containing metadata.json, hypotheses.json, evidence.json, sources.json, and optional i18n/<lang>.json files.",
+    "supportedLanguages": ["en"]
+  },
+  "analyses": [
+    {
+      "id": "ai-transformation-threats",
+      "path": "ai-transformation-threats",
+      "title": "Are Threat Actors Preparing for AI Transformations?",
+      "subtitle": "Multi-domain ACH on adversarial use and targeting of AI infrastructure",
+      "date": "2026-05-19",
+      "analyst": "Cablepull",
+      "evidenceCount": 70,
+      "hypothesisCount": 7,
+      "status": "active",
+      "tags": ["ai-security", "threat-intel", "supply-chain", "mcp", "nation-state"]
+    },
+    {
+      "id": "future-of-truth-rosenbaum",
+      "path": "future-of-truth-rosenbaum",
+      "title": "The Future of Truth — AI-Fabricated Quotes Incident",
+      "subtitle": "ACH on Rosenbaum book containing AI-generated misattributed quotes",
+      "date": "2026-05-19",
+      "analyst": "Cablepull",
+      "evidenceCount": 13,
+      "hypothesisCount": 6,
+      "status": "active",
+      "tags": ["media", "ai-attribution", "narrative-analysis"]
+    }
+  ]
+}

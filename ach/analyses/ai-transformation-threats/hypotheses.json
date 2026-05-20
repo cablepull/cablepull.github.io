@@ -1,0 +1,116 @@
+{
+  "scoreScale": {
+    "-2": { "symbol": "−−", "label": "Strongly inconsistent", "color": "#dc2626" },
+    "-1": { "symbol": "−",  "label": "Inconsistent",          "color": "#f87171" },
+    "0":  { "symbol": "·",  "label": "Neutral / not relevant", "color": "#6b7280" },
+    "1":  { "symbol": "+",  "label": "Consistent",            "color": "#86efac" },
+    "2":  { "symbol": "++", "label": "Strongly consistent",   "color": "#22c55e" }
+  },
+  "confidenceScale": {
+    "low":              { "weight": 0.25, "label": "Low — thin, circular, or mostly inferential evidence" },
+    "moderate":         { "weight": 0.50, "label": "Moderate — multiple independent indicators, but direct evidence missing" },
+    "moderate-to-high": { "weight": 0.65, "label": "Moderate-to-High — strong indicators with some direct evidence" },
+    "high":             { "weight": 0.80, "label": "High — strong, corroborated, diagnostic evidence" },
+    "very-high":        { "weight": 0.95, "label": "Very High — direct evidence exists and alternatives strongly contradicted" }
+  },
+  "hypotheses": [
+    {
+      "id": "H1",
+      "shortLabel": "State pre-positioning",
+      "label": "State pre-positioning against AI-transformed environments",
+      "description": "Sophisticated nation-state actors are deliberately pre-positioning attacks against AI infrastructure and AI-transformed enterprise workflows as a strategic investment.",
+      "assessment": "Holds at moderate-to-high. PLA doctrinal evidence (E16/E17) plus GTG-1002 detail (E11/E27/E39/E75) and second Vietnam campaign (E58) align motive, means, and partial trace. No public attribution yet of pre-positioning specifically against AI orchestration layers in critical infrastructure.",
+      "confidence": "moderate-to-high",
+      "counterevidence": [
+        "Multi-year passage with no further GTG-class disclosures",
+        "PLA doctrine remaining theoretical without operational expression",
+        "No attributable nation-state campaign explicitly targeting AI orchestration layers as objective (vs. using AI as tool against conventional targets)"
+      ],
+      "watchFor": "Compromise of widely-used MCP server with payload structured for selective behavioral modification or backdoor activation"
+    },
+    {
+      "id": "H2",
+      "shortLabel": "Criminal supply chain",
+      "label": "Criminal opportunistic exploitation of AI-adoption gap",
+      "description": "Threat actors are opportunistically exploiting the AI-adoption gap, primarily via supply chain attacks — economically rational, not strategically planned.",
+      "assessment": "Strong and currently dominant pattern. TeamPCP target mix (E1/E2/E21), Mini-Shai-Hulud credential scope (E20), Hugging Face trojan pattern (E12), Mercor-via-LiteLLM (E3), and now postmark-mcp (E68) all fit. AI packages and MCP servers are basket members, not exclusive focus.",
+      "confidence": "high",
+      "counterevidence": [
+        "A supply-chain wave targeting exclusively AI-pure components with no non-AI targets in the same campaigns",
+        "Disappearance of opportunistic mass-compromise patterns",
+        "TeamPCP-class actors shifting to AI-only target lists"
+      ],
+      "watchFor": "Target selection narrowing to AI-pure components only"
+    },
+    {
+      "id": "H3",
+      "shortLabel": "AI-as-tool dominant",
+      "label": "AI-as-tool is the dominant pattern, not AI-as-target",
+      "description": "Most observed 'AI attack' activity is AI being used as an attacker tool, not attacks on AI itself; the target taxonomy is being conflated.",
+      "assessment": "Very strong. OpenAI principal investigator on record: 'incremental efficiency gains, not new capabilities' (E55). Storm-2139 stolen-credential pattern (E26), GTG-1002 commodity orchestration (E27), Splunk 'not autonomous yet' (E60) all reinforce.",
+      "confidence": "high",
+      "counterevidence": [
+        "Emergence of novel-class attacks specifically targeting AI infrastructure with no conventional analog",
+        "Vendor primary sources beginning to revise upward on capability assessment",
+        "Documented adversary capabilities exceeding what stolen-credential-on-frontier-model can produce"
+      ],
+      "watchFor": "Custom adversarial AI tooling with capability ceiling above current frontier models"
+    },
+    {
+      "id": "H4",
+      "shortLabel": "PoC inflation",
+      "label": "Research and PoC traffic inflating in-the-wild numbers",
+      "description": "A meaningful share of reported 'AI threat' volume is research, PoC, and red-team disclosure mis-classified as in-the-wild adversary activity.",
+      "assessment": "Moderate, slightly weakening. Picus 2025 Red Report empirical finding of no AI-driven malware uptick (E30) and predicted-vs-realized gap (E36/E37) still support. But MCPTox empirical attack success (E62), Endor MCP vulnerability prevalence (E63), and postmark-mcp (E68) show the gap is closing.",
+      "confidence": "moderate",
+      "counterevidence": [
+        "Picus or equivalent telemetry showing year-over-year uptick in AI-driven malware techniques",
+        "Attributable adversary operations against agentic systems exceeding red-team disclosures by clear margin",
+        "Production AI infrastructure compromises with adversary attribution increasing"
+      ],
+      "watchFor": "Independent telemetry diverging from research-corpus pattern"
+    },
+    {
+      "id": "H5",
+      "shortLabel": "Vendor inflation",
+      "label": "Vendor and media narrative inflation",
+      "description": "Vendor and media incentives inflate ordinary supply chain attacks and traditional fraud into 'AI threats' for funding and coverage reasons.",
+      "assessment": "Material contributing factor. $4.1B AI-security VC funding (E31), Gartner $172B projection (E32), 7AI $130M Series A (E33) establish a structural incentive. Frame divergence on same incidents (E43) and headline packaging (E42/E44) show it operating. Partially offset by primary vendor sources actively deflating (E55/E60).",
+      "confidence": "moderate-to-high",
+      "counterevidence": [
+        "Picus-equivalent empirical measurements aligning with vendor projections",
+        "Independent academic measurement studies showing comparable threat volumes to vendor claims",
+        "AI security spending growing without corresponding incident growth"
+      ],
+      "watchFor": "Convergence of empirical telemetry and vendor projections"
+    },
+    {
+      "id": "H6",
+      "shortLabel": "Opportunistic piggyback",
+      "label": "Opportunistic piggybacking on AI-adjacent libraries",
+      "description": "Real, novel-class attacks against AI infrastructure exist but are still rare; opportunistic supply-chain piggybacking on AI libraries is the dominant pattern.",
+      "assessment": "Strong. Best single descriptor of current supply-chain reality. Now extends explicitly to MCP via postmark-mcp (E68). 188% YoY malicious packages (E19), Mini-Shai-Hulud broad credential scope (E20), bulk scope targeting pattern (E21) all reinforce.",
+      "confidence": "high",
+      "counterevidence": [
+        "Strategic concentration of attacks on a specific AI sub-component",
+        "Disappearance of mass-campaign target mixing",
+        "Sophisticated payloads specifically designed to persist past inference time"
+      ],
+      "watchFor": "Payload sophistication exceeding credential-harvest baseline"
+    },
+    {
+      "id": "H7",
+      "shortLabel": "Capability building",
+      "label": "Adversaries in capability-building / scoping phase",
+      "description": "A fraction of adversary activity reflects deliberate capability-building — toolchains, models, infrastructure — not yet deployed at scale. The 'scoping phase' framing for forward-looking analysis.",
+      "assessment": "Strengthened. GTG-1002 (E11/E27/E39/E75) is the cleanest example of an adversary building orchestration capability from commodity components. Hallucination ceiling (E28) limits scaling speed. PLA doctrinal trajectory (E16) is the strongest forward-looking signal. MCPTox empirical attack success (E62) shows the playbook is available.",
+      "confidence": "moderate-to-high",
+      "counterevidence": [
+        "12-24 more months passing with no further GTG-class adversary capability disclosures",
+        "Hallucination ceiling proving binding for adversary operations at scale",
+        "Capability ceiling on stolen-API-key access proving sufficient deterrent"
+      ],
+      "watchFor": "Adversary tooling that explicitly works around hallucination limitations"
+    }
+  ]
+}

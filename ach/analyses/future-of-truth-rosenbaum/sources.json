@@ -1,0 +1,36 @@
+{
+  "sources": {
+    "src_nyt_rosenbaum": {
+      "title": "Book About AI's Effects on Truth Found to Contain AI-Hallucinated Quotations",
+      "publisher": "New York Times (via SF Examiner reprint)",
+      "date": "2026-05-19",
+      "url": "https://www.sfexaminer.com/book-on-truth-in-the-age-of-ai-contains-quotes-made-up-by-ai/article_1f549d3e-005a-5d0d-9e06-cdbd1b846a36.html",
+      "type": "primary-news",
+      "reliability": "A"
+    },
+    "src_futurism_rosenbaum": {
+      "title": "Book About AI's Effects on the Future of Truth Found to Contain Slew of AI-Hallucinated Quotations",
+      "publisher": "Futurism",
+      "date": "2026-05-19",
+      "url": "https://futurism.com/artificial-intelligence/book-ai-truth-ai-hallucinated-quotes",
+      "type": "news",
+      "reliability": "B"
+    },
+    "src_dailybeast_rosenbaum": {
+      "title": "Author Steven Rosenbaum Busted Using Fake AI-Generated Quotes in Book Critiquing AI",
+      "publisher": "Daily Beast",
+      "date": "2026-05-19",
+      "url": "https://www.thedailybeast.com/author-steven-rosenbaum-busted-using-fake-ai-generated-quotes-in-book-critiquing-ai/",
+      "type": "news",
+      "reliability": "B"
+    },
+    "src_cjr_vandermeersch": {
+      "title": "Did I Really Say That? — Dutch journalist AI fabrications",
+      "publisher": "Columbia Journalism Review",
+      "date": "2026-03-26",
+      "url": "https://www.cjr.org/tow_center/did-i-really-say-that-dutch-journalist-ai-fabricate-quotes-vandermeersch-mediahuis.php",
+      "type": "industry-analysis",
+      "reliability": "A"
+    }
+  }
+}
