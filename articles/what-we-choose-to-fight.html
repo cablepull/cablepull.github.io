@@ -156,6 +156,23 @@
       color: var(--muted);
     }
 
+    .prose blockquote.pull {
+      border-left: none;
+      padding: 0;
+      margin: 2rem 0;
+      text-align: left;
+    }
+    .prose blockquote.pull p {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-style: normal;
+      font-weight: 800;
+      font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.1rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ember);
+      margin: 0 0 0.5rem;
+    }
+
     .prose strong.thesis {
       background: linear-gradient(transparent 60%, var(--ember-soft) 60%);
     }
@@ -332,11 +349,20 @@
 
       <p>In January 1995, a 20-year-old college student named Tariq Khamisa was delivering pizza in San Diego when a 14-year-old gang member named Tony Hicks shot and killed him.</p>
 
-      <p>Sit with that for a second. Twenty. Fourteen. A pizza order.</p>
+      <p>I'm a father, and I can't read that without putting myself in it. Your son goes out to deliver a pizza. A <em>pizza</em>. He isn't a soldier shipping out. He isn't walking into a war zone. He's doing the kind of job nobody thinks twice about. And he doesn't come home.</p>
 
-      <p>Tariq's father, Azim Khamisa, had every reason to hate that kid for the rest of his life. Nobody would have blamed him. Instead, he reached out to Ples Felix—Tony's grandfather and guardian—and the two of them started working together to keep other kids from ending up on either end of a gun.</p>
+      <p>I imagine it hitting all at once. Disbelief. Grief. Rage. The desperate need to find some reason it makes sense. Except there isn't one. One of the most important people in your life is gone because he went out to bring somebody dinner. Nothing about that will ever make sense.</p>
 
-      <p>Azim put it about as plainly as anyone could: there were victims at both ends of the gun.</p>
+      <p>Tariq's father, Azim Khamisa, was living that. And in the middle of it—not years later, with time and distance to soften it, but while he was still grieving his son—he saw something most of us never would. He looked at the fourteen-year-old who pulled the trigger and saw another victim.</p>
+
+      <blockquote class="pull">
+        <p>"There were victims at both ends of the gun."</p>
+        <cite>Azim Khamisa</cite>
+      </blockquote>
+
+      <p>Think about how clear you have to be to see that. Tariq was a victim of that gang. So was Tony: a fourteen-year-old handed a gun and told to shoot by an eighteen-year-old who should have known better. That doesn't excuse what Tony did. It means that when everything in Azim had every reason to see only one piece of the picture, he saw the whole thing.</p>
+
+      <p>And then he acted on it. He reached out to Ples Felix—Tony's grandfather and guardian—and the two of them started working together to keep other kids from ending up on either end of a gun.</p>
 
       <p>I want to be clear about what that did and didn't do. It didn't bring Tariq back. It didn't make the murder any less evil. It didn't let Tony off the hook—he was tried as an adult and went to prison.</p>
 
@@ -349,6 +375,8 @@
       <p>We know suffering changes people. What we don't talk about much is how much say we actually have in <em>which direction</em>. Or how easily one person's pain becomes somebody else's.</p>
 
       <p>So this is an essay about fighting. Not about giving up the fight. About aiming it.</p>
+
+      <p>Suffering doesn't stay put. It moves from person to person, and right now it's everywhere. Every one of us is a place where it either keeps going or stops.</p>
 
       <h2>The second arrow</h2>
 
@@ -385,11 +413,14 @@
         <cite>Sallatha Sutta, SN 36.6, trans. Thanissaro Bhikkhu</cite>
       </blockquote>
 
-      <p>You've seen it. Somebody gets betrayed and starts distrusting people who never did a thing to them. Somebody gets humiliated and hears every bit of feedback as an attack. Somebody gets treated unjustly and gets so good at spotting injustice that they start finding it where there isn't any.</p>
+      <p>You've seen it. Somebody gets betrayed and starts distrusting people who never did a thing to them. A humiliated person hears every bit of feedback as an attack. Somebody gets treated unjustly and gets so good at spotting injustice that they start finding it where there isn't any.</p>
 
-      <p>The original injury has become a lens. Everything after gets read through it.</p>
+      <p>The original injury isn't just a memory anymore. It's a fractured perspective, and everything that comes after gets viewed through that one broken facet.</p>
 
-      <p>Those of us in security have our own version of this. After a bad incident, there's a moment where the room decides what kind of team it's going to be. You can go hunting for someone to hang—and you'll find someone, you always do—and then watch everybody hide their mistakes for the next five years. Or you can run a blameless postmortem: hold the system accountable, fix the actual causes, and refuse to turn the pain of the breach into a fresh injury. Same incident. Very different second arrow.</p>
+      <p>You lose something there. A person who could once take in the whole picture—the context, the other person's side, the chance that it wasn't about them at all—just can't anymore. The grief and the damage narrow everything down to a point. All of your attention gets focused on the place that hurts.</p>
+
+      <p>I don't think that's a defect. It's a reaction we need. When you get hurt, narrowing in on the injury is how you survive it. It's the same reflex that yanks your hand off the stove. But it's an emergency mode. It was never meant to be a place you move into and live. Stay there long enough and it stops protecting you and starts running you.</p>
+
 
       <p>It's easy to spot this in other people. It's a lot harder to spot in yourself—especially when your grievance is legit. And it usually is. That's exactly what makes it dangerous.</p>
 
@@ -417,7 +448,7 @@
         <cite>Meditations 6.6, trans. George Long (the brackets are Long's)</cite>
       </blockquote>
 
-      <p>Read that again. That's not a pacifist talking. That's a man with the power to do just about anything, reminding himself—over and over, by the look of it—that retaliation can turn into imitation. You set out to answer the injury and you end up copying it.</p>
+      <p>This came from a man who could have answered almost any wrong with the full weight of Rome. He wrote it to himself, in a notebook nobody was meant to read, and the idea keeps coming back throughout <em>Meditations</em>. He understood that retaliation has a way of turning into imitation.</p>
 
       <p>He was more worried about what the wrong would make <em>him</em> than about what the wrongdoer deserved.</p>
 
@@ -455,13 +486,13 @@
         <cite>Etty Hillesum, diary, 23 September 1942 · <em>An Interrupted Life</em>, trans. Arnold J. Pomerans</cite>
       </blockquote>
 
-      <p>Destroy in yourself what you think you ought to destroy in others. Honestly, that's this whole essay in one line. She wrote it in September 1942, with the deportations already running. A few months later she wrote nearly the same thing again in a letter from Westerbork itself.</p>
+      <p>Destroy in yourself what you think you ought to destroy in others. She wrote it in September 1942, with the deportations already running. A few months later she wrote nearly the same thing again in a letter from Westerbork itself.</p>
 
       <p>She wasn't excusing anything. She saw the brutality up close. What scared her was that hatred—even completely justified hatred—would just add fuel to the thing that was destroying everyone around her.</p>
 
       <p>I want to be careful here. Nobody being persecuted owes anybody forgiveness, and nobody gets to turn Hillesum into a bar other victims are supposed to clear. I can call what she did courage without demanding it from anyone.</p>
 
-      <p class="beat">Here's where it gets complicated. Because I also believe in fighting back.</p>
+      <p class="beat">Here's where it gets complicated: I also believe in fighting back.</p>
 
       <aside class="bio" aria-label="About Frederick Douglass">
         <figure>
@@ -511,7 +542,7 @@
 
       <p>This is where I think we get aggression wrong.</p>
 
-      <p>We talk about aggression like it's just hostility—something you point at a person. But there's something else in there too: the drive to confront what's intolerable, to not back down, to win when it's hard. That drive isn't evil. It's fuel.</p>
+      <p>Aggression usually gets described as hostility, something pointed at a person. It is also the drive to confront what's intolerable, to hold your ground, to keep going when it's hard. That drive is fuel, and fuel doesn't care what it burns.</p>
 
       <p class="beat">It all depends on what you point it at.</p>
 
@@ -578,7 +609,7 @@
 
       <p>When the peace talks in Accra, Ghana, dragged on while people back home kept dying, the women showed up there too. They sat down in the doorways of the negotiating hall, linked arms, and told the delegates nobody was leaving until there was a deal. When security moved to remove them, Gbowee threatened to strip, which in traditional belief puts a curse on the men who see it. The delegates stayed put. Within weeks Taylor was gone and a peace agreement was signed. In 2011 she shared the Nobel Peace Prize.</p>
 
-      <p>Nonviolent? Yes. Passive? Not even a little.</p>
+      <p>Their weapon was refusing to leave.</p>
 
       <p>People mix up compassion with being soft, and nonviolence with being afraid of a fight. There is nothing soft about telling armed men they're not leaving the room. Ashoka had an army and reconsidered it. Gbowee had none and faced down the men who did.</p>
 
@@ -629,9 +660,9 @@
 
       <p>So check yourself. Am I still trying to help, or am I trying to be right? Do I care how they're doing, or do I just want them to admit I had a point? And when it's obviously not working—can I step back?</p>
 
-      <p>A person can be beyond <em>your</em> reach without being beyond help. Maybe your history makes you the wrong messenger. Maybe someone else gets through. Maybe life does. Stepping back isn't abandoning them, and compassion doesn't mean standing there taking abuse forever. Sometimes the responsible move is boundaries and distance.</p>
+      <p>A person can be beyond <em>your</em> reach without being beyond help. Maybe your history makes you the wrong messenger. Maybe someone else gets through. Maybe life does. Compassion was never supposed to mean standing there taking abuse forever, and stepping back isn't the same as giving up on someone.</p>
 
-      <p>The trick is doing that without turning their refusal into one more grievance. You don't get to decide they're hopeless just because you're out of moves. And you don't get to make their recovery the price of your own peace.</p>
+      <p>The trick is doing that without turning their refusal into one more grievance, and that takes a little humility. It takes some ego to believe we're the right messenger, or that we're the one who's going to fix them. They have their own agency and their own way back, and it may not run through us. You don't get to decide they're hopeless just because you're out of moves. And you don't get to make their recovery the price of your own peace.</p>
 
       <h2>So what is bravery?</h2>
 
