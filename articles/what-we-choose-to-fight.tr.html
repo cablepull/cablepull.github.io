@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Acı, saldırganlık ve döngüyü kırma cesareti üzerine: Khamisa ile Felix, iki ok, Marcus Aurelius, Etty Hillesum, Frederick Douglass, Aşoka, Leymah Gbowee ve Daryl Davis.">
+  <link rel="canonical" href="https://cablepull.github.io/articles/what-we-choose-to-fight.tr.html">
+  <link rel="alternate" hreflang="en" href="https://cablepull.github.io/articles/what-we-choose-to-fight.html">
+  <link rel="alternate" hreflang="zh-Hans" href="https://cablepull.github.io/articles/what-we-choose-to-fight.zh.html">
+  <link rel="alternate" hreflang="tr" href="https://cablepull.github.io/articles/what-we-choose-to-fight.tr.html">
+  <link rel="alternate" hreflang="x-default" href="https://cablepull.github.io/articles/what-we-choose-to-fight.html">
+  <meta property="og:site_name" content="cablepull">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://cablepull.github.io/articles/what-we-choose-to-fight.tr.html">
+  <meta property="og:title" content="Neyle Savaşmayı Seçtiğimiz · cablepull">
+  <meta property="og:description" content="Bence inşa etmeye değer bir saldırganlık türü var: acının sizden geçip yoluna devam etmesine inatla izin vermemek.">
+  <meta property="og:image" content="https://cablepull.github.io/images/what-we-choose-to-fight/preview.png">
+  <meta property="og:image:alt" content="Neyle Savaşmayı Seçtiğimiz: iki ok işaretli başlık sayfası.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://cablepull.github.io/images/what-we-choose-to-fight/preview.png">
+  <meta name="twitter:title" content="Neyle Savaşmayı Seçtiğimiz · cablepull">
+  <meta name="twitter:description" content="Acı, saldırganlık ve döngüyü kırma cesareti üzerine.">
+  <title>Neyle Savaşmayı Seçtiğimiz · cablepull</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #efe9df;
+      --paper-deep: #e4dccd;
+      --card: #f8f4ec;
+      --ink: #16130f;
+      --ink-soft: #4a443c;
+      --muted: #7a7166;
+      --ember: #a8432a;
+      --ember-soft: rgba(168, 67, 42, 0.12);
+      --rule: rgba(22, 19, 15, 0.14);
+      --prose: 38rem;
+      --side: 17rem;
+      --gap: 2.75rem;
+      --pad: clamp(1rem, 4vw, 2.5rem);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Newsreader", Georgia, serif;
+      font-size: clamp(1.05rem, 1rem + 0.3vw, 1.2rem);
+      line-height: 1.7;
+      color: var(--ink);
+      background: var(--paper);
+    }
+
+    a { color: var(--ember); text-underline-offset: 2px; }
+
+    nav.back {
+      padding: 1rem var(--pad);
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    nav.back a { color: var(--ink); text-decoration: none; }
+    nav.back a:hover { color: var(--ember); }
+
+    /* ---------- Masthead ---------- */
+    .masthead {
+      max-width: calc(var(--prose) + var(--side) + var(--gap));
+      margin: 2rem auto 0;
+      padding: 0 var(--pad);
+    }
+    .kicker {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ember);
+      margin: 0 0 0.75rem;
+    }
+    .masthead h1 {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.6rem, 2rem + 4vw, 5rem);
+      line-height: 0.95;
+      letter-spacing: -0.035em;
+      margin: 0;
+      max-width: 12ch;
+    }
+    .masthead .sub {
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--ink-soft);
+      margin: 1rem 0 0;
+    }
+    .byline {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin: 1.25rem 0 0;
+      padding-bottom: 1.75rem;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    /* Two arrows motif */
+    .arrows {
+      display: block;
+      width: 5.5rem;
+      height: auto;
+      margin: 0 0 1.25rem;
+      color: var(--ember);
+    }
+
+    /* ---------- Body: prose + margin sidebar ---------- */
+    .body {
+      max-width: calc(var(--prose) + var(--side) + var(--gap));
+      margin: 0 auto;
+      padding: 2.25rem var(--pad) 4rem;
+    }
+    .prose {
+      max-width: var(--prose);
+    }
+    .prose p { margin: 0 0 1.15rem; }
+
+    .prose h2 {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.45rem, 1.2rem + 1vw, 1.9rem);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin: 3.25rem 0 1.1rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--rule);
+      clear: none;
+    }
+
+    .prose .beat {
+      font-size: 1.15em;
+      font-weight: 600;
+    }
+
+    .prose blockquote {
+      margin: 1.5rem 0;
+      padding: 0.25rem 0 0.25rem 1.25rem;
+      border-left: 3px solid var(--ember);
+      font-style: italic;
+      font-size: 1.08em;
+    }
+    .prose blockquote p { margin: 0 0 0.4rem; }
+    .prose blockquote cite {
+      display: block;
+      font-style: normal;
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+
+    .prose blockquote.pull {
+      border-left: none;
+      padding: 0;
+      margin: 2rem 0;
+      text-align: left;
+    }
+    .prose blockquote.pull p {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-style: normal;
+      font-weight: 800;
+      font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.1rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ember);
+      margin: 0 0 0.5rem;
+    }
+
+    .prose strong.thesis {
+      background: linear-gradient(transparent 60%, var(--ember-soft) 60%);
+    }
+
+    .closer {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.3rem, 1.1rem + 0.8vw, 1.65rem);
+      letter-spacing: -0.015em;
+      line-height: 1.25;
+      margin-top: 2rem !important;
+    }
+
+
+    /* ---------- Bio cards (sidenotes) ---------- */
+    .bio {
+      float: right;
+      clear: right;
+      width: var(--side);
+      margin: 0.35rem calc(-1 * (var(--side) + var(--gap))) 1.5rem 0;
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--ember);
+      font-size: 0.86rem;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+    .bio figure { margin: 0; background: var(--paper-deep); }
+    .bio img {
+      display: block;
+      width: 100%;
+      height: 10.5rem;
+      object-fit: cover;
+      object-position: center 25%;
+      filter: grayscale(0.15) contrast(1.02);
+    }
+    .bio .no-image {
+      display: grid;
+      place-items: center;
+      height: 7rem;
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: var(--ember);
+      background:
+        repeating-linear-gradient(135deg, transparent 0 10px, var(--ember-soft) 10px 11px),
+        var(--paper-deep);
+    }
+    /* No-derivatives license: always show the whole image, never crop */
+    .bio .nocrop { background: #0d0d0f; }
+    .bio .nocrop img { height: auto !important; min-height: 0 !important; object-fit: contain; filter: none; }
+    .bio .nocrop .credit { background: var(--card); padding-bottom: 0.1rem; }
+    @media (max-width: 1000px) { .bio .nocrop { align-self: start; } }
+
+    .bio .credit {
+      display: block;
+      padding: 0.35rem 0.85rem 0;
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+    .bio .credit a { color: var(--muted); }
+    .bio-body { padding: 0.75rem 0.85rem 0.95rem; }
+    .bio h3 {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--ink);
+      margin: 0;
+      line-height: 1.2;
+    }
+    .bio .dates {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ember);
+      margin: 0.2rem 0 0.6rem;
+    }
+    .bio ul { margin: 0; padding-left: 1rem; }
+    .bio li { margin: 0 0 0.35rem; }
+    .bio .more {
+      display: inline-block;
+      margin-top: 0.4rem;
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 1000px) {
+      .body { max-width: calc(var(--prose) + 2 * var(--pad)); }
+      .bio {
+        float: none;
+        width: auto;
+        margin: 1.5rem 0;
+        display: grid;
+        grid-template-columns: 7.5rem 1fr;
+      }
+      .bio figure { grid-row: span 2; }
+      .bio img { height: 100%; min-height: 9rem; }
+      .bio .no-image { height: 100%; min-height: 7rem; font-size: 1.2rem; }
+    }
+    @media (max-width: 480px) {
+      .bio { grid-template-columns: 1fr; }
+      .bio img { height: 12rem; }
+    }
+
+    /* ---------- Sources ---------- */
+    .sources {
+      clear: both;
+      max-width: var(--prose);
+      margin-top: 4rem;
+      padding-top: 1.25rem;
+      border-top: 2px solid var(--ink);
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+    }
+    .sources h2 {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 0 0 0.75rem;
+    }
+    .sources ol { padding-left: 1.2rem; margin: 0; }
+    .sources li { margin-bottom: 0.35rem; }
+
+    /* ---------- Language switcher ---------- */
+    .lang {
+      position: fixed;
+      left: clamp(0.5rem, 1.5vw, 1.25rem);
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-family: "Bricolage Grotesque", "Noto Sans SC", system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .lang a {
+      display: block;
+      min-width: 2.6rem;
+      padding: 0.3rem 0.45rem;
+      text-align: center;
+      text-decoration: none;
+      color: var(--ink-soft);
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+    }
+    .lang a:hover { color: var(--ember); border-color: var(--ember); }
+    .lang a[aria-current="page"] {
+      color: var(--paper);
+      background: var(--ember);
+      border-color: var(--ember);
+    }
+    @media (max-width: 1180px) {
+      .lang {
+        position: static;
+        transform: none;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding: 0 var(--pad);
+        margin-top: -2.4rem;
+        margin-bottom: 0.9rem;
+      }
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--rule);
+      padding: 1.5rem var(--pad) 2.5rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      max-width: calc(var(--prose) + var(--side) + var(--gap) + 2 * var(--pad));
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <nav class="back"><a href="index.html">← Yazılar</a> · <a href="../">Ana sayfa</a></nav>
+  <nav class="lang" aria-label="Dil">
+    <a href="what-we-choose-to-fight.html" hreflang="en" lang="en">EN</a>
+    <a href="what-we-choose-to-fight.zh.html" hreflang="zh-Hans" lang="zh-Hans">中文</a>
+    <a href="what-we-choose-to-fight.tr.html" hreflang="tr" lang="tr" aria-current="page">TR</a>
+  </nav>
+
+  <header class="masthead">
+    <svg class="arrows" viewBox="0 0 88 28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 8h44m-8-5 8 5-8 5M4 3l4 5-4 5"/>
+      <path d="M36 21h48m-8-5 8 5-8 5M36 16l4 5-4 5" opacity=".45"/>
+    </svg>
+    <p class="kicker">Deneme</p>
+    <h1>Neyle Savaşmayı Seçtiğimiz</h1>
+    <p class="sub">Acı, saldırganlık ve döngüyü kırma cesareti üzerine</p>
+    <p class="byline">cablepull · Kasım 2026</p>
+  </header>
+
+  <main class="body">
+    <article class="prose">
+
+      <aside class="bio" aria-label="Azim Khamisa ve Ples Felix hakkında">
+        <figure class="nocrop">
+          <img src="https://live.staticflickr.com/4510/38090566162_c6de1acecf_b.jpg" alt="Azim Khamisa ve Ples Felix, TEDWomen 2017'de sahnede birlikte" loading="lazy">
+          <figcaption class="credit">Azim Khamisa ve Ples Felix, TEDWomen 2017 · <a href="https://www.flickr.com/photos/62773263@N00/38090566162" rel="noopener">TED Conference</a> · <a href="https://creativecommons.org/licenses/by-nc-nd/2.0/" rel="noopener license">CC BY-NC-ND 2.0</a></figcaption>
+        </figure>
+        <div class="bio-body">
+          <h3>Azim Khamisa ve Ples Felix</h3>
+          <p class="dates">Tariq Khamisa, 1974–1995</p>
+          <ul>
+            <li>Tariq, 21 Ocak 1995'te vurulduğunda San Diego State Üniversitesi'nde öğrenciydi ve pizza dağıtıyordu.</li>
+            <li>14 yaşındaki Tony Hicks, bir soygun girişimi sırasında 18 yaşındaki bir çete arkadaşının emriyle ateş etti. Kaliforniya'da cinayetten yetişkin olarak yargılanan en genç kişi olduğu bildirildi; en az 25 yıl, en fazla ömür boyu hapis cezasına çarptırıldı.</li>
+            <li>Yatırım bankacısı olan Azim, Tony'nin dedesi ve vasisi Ples Felix'e ulaştı; ikisi aynı yıl Tariq Khamisa Vakfı'nı birlikte kurdu.</li>
+            <li>Tony 2018'de şartlı tahliye için değerlendirmeye alındığında Azim onun lehine konuştu. 24 yılı aşkın bir sürenin ardından 2019'da serbest bırakılan Tony, vakfın yönetim kuruluna katıldı ve Azim'le birlikte öğrencilere konuşmalar yaptı.</li>
+          </ul>
+          <a class="more" href="https://tkf.org/" rel="noopener">Tariq Khamisa Vakfı →</a>
+        </div>
+      </aside>
+
+      <p>Ocak 1995'te, Tariq Khamisa adında 20 yaşında bir üniversite öğrencisi San Diego'da pizza dağıtırken Tony Hicks adında 14 yaşında bir çete üyesi onu vurup öldürdü.</p>
+
+      <p>Ben bir babayım ve bunu, kendimi o yere koymadan okuyamıyorum. Oğlunuz pizza dağıtmaya çıkıyor. Bir <em>pizza</em>. Cepheye giden bir asker değil. Bir savaş bölgesine yürümüyor. Kimsenin üzerine iki kez düşünmediği türden bir iş yapıyor. Ve eve dönmüyor.</p>
+
+      <p>Hepsinin aynı anda çöktüğünü hayal ediyorum. Şaşkınlık. Keder. Öfke. Bütün bunların bir anlamı olsun diye çaresizce bir sebep arama ihtiyacı. Ama öyle bir sebep yok. Hayatınızdaki en önemli insanlardan biri, birine akşam yemeğini götürmeye çıktığı için artık yok. Bunun hiçbir yanı hiçbir zaman anlam kazanmayacak.</p>
+
+      <p>Tariq'in babası Azim Khamisa bunu yaşıyordu. Tam ortasındayken—yıllar sonra, zamanın ve mesafenin acıyı yumuşattığı bir noktada değil, oğlunun yasını hâlâ tutarken—çoğumuzun asla göremeyeceği bir şey gördü. Tetiği çeken on dört yaşındaki çocuğa baktı ve bir kurban daha gördü.</p>
+
+      <blockquote class="pull">
+        <p>“Silahın iki ucunda da kurbanlar vardı.”</p>
+        <cite>Azim Khamisa</cite>
+      </blockquote>
+
+      <p>Böyle bir anda pek azımızda bulunacak bir berraklık bu. Tariq o çetenin kurbanıydı. Tony de öyle: eline silah tutuşturulmuş ve daha iyisini bilmesi gereken on sekiz yaşında birinden ateş etme emri almış on dört yaşında bir çocuk. Bu, Tony'nin yaptığını mazur göstermez. Şu anlama gelir: Azim'in içindeki her şeyin resmin yalnızca bir parçasını görmek için her türlü sebebi varken, o resmin tamamını gördü.</p>
+
+      <p>Ve gördüğüyle yetinmedi. Tony'nin dedesi ve vasisi Ples Felix'e ulaştı; ikisi, başka çocukların bir silahın herhangi bir ucuna düşmemesi için birlikte çalışmaya başladı.</p>
+
+      <p>Bunun neyi yapıp neyi yapmadığı konusunda açık olmak istiyorum. Tariq'i geri getirmedi. Cinayeti daha az kötü kılmadı. Tony'yi sorumluluktan kurtarmadı.</p>
+
+      <p>Yaptığı şey, bundan <em>sonra</em> ne olacağına karar vermekti.</p>
+
+      <p>Çoğumuz hak etmediğimiz bir şekilde incindik: ihanete uğradık, aşağılandık, hiç beklemediğimiz yerden darbe aldık. İşte, evde, güvendiğimiz birinin elinden ya da düpedüz kötü şans yüzünden. Birçoğumuz, olayın kendisi çoktan bitmiş olsa da bir türlü elimizden bırakamadığımız bir şey taşıyoruz.</p>
+
+      <p>Acının insanları değiştirdiğini biliyoruz. Pek konuşmadığımız şey, bu değişimin <em>hangi yöne</em> gideceği konusunda aslında ne kadar söz sahibi olduğumuz. Ya da bir insanın acısının ne kadar kolay başka birinin acısına dönüştüğü.</p>
+
+      <p>Bu yazı savaşmak üzerine; bir de o savaşı nereye yönelttiğimiz üzerine.</p>
+
+      <p>Acı olduğu yerde durmaz. İnsandan insana geçer ve şu anda her yerde. Her birimiz, onun ya yoluna devam ettiği ya da durduğu bir yeriz.</p>
+
+      <h2>İkinci ok</h2>
+
+      <aside class="bio" aria-label="Sallatha Sutta hakkında">
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Afghanistan%2C_Gandhara%2C_Hadda%2C_late_Kushan_Period_-_Seated_Buddha_-_1967.39_-_Cleveland_Museum_of_Art.jpg/500px-Afghanistan%2C_Gandhara%2C_Hadda%2C_late_Kushan_Period_-_Seated_Buddha_-_1967.39_-_Cleveland_Museum_of_Art.jpg" alt="Gandhara'daki Hadda'dan, MS 300 civarına ait oturan Buda heykeli" loading="lazy">
+          <figcaption class="credit">Oturan Buda, Hadda, MS 300 civarı. Cleveland Sanat Müzesi · <a href="https://commons.wikimedia.org/wiki/File:Afghanistan,_Gandhara,_Hadda,_late_Kushan_Period_-_Seated_Buddha_-_1967.39_-_Cleveland_Museum_of_Art.jpg" rel="noopener">CC0</a></figcaption>
+        </figure>
+        <div class="bio-body">
+          <h3>Sallatha Sutta</h3>
+          <p class="dates">Saṃyutta Nikāya 36.6 · “Ok”</p>
+          <ul>
+            <li>Buda'nın öğretilerinin günümüze ulaşan en eski derlemesi olan Pali Kanonu'nun parçası; MÖ 1. yüzyılda Sri Lanka'da yazıya geçirilmeden önce sözlü olarak korundu.</li>
+            <li>Öğreti görmemiş kişi acıyla vurulduğunda onun için yas tutar, feryat eder ve böylece biri bedensel, biri zihinsel iki acı duyar. Öğretiyi iyi öğrenmiş kişi yalnızca ilkini duyar.</li>
+            <li>Sutta, bunun altındaki alışkanlığa da bir ad verir: <em>paṭighānusaya</em>. Thanissaro bunu “direnç saplantısı” (resistance-obsession), Bhikkhu Sujato ise “tiksinmeye yönelik örtük eğilim” (the underlying tendency for aversion) diye karşılar.</li>
+          </ul>
+          <a class="more" href="https://www.accesstoinsight.org/tipitaka/sn/sn36/sn36.006.than.html" rel="noopener">Sutta'yı okuyun →</a>
+        </div>
+      </aside>
+
+      <p>Buda, bir okla vurulan ve hemen ardından ikinci bir okla vurulan bir adamı anlattı.</p>
+
+      <p>İlk ok acının kendisidir. İkincisi, onunla ne yaptığımızdır: üzerinde durup durmak, direnmek, onun hakkında kendimize anlatıp durduğumuz hikâye.</p>
+
+      <blockquote>
+        <p>“Sanki bir adamı bir okla vurmuşlar, hemen ardından bir okla daha vurmuşlar da adam iki okun acısını birden duyuyormuş gibi.”</p>
+        <cite>Sallatha Sutta, SN 36.6, Thanissaro Bhikkhu çevirisi (İngilizceden çevrilmiştir)</cite>
+      </blockquote>
+
+      <p>Sutta'nın, o ikinci okun altında yatan alışkanlık için bir adı bile var: <em>paṭighānusaya</em>. Thanissaro Bhikkhu bunu “direnç saplantısı” diye çeviriyor. Ben onu, o kadar çok tekrarlanmış bir tiksinme olarak düşünüyorum ki artık kendi kendine tetikleniyor.</p>
+
+      <blockquote>
+        <p>“O acı veren duygu kendisine dokunduğunda direnç gösterir. O acı veren duyguya ilişkin her direnç saplantısı ona musallat olur.”</p>
+        <cite>Sallatha Sutta, SN 36.6, Thanissaro Bhikkhu çevirisi (İngilizceden çevrilmiştir)</cite>
+      </blockquote>
+
+      <p>Biri ihanete uğrar ve kendisine hiçbir şey yapmamış insanlara güvenmemeye başlar. Aşağılanmış biri her geri bildirimi bir saldırı olarak duyar. Haksızlığa uğrayan biri haksızlığı fark etmekte öyle ustalaşır ki onu olmadığı yerlerde de bulmaya başlar.</p>
+
+      <p>Asıl yara artık yalnızca bir anı değildir. Çatlamış bir bakış açısıdır; ardından gelen her şey o tek kırık yüzün ardından görülür.</p>
+
+      <p>Orada bir şey kaybedersiniz. Bir zamanlar resmin bütününü—bağlamı, karşı tarafın gözünden bakışı, meselenin belki de hiç kendisiyle ilgili olmadığı ihtimalini—görebilen biri artık göremez. Keder ve hasar her şeyi tek bir noktaya daraltır. Bütün dikkatiniz acıyan yere toplanır.</p>
+
+      <p>Bunun bir kusur olduğunu düşünmüyorum. İhtiyaç duyduğumuz bir tepki bu. Yaralandığınızda dikkati yaraya daraltmak, onu atlatmanın yoludur. Elinizi ocaktan çeken refleksin aynısı. Ama bu bir acil durum hâli. Hiçbir zaman taşınıp yerleşeceğiniz bir yer olsun diye var olmadı. Orada yeterince uzun kalırsanız sizi korumayı bırakır ve sizi yönetmeye başlar.</p>
+
+
+      <p>Bunu başkalarında görmek kolay, kendinizde görmekse çok daha zor; hele kırgınlığınız haklıysa. Çoğu zaman haklıdır ve onu tehlikeli kılan da budur.</p>
+
+      <aside class="bio" aria-label="Marcus Aurelius hakkında">
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Marcus_Aurelius_Glyptothek_Munich.jpg/500px-Marcus_Aurelius_Glyptothek_Munich.jpg" alt="Marcus Aurelius'un mermer büstü" loading="lazy">
+          <figcaption class="credit">Büst, Glyptothek, Münih · Bibi Saint-Pol · <a href="https://commons.wikimedia.org/wiki/File:Marcus_Aurelius_Glyptothek_Munich.jpg" rel="noopener">Kamu malı</a></figcaption>
+        </figure>
+        <div class="bio-body">
+          <h3>Marcus Aurelius</h3>
+          <p class="dates">MS 121–180 · İmparator 161–180</p>
+          <ul>
+            <li>Roma'nın “Beş İyi İmparatoru”nun sonuncusu ve ömrü boyunca Stoa felsefesinin öğrencisi.</li>
+            <li>Hükümdarlığının büyük bölümünü Tuna sınırında Markomanlara ve başka kabilelere karşı savaşarak geçirdi; Antoninus Vebası boyunca hüküm sürdü.</li>
+            <li><em>Kendime Düşünceler</em>'i MS 170–180 civarında, büyük kısmını Markoman Savaşları sırasında seferdeyken, Yunanca olarak kişisel bir defter şeklinde yazdı. Yayımlanmasını hiçbir zaman amaçlamadı.</li>
+          </ul>
+          <a class="more" href="https://www.gutenberg.org/ebooks/15877" rel="noopener">Meditations'ı okuyun (Long'un İngilizce çevirisi) →</a>
+        </div>
+      </aside>
+
+      <p>Marcus Aurelius neredeyse iki bin yıl önce aynı şeyle boğuştu ve kendine şu notu bıraktı:</p>
+
+      <blockquote>
+        <p>“İntikamını almanın en iyi yolu, [haksızlık edene] benzememektir.”</p>
+        <cite>Kendime Düşünceler 6.6, George Long çevirisi (köşeli parantezler Long'a aittir; İngilizceden çevrilmiştir)</cite>
+      </blockquote>
+
+      <p>Bunu, neredeyse her haksızlığa Roma'nın bütün ağırlığıyla karşılık verebilecek bir adam yazdı. Kendine yazdı, kimsenin okuması düşünülmemiş bir defterde; ve bu fikir <em>Kendime Düşünceler</em> boyunca tekrar tekrar karşımıza çıkar. Misillemenin taklide dönüşmek gibi bir huyu olduğunu anlamıştı.</p>
+
+      <p>Haksızlık edenin neyi hak ettiğinden çok, o haksızlığın <em>kendisini</em> neye dönüştüreceğini dert ediyordu.</p>
+
+      <p>Oğlu Commodus imparatorluğu miras aldı, ama defteri değil. Kuşkuyla ve gösteriyle hüküm sürdü; MS 192'de banyosunda boğularak öldürüldü.</p>
+
+      <p>Azim Khamisa da Marcus'un vardığı sonuca vardı, üstelik bir imparatorluğu yoktu. Ölmüş bir oğlu vardı.</p>
+
+      <p>Hesap sorulması önemlidir. Aksini savunmuyorum. Ama hesap sormakla misilleme aynı şey değildir. Misilleme dürtüsü anlaşılır olmaktan çıkıp insanı ezip geçmeye başladığında, o fark her şeydir.</p>
+
+      <h2>Seni inciten şeye dönüşme</h2>
+
+      <aside class="bio" aria-label="Etty Hillesum hakkında">
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Etty_Hillesum_1939.jpg/500px-Etty_Hillesum_1939.jpg" alt="Etty Hillesum'un 1939 civarında çekilmiş portre fotoğrafı" loading="lazy">
+          <figcaption class="credit">1939 civarı · fotoğrafçısı bilinmiyor, Jewish Cultural Quarter · <a href="https://commons.wikimedia.org/wiki/File:Etty_Hillesum_1939.jpg" rel="noopener">Kamu malı</a></figcaption>
+        </figure>
+        <div class="bio-body">
+          <h3>Etty Hillesum</h3>
+          <p class="dates">15 Ocak 1914 – 30 Kasım 1943</p>
+          <ul>
+            <li>Hollanda'nın Middelburg kentinde doğdu; Amsterdam'da hukuk ve Slav dilleri okudu.</li>
+            <li>1941'den 1942'ye kadar günlük tuttu; ardından, Hollandalı Yahudilerin Auschwitz ve Sobibor trenlerinden önce tutulduğu geçiş kampı Westerbork'tan mektuplar yazdı.</li>
+            <li>Temmuz 1942'de Yahudi Konseyi'nde işe girdi, ardından konseyin Westerbork'taki sosyal yardım bölümüne gönderilmeyi istedi. Arkadaşları onu saklamayı önerdi; reddetti.</li>
+            <li>7 Eylül 1943'te anne babası ve kardeşi Mischa ile birlikte sürgün edildi. Hiçbiri hayatta kalmadı.</li>
+            <li>Yazdıkları 1981'de <em>Het verstoorde leven</em> (İngilizcesi <em>An Interrupted Life</em>) adıyla yayımlandı.</li>
+          </ul>
+          <a class="more" href="https://en.wikipedia.org/wiki/Etty_Hillesum" rel="noopener">Etty Hillesum hakkında daha fazlası →</a>
+        </div>
+      </aside>
+
+      <p>Etty Hillesum'un nefret etmek için her türlü sebebi vardı ve hayatının son yıllarını nefret etmeyi reddederek geçirdi. Eylül 1942'de, sürgünler çoktan başlamışken, günlüğüne şunu yazdı:</p>
+
+      <blockquote>
+        <p>“…her birimiz kendi içine dönmeli ve başkalarında yok edilmesi gerektiğini düşündüğü her şeyi kendinde yok etmeli. Ve unutmayalım ki bu dünyaya eklediğimiz her nefret zerresi onu daha da yaşanmaz kılıyor.”</p>
+        <cite>Etty Hillesum, günlük, 23 Eylül 1942 · <em>An Interrupted Life</em>, Arnold J. Pomerans çevirisi (İngilizceden çevrilmiştir)</cite>
+      </blockquote>
+
+      <p>Başkalarında yok edilmesi gerektiğini düşündüğünüz şeyi kendinizde yok edin. Birkaç ay sonra, gönderilmeyi kendisi istediği kamp olan Westerbork'tan neredeyse aynı şeyi yeniden yazdı.</p>
+
+      <p>Hiçbir şeyi mazur göstermiyordu. Vahşeti yakından gördü. Onu korkutan, nefretin—tamamen haklı bir nefretin bile—etrafındaki herkesi yok eden şeyi yalnızca daha da körükleyeceğiydi.</p>
+
+      <p>Burada dikkatli olmak istiyorum. Zulme uğrayan hiç kimse kimseye bağışlama borçlu değildir ve hiç kimsenin Hillesum'u öteki kurbanların aşması gereken bir çıtaya dönüştürmeye hakkı yoktur. Yaptığına cesaret diyebilirim, bunu kimseden beklemeden.</p>
+
+      <p class="beat">Karşı koymaya da inanıyorum.</p>
+
+      <aside class="bio" aria-label="Frederick Douglass hakkında">
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Frederick_Douglass_by_Samuel_J_Miller%2C_1847-52.png/500px-Frederick_Douglass_by_Samuel_J_Miller%2C_1847-52.png" alt="Frederick Douglass'ın 1847–1852 yıllarına ait dagerreyotip portresi" loading="lazy">
+          <figcaption class="credit">Dagerreyotip, 1847–52 · Samuel J. Miller, Art Institute of Chicago · <a href="https://commons.wikimedia.org/wiki/File:Frederick_Douglass_by_Samuel_J_Miller,_1847-52.png" rel="noopener">Kamu malı</a></figcaption>
+        </figure>
+        <div class="bio-body">
+          <h3>Frederick Douglass</h3>
+          <p class="dates">1818 civarı – 1895</p>
+          <ul>
+            <li>Maryland'in Eastern Shore bölgesinde köle olarak doğdu; tam doğum gününü hiçbir zaman bilmedi.</li>
+            <li>1833–34'te bir yıllığına, “köle kırıcı” diye tanınan çiftçi Edward Covey'nin yanına kiralandı. Kavga Ağustos 1834'te, Douglass 16 yaşındayken yaşandı. (1845 tarihli <em>Narrative</em> 1833 der; tarihçiler olayı 1834'e tarihlendirir.)</li>
+            <li>1838'de kaçarak özgürlüğüne kavuştu ve 1845'te <em>Narrative</em>'i yayımladı.</li>
+            <li>Amerika'nın en ünlü kölelik karşıtı hatibi oldu; daha sonra ABD Marşalı ve Haiti Elçisi olarak görev yaptı.</li>
+          </ul>
+          <a class="more" href="https://www.gutenberg.org/ebooks/23" rel="noopener">Narrative'i okuyun →</a>
+        </div>
+      </aside>
+
+      <p>On altı yaşında Frederick Douglass karşı koydu. Kiralandığı “köle kırıcı” Edward Covey onu aylardır dövüyordu. Kendi sözleriyle: “Neredeyse iki saat boyunca boğuştuk.” Covey bir daha ona elini sürmedi.</p>
+
+      <blockquote>
+        <p>“Bir insanın nasıl köle yapıldığını gördünüz; şimdi bir kölenin nasıl insan yapıldığını göreceksiniz.”</p>
+        <cite>Frederick Douglass, <em>Narrative of the Life of Frederick Douglass</em>, 1845 (İngilizceden çevrilmiştir)</cite>
+      </blockquote>
+
+      <p>Bunu “köle olarak geçen hayatımın dönüm noktası” diye andı. On yıl sonra hikâyeyi yeniden anlatırken, bunun nasıl bir kavga olduğu konusunda özenliydi:</p>
+
+      <blockquote>
+        <p>“Tamamen savunmadaydım; ona zarar vermeye çalışmaktan çok, onun bana zarar vermesini engelliyordum.”</p>
+        <cite>Frederick Douglass, <em>My Bondage and My Freedom</em>, 1855 (İngilizceden çevrilmiştir)</cite>
+      </blockquote>
+
+      <p>Kimse Douglass'a daha sabırlı olması gerektiğini söylemez.</p>
+
+      <p>Hillesum'un nefret etmeyi reddetmesi ile Douglass'ın karşı koyması bir çelişki gibi görünebilir.</p>
+
+      <p>Değil. Onları ayıran, her birinin savaşının ne <strong>için</strong> olduğu.</p>
+
+      <p>Douglass, tam o anda kendisine yapılmakta olan bir zararı durdurmak için güç kullandı. Hillesum, kendisine yapılanın koca bir halka duyulan nefrete dönüşmemesi için savaştı. Marcus, kınadığı şeye dönüşme dürtüsüyle savaştı. Birbirinden tamamen farklı üç durum ve hiçbiri “her zaman bağışla” ya da “her zaman karşılık ver” gibi bir kurala indirgenemiyor.</p>
+
+      <p>Ortak noktaları şu: hiçbiri, verdiği karşılığın tamamını yaranın yazmasına izin vermedi.</p>
+
+      <h2>Nişan alınmış saldırganlık</h2>
+
+      <p>Saldırganlık genellikle düşmanlık olarak, bir insana yöneltilmiş bir şey olarak tarif edilir. Ama aynı zamanda katlanılmaz olanla yüzleşme, yerinde durma, iş zorlaştığında da devam etme dürtüsüdür. Bu dürtü bir yakıttır ve yakıt neyi yaktığını umursamaz.</p>
+
+      <p class="beat">Her şey onu neye çevirdiğinize bağlı.</p>
+
+      <p>Onu, sizi aşağılayan kişiyi aşağılamaya yöneltebilirsiniz—ya da bunu asla ama asla başka birine yapmayacağınızdan emin olmaya. Gerçek bir kötü muameleye karşı kendinizi savunmak için kullanabilirsiniz ya da tek suçu size birini hatırlatmak olan insanların üzerine taşmasına izin verebilirsiniz. Onu bir kırgınlığı beslemek için de kullanabilirsiniz, kırgınlığın kendisiyle savaşmak için de.</p>
+
+      <p>Bu sonuncusu, kimsenin övmediği savaştır.</p>
+
+      <p>Misilleme iyi hissettirir. Öfkenizi paylaşan insanlar sizi alkışlar. Misillemeyi reddetmek size hiçbir şey kazandırmayabilir. Özür yok. Haklı çıkmak yok. Bunu yapanın ne yaptığını anladığına dair bir işaret bile yok. Bunun yaşandığı gerçeğiyle, onun kabul edilebilir olduğuna hiçbir zaman razı olmadan barışmanız gerekebilir.</p>
+
+      <p>Bu kabullenme teslimiyete dönüşmemeli.</p>
+
+      <h2>Savaş dünyayı değiştirdiğinde</h2>
+
+      <aside class="bio" aria-label="Aşoka hakkında">
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Rock_edicts_of_Ashoka_at_Dhauli.jpg/500px-Rock_edicts_of_Ashoka_at_Dhauli.jpg" alt="Aşoka'nın Dhauli, Odisha'da taşa kazınmış kaya fermanları" loading="lazy">
+          <figcaption class="credit">Dhauli'deki kaya fermanları, Odisha · Bhajish Bharathan · <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener license">CC BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/wiki/File:Rock_edicts_of_Ashoka_at_Dhauli.jpg" rel="noopener">kaynak</a></figcaption>
+        </figure>
+        <div class="bio-body">
+          <h3>Aşoka</h3>
+          <p class="dates">MÖ 268–232 civarı hüküm sürdü · Maurya İmparatorluğu</p>
+          <ul>
+            <li>Çandragupta Maurya'nın torunu; Pataliputra'dan Hint alt kıtasının büyük bölümünü yönetti.</li>
+            <li>Taç giymesinden sekiz yıl sonra, MÖ 261 civarında, kabaca bugünkü Odisha'ya denk gelen Kalinga'yı fethetti ve elinde tuttu.</li>
+            <li>İmparatorluğun dört bir yanında kayalara ve sütunlara fermanlar kazıttı. Hindistan'dan kalan okunabilir en eski yazılı metinler olan bu fermanlar <em>dhamma</em>'yı ortaya koyar: ölçülülük, hoşgörü ve tebaasını gözetmek.</li>
+            <li>Kalinga'nın kendisinde, Dhauli ve Jaugada'da, pişmanlık itirafını da içeren XI–XIII numaralı Kaya Fermanları yok. Onların yerinde iki özel “Ayrı Kalinga Fermanı” duruyor.</li>
+          </ul>
+          <a class="more" href="https://www.cs.colostate.edu/~malaiya/ashoka.html" rel="noopener">Fermanlar (Dhammika çevirisi) →</a>
+        </div>
+      </aside>
+
+      <p>Bütün toplumlar da bu seçimle karşı karşıya kalır.</p>
+
+      <p>Kalinga'yı fethettikten sonra imparator Aşoka, fatihlerin neredeyse hiç yapmadığı bir şey yaptı: ölü sayısını bizzat taşa kazıttı ve imparatorluğunun dört bir yanına diktirdi.</p>
+
+      <blockquote>
+        <p>“Yüz elli bin kişi sürgün edildi, yüz bin kişi öldürüldü ve çok daha fazlası (başka sebeplerden) öldü.”</p>
+        <cite>XIII. Kaya Fermanı, Ven. S. Dhammika çevirisi (İngilizceden çevrilmiştir)</cite>
+      </blockquote>
+
+      <p>Pişmanlığı taşa kazınacak kadar gerçekti. Ama Kalinga'yı elinde tuttu. Aynı ferman, imparatorluğu içindeki orman halklarını, “pişmanlığına rağmen” onları “cezalandırma gücüne” hâlâ sahip olduğu konusunda uyarır. İtiraf, Kalinga'nın kendisinde hiçbir zaman taşa kazınmadı. Onarmaya girişmeyen pişmanlık oku yarada bırakır ve okun gövdesine bir özür iliştirir.</p>
+
+      <p>Pişmanlık, bir döngüyü kırmanın kapısını aralayabilir. Aşoka o kapının eşiğinde durdu ve evi elinde tuttu.</p>
+
+      <aside class="bio" aria-label="Leymah Gbowee hakkında">
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Leymah_Gbowee_%28cropped%29.jpg/500px-Leymah_Gbowee_%28cropped%29.jpg" alt="Leymah Gbowee'nin portre fotoğrafı" loading="lazy">
+          <figcaption class="credit">Fronteiras do Pensamento · <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="noopener license">CC BY-SA 2.0</a> · <a href="https://commons.wikimedia.org/wiki/File:Leymah_Gbowee_(cropped).jpg" rel="noopener">kaynak</a></figcaption>
+        </figure>
+        <div class="bio-body">
+          <h3>Leymah Gbowee</h3>
+          <p class="dates">d. 1972 · Liberya</p>
+          <ul>
+            <li>Liberya'nın ilk iç savaşı 1989'da patlak verdiğinde 17 yaşındaydı; travma danışmanı olarak eğitim aldı ve eski çocuk askerlerle çalıştı.</li>
+            <li>2003'te Liberyalı Kadınların Barış İçin Kitlesel Eylemi'ne önderlik etti; Hristiyan kadınları, Asatu Bah Kenneth'in örgütlediği Müslüman kadınlarla bir araya getirdi.</li>
+            <li>Charles Taylor 11 Ağustos 2003'te istifa etti. Kapsamlı Barış Anlaşması bir hafta sonra, 18 Ağustos'ta Akra'da imzalandı.</li>
+            <li>2011 Nobel Barış Ödülü'nü Ellen Johnson Sirleaf ve Tevekkül Karman ile paylaştı. Hikâyesi <em>Pray the Devil Back to Hell</em> (2008) belgeselinde anlatılır.</li>
+          </ul>
+          <a class="more" href="https://www.nobelprize.org/prizes/peace/2011/gbowee/facts/" rel="noopener">Nobel Ödülü biyografisi →</a>
+        </div>
+      </aside>
+
+      <p>Leymah Gbowee'nin ne imparatorluğu vardı ne ordusu. İç savaşın didik didik ettiği bir ülkesi ve beyazlar giymiş Hristiyan ve Müslüman kadınlardan oluşan bir hareketi vardı; bu kadınlar, Charles Taylor'ın her gün geçtiği yolun kenarındaki bir tarlada oturuyordu. Barış gelene kadar kocalarıyla cinsel ilişkiye girmeyeceklerini ilan ettiler. Gbowee sonradan bunun pratikte pek işe yaramadığını kabul etti, ama dünyanın dikkatini çekti. Oradan gitmeye niyetleri yoktu.</p>
+
+      <p>Gana'nın Akra kentindeki barış görüşmeleri, memlekette insanlar ölmeye devam ederken sürüncemede kalınca, kadınlar oraya da gitti. Müzakere salonunun kapı eşiklerine oturdular, kol kola girdiler ve delegelere bir anlaşma olmadan kimsenin çıkmayacağını söylediler. Güvenlik görevlileri onları çıkarmaya davrandığında Gbowee soyunmakla tehdit etti; geleneksel inanışa göre bu, onu gören erkeklerin başına lanet getirir. Delegeler yerlerinden kıpırdamadı. Birkaç hafta içinde Taylor gitmişti ve bir barış anlaşması imzalanmıştı.</p>
+
+      <p>Silahları, gitmeyi reddetmekti.</p>
+
+      <p>İnsanlar şefkati yumuşaklıkla, şiddetsizliği de kavgadan korkmakla karıştırır. Silahlı adamlara odadan çıkamayacaklarını söylemenin hiçbir yumuşak yanı yok. Aşoka'nın bir ordusu vardı, onu kullandığına pişman oldu ve imparatorluğunu yine de elinde tuttu. Gbowee'nin hiç ordusu yoktu ve bir savaş ağasını koltuğundan etmeye yardım etti.</p>
+
+      <p>Biri bir düşmanın üzerine yürüdüğünde cesareti tanımayı biliyoruz. Biri, insanları en baştan düşman yapan koşulların üzerine yürüdüğünde onu tanımakta çok daha kötüyüz. O ikinci hücum belki daha fazla yürek ister.</p>
+
+      <h2>Yardım etmenize izin vermediklerinde</h2>
+
+      <p>Gözden kaçması kolay bir savaş daha var.</p>
+
+      <p>Bazen içinden çekip çıkarmaya çalıştığınız kişi çekip çıkarılmak istemez.</p>
+
+      <p>Küskün bir arkadaşa, zor günlerden geçen bir aile üyesine ya da düşmanca davranan bir iş arkadaşına yardım etmeye çalıştıysanız, bunun nasıl gittiğini bilirsiniz. Hıncın onu nasıl harap ettiğini apaçık görürsünüz. Sabırla ve içten bir kaygıyla yaklaşırsınız. O, eleştiri duyar. Ya da benliğinin bir parçası hâline gelmiş bir şeyi bırakmaya hazır değildir. Ya da siz, bunu kendisinden duyabileceği kişi değilsinizdir.</p>
+
+      <aside class="bio" aria-label="Daryl Davis hakkında">
+        <figure>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Daryl_Davis.jpg/500px-Daryl_Davis.jpg" alt="Daryl Davis bir caz festivalinde sahnede" loading="lazy">
+          <figcaption class="credit">Silver Spring Caz Festivali · John Mathew Smith &amp; celebrity-photos.com · <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="noopener license">CC BY-SA 4.0</a> · <a href="https://commons.wikimedia.org/wiki/File:Daryl_Davis.jpg" rel="noopener">kaynak</a></figcaption>
+        </figure>
+        <div class="bio-body">
+          <h3>Daryl Davis</h3>
+          <p class="dates">d. 1958 · Chicago</p>
+          <ul>
+            <li>Chuck Berry ile turneye çıkmış, Jerry Lee Lewis ile çalmış bir rhythm and blues ve boogie-woogie piyanisti.</li>
+            <li>1983'te Maryland'in Frederick kentinde bir bar konserinde, beyaz bir adam ona, siyahi birinin Jerry Lee Lewis kadar iyi çaldığını ilk kez duyduğunu söyledi. Birer içki eşliğinde adam, Klan üyesi olduğunu anlattı.</li>
+            <li>On yıllardır Klan üyeleriyle görüşüyor. Kendi hesabına göre yaklaşık 200'ü Klan'dan ayrıldı. Bazılarının kendisine teslim ettiği cüppeleri saklıyor; 2016 itibarıyla 25 kadar.</li>
+            <li>Yaklaşımını reddeden aktivistlere de yer veren 2016 tarihli <em>Accidental Courtesy</em> belgeselinin konusu.</li>
+          </ul>
+          <a class="more" href="https://www.daryldavis.com/" rel="noopener">daryldavis.com →</a>
+        </div>
+      </aside>
+
+      <p>Siyahi bir müzisyen olan Daryl Davis, on yıllardır Ku Klux Klan üyeleriyle birebir oturup konuşuyor. Yıllar içinde bunların pek çoğu Klan'ı bıraktı (onun tahminine göre yaklaşık 200 kişi) ve bazıları giderken cüppelerini ona verdi.</p>
+
+      <p>İnsanların aklında kalan cüppeler. Ben o dolapta olmayanları düşünüyorum. On yıllar boyunca iki yüz kişi, hiçbir yere varmayan çok daha fazla konuşma demek: kibarca dinleyip hiçbir şeyi değiştirmeyen adamlar, ondan nefret etmeyi hiç bırakmayan adamlar. Davis bu türden bir başarısızlığı defalarca kabullenmek ve bunun katılaşıp kendi içinde bir nefrete dönüşmesine engel olmak zorunda kaldı.</p>
+
+      <p>Yaklaşımı tartışmalı ve eleştiriler yerinde. Bir sohbet örgütlü ırkçılığı ortadan kaldırmaz ve kimse, kendisinden nefret edenleri eğitmek uğruna güvenliğini ortaya koymak zorunda değildir. Yine de bu işteki payını kendisinin nasıl anlattığını duymaya değer:</p>
+
+      <blockquote>
+        <p>“Ben kimseyi dönüştürmedim. Onlar ışığı gördü ve kendi kendilerini dönüştürdüler.”</p>
+        <cite>Daryl Davis, NPR, 2017 (İngilizceden çevrilmiştir)</cite>
+      </blockquote>
+
+      <p>Kimseyi değişmeye zorlamadı. Değişebilmeleri için yer açtı.</p>
+
+      <p>Yardım etmeye çalışırken kendimizi öyle kaptırabiliriz ki onların ilerlemesi bizim işimiz, onların reddi de bizim başarısızlığımız olur. Ne kadar zorlarsak o kadar sinirleniriz. Sonunda, hıncını gidermeye çalıştığımız kişinin ta kendisine hınç duymaya başlarız.</p>
+
+      <p>Yine ikinci ok. Onların düşmanlığı ilk darbe. Bizim sinirimiz ve yaralı gururumuz ikincisi. Artık iki kişi acı çekiyor ve “yardım” işleri daha da kötüleştiriyor.</p>
+
+      <p>Birine, öfkelenmeyi bırakamıyor diye öfkelenmenin acı bir ironisi var.</p>
+
+      <p>Birkaç dürüst soru işe yarar. Hâlâ yardım etmeye mi çalışıyorum, yoksa haklı çıkmaya mı? Onun nasıl olduğunu mu önemsiyorum, yoksa sadece söylediklerimde haklılık payı olduğunu kabul etmesini mi istiyorum? İşe yaramadığı apaçık ortadayken, geri çekilebiliyor muyum?</p>
+
+      <p>Biri <em>sizin</em> ulaşamayacağınız yerde olabilir; bu, yardımın ulaşamayacağı yerde olduğu anlamına gelmez. Belki geçmişiniz sizi yanlış haberci yapıyordur. Belki başka biri ona ulaşır. Belki de hayatın kendisi. Şefkat hiçbir zaman orada durup sonsuza dek kötü muameleye katlanmak anlamına gelmiyordu ve geri çekilmek birinden umudu kesmekle aynı şey değildir.</p>
+
+      <p>Zor olan, bunu onların reddini bir kırgınlığa daha dönüştürmeden yapmak; bu da biraz alçakgönüllülük ister. Doğru haberci olduğumuza ya da onu düzeltecek kişinin biz olduğumuza inanmak biraz ego ister. Onların kendi iradesi, kendi dönüş yolu var ve o yol bizden geçmeyebilir. Sizin hamleleriniz tükendi diye onların umutsuz vaka olduğuna karar veremezsiniz. Onların iyileşmesini kendi huzurunuzun bedeli yapamazsınız.</p>
+
+      <h2>Peki cesaret nedir?</h2>
+
+      <p>Azim Khamisa ve Ples Felix'e dönelim.</p>
+
+      <p>Öldürülen bir gencin babası ve onu öldüren çocuğun dedesi. Tony yirmi küsur yıl sonra şartlı tahliye için değerlendirmeye alındığında Azim onun lehine konuştu. Tony çıktığında onlara katıldı. Olanı geri alamazlardı. İkisi de ondan sırtını dönüp gidemezdi. Ama hayatlarının geri kalanının o gece tarafından mı yönetileceğine, yoksa ondan bir şey inşa edilip edilemeyeceğine karar verebilirlerdi.</p>
+
+      <p>İnşa ettikleri şey Tariq'in ölümünü kabul edilebilir kılmadı. Kimsenin sorumluluğunu silmedi. Aynı şeyin başka birinin çocuğunun başına gelmemesi için verilmiş bir savaştı.</p>
+
+      <p>Bunu ötekilerin yanına koyun. Covey'yi durmaya zorlayan Douglass. Nefreti içeri almayı reddeden Hillesum—hem de Westerbork'ta. Akra'da bir kapıyı tıkayan Gbowee. Kendi defterinde, nefret ettiği şeye dönüşmemeyi kendine hatırlatan Marcus.</p>
+
+      <p>Burada tek bir yöntem yok. Birini dayatmak asıl meseleyi ıskalamak olur. Bazen cevap yüzleşmektir. Bazen kendini tutmak. Bazen ulaşılmak istemeyen birine uzanmak. Bazen de işleri daha kötüye götürmeden daha fazlasını yapamayacağınızı kabul etmek.</p>
+
+      <p>Onları birbirine bağlayan şey, neyin savaşmaya değer olduğunu ayırt edebilmeleri.</p>
+
+      <p>Misilleme yapmamaya neredeyse hiç “saldırgan” demeyiz. Şefkate tutunmaya neredeyse hiç “cesur” demeyiz. Bu kelimeleri, rakibin belli olduğu ve sonunda bir kazananın çıktığı, gözle görülür savaşlara saklarız.</p>
+
+      <p>Ama en zor savaşların bazılarının seyircisi yoktur. Rakip, gerçekten teslim olmak isteyeceğiniz bir dürtüdür. Zafer size, bir yaranın başka bir yaraya dönüşmediğini bilmekten başka hiçbir şey getirmez.</p>
+
+      <p>Sizi inciten kişi hiç değişmeyebilir. Yardımınız boşa çıkabilir. Hatta yıllar sonra, durdurmaya çalıştığınız şeyin ta kendisini beslediğinizi bile fark edebilirsiniz. Buradaki cesaret ısrardan fazlasıdır. Kendi davranışınıza bakmak, yöntemleriniz işe yaramadığında bunu kabul etmek ve hayal kırıklığının ekşiyip küskünlüğe dönüşmesine izin vermeden sınırlarınızı kabullenmek demektir.</p>
+
+      <p>Bunların hiçbiri kolay değil ve bu insanların hiçbiri, herkesin boy ölçüşmekle yükümlü olduğu bir kalıp değil. Ama intikamdan, teslimiyetten ya da umursamazlıktan daha fazla seçeneğimiz olduğunu kanıtlıyorlar.</p>
+
+      <p>Zalimleşmeden zulme karşı çıkabiliriz. Direksiyonu nefrete bırakmadan haksızlığa direnebiliriz. Zararı durdurmak gerektiğinde güç kullanabiliriz, birini incitmenin bir başarı olduğunu varsaymadan. İşimizi gerçekten zorlaştıran insanlara karşı şefkatli olabiliriz. Yardım edemediğimizde, değişme şansını hak etmediklerine karar vermeden kenara çekilebiliriz.</p>
+
+      <p>Bence inşa etmeye değer bir saldırganlık türü var: <strong class="thesis">acının sizden geçip yoluna devam etmesine inatçı ve tavizsiz bir şekilde izin vermemek.</strong></p>
+
+      <p>Bütün mücadele azminizi buna yöneltin. Yalnızca size haksızlık edenlere karşı değil—içinizde, karşılığında birine haksızlık etmek isteyen o parçaya karşı da.</p>
+
+      <p>İlk oktan her zaman kaçamayacaksınız. İkincisinin geldiğini her zaman göremeyeceksiniz. Ama acınızın başka birinin acısına dönüşmeye başladığı anı hissetmeyi öğrenebilirsiniz.</p>
+
+      <p>O anda savaşmayı sürdürmek için her türlü sebebiniz, karşılığında birini incitmek için her türlü fırsatınız olabilir—ve yine de buna son verecek yüreği bulabilirsiniz.</p>
+
+      <p class="closer">Bu, bir insanın yapabileceği en cesur şeylerden biridir.</p>
+
+    </article>
+
+    <section class="sources" aria-labelledby="sources-title">
+      <h2 id="sources-title">Kaynaklar ve ileri okumalar</h2>
+      <ol>
+        <li>Tariq Khamisa Foundation (Tariq Khamisa Vakfı), <a href="https://tkf.org/" rel="noopener">tkf.org</a>; The Forgiveness Project, <a href="https://www.theforgivenessproject.com/stories-library/azim-khamisa-ples-felix/" rel="noopener">Azim Khamisa &amp; Ples Felix</a>; KPBS, <a href="https://www.kpbs.org/news/2018/nov/29/parole-granted-man-who-was-14-when-he-killed-stude" rel="noopener">şartlı tahliye haberi</a> (2018).</li>
+        <li><em>Sallatha Sutta</em> (SN 36.6), İngilizce çev. Thanissaro Bhikkhu, <a href="https://www.accesstoinsight.org/tipitaka/sn/sn36/sn36.006.than.html" rel="noopener">Access to Insight</a>; İngilizce çev. Bhikkhu Sujato, <a href="https://suttacentral.net/sn36.6" rel="noopener">SuttaCentral</a>.</li>
+        <li>Marcus Aurelius, <em>Meditations</em> (<em>Kendime Düşünceler</em>), İngilizce çev. George Long, <a href="https://www.gutenberg.org/ebooks/15877" rel="noopener">Project Gutenberg</a>.</li>
+        <li>Etty Hillesum, <em>An Interrupted Life: The Diaries, 1941–1943 and Letters from Westerbork</em> (“Kesintiye Uğramış Bir Hayat: Günlükler, 1941–1943 ve Westerbork'tan Mektuplar”); İngilizce çev. Arnold J. Pomerans.</li>
+        <li>Frederick Douglass, <em>Narrative of the Life of Frederick Douglass</em> (“Frederick Douglass'ın Hayat Hikâyesi”, 1845), <a href="https://www.gutenberg.org/ebooks/23" rel="noopener">Project Gutenberg</a>; <em>My Bondage and My Freedom</em> (“Esaretim ve Özgürlüğüm”, 1855), 17. bölüm, <a href="https://www.gutenberg.org/ebooks/202" rel="noopener">Project Gutenberg</a>.</li>
+        <li>Ven. S. Dhammika, <a href="https://www.cs.colostate.edu/~malaiya/ashoka.html" rel="noopener"><em>The Edicts of King Ashoka</em></a> (“Kral Aşoka'nın Fermanları”, 1993), XIII. Kaya Fermanı.</li>
+        <li>Leymah Gbowee, 2011 Nobel Barış Ödülü, <a href="https://www.nobelprize.org/prizes/peace/2011/gbowee/facts/" rel="noopener">nobelprize.org</a>; <em>Pray the Devil Back to Hell</em> (2008).</li>
+        <li>Daryl Davis, <a href="https://www.daryldavis.com/" rel="noopener">daryldavis.com</a>; NPR, <a href="https://www.npr.org/2017/08/20/544861933/how-one-man-convinced-200-ku-klux-klan-members-to-give-up-their-robes" rel="noopener">“How One Man Convinced 200 Ku Klux Klan Members To Give Up Their Robes”</a> (“Bir adam 200 Ku Klux Klan üyesini cüppelerini bırakmaya nasıl ikna etti”, 2017); <em>Accidental Courtesy</em> (2016).</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 cablepull. Tüm hakları saklıdır.</p>
+    <p>Bu sitenin veya içeriğinin yapay zekâ ya da makine öğrenimi sistemlerini eğitmek, ince ayar yapmak veya geliştirmek amacıyla kullanılmasına ya da bu amaçlarla herhangi bir modele veya veri kümesine aktarılmasına izin verilmez. Üçüncü taraflar, önceden yazılı izin almadan bu siteyi arama, yapay zekâ, içerik toplama veya benzeri hizmetler için tarayamaz, kazıyamaz, önbelleğe alamaz ya da dizine ekleyemez.</p>
+  </footer>
+
+<script data-goatcounter="https://cablepull.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="On suffering, aggression, and the courage to break the cycle—Khamisa and Felix, the two arrows, Marcus Aurelius, Etty Hillesum, Frederick Douglass, Ashoka, Leymah Gbowee, and Daryl Davis.">
   <link rel="canonical" href="https://cablepull.github.io/articles/what-we-choose-to-fight.html">
+  <link rel="alternate" hreflang="en" href="https://cablepull.github.io/articles/what-we-choose-to-fight.html">
+  <link rel="alternate" hreflang="zh-Hans" href="https://cablepull.github.io/articles/what-we-choose-to-fight.zh.html">
+  <link rel="alternate" hreflang="tr" href="https://cablepull.github.io/articles/what-we-choose-to-fight.tr.html">
+  <link rel="alternate" hreflang="x-default" href="https://cablepull.github.io/articles/what-we-choose-to-fight.html">
   <meta property="og:site_name" content="cablepull">
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="article">
@@ -302,6 +306,50 @@
     .sources ol { padding-left: 1.2rem; margin: 0; }
     .sources li { margin-bottom: 0.35rem; }
 
+    /* ---------- Language switcher ---------- */
+    .lang {
+      position: fixed;
+      left: clamp(0.5rem, 1.5vw, 1.25rem);
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-family: "Bricolage Grotesque", "Noto Sans SC", system-ui, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .lang a {
+      display: block;
+      min-width: 2.6rem;
+      padding: 0.3rem 0.45rem;
+      text-align: center;
+      text-decoration: none;
+      color: var(--ink-soft);
+      background: var(--card);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+    }
+    .lang a:hover { color: var(--ember); border-color: var(--ember); }
+    .lang a[aria-current="page"] {
+      color: var(--paper);
+      background: var(--ember);
+      border-color: var(--ember);
+    }
+    @media (max-width: 1180px) {
+      .lang {
+        position: static;
+        transform: none;
+        flex-direction: row;
+        justify-content: flex-end;
+        padding: 0 var(--pad);
+        margin-top: -2.4rem;
+        margin-bottom: 0.9rem;
+      }
+    }
+
     .site-footer {
       border-top: 1px solid var(--rule);
       padding: 1.5rem var(--pad) 2.5rem;
@@ -314,6 +362,11 @@
 </head>
 <body>
   <nav class="back"><a href="index.html">← Articles</a> · <a href="../">Home</a></nav>
+  <nav class="lang" aria-label="Language">
+    <a href="what-we-choose-to-fight.html" hreflang="en" lang="en" aria-current="page">EN</a>
+    <a href="what-we-choose-to-fight.zh.html" hreflang="zh-Hans" lang="zh-Hans">中文</a>
+    <a href="what-we-choose-to-fight.tr.html" hreflang="tr" lang="tr">TR</a>
+  </nav>
 
   <header class="masthead">
     <svg class="arrows" viewBox="0 0 88 28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
