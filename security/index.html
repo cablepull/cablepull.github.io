@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Threat models, control design, and security architecture notes—Ilithios BYOVD pipeline analysis, Dangerous AI governance, Conduct code, Copilot proxy keys, CISO leverage &amp; CVE trends, and field notes from cablepull.">
+  <meta name="description" content="Threat models, control design, and security architecture notes—leaked-credential honeypot findings, Ilithios BYOVD pipeline analysis, Dangerous AI governance, Conduct code, Copilot proxy keys, CISO leverage &amp; CVE trends, and field notes from cablepull.">
   <link rel="canonical" href="https://cablepull.github.io/security/">
   <meta property="og:site_name" content="cablepull">
   <meta property="og:locale" content="en_US">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://cablepull.github.io/security/">
   <meta property="og:title" content="Security · cablepull">
-  <meta property="og:description" content="Threat models, control design, security architecture notes—Ilithios BYOVD pipeline analysis, Dangerous AI governance, Conduct code, AI gateway credentials, CISO leverage &amp; CVE data, and field notes from cablepull.">
+  <meta property="og:description" content="Threat models, control design, security architecture notes—leaked-credential honeypot findings, Ilithios BYOVD pipeline analysis, Dangerous AI governance, Conduct code, AI gateway credentials, CISO leverage &amp; CVE data, and field notes from cablepull.">
   <meta property="og:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
   <meta property="og:image:alt" content="You vibe code, I conduct code — we are not the same.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Security · cablepull">
-  <meta name="twitter:description" content="Threat models, control design, security architecture notes—Ilithios BYOVD pipeline analysis, Dangerous AI governance, Conduct code, AI gateway credentials, CISO leverage &amp; CVE data, and field notes from cablepull.">
+  <meta name="twitter:description" content="Threat models, control design, security architecture notes—leaked-credential honeypot findings, Ilithios BYOVD pipeline analysis, Dangerous AI governance, Conduct code, AI gateway credentials, CISO leverage &amp; CVE data, and field notes from cablepull.">
   <meta name="twitter:image" content="https://cablepull.github.io/images/conduct-code.jpeg">
   <title>Security · cablepull</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -229,6 +229,43 @@
       outline-color: #00e5a0;
     }
 
+    .preview-card--honeypot:hover,
+    .preview-card--honeypot:focus-within {
+      border-color: rgba(245, 182, 42, 0.5);
+      box-shadow:
+        0 0 0 1px rgba(245, 182, 42, 0.16),
+        0 26px 60px -20px rgba(245, 182, 42, 0.24);
+    }
+
+    .preview-card__viewport--honeypot {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      gap: 0.35rem;
+      min-height: 11rem;
+      padding: 1.1rem;
+      line-height: 1.3;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(245, 182, 42, 0.38), transparent 45%),
+        linear-gradient(145deg, #07090c, #10141a 60%, #1a1a12);
+    }
+
+    .preview-card__viewport--honeypot b {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 2.4rem;
+      line-height: 1;
+      color: #f5b62a;
+    }
+
+    .preview-card__viewport--honeypot span {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(235, 238, 242, 0.88);
+    }
+
     .preview-card__viewport--dangerous {
       display: flex;
       align-items: flex-end;
@@ -275,6 +312,26 @@
     </div>
 
     <div class="preview-stage">
+      <article class="preview-card preview-card--honeypot" aria-labelledby="honeypot-preview-title">
+        <a
+          class="preview-card__stretch"
+          href="leaked-credentials-honeypot.html"
+          aria-label="Open Anatomy of a leaked key — security/leaked-credentials-honeypot.html"
+        ></a>
+        <div class="preview-card__chrome" aria-hidden="true">
+          <div class="preview-card__dots"><span></span><span></span><span></span></div>
+          <span class="preview-card__url">…/security/leaked-credentials-honeypot.html</span>
+        </div>
+        <div class="preview-card__viewport preview-card__viewport--honeypot">
+          <b>37 min</b>
+          <span>Median theft → first use · 413 canary keys</span>
+        </div>
+        <div class="preview-card__meta">
+          <h2 id="honeypot-preview-title" class="preview-card__title">Anatomy of a leaked key</h2>
+          <p class="preview-card__blurb">Animated breakdown of THOR Collective's four-month credential honeypot: time to first use, LLMjacking, thieves vs. users, SMTP abuse, and hunts for defenders.</p>
+        </div>
+      </article>
+
       <article class="preview-card preview-card--ilithios" aria-labelledby="ilithios-preview-title">
         <a
           class="preview-card__stretch"
