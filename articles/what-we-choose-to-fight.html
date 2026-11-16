@@ -205,6 +205,12 @@
         repeating-linear-gradient(135deg, transparent 0 10px, var(--ember-soft) 10px 11px),
         var(--paper-deep);
     }
+    /* No-derivatives license: always show the whole image, never crop */
+    .bio .nocrop { background: #0d0d0f; }
+    .bio .nocrop img { height: auto !important; min-height: 0 !important; object-fit: contain; filter: none; }
+    .bio .nocrop .credit { background: var(--card); padding-bottom: 0.1rem; }
+    @media (max-width: 1000px) { .bio .nocrop { align-self: start; } }
+
     .bio .credit {
       display: block;
       padding: 0.35rem 0.85rem 0;
@@ -307,7 +313,10 @@
     <article class="prose">
 
       <aside class="bio" aria-label="About Azim Khamisa and Ples Felix">
-        <figure><div class="no-image" aria-hidden="true">AK · PF</div></figure>
+        <figure class="nocrop">
+          <img src="https://live.staticflickr.com/4510/38090566162_c6de1acecf_b.jpg" alt="Azim Khamisa and Ples Felix on stage together at TEDWomen 2017" loading="lazy">
+          <figcaption class="credit">Azim Khamisa and Ples Felix, TEDWomen 2017 · <a href="https://www.flickr.com/photos/62773263@N00/38090566162" rel="noopener">TED Conference</a> · <a href="https://creativecommons.org/licenses/by-nc-nd/2.0/" rel="noopener license">CC BY-NC-ND 2.0</a></figcaption>
+        </figure>
         <div class="bio-body">
           <h3>Azim Khamisa &amp; Ples Felix</h3>
           <p class="dates">Tariq Khamisa, 1974–1995</p>
